@@ -1,7 +1,0 @@
-#  Monitor internet connection speed.
-
-- platform: speedtest
-  monitored_conditions:
-  - ping
-  - download
-  - upload

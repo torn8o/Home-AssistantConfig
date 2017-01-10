@@ -1,8 +1,0 @@
-- alias: close curtains sunset
-  hide_entity: false
-  trigger:
-    platform: sun
-    event: sunset
-  action:
-    service: switch.turn_on
-    entity_id: switch.living_room_curtain_close

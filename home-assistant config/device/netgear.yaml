@@ -1,7 +1,0 @@
-- device_tracker:
-  platform: netgear
-  host: 192.168.1.1
-  username: admin
-  password: a10281028
-
-#  port: 8400

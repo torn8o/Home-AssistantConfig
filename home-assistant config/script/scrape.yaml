@@ -1,4 +1,0 @@
-  - platform: scrape
-    resource: http://status.winkapp.com/
-    name: Overall Wink Status
-    select: "span:nth-of-type(5)"
