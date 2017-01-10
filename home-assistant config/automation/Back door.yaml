@@ -1,0 +1,12 @@
+- alias: Pool Door Lights
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_19_0
+      to: 'on'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.master_bathroom_light, switch.ge_12722_onoff_relay_switch_switch_25_0
+    - delay:
+        minutes: 10
+    - service: switch.turn_off
+      entity_id: switch.master_bathroom_light, switch.ge_12722_onoff_relay_switch_switch_25_0

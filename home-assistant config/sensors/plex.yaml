@@ -1,0 +1,7 @@
+- platform: plex
+  name: Torn8oplex
+  host: 192.168.1.113
+  port: 32400
+  username: icharliebrown@gmail.com
+  password: 340a5a880e
+  server: Torn-Home-pc

@@ -1,0 +1,28 @@
+#platform: mqtt
+#name: "Porch LEDs"
+#command_topic: "bruh/mqttstrip/setpower"
+#state_topic: "bruh/mqttstrip/setpowerpub"
+#rgb_state_topic: "bruh/mqttstrip/setcolorpub"
+#rgb_command_topic: "bruh/mqttstrip/setcolor"
+#brightness_state_topic: "bruh/mqttstrip/setbrightnesspub"
+#brightness_command_topic: "bruh/mqttstrip/setbrightness"
+##color_temp_state_topic: "bruh/mqttstrip/setcolortemppub"
+##color_temp_command_topic: "bruh/mqttstrip/setcolortemp"
+#optimistic: false
+
+
+platform: mqtt
+name: "Porch Light RGB"
+state_topic: "bruh/mqttstrip/light/status"
+command_topic: "bruh/mqttstrip/light/switch"
+brightness_state_topic: "bruh/mqttstrip/brightness/status"
+brightness_command_topic: "bruh/mqttstrip/brightness/set"
+rgb_state_topic: "bruh/mqttstrip/rgb/status"
+rgb_command_topic: "bruh/mqttstrip/rgb/set"
+state_value_template: "{{ value_json.state }}"
+brightness_value_template: "{{ value_json.brightness }}"
+rgb_value_template: "{{ value_json.rgb | join(',') }}"
+qos: 0
+payload_on: "ON"
+payload_off: "OFF"
+optimistic: false

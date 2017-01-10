@@ -1,0 +1,23 @@
+timed_lamp:
+  alias: "Turn on lamp and set timer"
+  sequence:
+    - service: script.turn_off
+      data:
+         entity_id: script.timer_off
+    - service: light.turn_on
+      data:
+         entity_id: light.__level_20
+#     data:
+#       brightness: 255
+    - service: script.turn_on
+      data:
+        entity_id: script.timer_off
+
+timer_off:
+  alias: "Turn off lamp after 10 minutes"
+  sequence:
+    - delay:
+        minutes: 10
+    - service: light.turn_off
+      data:
+        entity_id: light.__level_20
