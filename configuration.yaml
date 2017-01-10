@@ -1,0 +1,134 @@
+################################################################
+## Configuration
+################################################################
+
+homeassistant:
+  name: Torn Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
+  time_zone: America/Chicago
+  unit_system: imperial
+  customize: !include customize.yaml
+
+frontend:
+history:
+logbook:
+sun:
+updater:
+
+################################################
+## Components (Non-Includes)
+################################################
+
+iftt:
+  key: !secret iftt_key
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+climate:
+  platform: nest
+
+http:
+  api_password: !secret http_api_password
+  ssl_certificate: !secret http_ssl_certificate
+  ssl_key: !secret http_ssl_key
+
+wink:
+  access_token: !secret wink_access_token
+  user_agent: !secret wink_user_agent
+
+mqtt:
+#  broker: !secret mqtt_broker
+#  port: !secret mqtt_port
+#  username: !secret mqtt_username
+#  password: !secret mqtt_password
+  broker: 192.168.1.45
+  port: 1883
+  username: username
+  password: password
+#alexa:
+#  intents: !include_dir_named alexa/
+zwave:
+  usb_path: /dev/ttyACM0
+  config_path: /srv/hass/hass_venv/lib/python3.4/site-packages/libopenzwave-0.3.1-py3.4-linux-armv7l.egg/config
+  polling_interval: 60000
+
+emulated_hue:
+  host_ip: 192.168.1.45
+  off_maps_to_on_domains:
+    - script
+    - scene
+  expose_by_default: true
+  exposed_domains:
+    - input_boolean
+    - switch
+    - light
+
+remote:
+  - platform: harmony
+    name: torn hub
+    host: 192.168.1.60
+
+wemo:
+  static:
+    - 192.168.1.15
+    - 192.168.1.19
+    - 192.168.1.11
+    - 192.168.1.13
+
+camera:
+  - platform: ffmpeg
+    name: Cam
+    input: rtsp://192.168.1.121:554/ch0_0.h264
+  - platform: ffmpeg
+    name: Cam indoor
+    input: rtsp://192.168.1.122:554/ch0_0.h264
+recorder:
+  purge_days: 3
+
+################################################
+## Component Includes (Single File)
+################################################
+
+# emulated_hue: !include emulated_hue.yaml
+#icloud: !include icloud.yaml
+logger: !include logger.yaml
+#zwave: !include zwave.yaml
+group: !include groups.yaml
+
+################################################
+## Component Includes (Named)
+################################################
+
+# alexa:
+#   intents: !include_dir_named alexa
+
+################################################
+## Component Includes (Merge List)
+################################################
+
+automation: !include_dir_merge_list automation
+#binary_sensor: !include_dir_merge_list binary_sensor
+# camera: !include_dir_merge_list camera
+#cover: !include_dir_merge_list cover
+device_tracker: !include_dir_merge_list device
+light: !include_dir_merge_list light
+#media_player: !include_dir_merge_list media_player
+notify: !include_dir_merge_list notify
+#scene: !include_dir_merge_list scene
+sensor: !include_dir_merge_list sensors
+switch: !include_dir_merge_list switches
+#zone: !include_dir_merge_list zone
+
+################################################
+## Component Includes (Merge Named)
+################################################
+
+#group: !include_dir_merge_named group
+#input_boolean: !include_dir_merge_named input_boolean
+input_select: !include_dir_merge_named input_select
+input_slider: !include_dir_merge_named input_slider
+script: !include_dir_merge_named script
+shell_command: !include_dir_merge_named shell_command

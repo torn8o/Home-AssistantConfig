@@ -1,0 +1,4 @@
+- platform: sonarr
+  api_key: ae69047c47df49eaa497f0b140a2c908
+  host: 192.168.1.131
+  port: 8989

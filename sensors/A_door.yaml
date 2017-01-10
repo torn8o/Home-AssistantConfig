@@ -1,0 +1,15 @@
+#  Monitor internet connection speed.
+
+- platform: template
+  sensors:
+    top_door_status:
+      value_template: '{% if states.binary_sensor.everspring_hsp02_motion_detector_sensor_15_0 %}
+        {% if states.binary_sensor.everspring_hsp02_motion_detector_sensor_15_0.state == "on" %}
+          Open
+        {% else %}
+          Closed
+        {% endif %}
+        {% else %}
+        n/a
+        {% endif %}'
+      friendly_name: 'Attic Door Status'

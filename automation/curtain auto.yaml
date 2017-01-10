@@ -1,0 +1,36 @@
+- alias: curtain Reset
+  trigger:
+    platform: time
+    seconds: '/17'
+  condition:
+    - condition: state
+      entity_id: switch.living_room_curtain_stop
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.living_room_curtain_stop
+- alias: curtain Reset open
+  trigger:
+    platform: time
+    seconds: '/17'
+  condition:
+    - condition: state
+      entity_id: switch.living_room_curtain_open
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.living_room_curtain_open
+- alias: curtain Reset close
+  trigger:
+    platform: time
+    seconds: '/17'
+  condition:
+    - condition: state
+      entity_id: switch.living_room_curtain_close
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.living_room_curtain_close

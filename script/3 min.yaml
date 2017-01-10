@@ -1,0 +1,18 @@
+steps_timer_on:
+  sequence:
+    - service: script.turn_off
+      data:
+         entity_id: script.steps_timer_off
+    - service: light.turn_on
+      data:
+        entity_id: light.steps
+    - service: script.turn_on
+      data:
+        entity_id: script.steps_timer_off
+steps_timer_off:
+  sequence:
+    - delay:
+        minutes: 3
+    - service: light.turn_off
+      data:
+        entity_id: light.steps

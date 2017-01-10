@@ -1,0 +1,14 @@
+#  Glances is a system-monitoring tool. It runs
+#  on the same computer running Home Assistant.
+#  It is an easy way to keep any eye on the computer,
+#  since its operation is important.
+
+- platform: glances
+  name: Glances sensor
+  host: localhost
+  port: 61208
+  resources:
+  - disk_use_percent
+  - memory_use_percent
+  - swap_use_percent
+  - processor_load
