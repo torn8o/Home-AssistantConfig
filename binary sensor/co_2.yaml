@@ -1,0 +1,15 @@
+  - platform: template
+    sensors:
+      co:
+        friendly_name: 'CO'
+        sensor_class: 'gas'
+        value_template: >-
+          {%- if is_state("sensor.hallway_nest_protect_co_status", "Ok")
+              and is_state("sensor.kitchen_nest_protect_co_statuss", "Ok") -%}
+          Off
+          {%- else -%}
+          On
+          {%- endif %}
+        entity_id:
+          - sensor.hallway_nest_protect_co_status
+          - sensor.kitchen_nest_protect_co_status

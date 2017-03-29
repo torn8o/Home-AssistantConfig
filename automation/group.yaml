@@ -1,0 +1,10 @@
+- alias: View lights
+#  automation 2:
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    service: group.set_visibility
+    entity_id: group.lights1
+    data:
+      visible: True

@@ -1,0 +1,20 @@
+- alias: open curtains sunrise
+  hide_entity: false
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+    service: switch.turn_on
+    entity_id: switch.living_room_curtain_open
+- alias: curtain open
+  trigger:
+    platform: time
+    seconds: '/15'
+  condition:
+    - condition: state
+      entity_id: switch.living_room_curtain_open
+      state: "on"
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.living_room_curtain_stop

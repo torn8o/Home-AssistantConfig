@@ -1,0 +1,414 @@
+###########################################
+#
+# Binary Sensors
+#
+###########################################
+
+#binary_sensor.frontdoorswitch_sensor_3:
+#  friendly_name: Front Door
+#  type: opening
+sensor.download_speed_mean:
+  friendly_name: 'Speedtest Download Average'
+  icon: mdi:speedometer
+
+sensor.upload_speed_mean:
+  friendly_name: 'Spedtest Upload Average'
+  icon: mdi:speedometer
+
+sensor.ping_time_mean:
+  friendly_name: 'Speedtest Ping Average'
+  icon: mdi:clock-fast
+
+sensor.wan_traffic_in_mean:
+  friendly_name: 'WAN Download Average'
+  icon: mdi:download
+
+sensor.wan_traffic_out_mean:
+  friendly_name: 'WAN Upload Average'
+  icon: mdi:upload
+
+binary_sensor.__sensor_17:
+  haaska_hidden: true
+  friendly_name: Motion Hallway
+  type: opening
+binary_sensor.__sensor_22:
+  haaska_hidden: true
+  friendly_name: Motion Master Media Closet
+  type: opening
+switch.kitchen_outlet:
+  haaska_hidden: true
+  friendly_name: Kitchen Outlet
+  persistent: true
+#binary_sensor.everspring_hsp02_motion_detector_sensor_31_0:
+#  friendly_name: Attic Door
+  #hidden: true
+#  hidden: true
+###########################################
+#
+# Devices
+#
+###########################################
+
+switch.ge_12721_lighting_control_duplex_receptacle_switch_22_0:
+  haaska_hidden: true
+  friendly_name: Cable Modem
+  persistent: true
+
+
+###########################################
+#
+# Groups
+#
+###########################################
+
+
+#group.front_lights:
+#  icon: mdi:lightbulb
+
+#group.tv_room_lights:
+#  icon: mdi:lightbulb
+
+
+###########################################
+#
+# Input Booleans
+#
+###########################################
+
+#input_boolean.cctv_disabled:
+#  icon: mdi:camera
+#  friendly_name: Disable Motion Detection
+
+
+###########################################
+#
+# Lights
+#
+###########################################
+#tv room Lights:
+
+
+
+#light.halllight_level_10:
+#  friendly_name: Hall
+
+###########################################
+#
+# Media Players
+#
+###########################################
+
+
+###########################################
+#
+# Sensors
+#
+###########################################
+sensor.dark_sky_apparent_temperature:
+  friendly_name: temperature
+sensor.dark_sky_cloud_coverage:
+  friendly_name: Cloud Cover
+sensor.dark_sky_daily_high_apparent_temperature:
+  friendly_name: High temperature
+
+binary_sensor.ecolink_doorwindow_sensor_sensor_19_0:
+  haaska_hidden: true
+  friendly_name: Pool Door Sensor
+
+sensor.fastcom_download:
+  persistent: true
+
+binary_sensor.everspring_hsp02_motion_detector_sensor_5_0:
+  haaska_hidden: true
+  hidden: true
+sensor.everspring_hsp02_motion_detector_alarm_type_31_0:
+  haaska_hidden: true
+  hidden: true
+binary_sensor.hallway_motion_motion:
+  haaska_hidden: true
+  hidden: true
+sensor.everspring_hsp02_motion_detector_alarm_level_31_1:
+  haaska_hidden: true
+  hidden: true
+#sensor.torn8o_battery_level:
+#  haaska_hidden: true
+#  hidden: true
+#sensor.torn8o_battery_state:
+#  haaska_hidden: true
+#  hidden: true
+switch.ge_12722_onoff_relay_switch_switch_34_0:
+  haaska_hidden: true
+  friendly_name: Rabbit area
+  persistent: true
+  refresh_value: true
+  delay: 4
+light.ge_12724_3way_dimmer_switch_level_33_0:
+  haaska_hidden: true
+  friendly_name: Dining Room
+  persistent: true
+  refresh_value: true
+  delay: 4
+binary_sensor.ecolink_pir_motion_sensor_sensor_10_0:
+  haaska_hidden: true
+  friendly_name: Back Motion
+binary_sensor.ecolink_pir_motion_sensor_sensor_11_0:
+  haaska_hidden: true
+  friendly_name: Front Motion
+sensor.everspring_hsp02_motion_detector_alarm_level_5_1:
+  haaska_hidden: true
+  hidden: true
+sensor.everspring_hsp02_motion_detector_alarm_type_5_0:
+  haaska_hidden: true
+  hidden: true
+device_tracker.94103e4ff18d:
+  haaska_hidden: true
+  hidden: true
+device_tracker.d8c46a5da34d:
+  haaska_hidden: true
+  hidden: true
+light.front_door:
+  haaska_hidden: true
+  hidden: true
+switch.siren__strobe:
+  haaska_hidden: true
+  hidden: true
+switch.siren__strobe_2:
+  haaska_hidden: true
+  hidden: true
+#sensor.garage_door_status_2:
+#  hidden: true
+#binary_sensor.attic_door:
+binary_sensor.attic_door:
+  haaska_hidden: true
+  hidden: true
+light.light_bulb:
+  haaska_hidden: true
+  hidden: true
+light.light_bulb_2:
+  haaska_hidden: true
+  hidden: true
+sensor.attic_door_status_2:
+  haaska_hidden: true
+  hidden: true
+binary_sensor.sensor:
+  haaska_hidden: true
+  hidden: true
+sensor.fortrezz_mimolite_wireless_interfacebridge_module_alarm_level_2_1:
+  haaska_hidden: true
+  hidden: true
+sensor.fortrezz_mimolite_wireless_interfacebridge_module_alarm_type_2_0:
+  haaska_hidden: true
+  hidden: true
+sensor.fortrezz_mimolite_wireless_interfacebridge_module_general_2_2:
+  haaska_hidden: true
+  hidden: true
+binary_sensor.fortrezz_mimolite_wireless_interfacebridge_module_sensor_2_0:
+  haaska_hidden: true
+  hidden: true
+binary_sensor.aeotec_zw100_multisensor_6_sensor_31_0:
+  haaska_hidden: true
+  friendly_name: Aeotec Kitchen
+light.unknown_id015d_unknown_type0112_id241c_level_31_0:
+  haaska_hidden: true
+  friendly_name: Kitchen Bar Lights
+  refresh_value: true
+  delay: 4
+sensor.aeotec_zw100_multisensor_6_alarm_level_31_1:
+  haaska_hidden: true
+  friendly_name: Kitchen alarm_level
+  hidden: true
+sensor.aeotec_zw100_multisensor_6_alarm_type_31_0:
+  haaska_hidden: true
+  friendly_name: Kitchen alarm_type
+  hidden: true
+sensor.aeotec_zw100_multisensor_6_burglar_31_10:
+  haaska_hidden: true
+  friendly_name: Kitchen Motion
+sensor.aeotec_zw100_multisensor_6_luminance_31_3:
+  haaska_hidden: true
+  friendly_name: Kitchen luminance
+sensor.aeotec_zw100_multisensor_6_relative_humidity_31_5:
+  haaska_hidden: true
+  friendly_name: Kitchen humidity
+sensor.aeotec_zw100_multisensor_6_sourcenodeid_31_2:
+  haaska_hidden: true
+  friendly_name: Kitchen sourcenodeid
+  hidden: true
+sensor.aeotec_zw100_multisensor_6_temperature_31_1:
+  haaska_hidden: true
+  friendly_name: Kitchen temperature
+sensor.aeotec_zw100_multisensor_6_ultraviolet_31_27:
+  haaska_hidden: true
+  friendly_name: Kitchen ultraviolet
+binary_sensor.aeotec_zw100_multisensor_6_sensor_7_0:
+  haaska_hidden: true
+  friendly_name: Aeotec
+sensor.aeotec_zw100_multisensor_6_alarm_level_7_1:
+  haaska_hidden: true
+  friendly_name: Media Closet alarm_level
+  hidden: true
+sensor.aeotec_zw100_multisensor_6_alarm_type_7_0:
+  haaska_hidden: true
+  friendly_name: Media Closet alarm_type
+  hidden: true
+sensor.aeotec_zw100_multisensor_6_burglar_7_10:
+  haaska_hidden: true
+  friendly_name: Media Closet Motion
+sensor.aeotec_zw100_multisensor_6_luminance_7_3:
+  haaska_hidden: true
+  friendly_name: Media Closet luminance
+sensor.aeotec_zw100_multisensor_6_relative_humidity_7_5:
+  haaska_hidden: true
+  friendly_name: Media Closet relative_humidity
+sensor.aeotec_zw100_multisensor_6_sourcenodeid_7_2:
+  haaska_hidden: true
+  friendly_name: Media Closet sourcenodeid
+  hidden: true
+sensor.aeotec_zw100_multisensor_6_temperature_7_1:
+  haaska_hidden: true
+  friendly_name: Media Closet temperature
+sensor.aeotec_zw100_multisensor_6_ultraviolet_7_27:
+  haaska_hidden: true
+  friendly_name: Media Closet ultraviolet
+sensor.speedtest_ping:
+  haaska_hidden: true
+  icon: mdi:radar
+sensor.speedtest_download:
+  haaska_hidden: true
+  icon: mdi:download
+sensor.speedtest_upload:
+  haaska_hidden: true
+  icon: mdi:upload
+
+###########################################
+#
+# Switches
+#
+###########################################
+light.hallway_1:
+  haaska_hidden: true
+  persistent: true
+light.hallway_2:
+  haaska_hidden: true
+  persistent: true
+light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0:
+  haaska_hidden: true
+  friendly_name: Master bedroom Fan
+  persistent: true
+  icon: mdi:lightbulb
+switch.ge_12722_onoff_relay_switch_switch_28_0:
+  haaska_hidden: true
+  friendly_name: Front Lights
+  persistent: true
+  icon: mdi:lightbulb
+  refresh_value: true
+  delay: 4
+switch.leviton_unknown_type1d04_id0334_switch_17_0:
+  haaska_hidden: true
+  friendly_name: Christmas Angel
+  persistent: true
+  icon: mdi:lightbulb
+switch.ge_12722_onoff_relay_switch_switch_13_0:
+  haaska_hidden: true
+  friendly_name: Master bedroom Fan Light
+  persistent: true
+  icon: mdi:lightbulb
+  refresh_value: true
+  delay: 4
+switch.fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0:
+  haaska_hidden: true
+  friendly_name: Garage Door opener
+  persistent: true
+  icon: mdi:lightbulb
+light.zooz_zen22_zwave_plus_dimmer_light_switch_level_3_0:
+  haaska_hidden: true
+  friendly_name: Attic Lights
+  persistent: true
+  icon: mdi:lightbulb
+  refresh_value: true
+  delay: 4
+light.zooz_unknown_type0112_id241c_level_3_0:
+  haaska_hidden: true
+  friendly_name: Attic Lights
+  persistent: true
+  icon: mdi:lightbulb
+  refresh_value: true
+  delay: 4
+
+light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0:
+  haaska_hidden: true
+  friendly_name: Kitchen Bar Lights
+  refresh_value: true
+  delay: 4
+light.zooz_unknown_type0112_id241c_level_5_0:
+  friendly_name: Kitchen Bar
+  persistent: true
+  icon: mdi:lightbulb
+  refresh_value: true
+  delay: 4
+light.ge_12724_3way_dimmer_switch_level_16_0:
+  haaska_hidden: true
+  friendly_name: TV room Light
+  persistent: true
+  icon: mdi:lightbulb
+  refresh_value: true
+  delay: 4
+light.ge_12724_3way_dimmer_switch_level_9_0:
+  haaska_hidden: true
+  friendly_name: Kitchen Light
+  persistent: true
+  icon: mdi:lightbulb
+  refresh_value: true
+  delay: 2
+light.steps:
+  haaska_hidden: true
+  friendly_name: Step Lights
+  persistent: true
+  icon: mdi:lightbulb
+switch.ge_12722_onoff_relay_switch_switch_25_0:
+  haaska_hidden: true
+  friendly_name: Master Bedroom Hallway Light
+  persistent: true
+  icon: mdi:lightbulb
+  refresh_value: true
+  delay: 4
+light.zooz_zen22_zwave_plus_dimmer_light_switch_level_6_0:
+  haaska_hidden: true
+  friendly_name: Front entry
+  persistent: true
+  icon: mdi:lightbulb
+input_boolean.day_star:
+  emulated_hue_name: "Day Star"
+  friendly_name: "Day Star"
+  emulated_hue: true
+switch.game_room_fan:
+  persistent: true
+switch.game_room_light:
+  persistent: true
+
+
+#light.unknown_id015d_unknown_type0112_id241c_level_21_0:
+#  friendly_name: Kitchen Fan
+#  icon: mdi:fan
+#light.unknown_id015d_unknown_type0112_id241c_level_20_0:
+#  friendly_name: Kitchen Light
+#  icon: mdi:lightbulb
+# HOME
+group.tv_room_2:
+  order: 1
+group.kitchen_lights:
+  order: 2
+group.temperature:
+  order: 3
+group.nest:
+  order: 4
+group.master_bedroom_2:
+  order: 5
+group.air_safety:
+  order: 6
+group.TEST:
+  order: 7
+group.garage:
+  order: 8
+group.input:
+  order: 9

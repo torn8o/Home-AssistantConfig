@@ -1,0 +1,9 @@
+tv_room_fan:
+  name: tv room fan
+  initial: Select an option...
+  options:
+    - Select an option...
+    - Off
+    - Low
+    - Medium
+    - High

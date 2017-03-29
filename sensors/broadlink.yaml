@@ -1,0 +1,7 @@
+- platform: broadlink
+  host: 192.168.1.51
+  mac: B4:43:0D:EF:9F:25
+  name: "broadlink torn"
+  update_interval: 60
+  monitored_conditions:
+    - temperature

@@ -1,0 +1,11 @@
+  - alias: Startup Notification
+    trigger:
+      platform: event
+      event_type: homeassistant_start
+#    action:
+#      service: notify.notify
+#      data: {"event":"TestHA_Trigger", "value1":"Hello World!"}
+    action:
+      service: notify.notify
+      data_template:
+        message: 'homeassistant restarted'

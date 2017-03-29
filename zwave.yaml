@@ -1,0 +1,19 @@
+################################################################
+## Z-Wave
+################################################################
+#  usb_path: /dev/ttyACM0
+#  config_path: /srv/hass/hass_venv/lib/python3.4/site-packages/libopenzwave-0.3.1-py3.4-linux-armv7l.egg/config
+ usb_path: /dev/ttyACM0
+ config_path: /srv/homeassistant/src/python-openzwave/openzwave/config
+ polling_interval: 60000
+  # /srv/hass/hass/lib/python3.4/site-packages/libopenzwave-0.3.1-py3.4-linux-armv7l.egg/config
+ #customize:
+  # light.ge_12724_3way_dimmer_switch_level_16_0:
+  #   refresh_value: true
+  #   delay: 4
+   #light.ge_12724_3way_dimmer_switch_level_33_0:
+    # refresh_value: true
+     #delay: 4
+   #light.ge_12724_3way_dimmer_switch_level_9_0:
+    # refresh_value: true
+     #delay: 4

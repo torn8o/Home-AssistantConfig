@@ -1,0 +1,16 @@
+- alias: TV Lights and Fan on
+  trigger:
+    - platform: state
+      entity_id: sensor.vizio_tv
+      to: 'Online'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: light.ge_12724_3way_dimmer_switch_level_16_0, switch.tv_room_fan
+- alias: TV Lights and Fan off
+  trigger:
+    platform: state
+    entity_id: sensor.vizio_tv
+    to: 'offline'
+  action:
+    service: homeassistant.turn_off
+    entity_id: light.ge_12724_3way_dimmer_switch_level_16_0, switch.tv_room_fan

@@ -1,0 +1,18 @@
+usb_path: /dev/ttyACM0
+config_path: /srv/homeassistant/src/python-openzwave/openzwave/config
+polling_interval: 60000
+light.ge_12724_3way_dimmer_switch_level_16_0:
+  refresh_value: true
+  delay: 4
+light.ge_12724_3way_dimmer_switch_level_33_0:
+  refresh_value: true
+  delay: 4
+light.ge_12724_3way_dimmer_switch_level_9_0:
+  refresh_value: true
+  delay: 4
+light.zooz_unknown_type0112_id241c_level_5_0:
+  refresh_value: true
+  delay: 4
+light.zooz_unknown_type0112_id241c_level_6_0:
+  ignored: false
+  polling_intensity: 2

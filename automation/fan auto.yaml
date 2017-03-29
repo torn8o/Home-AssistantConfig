@@ -1,0 +1,29 @@
+ - alias: fan_speed_selected
+   trigger:
+     - platform: state
+       entity_id: input_select.fan_speed
+   condition:
+     - condition: template
+       value_template: "{{ trigger.to_state.state != 'Select an option...' }}"
+   action:
+     # Turn on the wall switch to make sure it receives the command
+     - service: switch.turn_on
+       data:
+         entity_id: switch.tv_room_fan
+     - delay: '00:00:05'
+     # Turn the corresponding switch on to send the fan speed command
+     - service: switch.turn_on
+       data_template:
+         entity_id: "switch.fan_speed_{{ trigger.to_state.state|lower|replace(' ', '_') }}"
+     # Reset the Input Select to "Select an option..."
+     - service: input_select.select_option
+       data_template:
+         entity_id: "{{ trigger.to_state.entity_id }}"
+         option: Select an option...
+     # Condition to check to see if the "Off" option was selected
+     - condition: template
+       value_template: "{{ trigger.to_state.state == 'Off' }}"
+     # If the above condition is true, turn the wall switch off
+     - service: switch.turn_off
+       data:
+         entity_id: switch.tv_room_fan

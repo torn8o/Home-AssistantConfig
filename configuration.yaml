@@ -1,0 +1,169 @@
+################################################################
+## Configuration
+################################################################
+
+homeassistant:
+  name: Torn Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
+  time_zone: America/Chicago
+  unit_system: imperial
+  customize: !include customize.yaml
+  packages: !include_dir_named packages
+
+frontend:
+history:
+logbook:
+sun:
+#updater:
+#discovery:
+discovery:
+  ignore:
+    - netgear_router
+
+
+################################################
+## Components (Non-Includes)
+################################################
+config:
+
+ifttt:
+  key: !secret iftt_key
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+climate:
+  platform: nest
+
+http:
+  api_password: !secret http_api_password
+  ssl_certificate: !secret http_ssl_certificate
+  ssl_key: !secret http_ssl_key
+
+wink:
+  email: !secret wink_email
+  password: !secret wink_password
+
+mqtt:
+  broker: !secret mqtt_broker
+  port: !secret mqtt_port
+  client_id: !secret mqtt_client
+  keepalive: !secret mqtt_keepalive
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+
+#influxdb:
+#  database: !secret influxdb_database
+#  host: !secret influxdb_host
+
+
+emulated_hue:
+  host_ip: !secret hue_host
+  type: alexa
+  off_maps_to_on_domains:
+    - script
+    - scene
+  expose_by_default: true
+  exposed_domains:
+    - input_boolean
+    - switch
+    - light
+
+remote:
+  - platform: !secret remote_platform
+    name: !secret remote_name
+    host: !secret remote_host
+
+wemo:
+  static:
+    - !secret wemo_one
+    - !secret wemo_two
+    - !secret wemo_three
+    - !secret wemo_four
+    - !secret wemo_five
+#media_player:
+#  - platform: plex
+#  - platform: vlc
+ffmpeg:
+  ffmpeg_bin: !secret ffmpeg_bin
+camera:
+  - platform: ffmpeg
+    name: Cam
+    input: !secret cam_input
+  - platform: ffmpeg
+    name: Cam indoor
+    input: !secret cam_indoor_input
+  - platform: mjpeg
+    name: Interior Motion
+    mjpeg_url: http://torn8o.ddns.net:81/mjpg/cam1/video.mjpg
+    username: home
+    password: a1028
+    authentication: basic
+
+recorder:
+  purge_days: 3
+#  exclude:
+#    domains:
+#      - automation
+#      - weblink
+#      - updater
+#    entities:
+#      - sun.sun   # Don't record sun data
+#zwave:
+#  device_config: !include zwave_device_config.yaml
+
+weblink:
+  entities:
+    - name: !secret grafana_name
+      url: !secret grafana_url
+#    - name: Pi_hole
+#      url: http://torn8o.ddns.net:8017/admin/
+    - name: !secret sonarr_name
+      url: !secret sonarr_url
+
+################################################
+## Component Includes (Single File)
+################################################
+
+# emulated_hue: !include emulated_hue.yaml
+#icloud: !include icloud.yaml
+logger: !include logger.yaml
+zwave: !include zwave.yaml
+group: !include groups.yaml
+
+################################################
+## Component Includes (Named)
+################################################
+
+# alexa:
+#   intents: !include_dir_named alexa
+
+################################################
+## Component Includes (Merge List)
+################################################
+
+automation: !include_dir_merge_list automation
+binary_sensor: !include_dir_merge_list binary_sensor
+#camera: !include_dir_merge_list camera
+#cover: !include_dir_merge_list cover
+device_tracker: !include_dir_merge_list device
+light: !include_dir_merge_list light
+#media_player: !include_dir_merge_list media_player
+notify: !include_dir_merge_list notify
+#scene: !include_dir_merge_list scene
+sensor: !include_dir_merge_list sensors
+switch: !include_dir_merge_list switches
+zone: !include_dir_merge_list zone
+
+################################################
+## Component Includes (Merge Named)
+################################################
+
+#group: !include_dir_merge_named group
+#input_boolean: !include_dir_merge_named input_boolean
+input_select: !include_dir_merge_named input_select
+input_slider: !include_dir_merge_named input_slider
+script: !include_dir_merge_named script
+shell_command: !include_dir_merge_named shell_command

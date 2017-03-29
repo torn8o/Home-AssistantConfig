@@ -1,0 +1,19 @@
+#- platform: owntracks
+#  max_gps_accuracy: 100
+#  mac: 78:4F:43:0A:40:C1
+#  waypoints: True
+#  track: yes
+#  waypoint_whitelist:
+- platform: netgear
+  host: !secret netgear_host
+  username: !secret netgear_username
+  password: !secret netgear_password
+  port: 80
+#  track_new_devices: false
+
+- platform: nmap_tracker
+  hosts: 192.168.1.1/24
+  home_interval: 10
+#  track_new_devices: false
+
+#- platform: bluetooth_tracker

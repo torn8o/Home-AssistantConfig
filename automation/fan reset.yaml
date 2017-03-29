@@ -1,0 +1,12 @@
+- alias: Fan Power Reset
+  trigger:
+    platform: time
+    seconds: '/5'
+  condition:
+    - condition: state
+      entity_id: switch.fan_off
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.fan_off

@@ -1,0 +1,14 @@
+#camera:
+- platform: ffmpeg
+  name: Cam
+  input: rtsp://192.168.1.121:554/ch0_0.h264
+- platform: ffmpeg
+  name: Cam indoor
+  input: rtsp://192.168.1.122:554/ch0_0.h264
+#camera:
+#- platform: mjpeg
+#  name: Interior Motion
+#  mjpeg_url: torn8o.ddns.net:81/mjpg/cam1/video.mjpg
+#  username: homeassistant
+#  password: a10281028
+#  authentication: basic

@@ -1,0 +1,8 @@
+- platform: sonarr
+  api_key: !secret sonarr_api_key
+  host: !secret sonarr_host
+  port: 8989
+  monitored_conditions:
+    - diskspace
+    - upcoming
+  days: 2

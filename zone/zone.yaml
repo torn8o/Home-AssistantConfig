@@ -1,0 +1,16 @@
+# zone:
+- name: Torn_Work
+  latitude: !secret work_latitude
+  longitude: !secret work_longitude
+#   elevation: !secret work_elevation
+  radius: 100
+  icon: mdi:account-multiple
+
+# This will override the default home zone
+# zone 2:
+- name: Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+#  elevation: !secret home_elevation
+  radius: 100
+ #  icon: mdi:account-multiple

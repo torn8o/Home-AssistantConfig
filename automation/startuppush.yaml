@@ -1,0 +1,8 @@
+  - alias: Startup Notification pushover
+    trigger:
+      platform: event
+      event_type: homeassistant_start
+    action:
+      service: notify.pushover
+      data_template:
+        message: 'homeassistant restarted'

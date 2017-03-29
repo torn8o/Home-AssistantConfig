@@ -1,0 +1,4 @@
+  plex_lights_disable:
+    name: Disable Plex Lights
+    initial: off
+    icon: mdi:filmstrip-off

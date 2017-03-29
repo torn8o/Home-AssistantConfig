@@ -1,0 +1,42 @@
+sensor:
+  - platform: command_line
+    command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+    name: HA Current Version
+  - platform: command_line
+    name: HA Installed Version
+    command: "/srv/homeassistant/bin/hass --version"
+  - platform: template
+    sensors:
+      ha_last_restart:
+        value_template: '{{ as_timestamp(states.automation.startup_notification.attributes.last_triggered) | timestamp_custom("%b %d %X") }}'
+        friendly_name: HA Last Restart
+
+automation:
+  - alias: 'Update Available Notification'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: updater.updater
+    action:
+      service: notify.pushbullet
+      data:
+        title: "HomeAssistant Update"
+        message: 'Update for Home Assistant is available.'
+
+  - alias: "Startup Notification"
+    trigger:
+      platform: event
+      event_type: homeassistant_start
+    action:
+      service: notify.pushbullet
+      data:
+        title: "HomeAssistant Startup"
+        message: "Home Assistant restarted."
+
+group:
+  hass:
+    name: HomeAssistant
+    entities:
+      - sensor.ha_installed_version
+      - sensor.ha_current_version
+      - sensor.ha_last_restart
