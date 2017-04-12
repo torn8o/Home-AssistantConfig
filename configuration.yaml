@@ -84,11 +84,7 @@ wemo:
     - !secret wemo_three
     - !secret wemo_four
     - !secret wemo_five
-#media_player:
-#  - platform: plex
-#    IP_ADDRESS: 192.168.1.113
-#    PORT: 32400
-#  - platform: vlc
+
 ffmpeg:
   ffmpeg_bin: !secret ffmpeg_bin
 camera:
@@ -116,8 +112,6 @@ weblink:
   entities:
     - name: !secret grafana_name
       url: !secret grafana_url
-#    - name: Pi_hole
-#      url: http://torn8o.ddns.net:8017/admin/
     - name: !secret sonarr_name
       url: !secret sonarr_url
 
