@@ -16,6 +16,11 @@
         n/a
         {% endif %}'
       friendly_name: 'Garage Door Status'
+  #    icon_template: '{%- if is_state("sensor.garage_door_status", "open") %}mdi:garage-open{%- elif is_state_attr("sensor.garage_door_status", "battery_status", "Closed")}'
+
+
+ #icon_template: '{%- if is_state("sensor.battery_ipad", "unknown") %}mdi:battery-unknown{%- elif is_state_attr("device_tracker.ipad", "battery_status", "Charging") %}mdi:battery-charging{%- elif  states.device_tracker.ipad.attributes.battery <= 5 %}mdi:battery-outline{%- elif states.device_tracker.ipad.attributes.battery >= 95 %}mdi:battery{% else %}mdi:battery-{{(states.device_tracker.ipad.attributes.battery|float / 10)|round*10}}{%- endif %}'
+
 
 - platform: template
   sensors:

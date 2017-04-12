@@ -46,3 +46,23 @@ Create fast Customize for groups, sensors, covers etc...  Just change that first
 {%- endfor %}
 
 #########################################################
+{ "_".ljust(90, "_") }}
+{%- set domains = [states.light, states.switch, states.automation, states.device_tracker, states.group, states.media_player, states.proximity, states.script, states.zone, states.zwave, states.sensor, states.calendar ] %}
+{{ "Attribute Name"}}: {{ "Attribute Value" }}
+{%- for domain in domains -%}
+{% for item in domain %}
+{{ "_".ljust(90, "_") }}
+{{ item.entity_id.ljust(50) }}
+  {{ "State"}}: {{ item.state}}
+  {{ "Domain"}}: {{ item.domain}}
+  {{ "Object ID"}}: {{ item.object_id}}
+  {{ "Last Updated"}}: {{ item.last_updated}}
+  {{ "Last Changed"}}: {{ item.last_changed}}
+{%- for attrib in item.attributes|sort() %}
+{%- if attrib is defined %}
+  {{attrib}}: {{ item.attributes[attrib] }}
+{%- endif %}
+{%- endfor %}
+{%- endfor %}
+{%- endfor %}
+##############################################

@@ -1,0 +1,3146 @@
+#_________________________________________________________________________________________
+#Attribute Name: Attribute Value
+#_________________________________________________________________________________________
+light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0:
+  #State: off
+  #Domain: light
+  #Object ID: aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0
+  #Last Updated: 2017-04-02 02:56:23.977857+00:00
+  #Last Changed: 2017-04-02 02:56:23.977857+00:00
+  friendly_name: Master bedroom Fan
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  node_id: 8
+  persistent: True
+  supported_features: 1
+#_________________________________________________________________________________________
+light.cabinet_lights:
+  #State: off
+  #Domain: light
+  #Object ID: cabinet_lights
+  #Last Updated: 2017-04-02 02:56:18.036914+00:00
+  #Last Changed: 2017-04-02 02:56:18.036914+00:00
+  friendly_name: Cabinet Lights
+  supported_features: 21
+#_________________________________________________________________________________________
+light.ge_12724_3way_dimmer_switch_level_16_0:
+  #State: on
+  #Domain: light
+  #Object ID: ge_12724_3way_dimmer_switch_level_16_0
+  #Last Updated: 2017-04-02 20:30:04.818020+00:00
+  #Last Changed: 2017-04-02 15:27:21.105380+00:00
+  brightness: 59.0
+  delay: 4
+  friendly_name: TV room Light
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  node_id: 16
+  persistent: True
+  refresh_value: True
+  supported_features: 1
+#_________________________________________________________________________________________
+light.ge_12724_3way_dimmer_switch_level_33_0:
+  #State: on
+  #Domain: light
+  #Object ID: ge_12724_3way_dimmer_switch_level_33_0
+  #Last Updated: 2017-04-02 20:13:21.790750+00:00
+  #Last Changed: 2017-04-02 20:13:21.790750+00:00
+  brightness: 8.0
+  delay: 4
+  friendly_name: Dining Room
+  haaska_hidden: True
+  node_id: 33
+  persistent: True
+  refresh_value: True
+  supported_features: 1
+#_________________________________________________________________________________________
+light.ge_12724_3way_dimmer_switch_level_9_0:
+  #State: on
+  #Domain: light
+  #Object ID: ge_12724_3way_dimmer_switch_level_9_0
+  #Last Updated: 2017-04-02 20:40:30.781275+00:00
+  #Last Changed: 2017-04-02 20:40:30.781275+00:00
+  brightness: 64.0
+  delay: 2
+  friendly_name: Kitchen Light
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  node_id: 9
+  persistent: True
+  refresh_value: True
+  supported_features: 1
+#_________________________________________________________________________________________
+light.hallway:
+  #State: off
+  #Domain: light
+  #Object ID: hallway
+  #Last Updated: 2017-04-02 19:46:46.402644+00:00
+  #Last Changed: 2017-04-02 19:46:46.402644+00:00
+  friendly_name: Hallway
+  is_hue_group: True
+  supported_features: 127
+#_________________________________________________________________________________________
+light.hallway_1:
+  #State: off
+  #Domain: light
+  #Object ID: hallway_1
+  #Last Updated: 2017-04-02 19:46:46.398634+00:00
+  #Last Changed: 2017-04-02 19:46:46.398634+00:00
+  friendly_name: Hallway 1
+  haaska_hidden: True
+  persistent: True
+  supported_features: 41
+#_________________________________________________________________________________________
+light.hallway_2:
+  #State: off
+  #Domain: light
+  #Object ID: hallway_2
+  #Last Updated: 2017-04-02 19:46:46.379921+00:00
+  #Last Changed: 2017-04-02 19:46:46.379921+00:00
+  friendly_name: Hallway 2
+  haaska_hidden: True
+  persistent: True
+  supported_features: 41
+#_________________________________________________________________________________________
+light.porch_led:
+  #State: off
+  #Domain: light
+  #Object ID: porch_led
+  #Last Updated: 2017-04-02 02:56:18.022985+00:00
+  #Last Changed: 2017-04-02 02:56:18.022985+00:00
+  friendly_name: Porch Led
+  supported_features: 21
+#_________________________________________________________________________________________
+light.steps:
+  #State: off
+  #Domain: light
+  #Object ID: steps
+  #Last Updated: 2017-04-02 02:56:18.030124+00:00
+  #Last Changed: 2017-04-02 02:56:18.030124+00:00
+  friendly_name: Step Lights
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  persistent: True
+  supported_features: 21
+#_________________________________________________________________________________________
+light.tv:
+  #State: off
+  #Domain: light
+  #Object ID: tv
+  #Last Updated: 2017-04-02 02:55:00.252466+00:00
+  #Last Changed: 2017-04-02 02:55:00.252466+00:00
+  friendly_name: tv
+  supported_features: 41
+#_________________________________________________________________________________________
+light.tv_color_lights:
+  #State: off
+  #Domain: light
+  #Object ID: tv_color_lights
+  #Last Updated: 2017-04-02 02:56:18.050654+00:00
+  #Last Changed: 2017-04-02 02:56:18.050654+00:00
+  friendly_name: TV Color Lights
+  supported_features: 21
+#_________________________________________________________________________________________
+light.tv_color_lights1:
+  #State: off
+  #Domain: light
+  #Object ID: tv_color_lights1
+  #Last Updated: 2017-04-02 02:56:18.043750+00:00
+  #Last Changed: 2017-04-02 02:56:18.043750+00:00
+  friendly_name: TV Color Lights1
+  supported_features: 21
+#_________________________________________________________________________________________
+light.zooz_unknown_type0112_id241c_level_3_0:
+  #State: off
+  #Domain: light
+  #Object ID: zooz_unknown_type0112_id241c_level_3_0
+  #Last Updated: 2017-04-02 02:56:22.677602+00:00
+  #Last Changed: 2017-04-02 02:56:22.677602+00:00
+  delay: 4
+  friendly_name: Attic Lights
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  node_id: 3
+  persistent: True
+  refresh_value: True
+  supported_features: 1
+#_________________________________________________________________________________________
+light.zooz_unknown_type0112_id241c_level_5_0:
+  #State: on
+  #Domain: light
+  #Object ID: zooz_unknown_type0112_id241c_level_5_0
+  #Last Updated: 2017-04-02 20:40:32.059476+00:00
+  #Last Changed: 2017-04-02 20:40:30.925265+00:00
+  brightness: 103.0
+  delay: 4
+  friendly_name: Kitchen Bar
+  icon: mdi:lightbulb
+  node_id: 5
+  persistent: True
+  refresh_value: True
+  supported_features: 1
+#_________________________________________________________________________________________
+light.zooz_unknown_type0112_id241c_level_6_0:
+  #State: off
+  #Domain: light
+  #Object ID: zooz_unknown_type0112_id241c_level_6_0
+  #Last Updated: 2017-04-02 02:56:23.597198+00:00
+  #Last Changed: 2017-04-02 02:56:23.597198+00:00
+  friendly_name: Zooz Unknown
+  node_id: 6
+  supported_features: 1
+#_________________________________________________________________________________________
+switch.bathroom_fan:
+  #State: off
+  #Domain: switch
+  #Object ID: bathroom_fan
+  #Last Updated: 2017-04-02 20:01:32.415864+00:00
+  #Last Changed: 2017-04-02 20:01:32.415864+00:00
+  friendly_name: bathroom fan
+#_________________________________________________________________________________________
+switch.christmas_tree:
+  #State: on
+  #Domain: switch
+  #Object ID: christmas_tree
+  #Last Updated: 2017-04-02 02:55:30.947344+00:00
+  #Last Changed: 2017-04-02 02:55:30.947344+00:00
+  friendly_name: Christmas Tree
+#_________________________________________________________________________________________
+switch.fan_off:
+  #State: off
+  #Domain: switch
+  #Object ID: fan_off
+  #Last Updated: 2017-04-02 02:55:01.365988+00:00
+  #Last Changed: 2017-04-02 02:55:01.365988+00:00
+  assumed_state: True
+  friendly_name: Fan Off
+#_________________________________________________________________________________________
+switch.fan_speed_high:
+  #State: off
+  #Domain: switch
+  #Object ID: fan_speed_high
+  #Last Updated: 2017-04-02 02:55:01.369675+00:00
+  #Last Changed: 2017-04-02 02:55:01.369675+00:00
+  assumed_state: True
+  friendly_name: Fan Speed High
+#_________________________________________________________________________________________
+switch.fan_speed_low:
+  #State: off
+  #Domain: switch
+  #Object ID: fan_speed_low
+  #Last Updated: 2017-04-02 02:55:01.351932+00:00
+  #Last Changed: 2017-04-02 02:55:01.351932+00:00
+  assumed_state: True
+  friendly_name: Fan Speed Low
+#_________________________________________________________________________________________
+switch.fan_speed_medium:
+  #State: off
+  #Domain: switch
+  #Object ID: fan_speed_medium
+  #Last Updated: 2017-04-02 02:55:01.344527+00:00
+  #Last Changed: 2017-04-02 02:55:01.344527+00:00
+  assumed_state: True
+  friendly_name: Fan Speed Medium
+#_________________________________________________________________________________________
+switch.fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0:
+  #State: off
+  #Domain: switch
+  #Object ID: fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0
+  #Last Updated: 2017-04-02 02:56:22.153206+00:00
+  #Last Changed: 2017-04-02 02:56:22.153206+00:00
+  friendly_name: Garage Door opener
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  node_id: 2
+  persistent: True
+#_________________________________________________________________________________________
+switch.game_room_fan:
+  #State: off
+  #Domain: switch
+  #Object ID: game_room_fan
+  #Last Updated: 2017-04-02 02:55:05.567348+00:00
+  #Last Changed: 2017-04-02 02:55:05.567348+00:00
+  friendly_name: Game Room Fan
+  last_event: None
+  persistent: True
+#_________________________________________________________________________________________
+switch.game_room_light:
+  #State: off
+  #Domain: switch
+  #Object ID: game_room_light
+  #Last Updated: 2017-04-02 02:55:05.597279+00:00
+  #Last Changed: 2017-04-02 02:55:05.597279+00:00
+  friendly_name: Game Room Light
+  last_event: None
+  persistent: True
+#_________________________________________________________________________________________
+switch.ge_12721_lighting_control_duplex_receptacle_switch_21_0:
+  #State: off
+  #Domain: switch
+  #Object ID: ge_12721_lighting_control_duplex_receptacle_switch_21_0
+  #Last Updated: 2017-04-02 02:56:29.410214+00:00
+  #Last Changed: 2017-04-02 02:56:29.410214+00:00
+  friendly_name: GE 12721 Lighting Control Duplex Receptacle Switch
+  node_id: 21
+#_________________________________________________________________________________________
+switch.ge_12721_lighting_control_duplex_receptacle_switch_22_0:
+  #State: on
+  #Domain: switch
+  #Object ID: ge_12721_lighting_control_duplex_receptacle_switch_22_0
+  #Last Updated: 2017-04-02 02:56:29.825391+00:00
+  #Last Changed: 2017-04-02 02:56:29.825391+00:00
+  friendly_name: Cable Modem
+  haaska_hidden: True
+  node_id: 22
+  persistent: True
+#_________________________________________________________________________________________
+switch.ge_12722_onoff_relay_switch_switch_13_0:
+  #State: off
+  #Domain: switch
+  #Object ID: ge_12722_onoff_relay_switch_switch_13_0
+  #Last Updated: 2017-04-02 02:56:26.415017+00:00
+  #Last Changed: 2017-04-02 02:56:26.415017+00:00
+  delay: 4
+  friendly_name: Master bedroom Fan Light
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  node_id: 13
+  persistent: True
+  refresh_value: True
+#_________________________________________________________________________________________
+switch.ge_12722_onoff_relay_switch_switch_25_0:
+  #State: off
+  #Domain: switch
+  #Object ID: ge_12722_onoff_relay_switch_switch_25_0
+  #Last Updated: 2017-04-02 02:56:30.928666+00:00
+  #Last Changed: 2017-04-02 02:56:30.928666+00:00
+  delay: 4
+  friendly_name: Master Bedroom Hallway Light
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  node_id: 25
+  persistent: True
+  refresh_value: True
+#_________________________________________________________________________________________
+switch.ge_12722_onoff_relay_switch_switch_28_0:
+  #State: off
+  #Domain: switch
+  #Object ID: ge_12722_onoff_relay_switch_switch_28_0
+  #Last Updated: 2017-04-02 11:14:09.604799+00:00
+  #Last Changed: 2017-04-02 11:14:09.604799+00:00
+  delay: 4
+  friendly_name: Front Lights
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  node_id: 28
+  persistent: True
+  refresh_value: True
+#_________________________________________________________________________________________
+switch.ge_12722_onoff_relay_switch_switch_34_0:
+  #State: on
+  #Domain: switch
+  #Object ID: ge_12722_onoff_relay_switch_switch_34_0
+  #Last Updated: 2017-04-02 18:32:22.174798+00:00
+  #Last Changed: 2017-04-02 18:32:22.174798+00:00
+  delay: 4
+  friendly_name: Rabbit area
+  haaska_hidden: True
+  node_id: 34
+  persistent: True
+  refresh_value: True
+#_________________________________________________________________________________________
+switch.hallway_light:
+  #State: on
+  #Domain: switch
+  #Object ID: hallway_light
+  #Last Updated: 2017-04-02 02:55:05.547273+00:00
+  #Last Changed: 2017-04-02 02:55:05.547273+00:00
+  friendly_name: Hallway Light
+  last_event: None
+#_________________________________________________________________________________________
+switch.home_assistant:
+  #State: on
+  #Domain: switch
+  #Object ID: home_assistant
+  #Last Updated: 2017-04-02 02:55:30.802201+00:00
+  #Last Changed: 2017-04-02 02:55:30.802201+00:00
+  friendly_name: home assistant
+#_________________________________________________________________________________________
+switch.leviton_unknown_type1d04_id0334_switch_17_0:
+  #State: on
+  #Domain: switch
+  #Object ID: leviton_unknown_type1d04_id0334_switch_17_0
+  #Last Updated: 2017-04-02 02:56:28.587481+00:00
+  #Last Changed: 2017-04-02 02:56:28.587481+00:00
+  friendly_name: Christmas Angel
+  haaska_hidden: True
+  icon: mdi:lightbulb
+  node_id: 17
+  persistent: True
+#_________________________________________________________________________________________
+switch.living_room_curtain_close:
+  #State: off
+  #Domain: switch
+  #Object ID: living_room_curtain_close
+  #Last Updated: 2017-04-02 02:55:01.348018+00:00
+  #Last Changed: 2017-04-02 02:55:01.348018+00:00
+  assumed_state: True
+  friendly_name: Living room curtain close
+#_________________________________________________________________________________________
+switch.living_room_curtain_open:
+  #State: off
+  #Domain: switch
+  #Object ID: living_room_curtain_open
+  #Last Updated: 2017-04-02 11:14:17.380262+00:00
+  #Last Changed: 2017-04-02 11:14:17.380262+00:00
+  assumed_state: True
+  friendly_name: Living room curtain open
+#_________________________________________________________________________________________
+switch.living_room_curtain_stop:
+  #State: off
+  #Domain: switch
+  #Object ID: living_room_curtain_stop
+  #Last Updated: 2017-04-02 11:14:17.366649+00:00
+  #Last Changed: 2017-04-02 11:14:17.366649+00:00
+  assumed_state: True
+  friendly_name: Living room curtain stop
+#_________________________________________________________________________________________
+switch.master_bathroom_fan:
+  #State: off
+  #Domain: switch
+  #Object ID: master_bathroom_fan
+  #Last Updated: 2017-04-02 16:30:24.409267+00:00
+  #Last Changed: 2017-04-02 16:30:24.409267+00:00
+  friendly_name: Master Bathroom Fan
+  last_event: None
+#_________________________________________________________________________________________
+switch.master_bathroom_light:
+  #State: off
+  #Domain: switch
+  #Object ID: master_bathroom_light
+  #Last Updated: 2017-04-02 04:02:21.290858+00:00
+  #Last Changed: 2017-04-02 04:02:21.290858+00:00
+  friendly_name: Master Bathroom Light
+  last_event: None
+#_________________________________________________________________________________________
+switch.master_bedroom_light:
+  #State: off
+  #Domain: switch
+  #Object ID: master_bedroom_light
+  #Last Updated: 2017-04-02 20:46:34.183106+00:00
+  #Last Changed: 2017-04-02 20:46:34.183106+00:00
+  friendly_name: master bedroom light
+#_________________________________________________________________________________________
+switch.nina_fan:
+  #State: on
+  #Domain: switch
+  #Object ID: nina_fan
+  #Last Updated: 2017-04-02 02:55:05.413978+00:00
+  #Last Changed: 2017-04-02 02:55:05.413978+00:00
+  friendly_name: Nina Fan
+  last_event: None
+#_________________________________________________________________________________________
+switch.nina_outlet:
+  #State: off
+  #Domain: switch
+  #Object ID: nina_outlet
+  #Last Updated: 2017-04-02 02:55:05.408523+00:00
+  #Last Changed: 2017-04-02 02:55:05.408523+00:00
+  friendly_name: Nina Outlet
+  last_event: None
+#_________________________________________________________________________________________
+switch.plex_server_power:
+  #State: on
+  #Domain: switch
+  #Object ID: plex_server_power
+  #Last Updated: 2017-04-02 02:55:30.701005+00:00
+  #Last Changed: 2017-04-02 02:55:30.701005+00:00
+  friendly_name: Plex Server Power
+#_________________________________________________________________________________________
+switch.porch_light:
+  #State: off
+  #Domain: switch
+  #Object ID: porch_light
+  #Last Updated: 2017-04-02 11:14:09.632173+00:00
+  #Last Changed: 2017-04-02 11:14:09.632173+00:00
+  friendly_name: porch light
+#_________________________________________________________________________________________
+switch.tv_room_fan:
+  #State: on
+  #Domain: switch
+  #Object ID: tv_room_fan
+  #Last Updated: 2017-04-02 02:55:30.996277+00:00
+  #Last Changed: 2017-04-02 02:55:30.996277+00:00
+  friendly_name: tv room fan
+#_________________________________________________________________________________________
+device_tracker.08002773bd08:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: 08002773bd08
+  #Last Updated: 2017-04-02 02:55:09.010372+00:00
+  #Last Changed: 2017-04-02 02:55:09.010372+00:00
+  friendly_name: 08002773bd08
+  source_type: None
+#_________________________________________________________________________________________
+device_tracker.18b43034608d:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: 18b43034608d
+  #Last Updated: 2017-04-02 16:32:45.320124+00:00
+  #Last Changed: 2017-04-02 16:32:45.320124+00:00
+  friendly_name: 18b43034608d
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.18b43034a3ac:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: 18b43034a3ac
+  #Last Updated: 2017-04-02 18:29:20.319956+00:00
+  #Last Changed: 2017-04-02 18:29:20.319956+00:00
+  friendly_name: 18b43034a3ac
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.342387f92947:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: 342387f92947
+  #Last Updated: 2017-04-02 02:55:09.030436+00:00
+  #Last Changed: 2017-04-02 02:55:09.030436+00:00
+  friendly_name: 342387f92947
+  source_type: None
+#_________________________________________________________________________________________
+device_tracker.38607731935d:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: 38607731935d
+  #Last Updated: 2017-04-02 08:03:00.321545+00:00
+  #Last Changed: 2017-04-02 08:03:00.321545+00:00
+  friendly_name: 38607731935d
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.38c986e759f2:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: 38c986e759f2
+  #Last Updated: 2017-04-02 08:04:40.320270+00:00
+  #Last Changed: 2017-04-02 08:04:40.320270+00:00
+  friendly_name: 38c986e759f2
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.64bc0c65237c:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: 64bc0c65237c
+  #Last Updated: 2017-04-02 18:35:15.321014+00:00
+  #Last Changed: 2017-04-02 18:35:15.321014+00:00
+  friendly_name: 64bc0c65237c
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.accf2366e59c:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: accf2366e59c
+  #Last Updated: 2017-04-02 02:55:09.017275+00:00
+  #Last Changed: 2017-04-02 02:55:09.017275+00:00
+  friendly_name: accf2366e59c
+  source_type: None
+#_________________________________________________________________________________________
+device_tracker.almond_ap:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: almond_ap
+  #Last Updated: 2017-04-02 02:55:09.234620+00:00
+  #Last Changed: 2017-04-02 02:55:09.234620+00:00
+  friendly_name: Almond_AP
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.belken_1:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: belken_1
+  #Last Updated: 2017-04-02 02:55:09.188548+00:00
+  #Last Changed: 2017-04-02 02:55:09.188548+00:00
+  friendly_name: 149182443e9d
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.belkin_2:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: belkin_2
+  #Last Updated: 2017-04-02 02:55:09.173282+00:00
+  #Last Changed: 2017-04-02 02:55:09.173282+00:00
+  friendly_name: 149182444019
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.belkin_3:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: belkin_3
+  #Last Updated: 2017-04-02 02:55:09.182209+00:00
+  #Last Changed: 2017-04-02 02:55:09.182209+00:00
+  friendly_name: 94103e4ff18d
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.belkin_4:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: belkin_4
+  #Last Updated: 2017-04-02 14:45:32.824247+00:00
+  #Last Changed: 2017-04-02 14:45:32.824247+00:00
+  friendly_name: 1491824440ad
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.belkin_5:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: belkin_5
+  #Last Updated: 2017-04-02 02:55:09.195017+00:00
+  #Last Changed: 2017-04-02 02:55:09.195017+00:00
+  friendly_name: 1491824465d9
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.belkin_switch_1:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: belkin_switch_1
+  #Last Updated: 2017-04-02 02:55:08.946061+00:00
+  #Last Changed: 2017-04-02 02:55:08.946061+00:00
+  friendly_name: 1491820336d5
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.belkin_switch_2:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: belkin_switch_2
+  #Last Updated: 2017-04-02 02:55:08.877738+00:00
+  #Last Changed: 2017-04-02 02:55:08.877738+00:00
+  friendly_name: 149182033aed
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.broadlink:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: broadlink
+  #Last Updated: 2017-04-02 02:55:08.979317+00:00
+  #Last Changed: 2017-04-02 02:55:08.979317+00:00
+  friendly_name: Broadlink
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.demo_anne_therese:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: demo_anne_therese
+  #Last Updated: 2017-04-02 02:55:09.064481+00:00
+  #Last Changed: 2017-04-02 02:55:09.064481+00:00
+  friendly_name: Anne Therese
+  source_type: None
+#_________________________________________________________________________________________
+device_tracker.demo_home_boy:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: demo_home_boy
+  #Last Updated: 2017-04-02 02:55:09.061294+00:00
+  #Last Changed: 2017-04-02 02:55:09.061294+00:00
+  friendly_name: Home Boy
+  source_type: None
+#_________________________________________________________________________________________
+device_tracker.demo_paulus:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: demo_paulus
+  #Last Updated: 2017-04-02 02:55:09.107293+00:00
+  #Last Changed: 2017-04-02 02:55:09.107293+00:00
+  friendly_name: Paulus
+  source_type: None
+#_________________________________________________________________________________________
+device_tracker.dining_room_camera:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: dining_room_camera
+  #Last Updated: 2017-04-02 02:55:08.992899+00:00
+  #Last Changed: 2017-04-02 02:55:08.992899+00:00
+  friendly_name: Dining_room_Camera
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.front_camera:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: front_camera
+  #Last Updated: 2017-04-02 02:56:27.183707+00:00
+  #Last Changed: 2017-04-02 02:56:27.183707+00:00
+  friendly_name: Front_Camera
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.harmony_hub:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: harmony_hub
+  #Last Updated: 2017-04-02 02:55:09.222968+00:00
+  #Last Changed: 2017-04-02 02:55:09.222968+00:00
+  friendly_name: 000420efdd0c
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.home_server:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: home_server
+  #Last Updated: 2017-04-02 02:55:09.149628+00:00
+  #Last Changed: 2017-04-02 02:55:09.149628+00:00
+  friendly_name: Home_Server
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.liz_iphone:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: liz_iphone
+  #Last Updated: 2017-04-02 19:54:19.066909+00:00
+  #Last Changed: 2017-04-02 19:54:19.066909+00:00
+  friendly_name: Apple TV
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.master_bedroom_relay:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: master_bedroom_relay
+  #Last Updated: 2017-04-02 02:55:08.825108+00:00
+  #Last Changed: 2017-04-02 02:55:08.825108+00:00
+  friendly_name: Master Bedroom Relay
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.micro_cell:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: micro_cell
+  #Last Updated: 2017-04-02 02:55:08.957864+00:00
+  #Last Changed: 2017-04-02 02:55:08.957864+00:00
+  friendly_name: Micro_Cell
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.monkey_phone:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: monkey_phone
+  #Last Updated: 2017-04-02 20:46:30.593493+00:00
+  #Last Changed: 2017-04-02 20:46:30.593493+00:00
+  friendly_name: Apple tv
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.nest_thermostat:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: nest_thermostat
+  #Last Updated: 2017-04-02 20:44:30.217770+00:00
+  #Last Changed: 2017-04-02 20:44:30.217770+00:00
+  friendly_name: Nest Thermostat
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.nighthawk_router:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: nighthawk_router
+  #Last Updated: 2017-04-02 02:55:08.899200+00:00
+  #Last Changed: 2017-04-02 02:55:08.899200+00:00
+  friendly_name: NightHawk_Router
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.nina_apple_watch:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: nina_apple_watch
+  #Last Updated: 2017-04-02 02:55:09.074149+00:00
+  #Last Changed: 2017-04-02 02:55:09.074149+00:00
+  friendly_name: 086698019e60
+  source_type: None
+#_________________________________________________________________________________________
+device_tracker.nina_ipad:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: nina_ipad
+  #Last Updated: 2017-04-02 20:38:40.167067+00:00
+  #Last Changed: 2017-04-02 20:38:40.167067+00:00
+  friendly_name: Nina_ipad
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.nina_iphone:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: nina_iphone
+  #Last Updated: 2017-04-02 20:38:26.992644+00:00
+  #Last Changed: 2017-04-02 20:38:26.992644+00:00
+  friendly_name: b0702d0b5841
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.owntracks_torn8o:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: owntracks_torn8o
+  #Last Updated: 2017-04-02 02:55:09.048001+00:00
+  #Last Changed: 2017-04-02 02:55:09.048001+00:00
+  friendly_name: owntracks
+  source_type: None
+#_________________________________________________________________________________________
+device_tracker.philipshue:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: philipshue
+  #Last Updated: 2017-04-02 02:55:09.211847+00:00
+  #Last Changed: 2017-04-02 02:55:09.211847+00:00
+  friendly_name: Philips-hue
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.torn8o:
+  #State: Torn_Work
+  #Domain: device_tracker
+  #Object ID: torn8o
+  #Last Updated: 2017-04-02 18:51:51.320723+00:00
+  #Last Changed: 2017-04-02 18:49:03.607509+00:00
+  battery: 100
+  friendly_name: torn8o
+  gps_accuracy: 12
+  latitude: 38.65931527937064
+  longitude: -121.2744441353074
+  source_type: gps
+#_________________________________________________________________________________________
+device_tracker.torncloud:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: torncloud
+  #Last Updated: 2017-04-02 02:55:08.919408+00:00
+  #Last Changed: 2017-04-02 02:55:08.919408+00:00
+  friendly_name: Torn-Cloud
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.vizio_tv:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: vizio_tv
+  #Last Updated: 2017-04-02 19:39:22.736674+00:00
+  #Last Changed: 2017-04-02 19:39:22.736674+00:00
+  friendly_name: Vizio_Tv
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.windows7_pc:
+  #State: home
+  #Domain: device_tracker
+  #Object ID: windows7_pc
+  #Last Updated: 2017-04-02 02:55:09.203174+00:00
+  #Last Changed: 2017-04-02 02:55:09.203174+00:00
+  friendly_name: Windows7-PC
+  gps_accuracy: 0
+  latitude: 28.6079
+  longitude: -81.3055
+  source_type: router
+#_________________________________________________________________________________________
+device_tracker.windows7pc:
+  #State: not_home
+  #Domain: device_tracker
+  #Object ID: windows7pc
+  #Last Updated: 2017-04-02 19:52:25.321227+00:00
+  #Last Changed: 2017-04-02 19:52:25.321227+00:00
+  friendly_name: Windows7-PC
+  source_type: router
+#_________________________________________________________________________________________
+group.aeotec_multisensor_6:
+  #State: unknown
+  #Domain: group
+  #Object ID: aeotec_multisensor_6
+  #Last Updated: 2017-04-02 02:54:53.648186+00:00
+  #Last Changed: 2017-04-02 02:54:53.648186+00:00
+  entity_id: ('binary_sensor.aeotec_zw100_multisensor_6_sensor_7_0', 'sensor.aeotec_zw100_multisensor_6_alarm_level_7_1', 'sensor.aeotec_zw100_multisensor_6_alarm_type_7_0', 'sensor.aeotec_zw100_multisensor_6_burglar_7_10', 'sensor.aeotec_zw100_multisensor_6_luminance_7_3', 'sensor.aeotec_zw100_multisensor_6_relative_humidity_7_5', 'sensor.aeotec_zw100_multisensor_6_sourcenodeid_7_2', 'sensor.aeotec_zw100_multisensor_6_temperature_7_1', 'sensor.aeotec_zw100_multisensor_6_ultraviolet_7_27')
+  friendly_name: Aeotec MultiSensor 6
+  order: 24
+#_________________________________________________________________________________________
+group.aeotec_multisensor_6_kitchen:
+  #State: on
+  #Domain: group
+  #Object ID: aeotec_multisensor_6_kitchen
+  #Last Updated: 2017-04-02 20:40:29.605800+00:00
+  #Last Changed: 2017-04-02 20:40:29.605800+00:00
+  entity_id: ('binary_sensor.aeotec_zw100_multisensor_6_sensor_31_0', 'sensor.aeotec_zw100_multisensor_6_alarm_level_31_1', 'sensor.aeotec_zw100_multisensor_6_alarm_type_31_0', 'sensor.aeotec_zw100_multisensor_6_burglar_31_10', 'sensor.aeotec_zw100_multisensor_6_luminance_31_3', 'sensor.aeotec_zw100_multisensor_6_relative_humidity_31_5', 'sensor.aeotec_zw100_multisensor_6_sourcenodeid_31_2', 'sensor.aeotec_zw100_multisensor_6_temperature_31_1', 'sensor.aeotec_zw100_multisensor_6_ultraviolet_31_27')
+  friendly_name: Aeotec MultiSensor 6 Kitchen
+  order: 25
+#_________________________________________________________________________________________
+group.air_safety:
+  #State: on
+  #Domain: group
+  #Object ID: air_safety
+  #Last Updated: 2017-04-02 02:54:58.461375+00:00
+  #Last Changed: 2017-04-02 02:54:58.461375+00:00
+  entity_id: ('binary_sensor.hallway_nest_protect_online', 'sensor.hallway_nest_protect_smoke_status', 'sensor.hallway_nest_protect_co_status', 'sensor.hallway_nest_protect_battery_level_2', 'sensor.hallway_nest_protect_battery_health', 'binary_sensor.kitchen_nest_protect_online', 'sensor.kitchen_nest_protect_smoke_status', 'sensor.kitchen_nest_protect_co_status', 'sensor.kitchen_nest_protect_battery_level', 'sensor.kitchen_nest_protect_battery_health')
+  friendly_name: Air Safety
+  order: 6
+#_________________________________________________________________________________________
+group.all_automation:
+  #State: on
+  #Domain: group
+  #Object ID: all_automation
+  #Last Updated: 2017-04-02 02:54:55.681160+00:00
+  #Last Changed: 2017-04-02 02:54:55.681160+00:00
+  entity_id: ('automation.zwave_network_is_complete', 'automation.update_available_notifications', 'automation.charlie_is_away', 'automation.view_lights', 'automation.tv_lights_and_fan_on', 'automation.tv_lights_and_fan_', 'automation.fan_speed_selected', 'automation.turn_theater_lights_to_80_on_motion_if_no_activity', 'automation.curtain_open', 'automation.close_curtains_sunset', 'automation.tv_lights', 'automation.pool_door_lights', 'automation.1turn_on_lights_downstairs', 'automation.holiday_led_stuff_', 'automation.turn_holiday_led_on_at_sunset', 'automation.turn_on_lights_downstairs', 'automation.pool_door_lights', 'automation.76_detect_light_between_8pm_and_5am', 'automation.garage_door_reset', 'automation.01_turn__hallway_light_when_there_is_no_movement', 'automation.01_turn_on_hallway_light_when_there_is_movement', 'automation.turn__kitchen_light_when_there_is_no_movement', 'automation.turn_on_kitchen_light_when_there_is_movement', 'automation.turn_porch_light__at_sunrise', 'automation.turn_porch_light_on_at_sunset', 'automation.255_detect_light_between_8am_and_8pm', 'automation.76_detect_light_between_8pm_and_5am', 'automation.turn_holiday_on_at_sunset', 'automation.holiday_stuff_', 'automation.notify_if_any_doors_left_open_for_10_minutes', 'automation.startup_notification', 'automation.turn_angel_light_on_at_sunset', 'automation.turn__kitchen_light_when_there_is_no_movement', 'automation.turn_on_kitchen_light_when_there_is_movement', 'automation.garage_door_is_open', 'automation.startup_notification_pushover', 'automation.startup_notification', 'automation.turn__hallway_light_when_there_is_no_movement', 'automation.turn__master_bath_light_when_there_is_no_movement', 'automation.turn__porch_light_at_700', 'automation.turn_on_hallway_light_when_there_is_movement', 'automation.turn_on_master_bath_light_when_there_is_movement', 'automation.turn_on_porch_light_15_minutes_before_dusk', 'automation.tv_room', 'automation.wink_troubles', 'script.signal_garage_door', 'script.timed_lamp', 'script.timer_', 'automation.garage_door')
+  friendly_name: all automation
+  order: 18
+#_________________________________________________________________________________________
+group.all_automations:
+  #State: on
+  #Domain: group
+  #Object ID: all_automations
+  #Last Updated: 2017-04-02 02:54:58.430676+00:00
+  #Last Changed: 2017-04-02 02:54:58.430676+00:00
+  auto: True
+  entity_id: ('automation.startup_notification_2', 'automation.update_available_notification', 'automation.porch_input_effect', 'automation.turn_off_day_star', 'automation.24__minimote_button_2_pressed', 'automation.turn_off_kitchen_light_when_there_is_no_movement', 'automation.zwave_network_is_complete', 'automation.24_minimote_button_1_pressed', 'automation.curtain_reset', 'automation.turn_porch_light_on_at_sunset', 'automation.log_level', 'automation.tv_lights_and_fan_on', 'automation.porch_animation_speed', 'automation.set_radio_volume', 'automation.24_3_minimote_button_3_held_2', 'automation.turn_off_attic_light_when_door_is_closed', 'automation.garage_door_reset', 'automation.close_curtains_sunset', 'automation.24_2_minimote_button_2_held', 'automation.view_lights', 'automation.fan_power_reset', 'automation.24_3_minimote_button_3_held', 'automation.turn_on_kitchen_light_when_there_is_movement', 'automation.tv_lights_and_fan_off', 'automation.minimote_button_1_pressed', 'automation.radio', 'automation.monitor_traffic_2', 'automation.curtain_reset_open', 'automation.front_light_off', 'automation.24_4_minimote_button_4_pressed', 'automation.turn_on_attic_light_when_door_opened', 'automation.turn_porch_light_off_at_sunrise', 'automation.startup_notification_pushover', 'automation.charlie_is_home', 'automation.notify_if_any_doors_left_open_for_10_minutes', 'automation.holiday_led_stuff_off', 'automation.76_detect_light_between_8pm_and_5am', 'automation.curtain_reset_close', 'automation.24_2_minimote_button_3_pressed', 'automation.fan_speed_selected', 'automation.garage_entry', 'automation.open_curtains_sunrise', 'automation.startup_notification', 'automation.update_available_notifications', 'automation.monitor_traffic', 'automation.turn_theater_lights_to_80_on_motion_if_no_activity', 'automation.charlie_is_away', 'automation.curtain_open', 'automation.24_full_minimote_button_1_held', 'automation.turn_front_lights_on_at_sunset', 'automation.turn_holiday_led_on_at_sunset', 'automation.pool_door_lights', 'automation.turn_on_day_star')
+  friendly_name: all automations
+  hidden: True
+  order: 50
+#_________________________________________________________________________________________
+group.all_devices:
+  #State: home
+  #Domain: group
+  #Object ID: all_devices
+  #Last Updated: 2017-04-02 02:55:08.861198+00:00
+  #Last Changed: 2017-04-02 02:55:08.861198+00:00
+  entity_id: ('group.devices',)
+  friendly_name: Devices
+  hidden: True
+  icon: mdi:bluetooth-transfer
+  order: 11
+  view: True
+#_________________________________________________________________________________________
+group.all_devices_2:
+  #State: home
+  #Domain: group
+  #Object ID: all_devices_2
+  #Last Updated: 2017-04-02 02:55:08.838339+00:00
+  #Last Changed: 2017-04-02 02:55:08.838339+00:00
+  auto: True
+  entity_id: ('device_tracker.belkin_4', 'device_tracker.front_camera', 'device_tracker.philipshue', 'device_tracker.windows7pc', 'device_tracker.08002773bd08', 'device_tracker.belkin_3', 'device_tracker.accf2366e59c', 'device_tracker.nina_iphone', 'device_tracker.nina_ipad', 'device_tracker.liz_iphone', 'device_tracker.belkin_switch_2', 'device_tracker.belkin_switch_1', 'device_tracker.342387f92947', 'device_tracker.nest_thermostat', 'device_tracker.torncloud', 'device_tracker.38607731935d', 'device_tracker.64bc0c65237c', 'device_tracker.owntracks_torn8o', 'device_tracker.belkin_2', 'device_tracker.master_bedroom_relay', 'device_tracker.torn8o', 'device_tracker.38c986e759f2', 'device_tracker.demo_home_boy', 'device_tracker.micro_cell', 'device_tracker.demo_anne_therese', 'device_tracker.home_server', 'device_tracker.vizio_tv', 'device_tracker.nina_apple_watch', 'device_tracker.almond_ap', 'device_tracker.broadlink', 'device_tracker.belken_1', 'device_tracker.18b43034a3ac', 'device_tracker.harmony_hub', 'device_tracker.nighthawk_router', 'device_tracker.windows7_pc', 'device_tracker.monkey_phone', 'device_tracker.18b43034608d', 'device_tracker.dining_room_camera', 'device_tracker.belkin_5', 'device_tracker.demo_paulus')
+  friendly_name: all devices
+  hidden: True
+  order: 53
+#_________________________________________________________________________________________
+group.all_lights:
+  #State: on
+  #Domain: group
+  #Object ID: all_lights
+  #Last Updated: 2017-04-02 15:20:44.886747+00:00
+  #Last Changed: 2017-04-02 15:20:44.886747+00:00
+  auto: True
+  entity_id: ('light.tv_color_lights1', 'light.cabinet_lights', 'light.tv_color_lights', 'light.hallway', 'light.steps', 'light.tv', 'light.hallway_2', 'light.porch_led', 'light.zooz_unknown_type0112_id241c_level_6_0', 'light.ge_12724_3way_dimmer_switch_level_16_0', 'light.hallway_1', 'light.zooz_unknown_type0112_id241c_level_3_0', 'light.zooz_unknown_type0112_id241c_level_5_0', 'light.ge_12724_3way_dimmer_switch_level_9_0', 'light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0', 'light.ge_12724_3way_dimmer_switch_level_33_0')
+  friendly_name: all lights
+  hidden: True
+  order: 51
+#_________________________________________________________________________________________
+group.all_remotes:
+  #State: off
+  #Domain: group
+  #Object ID: all_remotes
+  #Last Updated: 2017-04-02 02:55:15.422689+00:00
+  #Last Changed: 2017-04-02 02:55:15.422689+00:00
+  auto: True
+  entity_id: ('remote.torn_hub',)
+  friendly_name: all remotes
+  hidden: True
+  order: 54
+#_________________________________________________________________________________________
+group.all_scripts:
+  #State: off
+  #Domain: group
+  #Object ID: all_scripts
+  #Last Updated: 2017-04-02 02:54:54.706887+00:00
+  #Last Changed: 2017-04-02 02:54:54.706887+00:00
+  entity_id: ('script.backup_config', 'script.good_morning', 'script.good_night', 'script.master_bedroom_motion_helper', 'script.master_bedroom_motion_timer', 'script.occupancy', 'script.rebuild_customize', 'script.reload_config', 'script.restart_ha', 'script.update_hass')
+  friendly_name: all scripts
+  order: 17
+#_________________________________________________________________________________________
+group.all_scripts_2:
+  #State: off
+  #Domain: group
+  #Object ID: all_scripts_2
+  #Last Updated: 2017-04-02 02:54:54.721718+00:00
+  #Last Changed: 2017-04-02 02:54:54.721718+00:00
+  auto: True
+  entity_id: ('script.restart_ha', 'script.timed_theater_lights', 'script.restart_https_proxy', 'script.master_bedroom_motion_helper', 'script.backup_config', 'script.rebuild_customize', 'script.timed_lamp', 'script.steps_timer_on', 'script.good_night', 'script.timer_off', 'script.occupancy', 'script.good_morning', 'script.reload_config', 'script.master_bedroom_motion_timer', 'script.steps_timer_off', 'script.theater_lights_off', 'script.update_hass')
+  friendly_name: all scripts
+  hidden: True
+  order: 49
+#_________________________________________________________________________________________
+group.all_switches:
+  #State: on
+  #Domain: group
+  #Object ID: all_switches
+  #Last Updated: 2017-04-02 02:56:34.951351+00:00
+  #Last Changed: 2017-04-02 02:56:34.951351+00:00
+  assumed_state: True
+  auto: True
+  entity_id: ('switch.fan_speed_medium', 'switch.living_room_curtain_stop', 'switch.porch_light', 'switch.fan_speed_low', 'switch.nina_fan', 'switch.fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0', 'switch.game_room_light', 'switch.game_room_fan', 'switch.living_room_curtain_open', 'switch.plex_server_power', 'switch.tv_room_fan', 'switch.ge_12722_onoff_relay_switch_switch_13_0', 'switch.ge_12721_lighting_control_duplex_receptacle_switch_22_0', 'switch.ge_12722_onoff_relay_switch_switch_28_0', 'switch.christmas_tree', 'switch.master_bathroom_fan', 'switch.fan_off', 'switch.bathroom_fan', 'switch.ge_12722_onoff_relay_switch_switch_25_0', 'switch.leviton_unknown_type1d04_id0334_switch_17_0', 'switch.hallway_light', 'switch.fan_speed_high', 'switch.living_room_curtain_close', 'switch.nina_outlet', 'switch.master_bedroom_light', 'switch.ge_12722_onoff_relay_switch_switch_34_0', 'switch.home_assistant', 'switch.master_bathroom_light', 'switch.ge_12721_lighting_control_duplex_receptacle_switch_21_0')
+  friendly_name: all switches
+  hidden: True
+  order: 52
+#_________________________________________________________________________________________
+group.assistant:
+  #State: unknown
+  #Domain: group
+  #Object ID: assistant
+  #Last Updated: 2017-04-02 02:54:53.631798+00:00
+  #Last Changed: 2017-04-02 02:54:53.631798+00:00
+  entity_id: ('sensor.ha_installed_version', 'sensor.ha_current_version', 'sensor.ha_last_restart')
+  friendly_name: assistant
+  hidden: True
+  order: 15
+  view: True
+#_________________________________________________________________________________________
+group.automations:
+  #State: on
+  #Domain: group
+  #Object ID: automations
+  #Last Updated: 2017-04-02 02:54:55.764473+00:00
+  #Last Changed: 2017-04-02 02:54:55.764473+00:00
+  entity_id: ('group.all_automation',)
+  friendly_name: Automations
+  hidden: True
+  order: 16
+  view: True
+#_________________________________________________________________________________________
+group.batery_levels:
+  #State: unknown
+  #Domain: group
+  #Object ID: batery_levels
+  #Last Updated: 2017-04-02 02:54:53.622260+00:00
+  #Last Changed: 2017-04-02 02:54:53.622260+00:00
+  entity_id: ('sensor.torn8o_battery_level', 'sensor.aeotec_zw100_multisensor_6_battery_level_31_0', 'sensor.ecolink_doorwindow_sensor_battery_level_19_0', 'sensor.ecolink_doorwindow_sensor_battery_level_23_0', 'sensor.everspring_unknown_type0002_id0002_battery_level_15_0', 'sensor.ecolink_motion_sensor_battery_level_10_0', 'sensor.ecolink_motion_sensor_battery_level_11_0', 'sensor.torn8o_battery_level')
+  friendly_name: Battery Levels
+  hidden: True
+  icon: mdi:battery-charging-30
+  order: 8
+  view: True
+#_________________________________________________________________________________________
+group.camera:
+  #State: on
+  #Domain: group
+  #Object ID: camera
+  #Last Updated: 2017-04-02 20:40:30.819480+00:00
+  #Last Changed: 2017-04-02 20:40:30.819480+00:00
+  entity_id: ('camera.cam', 'camera.cam_indoor', 'camera.interior_motion', 'group.kitchen_lights', 'switch.ge_12722_onoff_relay_switch_switch_28_0')
+  friendly_name: Camera Front Door
+  hidden: True
+  icon: mdi:camera
+  order: 2
+  view: True
+#_________________________________________________________________________________________
+group.christmas_lights:
+  #State: on
+  #Domain: group
+  #Object ID: christmas_lights
+  #Last Updated: 2017-04-02 02:55:30.952180+00:00
+  #Last Changed: 2017-04-02 02:55:30.952180+00:00
+  entity_id: ('switch.kitchen_outlet', 'switch.ge_12722_on_relay_switch_switch_28_0', 'switch.ge_12722_onoff_relay_switch_switch_28_0', 'switch.leviton_unknown_type1d04_id0334_switch_17_0', 'switch.christmas_sleigh', 'switch.christmas_tree')
+  friendly_name: Christmas lights
+  order: 42
+#_________________________________________________________________________________________
+group.color_all_lights:
+  #State: off
+  #Domain: group
+  #Object ID: color_all_lights
+  #Last Updated: 2017-04-02 02:56:18.077742+00:00
+  #Last Changed: 2017-04-02 02:56:18.077742+00:00
+  entity_id: ('light.tv_color_lights', 'light.tv_color_lights1', 'light.cabinet_lights', 'light.steps')
+  friendly_name: Color all lights
+  order: 45
+#_________________________________________________________________________________________
+group.color_lights:
+  #State: off
+  #Domain: group
+  #Object ID: color_lights
+  #Last Updated: 2017-04-02 02:56:18.087718+00:00
+  #Last Changed: 2017-04-02 02:56:18.087718+00:00
+  entity_id: ('light.tv_color_lights', 'light.tv_color_lights1')
+  friendly_name: Color lights
+  order: 44
+#_________________________________________________________________________________________
+group.darksky:
+  #State: unknown
+  #Domain: group
+  #Object ID: darksky
+  #Last Updated: 2017-04-02 02:54:53.681628+00:00
+  #Last Changed: 2017-04-02 02:54:53.681628+00:00
+  entity_id: ('sensor.dark_sky_apparent_temperature', 'sensor.dark_sky_cloud_coverage', 'sensor.dark_sky_daily_high_apparent_temperature', 'sensor.dark_sky_daily_high_temperature', 'sensor.dark_sky_daily_low_apparent_temperature', 'sensor.dark_sky_daily_low_temperature', 'sensor.dark_sky_daily_max_precip_intensity', 'sensor.dark_sky_daily_summary', 'sensor.dark_sky_dew_point', 'sensor.dark_sky_hourly_summary', 'sensor.dark_sky_humidity', 'sensor.dark_sky_icon', 'sensor.dark_sky_nearest_storm_bearing', 'sensor.dark_sky_nearest_storm_distance', 'sensor.dark_sky_ozone', 'sensor.dark_sky_precip', 'sensor.dark_sky_precip_intensity', 'sensor.dark_sky_precip_probability', 'sensor.dark_sky_pressure', 'sensor.dark_sky_summary', 'sensor.dark_sky_temperature', 'sensor.dark_sky_visibility', 'sensor.dark_sky_wind_bearing', 'sensor.dark_sky_wind_speed')
+  friendly_name: darksky
+  order: 39
+#_________________________________________________________________________________________
+group.default_view:
+  #State: on
+  #Domain: group
+  #Object ID: default_view
+  #Last Updated: 2017-04-02 02:55:01.411470+00:00
+  #Last Changed: 2017-04-02 02:54:58.537364+00:00
+  assumed_state: True
+  entity_id: ('group.tv_room_2', 'group.master_bedroom_2', 'group.game_room', 'group.nest', 'group.kitchen_lights', 'group.air_safety', 'group.network', 'group.garage', 'group.battery_levels', 'group.input', 'group.color_all_lights', 'group.temperature', 'group.christmas_lights', 'group.online', 'group.sonarr', 'group.playlist')
+  friendly_name: Default View
+  hidden: True
+  order: 0
+  view: True
+#_________________________________________________________________________________________
+group.den_room:
+  #State: off
+  #Domain: group
+  #Object ID: den_room
+  #Last Updated: 2017-04-02 02:55:05.679937+00:00
+  #Last Changed: 2017-04-02 02:55:05.679937+00:00
+  entity_id: ('group.game_room',)
+  friendly_name: Game Room
+  hidden: True
+  icon: mdi:xbox-controller
+  order: 6
+  view: True
+#_________________________________________________________________________________________
+group.devices:
+  #State: home
+  #Domain: group
+  #Object ID: devices
+  #Last Updated: 2017-04-02 02:55:08.834849+00:00
+  #Last Changed: 2017-04-02 02:55:08.834849+00:00
+  entity_id: ('device_tracker.0021cc4bdaf6', 'device_tracker.3ds', 'device_tracker.5ccf7fdc8490', 'device_tracker.accf2366e59c', 'device_tracker.b827eb142724', 'device_tracker.b827eb417271', 'device_tracker.charlesplewatch_2', 'device_tracker.e4718516fd0c', 'device_tracker.e4718516fd0f', 'device_tracker.torn_gps', 'device_tracker.vampgirplewatch', 'device_tracker.vamp', 'device_tracker.master_bedroom_relay', 'device_tracker.nina_macbook', 'device_tracker.vizio_tv', 'device_tracker.monkey_laptop', 'device_tracker.149182444019', 'device_tracker.38607731935d', 'device_tracker.raspberrypi', 'device_tracker.phone_torn8o', 'device_tracker.den_relay', 'device_tracker.plex_server', 'device_tracker.windows7pc', 'device_tracker.xboxtorn', 'device_tracker.charlessmbp', 'device_tracker.pr2000', 'device_tracker.foobot', 'device_tracker.nina', 'device_tracker.torn_asus', 'device_tracker.monkeysphone', 'device_tracker.hallway_relay', 'device_tracker.micro_cell', 'device_tracker.torn8o', 'device_tracker.006b9ed073ac', 'device_tracker.iphone', 'device_tracker.nina_relay', 'device_tracker.nintendo_3ds', 'device_tracker.ha_torn8o', 'device_tracker.torncloud', 'device_tracker.appletv', 'device_tracker.mommy_laptop', 'device_tracker.torntravel', 'device_tracker.nighthawk_router', 'device_tracker.1491824465d9', 'device_tracker.tornhomehue', 'device_tracker.access_point', 'device_tracker.09aa01ac48150fbw', 'device_tracker.mommy_iphone', 'device_tracker.mommy_server', 'device_tracker.nest', 'device_tracker.home_server', 'device_tracker.knight_hawk_router', 'device_tracker.home_server', 'device_tracker.repeater', 'device_tracker.philipshue', 'device_tracker.b479a71a655a', 'device_tracker.laptopfftud7m2', 'device_tracker.kindle421b49cb2')
+  friendly_name: Devices
+  order: 32
+#_________________________________________________________________________________________
+group.family:
+  #State: not_home
+  #Domain: group
+  #Object ID: family
+  #Last Updated: 2017-04-02 02:55:09.153366+00:00
+  #Last Changed: 2017-04-02 02:55:09.153366+00:00
+  entity_id: ('device_tracker.torn8o', 'device_tracker.torn8o_2')
+  friendly_name: family
+  order: 31
+#_________________________________________________________________________________________
+group.family1:
+  #State: not_home
+  #Domain: group
+  #Object ID: family1
+  #Last Updated: 2017-04-02 02:55:09.169807+00:00
+  #Last Changed: 2017-04-02 02:55:09.169807+00:00
+  entity_id: ('group.family',)
+  friendly_name: Family
+  hidden: True
+  icon: mdi:security-home
+  order: 12
+  view: True
+#_________________________________________________________________________________________
+group.fan:
+  #State: unknown
+  #Domain: group
+  #Object ID: fan
+  #Last Updated: 2017-04-02 02:54:53.623512+00:00
+  #Last Changed: 2017-04-02 02:54:53.623512+00:00
+  entity_id: ('input_select.tv_room_fan',)
+  friendly_name: Fan living room
+  hidden: True
+  icon: mdi:lightbulb-outline
+  order: 9
+  view: True
+#_________________________________________________________________________________________
+group.game_room:
+  #State: off
+  #Domain: group
+  #Object ID: game_room
+  #Last Updated: 2017-04-02 02:55:05.632580+00:00
+  #Last Changed: 2017-04-02 02:55:05.632580+00:00
+  entity_id: ('switch.game_room_fan', 'switch.game_room_light', 'binary_sensor.game_room_presence', 'sensor.game_room_humidity', 'sensor.game_room_proximity', 'sensor.game_room_temperature')
+  friendly_name: game room
+  order: 19
+#_________________________________________________________________________________________
+group.garage:
+  #State: off
+  #Domain: group
+  #Object ID: garage
+  #Last Updated: 2017-04-02 02:56:22.162351+00:00
+  #Last Changed: 2017-04-02 02:56:22.162351+00:00
+  entity_id: ('sensor.top_door_status', 'sensor.a_door_status', 'sensor.garage_door_status', 'light.zooz_unknown_type0112_id241c_level_3_0', 'light.zooz_zen22_zwave_plus_dimmer_light_switch_level_3_0', 'switch.fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0')
+  friendly_name: Garage
+  order: 8
+#_________________________________________________________________________________________
+group.glance:
+  #State: unknown
+  #Domain: group
+  #Object ID: glance
+  #Last Updated: 2017-04-02 02:54:53.656495+00:00
+  #Last Changed: 2017-04-02 02:54:53.656495+00:00
+  entity_id: ('sensor.glances_sensor_cpu_load', 'sensor.glances_sensor_disk_use', 'sensor.glances_sensor_ram_use', 'sensor.glances_sensor_swap_use')
+  friendly_name: glance
+  order: 28
+#_________________________________________________________________________________________
+group.hallway:
+  #State: on
+  #Domain: group
+  #Object ID: hallway
+  #Last Updated: 2017-04-02 02:55:05.739471+00:00
+  #Last Changed: 2017-04-02 02:55:05.739471+00:00
+  entity_id: ('switch.bottom_light_load', 'binary_sensor.hallway_presence', 'sensor.hallway_proximity', 'sensor.hallway_temperature', 'sensor.hallway_humidity', 'binary_sensor.ecolink_pir_motion_sensor_sensor_10_0', 'binary_sensor.ecolink_pir_motion_sensor_sensor_11_0', 'light.unknown_id015d_unknown_type0112_id241c_level_15_0', 'light.zooz_zen22_zwave_plus_dimmer_light_switch_level_6_0', 'light.zooz_unknown_type0112_id241c_level_6_0')
+  friendly_name: Hallway
+  order: 34
+#_________________________________________________________________________________________
+group.hallway_light:
+  #State: off
+  #Domain: group
+  #Object ID: hallway_light
+  #Last Updated: 2017-04-02 19:46:46.407769+00:00
+  #Last Changed: 2017-04-02 19:46:46.407769+00:00
+  entity_id: ('light.hallway_1', 'light.hallway_2')
+  friendly_name: Hallway Light
+  order: 36
+#_________________________________________________________________________________________
+group.hallway_motion:
+  #State: unknown
+  #Domain: group
+  #Object ID: hallway_motion
+  #Last Updated: 2017-04-02 02:54:53.672220+00:00
+  #Last Changed: 2017-04-02 02:54:53.672220+00:00
+  entity_id: ('binary_sensor.__sensor_10_0', 'binary_sensor.__sensor_11_0', 'binary_sensor.ecolink_pir_motion_sensor_sensor_10_0', 'binary_sensor.ecolink_pir_motion_sensor_sensor_11_0')
+  friendly_name: Hallway Motion
+  order: 35
+#_________________________________________________________________________________________
+group.hass:
+  #State: unknown
+  #Domain: group
+  #Object ID: hass
+  #Last Updated: 2017-04-02 02:54:53.709256+00:00
+  #Last Changed: 2017-04-02 02:54:53.709256+00:00
+  entity_id: ('sensor.ha_installed_version', 'sensor.ha_current_version', 'sensor.ha_last_restart')
+  friendly_name: HomeAssistant
+  order: 48
+#_________________________________________________________________________________________
+group.kitchen_lights:
+  #State: on
+  #Domain: group
+  #Object ID: kitchen_lights
+  #Last Updated: 2017-04-02 20:40:30.795193+00:00
+  #Last Changed: 2017-04-02 20:40:30.795193+00:00
+  entity_id: ('light.ge_12724_3way_dimmer_switch_level_9_0', 'light.zooz_unknown_type0112_id241c_level_5_0', 'light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0', 'camera.cam')
+  friendly_name: Kitchen Lights
+  order: 2
+#_________________________________________________________________________________________
+group.kitchen_motion:
+  #State: on
+  #Domain: group
+  #Object ID: kitchen_motion
+  #Last Updated: 2017-04-02 02:55:05.742704+00:00
+  #Last Changed: 2017-04-02 02:55:05.742704+00:00
+  entity_id: ('binary_sensor.hallway_presence', 'sensor.aeotec_zw100_multisensor_6_burglar_31_10')
+  friendly_name: kitchen motion
+  order: 41
+#_________________________________________________________________________________________
+group.led_lights:
+  #State: off
+  #Domain: group
+  #Object ID: led_lights
+  #Last Updated: 2017-04-02 02:56:18.071428+00:00
+  #Last Changed: 2017-04-02 02:56:18.071428+00:00
+  entity_id: ('light.steps', 'light.cabinet_lights')
+  friendly_name: Led lights
+  order: 43
+#_________________________________________________________________________________________
+group.lights:
+  #State: on
+  #Domain: group
+  #Object ID: lights
+  #Last Updated: 2017-04-02 02:55:05.444348+00:00
+  #Last Changed: 2017-04-02 02:55:05.444348+00:00
+  assumed_state: True
+  entity_id: ('group.all_switches', 'group.lights1')
+  friendly_name: All Lights
+  hidden: True
+  icon: mdi:lightbulb-outline
+  order: 13
+  view: True
+#_________________________________________________________________________________________
+group.lights1:
+  #State: on
+  #Domain: group
+  #Object ID: lights1
+  #Last Updated: 2017-04-02 02:55:05.429496+00:00
+  #Last Changed: 2017-04-02 02:55:05.429496+00:00
+  assumed_state: True
+  entity_id: ('light.hallway_1', 'light.zooz_zen22_zwave_plus_dimmer_light_switch_level_3_0', 'light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0', 'light.cabinet_lights', 'light.hallway_2', 'light.ge_12724_3way_dimmer_switch_level_16_0', 'light.ge_12724_3way_dimmer_switch_level_9_0', 'light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0', 'light.steps', 'light.tv_color_lights', 'light.zooz_zen22_zwave_plus_dimmer_light_switch_level_6_0', 'light.tv', 'light.hallway', 'light.tv_color_lights1', 'switch.ge_12722_onoff_relay_switch_switch_25_0', 'switch.ge_12722_on_relay_switch_switch_25_0', 'switch.ge_12722_on_relay_switch_switch_34_0', 'switch.ge_12722_onoff_relay_switch_switch_34_0', 'light.ge_12724_3way_dimmer_switch_level_33_0', 'switch.porch_light', 'switch.living_room_curtain_close', 'switch.ge_12722_on_relay_switch_switch_13_0', 'switch.ge_12722_onoff_relay_switch_switch_13_0', 'switch.master_bedroom_light', 'switch.fan_light_on', 'switch.ge_12721_lighting_control_duplex_receptacle_switch_21_0', 'switch.hallway_light', 'switch.switch', 'switch.tv_room_fan', 'switch.top_light_load', 'switch.switch_3', 'switch.switch_2', 'switch.leviton_unknown_type1d04_id0334_switch_17_0', 'switch.game_room_light', 'switch.switch_4', 'switch.ceiling_fan_1', 'switch.ceiling_fan_2', 'switch.ceiling_fan_3', 'switch.kitchen_switch', 'switch.bathroom_fan', 'switch.christmas_sleigh', 'switch.living_room_curtain_open', 'switch.game_room_fan', 'switch.ge_12722_on_relay_switch_switch_28_0', 'switch.ge_12722_onoff_relay_switch_switch_28_0', 'switch.master_bathroom_fan', 'switch.nina_fan', 'switch.living_room_curtain_stop', 'switch.ge_12721_lighting_control_duplex_receptacle_switch_22_0', 'switch.nina_outlet', 'switch.christmas_tree', 'switch.fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0', 'switch.porch_light', 'switch.master_bathroom_light', 'light.porch_led')
+  friendly_name: Lights1
+  order: 47
+#_________________________________________________________________________________________
+group.master_bedroom:
+  #State: off
+  #Domain: group
+  #Object ID: master_bedroom
+  #Last Updated: 2017-04-02 20:46:34.222475+00:00
+  #Last Changed: 2017-04-02 20:46:34.222475+00:00
+  entity_id: ('group.master_bedroom_2',)
+  friendly_name: Master Bedroom
+  hidden: True
+  icon: mdi:hotel
+  order: 4
+  view: True
+#_________________________________________________________________________________________
+group.master_bedroom_2:
+  #State: off
+  #Domain: group
+  #Object ID: master_bedroom_2
+  #Last Updated: 2017-04-02 20:46:34.198525+00:00
+  #Last Changed: 2017-04-02 20:46:34.198525+00:00
+  entity_id: ('switch.ge_12722_on_relay_switch_switch_13_0', 'switch.ge_12722_onoff_relay_switch_switch_13_0', 'light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0', 'switch.master_bedroom_light', 'switch.master_bathroom_fan', 'switch.master_bathroom_light', 'sensor.master_bedroom_humidity', 'sensor.master_bedroom_proximity', 'sensor.master_bedroom_temperature', 'binary_sensor.master_bedroom_presence', 'switch.ge_12722_on_relay_switch_switch_25_0', 'switch.ge_12722_onoff_relay_switch_switch_25_0')
+  friendly_name: Master Bedroom
+  order: 5
+#_________________________________________________________________________________________
+group.media_player:
+  #State: unknown
+  #Domain: group
+  #Object ID: media_player
+  #Last Updated: 2017-04-02 02:54:53.676760+00:00
+  #Last Changed: 2017-04-02 02:54:53.676760+00:00
+  entity_id: ('sensor.torn8oplex',)
+  friendly_name: media player
+  order: 37
+#_________________________________________________________________________________________
+group.motion_sensor:
+  #State: on
+  #Domain: group
+  #Object ID: motion_sensor
+  #Last Updated: 2017-04-02 02:55:05.732229+00:00
+  #Last Changed: 2017-04-02 02:55:05.732229+00:00
+  entity_id: ('sensor.aeotec_zw100_multisensor_6_burglar_7_0', 'sensor.aeotec_zw100_multisensor_6_burglar_31_0', 'binary_sensor.__sensor_11_1', 'binary_sensor.__sensor_10_1', 'binary_sensor.ecolink_pir_motion_sensor_sensor_11_0', 'binary_sensor.ecolink_pir_motion_sensor_sensor_10_0', 'sensor.ecolink_pir_motion_sensor_burglar_11_10', 'sensor.ecolink_pir_motion_sensor_burglar_10_10', 'sensor.ecolink_pir_motion_sensor_sourcenodeid_11_2', 'sensor.ecolink_pir_motion_sensor_sourcenodeid_10_2', 'sensor.ecolink_pir_motion_sensor_alarm_level_11_1', 'sensor.ecolink_pir_motion_sensor_alarm_level_10_1', 'binary_sensor.master_bedroom_presence', 'binary_sensor.den_presence', 'binary_sensor.hallway_presence', 'binary_sensor.nina_room_presence', 'sensor.den_proximity', 'sensor.master_bedroom_proximity', 'sensor.hallway_proximity', 'sensor.nina_room_proximity')
+  friendly_name: Motion Sensor
+  order: 26
+#_________________________________________________________________________________________
+group.nest:
+  #State: on
+  #Domain: group
+  #Object ID: nest
+  #Last Updated: 2017-04-02 02:54:58.474830+00:00
+  #Last Changed: 2017-04-02 02:54:58.474830+00:00
+  entity_id: ('climate.hallway', 'sensor.hallway_thermostat_target', 'sensor.hallway_thermostat_temperature', 'binary_sensor.hallway_presence', 'sensor.hallway_temperature', 'sensor.hallway_thermostat_humidity', 'sensor.hallway_thermostat_operation_mode', 'binary_sensor.hallway_thermostat_fan', 'binary_sensor.hallway_thermostat_has_leaf', 'binary_sensor.hallway_thermostat_is_locked', 'binary_sensor.hallway_thermostat_is_using_emergency_heat', 'binary_sensor.hallway_thermostat_online')
+  friendly_name: Nest
+  order: 4
+#_________________________________________________________________________________________
+group.network:
+  #State: unknown
+  #Domain: group
+  #Object ID: network
+  #Last Updated: 2017-04-02 02:54:53.654461+00:00
+  #Last Changed: 2017-04-02 02:54:53.654461+00:00
+  entity_id: ('sensor.speedtest_upload', 'sensor.speedtest_download', 'sensor.speedtest_ping', 'sensor.fastcom_download')
+  friendly_name: network
+  order: 27
+#_________________________________________________________________________________________
+group.online:
+  #State: off
+  #Domain: group
+  #Object ID: online
+  #Last Updated: 2017-04-02 11:14:17.408230+00:00
+  #Last Changed: 2017-04-02 11:14:17.408230+00:00
+  assumed_state: True
+  entity_id: ('sensor.average_house_temp', 'sensor.gas_price', 'sensor.esp_92eba2', 'sensor.esp_122131', 'sensor.vizio_tv', 'sensor.broadlink', 'sensor.harmony_hub', 'remote.torn_hub', 'switch.living_room_curtain_open', 'switch.living_room_curtain_close', 'switch.living_room_curtain_stop', 'sensor.torn8o_battery_level', 'weblink.grafana', 'weblink.pi_hole', 'weblink.sonarr')
+  friendly_name: items
+  order: 7
+#_________________________________________________________________________________________
+group.pihole:
+  #State: unknown
+  #Domain: group
+  #Object ID: pihole
+  #Last Updated: 2017-04-02 02:54:53.684021+00:00
+  #Last Changed: 2017-04-02 02:54:53.684021+00:00
+  entity_id: ('sensor.pihole', 'sensor.pihole_ads_blocked_today', 'sensor.pihole_domains_blocked', 'sensor.pihole_percentage_today', 'sensor.pihole_dns_queries_today')
+  friendly_name: Pi-Hole
+  order: 40
+#_________________________________________________________________________________________
+group.playlist:
+  #State: unknown
+  #Domain: group
+  #Object ID: playlist
+  #Last Updated: 2017-04-02 02:54:53.614371+00:00
+  #Last Changed: 2017-04-02 02:54:53.614371+00:00
+  entity_id: ('input_select.radio_station_location', 'input_select.radio_station', 'input_slider.volume_radio')
+  friendly_name: Radio
+  order: 1
+#_________________________________________________________________________________________
+group.scripts:
+  #State: off
+  #Domain: group
+  #Object ID: scripts
+  #Last Updated: 2017-04-02 02:54:54.749533+00:00
+  #Last Changed: 2017-04-02 02:54:54.749533+00:00
+  entity_id: ('group.all_scripts',)
+  friendly_name: scripts
+  hidden: True
+  order: 14
+  view: True
+#_________________________________________________________________________________________
+group.seedbox:
+  #State: unknown
+  #Domain: group
+  #Object ID: seedbox
+  #Last Updated: 2017-04-02 02:54:53.679119+00:00
+  #Last Changed: 2017-04-02 02:54:53.679119+00:00
+  entity_id: ('sensor.nzbget_article_cache', 'sensor.nzbget_download_paused', 'sensor.nzbget_speed')
+  friendly_name: Seedbox
+  order: 38
+#_________________________________________________________________________________________
+group.sonarr:
+  #State: off
+  #Domain: group
+  #Object ID: sonarr
+  #Last Updated: 2017-04-02 02:54:54.709928+00:00
+  #Last Changed: 2017-04-02 02:54:54.709928+00:00
+  entity_id: ('sensor.sonarr_disk_space', 'sensor.sonarr_upcoming', 'sensor.ha_installed_version', 'sensor.ha_current_version', 'sensor.ha_last_restart', 'script.update_hass')
+  friendly_name: Sonarr
+  order: 22
+#_________________________________________________________________________________________
+group.tech_info:
+  #State: unknown
+  #Domain: group
+  #Object ID: tech_info
+  #Last Updated: 2017-04-02 02:54:53.624776+00:00
+  #Last Changed: 2017-04-02 02:54:53.624776+00:00
+  entity_id: ('group.network',)
+  friendly_name: Settings
+  hidden: True
+  icon: mdi:server-network
+  order: 10
+  view: True
+#_________________________________________________________________________________________
+group.temperature:
+  #State: unknown
+  #Domain: group
+  #Object ID: temperature
+  #Last Updated: 2017-04-02 02:54:53.699563+00:00
+  #Last Changed: 2017-04-02 02:54:53.699563+00:00
+  entity_id: ('sensor.hallway_thermostat_temperature', 'sensor.aeotec_zw100_multisensor_6_temperature_31_1', 'sensor.aeotec_zw100_multisensor_6_temperature_7_1', 'sensor.den_temperature', 'sensor.master_bedroom_temperature', 'sensor.nina_room_temperature', 'sensor.hallway_temperature')
+  friendly_name: temperature
+  order: 3
+#_________________________________________________________________________________________
+group.tv_room:
+  #State: on
+  #Domain: group
+  #Object ID: tv_room
+  #Last Updated: 2017-04-02 02:54:56.347115+00:00
+  #Last Changed: 2017-04-02 02:54:56.347115+00:00
+  entity_id: ('group.tv_room_2', 'automation.turn_theater_lights_to_80_on_motion_if_no_activity', 'automation.turn_tv_lights_if_no_activity', 'script.timed_theater_lights', 'script.theater_lights_')
+  friendly_name: TV Room
+  hidden: True
+  icon: mdi:television
+  order: 3
+  view: True
+#_________________________________________________________________________________________
+group.tv_room_2:
+  #State: on
+  #Domain: group
+  #Object ID: tv_room_2
+  #Last Updated: 2017-04-02 02:55:30.739409+00:00
+  #Last Changed: 2017-04-02 02:55:30.739409+00:00
+  entity_id: ('switch.ge_12721_lighting_control_duplex_receptacle_switch_22_0', 'switch.plex_server_power', 'switch.ge_12722_on_relay_switch_switch_16_0', 'light.ge_12724_3way_dimmer_switch_level_16_0', 'switch.fan_', 'switch.tv_room_fan', 'input_select.tv_room_fan', 'light.cabinet_lights', 'switch.deck_motion', 'switch.deck_flood_lights', 'light.tv_color_lights', 'light.tv_color_lights1', 'switch.flood_lights', 'media_player.xboxtorn')
+  friendly_name: tv room
+  order: 1
+#_________________________________________________________________________________________
+group.weather:
+  #State: unknown
+  #Domain: group
+  #Object ID: weather
+  #Last Updated: 2017-04-02 02:54:53.618550+00:00
+  #Last Changed: 2017-04-02 02:54:53.618550+00:00
+  entity_id: ('group.darksky',)
+  friendly_name: darksky
+  hidden: True
+  icon: mdi:weather-cloudy
+  order: 5
+  view: True
+#_________________________________________________________________________________________
+zone.home:
+  #State: zoning
+  #Domain: zone
+  #Object ID: home
+  #Last Updated: 2017-04-02 02:54:54.498029+00:00
+  #Last Changed: 2017-04-02 02:54:54.498029+00:00
+  friendly_name: Home
+  hidden: True
+  latitude: 28.6079
+  longitude: -81.3055
+  radius: 100.0
+#_________________________________________________________________________________________
+zone.torn_work:
+  #State: zoning
+  #Domain: zone
+  #Object ID: torn_work
+  #Last Updated: 2017-04-02 02:54:54.495203+00:00
+  #Last Changed: 2017-04-02 02:54:54.495203+00:00
+  friendly_name: Torn_Work
+  hidden: True
+  icon: mdi:account-multiple
+  latitude: 38.6599
+  longitude: -121.2747
+  radius: 100.0
+#_________________________________________________________________________________________
+zwave.__14:
+  #State: Sleeping (Probe)
+  #Domain: zwave
+  #Object ID: __14
+  #Last Updated: 2017-04-02 02:56:58.028201+00:00
+  #Last Changed: 2017-04-02 02:56:58.028201+00:00
+  capabilities: {'routing', 'beaming'}
+  friendly_name:
+  is_awake: False
+  is_failed: False
+  is_info_received: False
+  is_ready: False
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  node_id: 14
+  query_stage: Probe
+  wake_up_interval: 3600
+#_________________________________________________________________________________________
+zwave.__24:
+  #State: Sleeping (Probe)
+  #Domain: zwave
+  #Object ID: __24
+  #Last Updated: 2017-04-02 02:57:19.223592+00:00
+  #Last Changed: 2017-04-02 02:57:19.223592+00:00
+  capabilities: {'beaming'}
+  friendly_name:
+  is_awake: False
+  is_failed: False
+  is_info_received: False
+  is_ready: False
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  node_id: 24
+  query_stage: Probe
+#_________________________________________________________________________________________
+zwave.__27:
+  #State: Sleeping (Probe)
+  #Domain: zwave
+  #Object ID: __27
+  #Last Updated: 2017-04-02 02:57:19.753914+00:00
+  #Last Changed: 2017-04-02 02:57:19.753914+00:00
+  capabilities: {'beaming'}
+  friendly_name:
+  is_awake: False
+  is_failed: False
+  is_info_received: False
+  is_ready: False
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  node_id: 27
+  query_stage: Probe
+#_________________________________________________________________________________________
+zwave.__32:
+  #State: Dead (Probe)
+  #Domain: zwave
+  #Object ID: __32
+  #Last Updated: 2017-04-02 02:57:34.874667+00:00
+  #Last Changed: 2017-04-02 02:57:34.874667+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name:
+  is_awake: True
+  is_failed: True
+  is_info_received: False
+  is_ready: False
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  node_id: 32
+  query_stage: Probe
+#_________________________________________________________________________________________
+zwave.aeotec_dsc27103_micro_dimmer_2nd_edition_8:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: aeotec_dsc27103_micro_dimmer_2nd_edition_8
+  #Last Updated: 2017-04-02 02:58:00.125260+00:00
+  #Last Changed: 2017-04-02 02:58:00.125260+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: Aeotec DSC27103 Micro Dimmer (2nd Edition)
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 33, 34, 5, 6, 9, 10, 11, 13, 14, 15, 16, 17, 19, 22, 23, 25, 28, 31}
+  node_id: 8
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.aeotec_zw090_zstick_gen5_1:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: aeotec_zw090_zstick_gen5_1
+  #Last Updated: 2017-04-02 02:57:25.842412+00:00
+  #Last Changed: 2017-04-02 02:57:25.842412+00:00
+  capabilities: {'listening', 'primaryController', 'beaming'}
+  friendly_name: Aeotec ZW090 Z-Stick Gen5
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {33, 2, 34, 5, 6, 8, 9, 10, 11, 16, 17, 21, 22, 23, 25, 28, 31}
+  node_id: 1
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.aeotec_zw100_multisensor_6_31:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: aeotec_zw100_multisensor_6_31
+  #Last Updated: 2017-04-02 05:18:27.394105+00:00
+  #Last Changed: 2017-04-02 02:58:00.069470+00:00
+  battery_level: 100
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: Aeotec ZW100 MultiSensor 6
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: True
+  max_baud_rate: 40000
+  neighbors: {1, 2, 34, 5, 6, 8, 9, 10, 11, 15, 21, 22, 23, 28}
+  node_id: 31
+  query_stage: Complete
+  wake_up_interval: 240
+#_________________________________________________________________________________________
+zwave.ecolink_doorwindow_sensor_19:
+  #State: Sleeping
+  #Domain: zwave
+  #Object ID: ecolink_doorwindow_sensor_19
+  #Last Updated: 2017-04-02 20:39:16.064068+00:00
+  #Last Changed: 2017-04-02 20:39:16.064068+00:00
+  battery_level: 100
+  capabilities: {'routing', 'beaming'}
+  friendly_name: Ecolink Door/Window Sensor
+  is_awake: False
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {8, 25, 2, 33, 28}
+  node_id: 19
+  query_stage: Complete
+  wake_up_interval: 14400
+#_________________________________________________________________________________________
+zwave.ecolink_doorwindow_sensor_23:
+  #State: Sleeping
+  #Domain: zwave
+  #Object ID: ecolink_doorwindow_sensor_23
+  #Last Updated: 2017-04-02 06:34:57.068773+00:00
+  #Last Changed: 2017-04-02 06:34:57.068773+00:00
+  battery_level: 100
+  capabilities: {'routing', 'beaming'}
+  friendly_name: Ecolink Door/Window Sensor
+  is_awake: False
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 3, 33, 34, 6, 9, 16, 17, 21, 22, 25, 28, 31}
+  node_id: 23
+  query_stage: Complete
+  wake_up_interval: 14400
+#_________________________________________________________________________________________
+zwave.ecolink_motion_sensor_10:
+  #State: Sleeping
+  #Domain: zwave
+  #Object ID: ecolink_motion_sensor_10
+  #Last Updated: 2017-04-02 05:54:50.198490+00:00
+  #Last Changed: 2017-04-02 05:54:50.198490+00:00
+  battery_level: 100
+  capabilities: {'routing', 'beaming'}
+  friendly_name: Ecolink Motion Sensor
+  is_awake: False
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 3, 33, 5, 6, 34, 8, 9, 16, 17, 21, 22, 25, 28, 31}
+  node_id: 10
+  query_stage: Complete
+  wake_up_interval: 14400
+#_________________________________________________________________________________________
+zwave.ecolink_motion_sensor_11:
+  #State: Sleeping
+  #Domain: zwave
+  #Object ID: ecolink_motion_sensor_11
+  #Last Updated: 2017-04-02 07:55:40.714513+00:00
+  #Last Changed: 2017-04-02 07:55:40.714513+00:00
+  battery_level: 100
+  capabilities: {'routing', 'beaming'}
+  friendly_name: Ecolink Motion Sensor
+  is_awake: False
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 3, 34, 5, 6, 8, 9, 16, 17, 21, 22, 25, 28, 31}
+  node_id: 11
+  query_stage: Complete
+  wake_up_interval: 14400
+#_________________________________________________________________________________________
+zwave.everspring_unknown_type0002_id0002_15:
+  #State: Sleeping (CacheLoad)
+  #Domain: zwave
+  #Object ID: everspring_unknown_type0002_id0002_15
+  #Last Updated: 2017-04-02 02:57:04.697318+00:00
+  #Last Changed: 2017-04-02 02:57:04.697318+00:00
+  battery_level: 90
+  capabilities: {'routing', 'beaming'}
+  friendly_name: Everspring Unknown type=0002, id=0002
+  is_awake: False
+  is_failed: False
+  is_info_received: True
+  is_ready: False
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  node_id: 15
+  query_stage: CacheLoad
+  wake_up_interval: 86400
+#_________________________________________________________________________________________
+zwave.fortrezz_mimolite_wireless_interfacebridge_module_2:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: fortrezz_mimolite_wireless_interfacebridge_module_2
+  #Last Updated: 2017-04-02 05:00:30.084181+00:00
+  #Last Changed: 2017-04-02 02:57:49.822066+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: FortrezZ MIMOlite Wireless Interface/Bridge Module
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 33, 3, 34, 5, 8, 9, 10, 14, 15, 16, 17, 19, 21, 22, 23, 25, 28, 31}
+  node_id: 2
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.ge_12721_lighting_control_duplex_receptacle_21:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: ge_12721_lighting_control_duplex_receptacle_21
+  #Last Updated: 2017-04-02 02:57:51.047608+00:00
+  #Last Changed: 2017-04-02 02:57:51.047608+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: GE 12721 Lighting Control Duplex Receptacle
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 33, 34, 5, 6, 9, 10, 11, 15, 17, 22, 23, 28, 31}
+  node_id: 21
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.ge_12721_lighting_control_duplex_receptacle_22:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: ge_12721_lighting_control_duplex_receptacle_22
+  #Last Updated: 2017-04-02 02:57:51.056384+00:00
+  #Last Changed: 2017-04-02 02:57:51.056384+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: GE 12721 Lighting Control Duplex Receptacle
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 33, 34, 5, 6, 8, 9, 10, 11, 15, 16, 17, 21, 23, 28, 31}
+  node_id: 22
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.ge_12722_onoff_relay_switch_13:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: ge_12722_onoff_relay_switch_13
+  #Last Updated: 2017-04-02 02:57:51.018206+00:00
+  #Last Changed: 2017-04-02 02:57:51.018206+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: GE 12722 On/Off Relay Switch
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {8}
+  node_id: 13
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.ge_12722_onoff_relay_switch_25:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: ge_12722_onoff_relay_switch_25
+  #Last Updated: 2017-04-02 02:57:51.065368+00:00
+  #Last Changed: 2017-04-02 02:57:51.065368+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: GE 12722 On/Off Relay Switch
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 33, 34, 8, 10, 15, 16, 17, 19, 23, 28, 31}
+  node_id: 25
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.ge_12722_onoff_relay_switch_28:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: ge_12722_onoff_relay_switch_28
+  #Last Updated: 2017-04-02 11:14:09.600856+00:00
+  #Last Changed: 2017-04-02 02:57:51.087423+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: GE 12722 On/Off Relay Switch
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 3, 33, 5, 6, 34, 8, 9, 10, 11, 15, 17, 19, 21, 22, 23, 25, 31}
+  node_id: 28
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.ge_12722_onoff_relay_switch_34:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: ge_12722_onoff_relay_switch_34
+  #Last Updated: 2017-04-02 13:32:21.233240+00:00
+  #Last Changed: 2017-04-02 02:58:00.082378+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: GE 12722 On/Off Relay Switch
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 33, 5, 6, 8, 9, 10, 11, 15, 16, 17, 21, 22, 23, 25, 28, 31}
+  node_id: 34
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.ge_12724_3way_dimmer_switch_16:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: ge_12724_3way_dimmer_switch_16
+  #Last Updated: 2017-04-02 02:57:51.027889+00:00
+  #Last Changed: 2017-04-02 02:57:51.027889+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: GE 12724 3-Way Dimmer Switch
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 33, 34, 6, 8, 9, 10, 11, 17, 22, 23, 25}
+  node_id: 16
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.ge_12724_3way_dimmer_switch_33:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: ge_12724_3way_dimmer_switch_33
+  #Last Updated: 2017-04-02 20:13:21.786383+00:00
+  #Last Changed: 2017-04-02 02:58:00.078482+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: GE 12724 3-Way Dimmer Switch
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 3, 34, 8, 9, 10, 11, 15, 16, 17, 19, 21, 22, 23, 25, 28, 31}
+  node_id: 33
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.ge_12724_3way_dimmer_switch_9:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: ge_12724_3way_dimmer_switch_9
+  #Last Updated: 2017-04-02 05:18:29.784645+00:00
+  #Last Changed: 2017-04-02 02:57:51.008565+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: GE 12724 3-Way Dimmer Switch
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {33, 2, 3, 34, 5, 6, 8, 10, 11, 14, 15, 16, 17, 21, 22, 23, 28, 31}
+  node_id: 9
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.leviton_unknown_type1d04_id0334_17:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: leviton_unknown_type1d04_id0334_17
+  #Last Updated: 2017-04-02 02:57:51.036694+00:00
+  #Last Changed: 2017-04-02 02:57:51.036694+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: Leviton Unknown type=1d04, id=0334
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: False
+  max_baud_rate: 40000
+  neighbors: {1, 2, 33, 34, 5, 6, 8, 9, 10, 11, 15, 16, 21, 22, 23, 25, 28, 31}
+  node_id: 17
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.zooz_unknown_type0112_id241c_3:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: zooz_unknown_type0112_id241c_3
+  #Last Updated: 2017-04-02 02:58:00.097820+00:00
+  #Last Changed: 2017-04-02 02:58:00.097820+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: Zooz Unknown type=0112, id=241c
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: True
+  max_baud_rate: 40000
+  neighbors: {33, 2, 9, 10, 11, 15, 23, 28}
+  node_id: 3
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.zooz_unknown_type0112_id241c_5:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: zooz_unknown_type0112_id241c_5
+  #Last Updated: 2017-04-02 05:18:29.964574+00:00
+  #Last Changed: 2017-04-02 02:58:00.106485+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: Zooz Unknown type=0112, id=241c
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: True
+  max_baud_rate: 40000
+  neighbors: {1, 6, 9, 10, 11, 17, 21, 22, 23, 28, 31}
+  node_id: 5
+  query_stage: Complete
+#_________________________________________________________________________________________
+zwave.zooz_unknown_type0112_id241c_6:
+  #State: Ready
+  #Domain: zwave
+  #Object ID: zooz_unknown_type0112_id241c_6
+  #Last Updated: 2017-04-02 02:58:00.114936+00:00
+  #Last Changed: 2017-04-02 02:58:00.114936+00:00
+  capabilities: {'listening', 'routing', 'beaming'}
+  friendly_name: Zooz Unknown type=0112, id=241c
+  is_awake: True
+  is_failed: False
+  is_info_received: True
+  is_ready: True
+  is_zwave_plus: True
+  max_baud_rate: 40000
+  neighbors: {1, 2, 33, 34, 5, 8, 9, 10, 11, 15, 16, 17, 21, 22, 23, 28, 31}
+  node_id: 6
+  query_stage: Complete
+#_________________________________________________________________________________________
+sensor.a_door_status:
+  #State: n/a
+  #Domain: sensor
+  #Object ID: a_door_status
+  #Last Updated: 2017-04-02 02:56:19.450893+00:00
+  #Last Changed: 2017-04-02 02:56:19.450893+00:00
+  friendly_name: Attic Door Status
+#_________________________________________________________________________________________
+sensor.aeotec_zw100_multisensor_6_alarm_level_31_1:
+  #State: 0
+  #Domain: sensor
+  #Object ID: aeotec_zw100_multisensor_6_alarm_level_31_1
+  #Last Updated: 2017-04-02 20:40:29.670744+00:00
+  #Last Changed: 2017-04-02 20:40:29.670744+00:00
+  friendly_name: Kitchen alarm_level
+  haaska_hidden: True
+  hidden: True
+  node_id: 31
+#_________________________________________________________________________________________
+sensor.aeotec_zw100_multisensor_6_alarm_type_31_0:
+  #State: 0
+  #Domain: sensor
+  #Object ID: aeotec_zw100_multisensor_6_alarm_type_31_0
+  #Last Updated: 2017-04-02 20:40:29.648254+00:00
+  #Last Changed: 2017-04-02 20:40:29.648254+00:00
+  friendly_name: Kitchen alarm_type
+  haaska_hidden: True
+  hidden: True
+  node_id: 31
+#_________________________________________________________________________________________
+sensor.aeotec_zw100_multisensor_6_burglar_31_10:
+  #State: 8
+  #Domain: sensor
+  #Object ID: aeotec_zw100_multisensor_6_burglar_31_10
+  #Last Updated: 2017-04-02 20:40:29.764624+00:00
+  #Last Changed: 2017-04-02 20:40:29.764624+00:00
+  friendly_name: Kitchen Motion
+  haaska_hidden: True
+  node_id: 31
+#_________________________________________________________________________________________
+sensor.aeotec_zw100_multisensor_6_luminance_31_3:
+  #State: 9.0
+  #Domain: sensor
+  #Object ID: aeotec_zw100_multisensor_6_luminance_31_3
+  #Last Updated: 2017-04-02 20:20:40.401811+00:00
+  #Last Changed: 2017-04-02 20:20:40.401811+00:00
+  friendly_name: Kitchen luminance
+  haaska_hidden: True
+  node_id: 31
+  unit_of_measurement: lux
+#_________________________________________________________________________________________
+sensor.aeotec_zw100_multisensor_6_relative_humidity_31_5:
+  #State: 45.0
+  #Domain: sensor
+  #Object ID: aeotec_zw100_multisensor_6_relative_humidity_31_5
+  #Last Updated: 2017-04-02 20:20:39.483043+00:00
+  #Last Changed: 2017-04-02 20:20:39.483043+00:00
+  friendly_name: Kitchen humidity
+  haaska_hidden: True
+  node_id: 31
+  #unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.aeotec_zw100_multisensor_6_sourcenodeid_31_2:
+  #State: 0
+  #Domain: sensor
+  #Object ID: aeotec_zw100_multisensor_6_sourcenodeid_31_2
+  #Last Updated: 2017-04-02 20:40:29.746422+00:00
+  #Last Changed: 2017-04-02 20:40:29.746422+00:00
+  friendly_name: Kitchen sourcenodeid
+  haaska_hidden: True
+  hidden: True
+  node_id: 31
+#_________________________________________________________________________________________
+sensor.aeotec_zw100_multisensor_6_temperature_31_1:
+  #State: 76.1
+  #Domain: sensor
+  #Object ID: aeotec_zw100_multisensor_6_temperature_31_1
+  #Last Updated: 2017-04-02 20:20:39.035577+00:00
+  #Last Changed: 2017-04-02 20:20:39.035577+00:00
+  friendly_name: Kitchen temperature
+  haaska_hidden: True
+  node_id: 31
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.aeotec_zw100_multisensor_6_ultraviolet_31_27:
+  #State: 0.0
+  #Domain: sensor
+  #Object ID: aeotec_zw100_multisensor_6_ultraviolet_31_27
+  #Last Updated: 2017-04-02 20:20:40.544345+00:00
+  #Last Changed: 2017-04-02 20:20:40.544345+00:00
+  friendly_name: Kitchen ultraviolet
+  haaska_hidden: True
+  node_id: 31
+#_________________________________________________________________________________________
+sensor.average_house_temp:
+  #State: 74.2
+  #Domain: sensor
+  #Object ID: average_house_temp
+  #Last Updated: 2017-04-02 20:38:49.798156+00:00
+  #Last Changed: 2017-04-02 20:38:49.798156+00:00
+  friendly_name: average_house_temp
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.broadlink:
+  #State: Online
+  #Domain: sensor
+  #Object ID: broadlink
+  #Last Updated: 2017-04-02 02:56:19.407377+00:00
+  #Last Changed: 2017-04-02 02:56:19.407377+00:00
+  friendly_name: Broadlink
+#_________________________________________________________________________________________
+sensor.broadlink_torn_temperature:
+  #State: 76.3
+  #Domain: sensor
+  #Object ID: broadlink_torn_temperature
+  #Last Updated: 2017-04-02 06:02:17.432469+00:00
+  #Last Changed: 2017-04-02 06:02:17.432469+00:00
+  friendly_name: broadlink torn Temperature
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.dark_sky_apparent_temperature:
+  #State: 92.6
+  #Domain: sensor
+  #Object ID: dark_sky_apparent_temperature
+  #Last Updated: 2017-04-02 20:45:40.066724+00:00
+  #Last Changed: 2017-04-02 20:45:40.066724+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: temperature
+  icon: mdi:thermometer
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.dark_sky_cloud_coverage:
+  #State: 38.0
+  #Domain: sensor
+  #Object ID: dark_sky_cloud_coverage
+  #Last Updated: 2017-04-02 20:41:32.679579+00:00
+  #Last Changed: 2017-04-02 20:41:32.679579+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Cloud Cover
+  icon: mdi:weather-partlycloudy
+#  unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.dark_sky_daily_high_apparent_temperature:
+  #State: 96.6
+  #Domain: sensor
+  #Object ID: dark_sky_daily_high_apparent_temperature
+  #Last Updated: 2017-04-02 20:45:40.028141+00:00
+  #Last Changed: 2017-04-02 20:45:40.028141+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: High temperature
+  icon: mdi:thermometer
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.dark_sky_daily_high_temperature:
+  #State: 90.6
+  #Domain: sensor
+  #Object ID: dark_sky_daily_high_temperature
+  #Last Updated: 2017-04-02 20:45:40.121104+00:00
+  #Last Changed: 2017-04-02 20:45:40.121104+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Daily High Temperature
+  icon: mdi:thermometer
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.dark_sky_daily_low_apparent_temperature:
+  #State: 62.2
+  #Domain: sensor
+  #Object ID: dark_sky_daily_low_apparent_temperature
+  #Last Updated: 2017-04-02 19:22:30.161390+00:00
+  #Last Changed: 2017-04-02 19:22:30.161390+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Daily Low Apparent Temperature
+  icon: mdi:thermometer
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.dark_sky_daily_low_temperature:
+  #State: 62.2
+  #Domain: sensor
+  #Object ID: dark_sky_daily_low_temperature
+  #Last Updated: 2017-04-02 19:22:30.147585+00:00
+  #Last Changed: 2017-04-02 19:22:30.147585+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Daily Low Temperature
+  icon: mdi:thermometer
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.dark_sky_daily_max_precip_intensity:
+  #State: 0.0278
+  #Domain: sensor
+  #Object ID: dark_sky_daily_max_precip_intensity
+  #Last Updated: 2017-04-02 20:45:40.042994+00:00
+  #Last Changed: 2017-04-02 20:45:40.042994+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Daily Max Precip Intensity
+  icon: mdi:thermometer
+  unit_of_measurement: in
+#_________________________________________________________________________________________
+sensor.dark_sky_daily_summary:
+  #State: Light rain today and tomorrow, with temperatures peaking at 95°F on Wednesday.
+  #Domain: sensor
+  #Object ID: dark_sky_daily_summary
+  #Last Updated: 2017-04-02 20:25:00.093166+00:00
+  #Last Changed: 2017-04-02 20:25:00.093166+00:00
+  attribution: Powered by Dark Sky
+  entity_picture: /static/images/darksky/weather-pouring.svg
+  friendly_name: Dark Sky Daily Summary
+#_________________________________________________________________________________________
+sensor.dark_sky_dew_point:
+  #State: 69.2
+  #Domain: sensor
+  #Object ID: dark_sky_dew_point
+  #Last Updated: 2017-04-02 20:45:40.145555+00:00
+  #Last Changed: 2017-04-02 20:45:40.145555+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Dew point
+  icon: mdi:thermometer
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.dark_sky_hourly_summary:
+  #State: Light rain until this evening, starting again tomorrow afternoon.
+  #Domain: sensor
+  #Object ID: dark_sky_hourly_summary
+  #Last Updated: 2017-04-02 20:29:08.183909+00:00
+  #Last Changed: 2017-04-02 20:29:08.183909+00:00
+  attribution: Powered by Dark Sky
+  entity_picture: /static/images/darksky/weather-pouring.svg
+  friendly_name: Dark Sky Hourly Summary
+#_________________________________________________________________________________________
+sensor.dark_sky_humidity:
+  #State: 54.0
+  #Domain: sensor
+  #Object ID: dark_sky_humidity
+  #Last Updated: 2017-04-02 20:45:40.110005+00:00
+  #Last Changed: 2017-04-02 20:45:40.110005+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Humidity
+  icon: mdi:water-percent
+#  unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.dark_sky_icon:
+  #State: partly-cloudy-day
+  #Domain: sensor
+  #Object ID: dark_sky_icon
+  #Last Updated: 2017-04-02 20:43:36.031447+00:00
+  #Last Changed: 2017-04-02 20:43:36.031447+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Icon
+#_________________________________________________________________________________________
+sensor.dark_sky_nearest_storm_bearing:
+  #State: unknown
+  #Domain: sensor
+  #Object ID: dark_sky_nearest_storm_bearing
+  #Last Updated: 2017-04-02 19:51:26.086544+00:00
+  #Last Changed: 2017-04-02 19:51:26.086544+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Nearest Storm Bearing
+  icon: mdi:weather-lightning
+  unit_of_measurement: °
+#_________________________________________________________________________________________
+sensor.dark_sky_nearest_storm_distance:
+  #State: 0
+  #Domain: sensor
+  #Object ID: dark_sky_nearest_storm_distance
+  #Last Updated: 2017-04-02 19:51:26.096791+00:00
+  #Last Changed: 2017-04-02 19:51:26.096791+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Nearest Storm Distance
+  icon: mdi:weather-lightning
+  unit_of_measurement: mi
+#_________________________________________________________________________________________
+sensor.dark_sky_ozone:
+  #State: 275.3
+  #Domain: sensor
+  #Object ID: dark_sky_ozone
+  #Last Updated: 2017-04-02 20:41:32.564024+00:00
+  #Last Changed: 2017-04-02 20:41:32.564024+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Ozone
+  icon: mdi:eye
+  unit_of_measurement: DU
+#_________________________________________________________________________________________
+sensor.dark_sky_precip:
+  #State: rain
+  #Domain: sensor
+  #Object ID: dark_sky_precip
+  #Last Updated: 2017-04-02 19:59:41.958205+00:00
+  #Last Changed: 2017-04-02 19:59:41.958205+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Precip
+  icon: mdi:weather-pouring
+#_________________________________________________________________________________________
+sensor.dark_sky_precip_intensity:
+  #State: 0.003
+  #Domain: sensor
+  #Object ID: dark_sky_precip_intensity
+  #Last Updated: 2017-04-02 20:43:36.052054+00:00
+  #Last Changed: 2017-04-02 20:43:36.052054+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Precip Intensity
+  icon: mdi:weather-rainy
+  unit_of_measurement: in
+#_________________________________________________________________________________________
+sensor.dark_sky_precip_probability:
+  #State: 16.0
+  #Domain: sensor
+  #Object ID: dark_sky_precip_probability
+  #Last Updated: 2017-04-02 20:45:40.095813+00:00
+  #Last Changed: 2017-04-02 20:45:40.095813+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Precip Probability
+  icon: mdi:water-percent
+#  unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.dark_sky_pressure:
+  #State: 1016.7
+  #Domain: sensor
+  #Object ID: dark_sky_pressure
+  #Last Updated: 2017-04-02 20:45:39.984413+00:00
+  #Last Changed: 2017-04-02 20:45:39.984413+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Pressure
+  icon: mdi:gauge
+  unit_of_measurement: mbar
+#_________________________________________________________________________________________
+sensor.dark_sky_summary:
+  #State: Partly Cloudy
+  #Domain: sensor
+  #Object ID: dark_sky_summary
+  #Last Updated: 2017-04-02 20:43:36.003204+00:00
+  #Last Changed: 2017-04-02 20:43:36.003204+00:00
+  attribution: Powered by Dark Sky
+  entity_picture: /static/images/darksky/weather-partlycloudy.svg
+  friendly_name: Dark Sky Summary
+#_________________________________________________________________________________________
+sensor.dark_sky_temperature:
+  #State: 88.0
+  #Domain: sensor
+  #Object ID: dark_sky_temperature
+  #Last Updated: 2017-04-02 20:39:28.100423+00:00
+  #Last Changed: 2017-04-02 20:39:28.100423+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Temperature
+  icon: mdi:thermometer
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.dark_sky_visibility:
+  #State: 8.96
+  #Domain: sensor
+  #Object ID: dark_sky_visibility
+  #Last Updated: 2017-04-02 20:45:40.000998+00:00
+  #Last Changed: 2017-04-02 20:45:40.000998+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Visibility
+  icon: mdi:eye
+  unit_of_measurement: mi
+#_________________________________________________________________________________________
+sensor.dark_sky_wind_bearing:
+  #State: 94
+  #Domain: sensor
+  #Object ID: dark_sky_wind_bearing
+  #Last Updated: 2017-04-02 20:45:40.083229+00:00
+  #Last Changed: 2017-04-02 20:45:40.083229+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Wind Bearing
+  icon: mdi:compass
+  unit_of_measurement: °
+#_________________________________________________________________________________________
+sensor.dark_sky_wind_speed:
+  #State: 5.19
+  #Domain: sensor
+  #Object ID: dark_sky_wind_speed
+  #Last Updated: 2017-04-02 20:45:40.017871+00:00
+  #Last Changed: 2017-04-02 20:45:40.017871+00:00
+  attribution: Powered by Dark Sky
+  friendly_name: Dark Sky Wind Speed
+  icon: mdi:weather-windy
+  unit_of_measurement: mph
+#_________________________________________________________________________________________
+sensor.ecolink_doorwindow_sensor_alarm_level_19_1:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_doorwindow_sensor_alarm_level_19_1
+  #Last Updated: 2017-04-02 04:29:44.120199+00:00
+  #Last Changed: 2017-04-02 04:29:44.120199+00:00
+  friendly_name: Ecolink Door/Window Sensor Alarm Level
+  node_id: 19
+#_________________________________________________________________________________________
+sensor.ecolink_doorwindow_sensor_alarm_level_23_1:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_doorwindow_sensor_alarm_level_23_1
+  #Last Updated: 2017-04-02 06:34:56.886187+00:00
+  #Last Changed: 2017-04-02 06:34:56.886187+00:00
+  friendly_name: Ecolink Door/Window Sensor Alarm Level
+  node_id: 23
+#_________________________________________________________________________________________
+sensor.ecolink_doorwindow_sensor_alarm_type_19_0:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_doorwindow_sensor_alarm_type_19_0
+  #Last Updated: 2017-04-02 04:29:44.103939+00:00
+  #Last Changed: 2017-04-02 04:29:44.103939+00:00
+  friendly_name: Ecolink Door/Window Sensor Alarm Type
+  node_id: 19
+#_________________________________________________________________________________________
+sensor.ecolink_doorwindow_sensor_alarm_type_23_0:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_doorwindow_sensor_alarm_type_23_0
+  #Last Updated: 2017-04-02 06:34:56.874402+00:00
+  #Last Changed: 2017-04-02 06:34:56.874402+00:00
+  friendly_name: Ecolink Door/Window Sensor Alarm Type
+  node_id: 23
+#_________________________________________________________________________________________
+sensor.ecolink_doorwindow_sensor_burglar_19_10:
+  #State: 3
+  #Domain: sensor
+  #Object ID: ecolink_doorwindow_sensor_burglar_19_10
+  #Last Updated: 2017-04-02 04:29:44.142527+00:00
+  #Last Changed: 2017-04-02 04:29:44.142527+00:00
+  friendly_name: Ecolink Door/Window Sensor Burglar
+  node_id: 19
+#_________________________________________________________________________________________
+sensor.ecolink_doorwindow_sensor_burglar_23_10:
+  #State: 3
+  #Domain: sensor
+  #Object ID: ecolink_doorwindow_sensor_burglar_23_10
+  #Last Updated: 2017-04-02 06:34:56.909180+00:00
+  #Last Changed: 2017-04-02 06:34:56.909180+00:00
+  friendly_name: Ecolink Door/Window Sensor Burglar
+  node_id: 23
+#_________________________________________________________________________________________
+sensor.ecolink_doorwindow_sensor_sourcenodeid_19_2:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_doorwindow_sensor_sourcenodeid_19_2
+  #Last Updated: 2017-04-02 04:29:44.135600+00:00
+  #Last Changed: 2017-04-02 04:29:44.135600+00:00
+  friendly_name: Ecolink Door/Window Sensor SourceNodeId
+  node_id: 19
+#_________________________________________________________________________________________
+sensor.ecolink_doorwindow_sensor_sourcenodeid_23_2:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_doorwindow_sensor_sourcenodeid_23_2
+  #Last Updated: 2017-04-02 06:34:56.898935+00:00
+  #Last Changed: 2017-04-02 06:34:56.898935+00:00
+  friendly_name: Ecolink Door/Window Sensor SourceNodeId
+  node_id: 23
+#_________________________________________________________________________________________
+sensor.ecolink_motion_sensor_alarm_level_10_1:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_motion_sensor_alarm_level_10_1
+  #Last Updated: 2017-04-02 05:54:50.054443+00:00
+  #Last Changed: 2017-04-02 05:54:50.054443+00:00
+  friendly_name: Ecolink Motion Sensor Alarm Level
+  node_id: 10
+#_________________________________________________________________________________________
+sensor.ecolink_motion_sensor_alarm_level_11_1:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_motion_sensor_alarm_level_11_1
+  #Last Updated: 2017-04-02 03:33:25.546976+00:00
+  #Last Changed: 2017-04-02 03:33:25.546976+00:00
+  friendly_name: Ecolink Motion Sensor Alarm Level
+  node_id: 11
+#_________________________________________________________________________________________
+sensor.ecolink_motion_sensor_alarm_type_10_0:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_motion_sensor_alarm_type_10_0
+  #Last Updated: 2017-04-02 05:54:50.032519+00:00
+  #Last Changed: 2017-04-02 05:54:50.032519+00:00
+  friendly_name: Ecolink Motion Sensor Alarm Type
+  node_id: 10
+#_________________________________________________________________________________________
+sensor.ecolink_motion_sensor_alarm_type_11_0:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_motion_sensor_alarm_type_11_0
+  #Last Updated: 2017-04-02 03:33:25.518620+00:00
+  #Last Changed: 2017-04-02 03:33:25.518620+00:00
+  friendly_name: Ecolink Motion Sensor Alarm Type
+  node_id: 11
+#_________________________________________________________________________________________
+sensor.ecolink_motion_sensor_burglar_10_10:
+  #State: 3
+  #Domain: sensor
+  #Object ID: ecolink_motion_sensor_burglar_10_10
+  #Last Updated: 2017-04-02 05:54:50.070352+00:00
+  #Last Changed: 2017-04-02 05:54:50.070352+00:00
+  friendly_name: Ecolink Motion Sensor Burglar
+  node_id: 10
+#_________________________________________________________________________________________
+sensor.ecolink_motion_sensor_burglar_11_10:
+  #State: 3
+  #Domain: sensor
+  #Object ID: ecolink_motion_sensor_burglar_11_10
+  #Last Updated: 2017-04-02 03:33:25.617778+00:00
+  #Last Changed: 2017-04-02 03:33:25.617778+00:00
+  friendly_name: Ecolink Motion Sensor Burglar
+  node_id: 11
+#_________________________________________________________________________________________
+sensor.ecolink_motion_sensor_sourcenodeid_10_2:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_motion_sensor_sourcenodeid_10_2
+  #Last Updated: 2017-04-02 05:54:50.063041+00:00
+  #Last Changed: 2017-04-02 05:54:50.063041+00:00
+  friendly_name: Ecolink Motion Sensor SourceNodeId
+  node_id: 10
+#_________________________________________________________________________________________
+sensor.ecolink_motion_sensor_sourcenodeid_11_2:
+  #State: 0
+  #Domain: sensor
+  #Object ID: ecolink_motion_sensor_sourcenodeid_11_2
+  #Last Updated: 2017-04-02 03:33:25.586627+00:00
+  #Last Changed: 2017-04-02 03:33:25.586627+00:00
+  friendly_name: Ecolink Motion Sensor SourceNodeId
+  node_id: 11
+#_________________________________________________________________________________________
+sensor.esp_122131:
+  #State: Offline
+  #Domain: sensor
+  #Object ID: esp_122131
+  #Last Updated: 2017-04-02 02:56:19.403139+00:00
+  #Last Changed: 2017-04-02 02:56:19.403139+00:00
+  friendly_name: NodeMcu front lights
+#_________________________________________________________________________________________
+sensor.esp_92eba2:
+  #State: Offline
+  #Domain: sensor
+  #Object ID: esp_92eba2
+  #Last Updated: 2017-04-02 02:56:19.398038+00:00
+  #Last Changed: 2017-04-02 02:56:19.398038+00:00
+  friendly_name: NodeMcu
+#_________________________________________________________________________________________
+sensor.everspring_unknown_type0002_id0002_alarm_level_15_1:
+  #State: 0
+  #Domain: sensor
+  #Object ID: everspring_unknown_type0002_id0002_alarm_level_15_1
+  #Last Updated: 2017-04-02 02:56:27.047355+00:00
+  #Last Changed: 2017-04-02 02:56:27.047355+00:00
+  friendly_name: Everspring Unknown type=0002, id=0002 Alarm Level
+  node_id: 15
+#_________________________________________________________________________________________
+sensor.everspring_unknown_type0002_id0002_alarm_type_15_0:
+  #State: 0
+  #Domain: sensor
+  #Object ID: everspring_unknown_type0002_id0002_alarm_type_15_0
+  #Last Updated: 2017-04-02 02:56:26.904316+00:00
+  #Last Changed: 2017-04-02 02:56:26.904316+00:00
+  friendly_name: Everspring Unknown type=0002, id=0002 Alarm Type
+  node_id: 15
+#_________________________________________________________________________________________
+sensor.fastcom_download:
+  #State: 86.5
+  #Domain: sensor
+  #Object ID: fastcom_download
+  #Last Updated: 2017-04-02 20:30:40.370575+00:00
+  #Last Changed: 2017-04-02 20:30:40.370575+00:00
+  friendly_name: Fast.com Download
+  persistent: True
+  unit_of_measurement: Mbit/s
+#_________________________________________________________________________________________
+sensor.fortrezz_mimolite_wireless_interfacebridge_module_alarm_level_2_1:
+  #State: 0
+  #Domain: sensor
+  #Object ID: fortrezz_mimolite_wireless_interfacebridge_module_alarm_level_2_1
+  #Last Updated: 2017-04-02 02:56:22.594642+00:00
+  #Last Changed: 2017-04-02 02:56:22.594642+00:00
+  friendly_name: FortrezZ MIMOlite Wireless Interface/Bridge Module Alarm Level
+  haaska_hidden: True
+  hidden: True
+  node_id: 2
+#_________________________________________________________________________________________
+sensor.fortrezz_mimolite_wireless_interfacebridge_module_alarm_type_2_0:
+  #State: 0
+  #Domain: sensor
+  #Object ID: fortrezz_mimolite_wireless_interfacebridge_module_alarm_type_2_0
+  #Last Updated: 2017-04-02 02:56:22.583895+00:00
+  #Last Changed: 2017-04-02 02:56:22.583895+00:00
+  friendly_name: FortrezZ MIMOlite Wireless Interface/Bridge Module Alarm Type
+  haaska_hidden: True
+  hidden: True
+  node_id: 2
+#_________________________________________________________________________________________
+sensor.fortrezz_mimolite_wireless_interfacebridge_module_general_2_2:
+  #State: 2691.0
+  #Domain: sensor
+  #Object ID: fortrezz_mimolite_wireless_interfacebridge_module_general_2_2
+  #Last Updated: 2017-04-02 20:47:27.633754+00:00
+  #Last Changed: 2017-04-02 20:47:27.633754+00:00
+  friendly_name: FortrezZ MIMOlite Wireless Interface/Bridge Module General
+  haaska_hidden: True
+  hidden: True
+  node_id: 2
+#_________________________________________________________________________________________
+sensor.fortrezz_mimolite_wireless_interfacebridge_module_solar_radiation_2_10:
+  #State: 2698.0
+  #Domain: sensor
+  #Object ID: fortrezz_mimolite_wireless_interfacebridge_module_solar_radiation_2_10
+  #Last Updated: 2017-04-02 02:56:22.485921+00:00
+  #Last Changed: 2017-04-02 02:56:22.485921+00:00
+  friendly_name: FortrezZ MIMOlite Wireless Interface/Bridge Module Solar Radiation
+  node_id: 2
+  unit_of_measurement: W/m2
+#_________________________________________________________________________________________
+sensor.front_door_status:
+  #State: n/a
+  #Domain: sensor
+  #Object ID: front_door_status
+  #Last Updated: 2017-04-02 02:56:19.437822+00:00
+  #Last Changed: 2017-04-02 02:56:19.437822+00:00
+  friendly_name: Door
+#_________________________________________________________________________________________
+sensor.game_room_humidity:
+  #State: 81
+  #Domain: sensor
+  #Object ID: game_room_humidity
+  #Last Updated: 2017-04-02 02:55:10.605570+00:00
+  #Last Changed: 2017-04-02 02:55:10.605570+00:00
+  device_manufacturer: wink
+  friendly_name: Game Room humidity
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+#  unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.game_room_proximity:
+  #State: 4066.0
+  #Domain: sensor
+  #Object ID: game_room_proximity
+  #Last Updated: 2017-04-02 02:55:10.613320+00:00
+  #Last Changed: 2017-04-02 02:55:10.613320+00:00
+  device_manufacturer: wink
+  friendly_name: Game Room proximity
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+#_________________________________________________________________________________________
+sensor.game_room_temperature:
+  #State: 71.2
+  #Domain: sensor
+  #Object ID: game_room_temperature
+  #Last Updated: 2017-04-02 02:55:10.597544+00:00
+  #Last Changed: 2017-04-02 02:55:10.597544+00:00
+  device_manufacturer: wink
+  friendly_name: Game Room temperature
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.garage_door_status:
+  #State: Closed
+  #Domain: sensor
+  #Object ID: garage_door_status
+  #Last Updated: 2017-04-02 02:56:22.464282+00:00
+  #Last Changed: 2017-04-02 02:56:22.464282+00:00
+  friendly_name: Garage Door Status
+#_________________________________________________________________________________________
+sensor.ha_current_version:
+  #State: 0.41.0
+  #Domain: sensor
+  #Object ID: ha_current_version
+  #Last Updated: 2017-04-02 02:54:55.540937+00:00
+  #Last Changed: 2017-04-02 02:54:55.540937+00:00
+  friendly_name: HA Current Version
+#_________________________________________________________________________________________
+sensor.ha_installed_version:
+  #State: 0.41.0
+  #Domain: sensor
+  #Object ID: ha_installed_version
+  #Last Updated: 2017-04-02 02:54:57.615261+00:00
+  #Last Changed: 2017-04-02 02:54:57.615261+00:00
+  friendly_name: HA Installed Version
+#_________________________________________________________________________________________
+sensor.ha_last_restart:
+  #State: Apr 01 21:56:24
+  #Domain: sensor
+  #Object ID: ha_last_restart
+  #Last Updated: 2017-04-02 02:56:24.836719+00:00
+  #Last Changed: 2017-04-02 02:56:24.836719+00:00
+  friendly_name: HA Last Restart
+#_________________________________________________________________________________________
+sensor.hallway_humidity:
+  #State: 74
+  #Domain: sensor
+  #Object ID: hallway_humidity
+  #Last Updated: 2017-04-02 02:55:10.581754+00:00
+  #Last Changed: 2017-04-02 02:55:10.581754+00:00
+  device_manufacturer: wink
+  friendly_name: Hallway humidity
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+#  unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.hallway_nest_protect_battery_health:
+  #State: Ok
+  #Domain: sensor
+  #Object ID: hallway_nest_protect_battery_health
+  #Last Updated: 2017-04-02 02:55:10.516627+00:00
+  #Last Changed: 2017-04-02 02:55:10.516627+00:00
+  friendly_name: Hallway Nest Protect battery health
+#_________________________________________________________________________________________
+sensor.hallway_nest_protect_co_status:
+  #State: Ok
+  #Domain: sensor
+  #Object ID: hallway_nest_protect_co_status
+  #Last Updated: 2017-04-02 02:55:10.506801+00:00
+  #Last Changed: 2017-04-02 02:55:10.506801+00:00
+  friendly_name: Hallway Nest Protect co status
+#_________________________________________________________________________________________
+sensor.hallway_nest_protect_smoke_status:
+  #State: Ok
+  #Domain: sensor
+  #Object ID: hallway_nest_protect_smoke_status
+  #Last Updated: 2017-04-02 02:55:10.520121+00:00
+  #Last Changed: 2017-04-02 02:55:10.520121+00:00
+  friendly_name: Hallway Nest Protect smoke status
+#_________________________________________________________________________________________
+sensor.hallway_proximity:
+  #State: 4171.0
+  #Domain: sensor
+  #Object ID: hallway_proximity
+  #Last Updated: 2017-04-02 02:55:10.589833+00:00
+  #Last Changed: 2017-04-02 02:55:10.589833+00:00
+  device_manufacturer: wink
+  friendly_name: Hallway proximity
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+#_________________________________________________________________________________________
+sensor.hallway_temperature:
+  #State: 75.6
+  #Domain: sensor
+  #Object ID: hallway_temperature
+  #Last Updated: 2017-04-02 02:55:10.573752+00:00
+  #Last Changed: 2017-04-02 02:55:10.573752+00:00
+  device_manufacturer: wink
+  friendly_name: Hallway temperature
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.hallway_thermostat_humidity:
+  #State: 40
+  #Domain: sensor
+  #Object ID: hallway_thermostat_humidity
+  #Last Updated: 2017-04-02 02:55:10.510112+00:00
+  #Last Changed: 2017-04-02 02:55:10.510112+00:00
+  friendly_name: Hallway Thermostat humidity
+#  unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.hallway_thermostat_hvac_state:
+  #State: cooling
+  #Domain: sensor
+  #Object ID: hallway_thermostat_hvac_state
+  #Last Updated: 2017-04-02 02:55:10.503586+00:00
+  #Last Changed: 2017-04-02 02:55:10.503586+00:00
+  friendly_name: Hallway Thermostat hvac state
+#_________________________________________________________________________________________
+sensor.hallway_thermostat_operation_mode:
+  #State: cool
+  #Domain: sensor
+  #Object ID: hallway_thermostat_operation_mode
+  #Last Updated: 2017-04-02 02:55:10.513408+00:00
+  #Last Changed: 2017-04-02 02:55:10.513408+00:00
+  friendly_name: Hallway Thermostat operation mode
+#_________________________________________________________________________________________
+sensor.hallway_thermostat_target:
+  #State: 76
+  #Domain: sensor
+  #Object ID: hallway_thermostat_target
+  #Last Updated: 2017-04-02 02:55:10.474281+00:00
+  #Last Changed: 2017-04-02 02:55:10.474281+00:00
+  friendly_name: Hallway Thermostat target
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.hallway_thermostat_temperature:
+  #State: 76
+  #Domain: sensor
+  #Object ID: hallway_thermostat_temperature
+  #Last Updated: 2017-04-02 03:04:37.030142+00:00
+  #Last Changed: 2017-04-02 03:04:37.030142+00:00
+  friendly_name: Hallway Thermostat temperature
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.harmony_hub:
+  #State: Offline
+  #Domain: sensor
+  #Object ID: harmony_hub
+  #Last Updated: 2017-04-02 02:56:19.378010+00:00
+  #Last Changed: 2017-04-02 02:56:19.378010+00:00
+  friendly_name: Harmony Hub
+#_________________________________________________________________________________________
+sensor.internet_speed_in:
+  #State: 0.0
+  #Domain: sensor
+  #Object ID: internet_speed_in
+  #Last Updated: 2017-04-02 02:56:19.416312+00:00
+  #Last Changed: 2017-04-02 02:56:19.416312+00:00
+  friendly_name: Internet Speed
+  unit_of_measurement: Mbps
+#_________________________________________________________________________________________
+sensor.internet_speed_out:
+  #State: unknown
+  #Domain: sensor
+  #Object ID: internet_speed_out
+  #Last Updated: 2017-04-02 02:54:56.660147+00:00
+  #Last Changed: 2017-04-02 02:54:56.660147+00:00
+  friendly_name: Internet Speed
+  unit_of_measurement: Mbps
+#_________________________________________________________________________________________
+sensor.kitchen_nest_protect_battery_health:
+  #State: Ok
+  #Domain: sensor
+  #Object ID: kitchen_nest_protect_battery_health
+  #Last Updated: 2017-04-02 02:55:10.495248+00:00
+  #Last Changed: 2017-04-02 02:55:10.495248+00:00
+  friendly_name: Kitchen Nest Protect battery health
+#_________________________________________________________________________________________
+sensor.kitchen_nest_protect_co_status:
+  #State: Ok
+  #Domain: sensor
+  #Object ID: kitchen_nest_protect_co_status
+  #Last Updated: 2017-04-02 02:55:10.487308+00:00
+  #Last Changed: 2017-04-02 02:55:10.487308+00:00
+  friendly_name: Kitchen Nest Protect co status
+#_________________________________________________________________________________________
+sensor.kitchen_nest_protect_smoke_status:
+  #State: Ok
+  #Domain: sensor
+  #Object ID: kitchen_nest_protect_smoke_status
+  #Last Updated: 2017-04-02 02:55:10.500291+00:00
+  #Last Changed: 2017-04-02 02:55:10.500291+00:00
+  friendly_name: Kitchen Nest Protect smoke status
+#_________________________________________________________________________________________
+sensor.master_bedroom_humidity:
+  #State: 81
+  #Domain: sensor
+  #Object ID: master_bedroom_humidity
+  #Last Updated: 2017-04-02 20:42:56.407684+00:00
+  #Last Changed: 2017-04-02 20:42:56.407684+00:00
+  device_manufacturer: wink
+  friendly_name: Master Bedroom humidity
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+#  unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.master_bedroom_proximity:
+  #State: 1681.0
+  #Domain: sensor
+  #Object ID: master_bedroom_proximity
+  #Last Updated: 2017-04-02 20:42:56.423174+00:00
+  #Last Changed: 2017-04-02 20:42:56.423174+00:00
+  device_manufacturer: wink
+  friendly_name: Master Bedroom proximity
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+#_________________________________________________________________________________________
+sensor.master_bedroom_temperature:
+  #State: 70.9
+  #Domain: sensor
+  #Object ID: master_bedroom_temperature
+  #Last Updated: 2017-04-02 20:42:56.400121+00:00
+  #Last Changed: 2017-04-02 20:42:56.400121+00:00
+  device_manufacturer: wink
+  friendly_name: Master Bedroom temperature
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.motion_status:
+  #State: n/a
+  #Domain: sensor
+  #Object ID: motion_status
+  #Last Updated: 2017-04-02 02:56:19.446559+00:00
+  #Last Changed: 2017-04-02 02:56:19.446559+00:00
+  friendly_name: motion Status
+#_________________________________________________________________________________________
+sensor.nina_room_humidity:
+  #State: 75
+  #Domain: sensor
+  #Object ID: nina_room_humidity
+  #Last Updated: 2017-04-02 02:55:10.467068+00:00
+  #Last Changed: 2017-04-02 02:55:10.467068+00:00
+  device_manufacturer: wink
+  friendly_name: Nina Room humidity
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+#  unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.nina_room_proximity:
+  #State: 2199.0
+  #Domain: sensor
+  #Object ID: nina_room_proximity
+  #Last Updated: 2017-04-02 02:55:10.537466+00:00
+  #Last Changed: 2017-04-02 02:55:10.537466+00:00
+  device_manufacturer: wink
+  friendly_name: Nina Room proximity
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+#_________________________________________________________________________________________
+sensor.nina_room_temperature:
+  #State: 73.6
+  #Domain: sensor
+  #Object ID: nina_room_temperature
+  #Last Updated: 2017-04-02 02:55:10.433480+00:00
+  #Last Changed: 2017-04-02 02:55:10.433480+00:00
+  device_manufacturer: wink
+  friendly_name: Nina Room temperature
+  manufacturer_device_model: wink_relay_sensor
+  model_name: Wink Relay Sensor
+  tamper_detected: False
+  unit_of_measurement: °F
+#_________________________________________________________________________________________
+sensor.sonarr_disk_space:
+  #State: 3118.08
+  #Domain: sensor
+  #Object ID: sonarr_disk_space
+  #Last Updated: 2017-04-02 20:47:13.148068+00:00
+  #Last Changed: 2017-04-02 20:47:13.148068+00:00
+  \\TORN-CLOUD\Public: 130.04/1829.36GB (7.11%)
+  C:\: 342.73/919.77GB (37.26%)
+  E:\: 189.36/931.50GB (20.33%)
+  F:\: 1.42/11.65GB (12.24%)
+  friendly_name: Sonarr Disk Space
+  icon: mdi:harddisk
+  T:\: 1131.53/1863.01GB (60.74%)
+  unit_of_measurement: GB
+  X:\: 250.23/2047.51GB (12.22%)
+  Y:\: 1072.78/3725.99GB (28.79%)
+#_________________________________________________________________________________________
+sensor.sonarr_disk_space_2:
+  #State: 3118.08
+  #Domain: sensor
+  #Object ID: sonarr_disk_space_2
+  #Last Updated: 2017-04-02 20:47:14.160157+00:00
+  #Last Changed: 2017-04-02 20:47:14.160157+00:00
+  \\TORN-CLOUD\Public: 130.04/1829.36GB (7.11%)
+  C:\: 342.73/919.77GB (37.26%)
+  E:\: 189.36/931.50GB (20.33%)
+  F:\: 1.42/11.65GB (12.24%)
+  friendly_name: Sonarr Disk Space
+  icon: mdi:harddisk
+  T:\: 1131.53/1863.01GB (60.74%)
+  unit_of_measurement: GB
+  X:\: 250.23/2047.51GB (12.22%)
+  Y:\: 1072.78/3725.99GB (28.79%)
+#_________________________________________________________________________________________
+sensor.sonarr_upcoming:
+  #State: 14
+  #Domain: sensor
+  #Object ID: sonarr_upcoming
+  #Last Updated: 2017-04-02 07:53:25.537872+00:00
+  #Last Changed: 2017-04-02 07:53:25.537872+00:00
+  24: Legacy S01E10
+  American Crime: S03E04
+  APB: S01E09
+  Billions: S02E07
+  Bob's Burgers: S07E16
+  friendly_name: Sonarr Upcoming
+  icon: mdi:television
+  Into the Badlands: S02E03
+  Last Week Tonight with John Oliver: S04E07
+  Long Island Medium: S09E07
+  Quantico: S02E16
+  Taken (2017): S01E06
+  Talking Dead: S06E16
+  The Simpsons: S28E19
+  The Walking Dead: S07E16
+  unit_of_measurement: Episodes
+  We Bare Bears: S02E23
+#_________________________________________________________________________________________
+sensor.sonarr_upcoming_2:
+  #State: 14
+  #Domain: sensor
+  #Object ID: sonarr_upcoming_2
+  #Last Updated: 2017-04-02 07:53:25.699969+00:00
+  #Last Changed: 2017-04-02 07:53:25.699969+00:00
+  24: Legacy S01E10
+  American Crime: S03E04
+  APB: S01E09
+  Billions: S02E07
+  Bob's Burgers: S07E16
+  friendly_name: Sonarr Upcoming
+  icon: mdi:television
+  Into the Badlands: S02E03
+  Last Week Tonight with John Oliver: S04E07
+  Long Island Medium: S09E07
+  Quantico: S02E16
+  Taken (2017): S01E06
+  Talking Dead: S06E16
+  The Simpsons: S28E19
+  The Walking Dead: S07E16
+  unit_of_measurement: Episodes
+  We Bare Bears: S02E23
+#_________________________________________________________________________________________
+sensor.speedtest_download:
+  #State: 19.54
+  #Domain: sensor
+  #Object ID: speedtest_download
+  #Last Updated: 2017-04-02 20:00:43.385490+00:00
+  #Last Changed: 2017-04-02 20:00:43.385490+00:00
+  friendly_name: Speedtest Download
+  haaska_hidden: True
+  icon: mdi:download
+  unit_of_measurement: Mbit/s
+#_________________________________________________________________________________________
+sensor.speedtest_ping:
+  #State: 32.46
+  #Domain: sensor
+  #Object ID: speedtest_ping
+  #Last Updated: 2017-04-02 20:00:43.440313+00:00
+  #Last Changed: 2017-04-02 20:00:43.440313+00:00
+  friendly_name: Speedtest Ping
+  haaska_hidden: True
+  icon: mdi:radar
+  unit_of_measurement: ms
+#_________________________________________________________________________________________
+sensor.speedtest_upload:
+  #State: 8.82
+  #Domain: sensor
+  #Object ID: speedtest_upload
+  #Last Updated: 2017-04-02 20:00:43.424695+00:00
+  #Last Changed: 2017-04-02 20:00:43.424695+00:00
+  friendly_name: Speedtest Upload
+  haaska_hidden: True
+  icon: mdi:upload
+  unit_of_measurement: Mbit/s
+#_________________________________________________________________________________________
+sensor.torn8o_battery_level:
+  #State: 96
+  #Domain: sensor
+  #Object ID: torn8o_battery_level
+  #Last Updated: 2017-04-02 16:28:24.371857+00:00
+  #Last Changed: 2017-04-02 16:28:24.371857+00:00
+  Battery Level: 96
+  Battery State: Charging
+  Device Name: TORN8O
+  Device Type: iPhone 7 Plus
+  Device Version: 10.1.1
+  friendly_name: TORN8O Battery Level
+  icon: mdi:battery-charging-100
+#  unit_of_measurement: %
+#_________________________________________________________________________________________
+sensor.torn8o_battery_state:
+  #State: Charging
+  #Domain: sensor
+  #Object ID: torn8o_battery_state
+  #Last Updated: 2017-04-02 16:28:24.350696+00:00
+  #Last Changed: 2017-04-02 16:28:24.350696+00:00
+  Battery Level: 96
+  Battery State: Charging
+  Device Name: TORN8O
+  Device Type: iPhone 7 Plus
+  Device Version: 10.1.1
+  friendly_name: TORN8O Battery State
+  icon: mdi:battery-charging-100
+#_________________________________________________________________________________________
+sensor.tv_room:
+  #State: PowerOff
+  #Domain: sensor
+  #Object ID: tv_room
+  #Last Updated: 2017-04-02 02:56:19.388354+00:00
+  #Last Changed: 2017-04-02 02:56:19.388354+00:00
+  friendly_name: Tv Room
+#_________________________________________________________________________________________
+sensor.vizio_tv:
+  #State: Online
+  #Domain: sensor
+  #Object ID: vizio_tv
+  #Last Updated: 2017-04-02 19:39:22.756378+00:00
+  #Last Changed: 2017-04-02 19:39:22.756378+00:00
+  friendly_name: Vizio TV
+#_________________________________________________________________________________________
+sensor.wan_traffic_in_mean:
+  #State: unknown
+  #Domain: sensor
+  #Object ID: wan_traffic_in_mean
+  #Last Updated: 2017-04-02 02:56:19.586209+00:00
+  #Last Changed: 2017-04-02 02:54:54.704094+00:00
+  count: 2
+  friendly_name: WAN Download Average
+  icon: mdi:download
+  max_value: 0.0
+  mean: unknown
+  median: unknown
+  min_value: 0.0
+  sampling_size: 20
+  standard_deviation: unknown
+  total: 0.0
+  unit_of_measurement: Mbps
+  variance: unknown
+#_________________________________________________________________________________________
+sensor.wan_traffic_out_mean:
+  #State: unknown
+  #Domain: sensor
+  #Object ID: wan_traffic_out_mean
+  #Last Updated: 2017-04-02 02:54:56.689294+00:00
+  #Last Changed: 2017-04-02 02:54:54.687060+00:00
+  count: 1
+  friendly_name: WAN Upload Average
+  icon: mdi:upload
+  max_value: unknown
+  mean: unknown
+  median: unknown
+  min_value: unknown
+  sampling_size: 20
+  standard_deviation: unknown
+  total: unknown
+  unit_of_measurement: Mbps
+  variance: unknown

@@ -1,10 +1,7 @@
   - alias: Startup Notification
     trigger:
-      platform: event
-      event_type: homeassistant_start
-#    action:
-#      service: notify.notify
-#      data: {"event":"TestHA_Trigger", "value1":"Hello World!"}
+    - platform: homeassistant
+      event: start
     action:
       service: notify.notify
       data_template:

@@ -3,14 +3,13 @@
 #################################################################
 Default View:
   view: yes
-  icon: mdi:source-commit-local
   entities:
     - group.tv_room_2
     - group.master_bedroom_2
     - group.game_room
     - group.nest
     - group.kitchen_lights
-#    - group.web
+  #  - group.web
     - group.air_safety
     - group.network
     - group.garage
@@ -19,10 +18,9 @@ Default View:
     - group.color_all_lights
     - group.temperature
     - group.christmas_lights
-    - group.Online
+    - group.items
     - group.sonarr
     - group.playlist
-    - input_select.log_level
 #website:
 #  view: yes
 #  icon: mdi:camera
@@ -34,6 +32,7 @@ Default View:
 playlist:
   name: Radio
   entities:
+    - group.Home_crimereports
     - input_select.radio_station_location
     - input_select.radio_station
     - input_slider.volume_radio
@@ -77,9 +76,11 @@ den room:
   name: Game Room
   entities:
     - group.game_room
-online:
+items:
   name: items
   entities:
+    - sensor.average_house_temp
+    - automation.mqtt_publish_sensors
     - sensor.gas_price
     - sensor.esp_92eba2
     - sensor.esp_122131
@@ -197,6 +198,11 @@ all scripts:
   - script.restart_ha
   - script.update_hass
 all automation:
+  - automation.hass_startup
+  - automation.zwave_network_is_complete
+  - automation.mqtt_publish_sensors
+  - automation.update_available_notifications
+  - automation.charlie_is_away
   - automation.view_lights
   - automation.TV_Lights_and_Fan_on
   - automation.TV_Lights_and_Fan_

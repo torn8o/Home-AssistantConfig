@@ -319,7 +319,7 @@ switch.fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0:
   haaska_hidden: true
   friendly_name: Garage Door opener
   persistent: true
-  icon: mdi:lightbulb
+  icon: mdi:circle-outline
 light.zooz_zen22_zwave_plus_dimmer_light_switch_level_3_0:
   haaska_hidden: true
   friendly_name: Attic Lights

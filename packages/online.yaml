@@ -1,0 +1,59 @@
+homeassistant:
+  customize:
+    group.online_devices:
+      friendly_name: "online Devices"
+      hidden: true
+
+    group.online_devices_template:
+      friendly_name: "online Devices"
+
+group:
+  online_devices:
+    entities:
+      - device_tracker.vizio_tv
+      - device_tracker.esp_92eba2
+      - device_tracker.esp_122131
+      - device_tracker.broadlink
+      - device_tracker.harmonyhub
+
+  #online_devices_template:
+  #  entities:
+  #    -
+
+sensor:
+  - platform: template
+    sensors:
+       vizio_tv:
+          friendly_name: 'Vizio TV'
+          value_template: "{{ 'Online' if is_state('device_tracker.vizio_tv', 'home') else 'Offline' }}"
+          icon_template: "{{ 'mdi:television' if is_state('device_tracker.vizio_tv', 'home') else 'mdi:alert-circle' }}"
+
+       esp_92eba2:
+          friendly_name: 'NodeMcu'
+          value_template: "{{ 'Online' if is_state('device_tracker.esp_92eba2', 'home') else 'Offline' }}"
+
+       esp_122131:
+          friendly_name: 'NodeMcu front lights'
+          value_template: "{{ 'Online' if is_state('device_tracker.esp_122131', 'home') else 'Offline' }}"
+
+    #   broadlink:
+    #      friendly_name: 'Broadlink'
+    #      value_template: "{{ 'Online' if is_state('device_tracker.broadlink', 'home') else 'Offline' }}"
+
+       broadlink:
+          friendly_name: "Broadlink"
+          value_template: "{{ 'online' if is_state('device_tracker.broadlink', 'home') else 'offline' }}"
+          icon_template: "{{ 'mdi:check-circle' if is_state('device_tracker.broadlink', 'home') else 'mdi:alert-circle' }}"
+
+       harmony_hub:
+          friendly_name: 'Harmony Hub'
+          value_template: "{{ 'Online' if is_state('device_tracker.harmonyhub', 'home') else 'Offline' }}"
+
+       tv_room:
+          friendly_name: 'Tv Room'
+          value_template: "{{ states.remote.torn_hub.attributes.current_activity }}"
+
+
+    #   Harmony_hub:
+    #      friendly_name: 'Harmony Hub'
+    #      value_template: "{{ 'Online' if is_state('device_tracker.harmonyhub', 'home') else 'Offline' }}"

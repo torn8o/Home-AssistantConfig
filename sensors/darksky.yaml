@@ -29,9 +29,13 @@
 
 - platform: sonarr
   api_key: !secret sonarr_api_key
-  host: torn8o.ddns.net
-  port: 8989
+  host: !secret sonarr_url
+  port: !secret sonarr_port
   monitored_conditions:
     - diskspace
     - upcoming
-  days: 2
+  days: 1
+
+- platform: crimereports
+  name: Home crimereports
+  radius: 10
