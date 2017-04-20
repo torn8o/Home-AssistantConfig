@@ -10,6 +10,7 @@ homeassistant:
   time_zone: America/Chicago
   unit_system: imperial
   customize: !include customize.yaml
+
 #  customize: !include_dir_named customize
   packages: !include_dir_named packages
 
@@ -19,9 +20,9 @@ logbook:
 sun:
 #updater:
 #discovery:
-##discovery:
-#  ignore:
-#    - netgear_router
+discovery:
+  ignore:
+    - netgear_router
 
 
 ################################################
@@ -71,6 +72,27 @@ emulated_hue:
     - input_boolean
     - switch
     - light
+
+ios:
+  push:
+    categories:
+      - name: Alarm
+        identifier: 'ALARM'
+        actions:
+          - identifier: 'SOUND_ALARM'
+            title: 'Sound Alarm'
+            activationMode: 'background'
+            authenticationRequired: yes
+            destructive: yes
+            behavior: 'default'
+          - identifier: 'SILENCE_ALARM'
+            title: 'Silence Alarm'
+            activationMode: 'background'
+            authenticationRequired: yes
+            destructive: no
+            behavior: 'textInput'
+            textInputButtonTitle: 'Silencio!'
+            textInputPlaceholder: 'Placeholder'
 
 remote:
   - platform: !secret remote_platform

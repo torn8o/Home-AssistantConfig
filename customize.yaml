@@ -412,3 +412,9 @@ group.garage:
   order: 8
 group.input:
   order: 9
+
+
+  zone.home:
+    track_ios: true
+  zone.torn_work:
+    track_ios: true

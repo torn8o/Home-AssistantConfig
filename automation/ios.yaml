@@ -1,0 +1,98 @@
+  - alias: Notify iOS app
+    trigger:
+      platform: time
+      after: '16:00:00'
+    action:
+      service: notify.ios_torn8o
+      data:
+      #  title: "this a test"
+        #data:
+          message: "Something at home!"
+        #  data:
+        #  subtitle: "Subtitle test here"
+          data:
+            push:
+              badge:
+  - alias: Notify iOS map
+    trigger:
+      platform: time
+      after: '16:00:00'
+    action:
+      service: notify.ios_torn8o
+      data:
+        message: "map test"
+        data:
+          push:
+            category: map
+          action_data:
+            latitude: "40.785091"
+            longitude: "-73.968285"
+
+  - alias: Notify iOS camera
+    trigger:
+      platform: time
+      after: '16:00:00'
+    action:
+      service: notify.notify
+      data:
+        message: Front Door
+        data:
+          push:
+            category: camera
+          entity_id: camera.cam
+
+  - alias: Notify iOS ALARM
+    trigger:
+      platform: time
+      after: '16:00:00'
+    action:
+      service: notify.ios_torn8o
+      data:
+        message: "an alarm"
+        data:
+          push:
+            badge: 5
+            sound: <SOUND FILE HERE>
+            category: "ALARM" # Needs to match the top level identifier you used in the ios configuration
+          action_data: # Anything passed in action_data will get echoed back to Home Assistant.
+            entity_id: light.test
+            my_custom_data: foo_bar
+
+
+  - alias: notify location update
+    trigger:
+      platform: time
+      after: '16:00:00'
+    action:
+      service: notify.ios_torn8o
+      data:
+        message: "request_location_update"
+
+  - alias: Notify iOS alarm2
+    trigger:
+      platform: time
+      after: '16:00:00'
+    action:
+      service: notify.ios_torn8o
+      data:
+        message: "Something happened at home!"
+        data:
+          push:
+            badge:
+            sound: US-EN-Morgan-Freeman-Vacate-The-Premises.wav
+            category: "ALARM" # Needs to match the top level identifier you used in the ios configuration
+          action_data: # Anything passed in action_data will get echoed back to Home Assistant.
+            entity_id: light.test
+            my_custom_data: foo_bar
+
+
+  - alias: Sound the alarm
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: SOUND_ALARM
+    action:
+      service: notify.ios_torn8o
+      data:
+        message: "there should be an alarm"

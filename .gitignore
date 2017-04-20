@@ -49,6 +49,8 @@ __pycache__
 *.sqlite
 *.xml
 *.backup
+*.db-shm
+*.db-wal
 .HA_VERSION
 .uuid
 .sh

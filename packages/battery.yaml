@@ -1,0 +1,122 @@
+###############################################################################
+#   @user           :   torn8o
+#   original Github
+#   https://github.com/skalavala/smarthome
+#   @author         :   Mahasri Kalavala
+#   @date           :   04/15/2017
+#   @package        :   Batteries
+#   @description    :   Status about various baterries (iphones, sensors...etc)
+###############################################################################
+homeassistant:
+  customize:
+    sensor.torn8os_iphone_battery:
+      hidden: True
+    sensor.lynxs_iphone_battery:
+      hidden: True
+
+    sensor.torn8o_iphone_battery:
+      friendly_name: torn8os iPhone Battery
+    sensor.lynx_iphone_battery:
+      friendly_name: lynxs iPhone Battery
+
+
+# Multi Sensor Batteries
+#    sensor.upstairs_multisensor_battery:
+#      friendly_name: Upstairs Multisensor Battery
+#    sensor.downstairs_multisensor_battery:
+#      friendly_name: Downstairs Multisensor Battery
+#    sensor.single_car_garage_door_sensor_battery:
+#      friendly_name: Single Car Garage Door Sensor Battery
+#    sensor.two_car_garage_door_sensor_battery:
+#      friendly_name: Two Car Garage Door Sensor Battery
+#    automation.alert_low_battery_level_of_multisensors:
+#      friendly_name: Alert Low Battery of Multisensors
+#      icon: mdi:battery
+
+sensor:
+  - platform: template
+    sensors:
+      lynx_iphone_battery:
+        unit_of_measurement: '%'
+        entity_id: device_tracker.lynx
+        value_template: "{{ (states.device_tracker.lynx.attributes|default).battery|default|int('unknown') }}"
+        icon_template: >-
+          {% set battery_level = states('sensor.lynx_iphone_battery')|int('unknown') %}
+          {% set battery_round = (battery_level|int / 10)|int * 10 %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+
+  - platform: template
+    sensors:
+      torn8o_iphone_battery:
+        unit_of_measurement: '%'
+        entity_id: device_tracker.torn8o
+        value_template: "{{ (states.device_tracker.torn8o.attributes|default).battery|default|int('unknown') }}"
+        icon_template: >-
+          {% set battery_level = states('sensor.torn8o_iphone_battery')|int('unknown') %}
+          {% set battery_round = (battery_level|int / 10)|int * 10 %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+
+#  - platform: mqtt
+#    state_topic: "owntracks/lynx/lynx"
+#    name: "lynx's iPhone Battery"
+#    unit_of_measurement: "%"
+#    value_template: "{{ value_json.batt }}"
+
+
+#  - platform: mqtt
+#    state_topic: "owntracks/torn8o/torn8o"
+#    name: "torn8o iPhone Battery"
+#    unit_of_measurement: "%"
+#    value_template: "{{ value_json.batt }}"
+
+automation:
+  - alias: Notify Low battery
+    trigger:
+      platform: numeric_state
+      entity_id:
+      - device_tracker.lynx
+      - device_tracker.torn8o
+      value_template: '{{ state.attributes.battery }}'
+      below: 30
+    action:
+      - service: script.notify_me
+        data_template:
+          value1: >
+            {{ trigger.to_state.attributes.friendly_name }}'s phone battery is less than: {{ trigger.to_state.attributes.battery }}%.
+          value2: ""
+
+#  - alias: Alert Low Battery Level of Sensors
+#    trigger:
+#      platform: numeric_state
+#      entity_id:
+#      - sensor.upstairs_multisensor_battery
+#      - sensor.downstairs_multisensor_battery
+#      - sensor.single_car_garage_door_sensor_battery
+#      - sensor.two_car_garage_door_sensor_battery
+#      below: 20
+#    action:
+#      - service: script.notify_me
+#        data_template:
+#          value1: >
+#            Action Required: {{ trigger.to_state.attributes.friendly_name }}'s battery is: {{ trigger.to_state.state }}%.
+#          value2: ""

@@ -1,9 +1,0 @@
-- alias: Hass startup
-  trigger:
-   - platform: homeassistant
-     event: start
-  action:
-    service: notify.notify
-    data:
-      title: "HASS Startup"
-      message: "HASS Startup"

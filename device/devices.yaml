@@ -1,8 +1,8 @@
-- platform: owntracks
-  max_gps_accuracy: 100
-  mac: 78:4F:43:0A:40:C1
-  waypoints: True
-  track: yes
+#- platform: owntracks
+#  max_gps_accuracy: 100
+#  mac: 78:4F:43:0A:40:C1
+#  waypoints: True
+#  track: yes
 #  waypoint_whitelist:
 - platform: netgear
   host: !secret netgear_host

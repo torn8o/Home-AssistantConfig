@@ -1,0 +1,6 @@
+notify_me:
+  sequence:
+    - service: notify.notify
+      data_template:
+        message: "{{ value1 }} {{ value2 }}"
+        title: "{{ value1 }} {{ value2 }}"

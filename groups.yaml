@@ -2,6 +2,7 @@
 ##Groups
 #################################################################
 Default View:
+  icon: mdi:linux mdi:spin
   view: yes
   entities:
     - group.tv_room_2
@@ -70,6 +71,7 @@ weather:
   icon: mdi:weather-cloudy
   entities:
     - group.darksky
+
 den room:
   view: yes
   icon: mdi:xbox-controller
@@ -95,98 +97,81 @@ items:
     - weblink.grafana
     - weblink.pi_hole
     - weblink.sonarr
-#Input:
-#  name: Porch Lights
-#  view: yes
-#  entities:
-#    - light.porch_led
-#    - input_select.porch_led_effect
-#    - input_slider.porch_animation_speed
-Batery_Levels:
-  view: yes
-  name: Battery Levels
-  icon: mdi:battery-charging-30
-  entities:
-    - sensor.torn8o_battery_level
-    - sensor.aeotec_zw100_multisensor_6_battery_level_31_0
-    - sensor.ecolink_doorwindow_sensor_battery_level_19_0
-    - sensor.ecolink_doorwindow_sensor_battery_level_23_0
-    - sensor.everspring_unknown_type0002_id0002_battery_level_15_0
-    - sensor.ecolink_motion_sensor_battery_level_10_0
-    - sensor.ecolink_motion_sensor_battery_level_11_0
-    - sensor.torn8o_battery_level
-fan:
-  view: yes
-  name: Fan living room
-  icon: mdi:lightbulb-outline
-  entities:
-    - input_select.tv_room_fan
 
-tech_info:
-  name: Settings
-  view: yes
-  icon: mdi:server-network
-  entities:
-    - group.Network
+
 All Devices:
   view: yes
   name: Devices
   icon: mdi:bluetooth-transfer
   entities:
-  - group.devices
-family1:
-  view: yes
-  name: Family
-  icon: mdi:security-home
-  entities:
-  - group.family
-#Motion:
-#  view: yes
-#  name: Motion
-#  entities:
-#  - group.Motion_Sensor
+    - group.devices
+
+
 lights:
   name: All Lights
   view: yes
   icon: mdi:lightbulb-outline
   entities:
-  - group.all_switches
-  - group.Lights1
-##Speed:
-#  name: Speed
-#  view: yes
-#  entities:
-#  - group.Network
-#Nzb Get:
-#  view: yes
-#  entities:
-#  - group.seedbox
-#pi-hole:
-#  name: pi-hole
-#  view: yes
-#  entities:
-#  - group.Pi-Hole
+    - group.all_switches
+    - group.Lights1
+
 scripts:
   name: scripts
   view: yes
   entities:
-  - group.all_scripts
-Assistant:
-  name: assistant
-  view: yes
-  entities:
-  - sensor.ha_installed_version
-  - sensor.ha_current_version
-  - sensor.ha_last_restart
+    - group.all_scripts
+#Assistant:
+#  name: assistant
+#  view: yes
+#  entities:
+#    - sensor.ha_installed_version
+#    - sensor.ha_current_version
+#    - sensor.ha_last_restart
 
 Automations:
   name: Automations
   view: yes
   entities:
-  - group.all_automation
-#  - group.kitchen
+    - group.all_automation
+
+MultiSensor:
+  name: MultiSensor
+  view: yes
+  entities:
+    - group.sensor_node_1_card
+
+#family:
+#  view: yes
+#  name: family
+#  icon: mdi-account-switch
+#  entities:
+#    - group.family_group
+
+trash__recycle_schedule:
+  view: yes
+  name: trash and recycle
+  icon: mdi:arrow-right-drop-circle
+  entities:
+    - group.trash__recycle_schedule
+    - group.trash__recycle
+    - group.family_group
+
 ####GROUPS####
+
+Trash & Recycle:
+  entities:
+    - sensor.torn8o_recycle_day
+    - sensor.torn8o_trash_day
+
+Sensor_multi:
+  entities:
+    - sensor.sn1_humidity
+    - sensor.sn1_ldr
+    - sensor.sn1_pir
+    - sensor.sn1_temperature
+
 all scripts:
+  - script.notify_me
   - script.backup_config
   - script.good_morning
   - script.good_night
@@ -198,6 +183,14 @@ all scripts:
   - script.restart_ha
   - script.update_hass
 all automation:
+  - automation.notify_location_update
+  - automation.notify_ios_alarm
+  - automation.notify_ios_alarm2
+  - automation.notify_ios_camera
+  - automation.notify_ios_map
+  - automation.notify_ios_app
+  - automation.trash_and_recycle_pickup_reminder
+  - automation.notify_low_battery
   - automation.hass_startup
   - automation.zwave_network_is_complete
   - automation.mqtt_publish_sensors
@@ -277,12 +270,22 @@ Master Bedroom:
   - switch.ge_12722_on_relay_switch_switch_25_0
   - switch.ge_12722_onoff_relay_switch_switch_25_0
 Sonarr:
-  - sensor.sonarr_disk_space
-  - sensor.sonarr_upcoming
+  - sensor.sonarr_disk_space_2
+  - sensor.sonarr_upcoming_2
   - sensor.ha_installed_version
   - sensor.ha_current_version
   - sensor.ha_last_restart
   - script.update_hass
+family_group:
+  - device_tracker.torn8o
+  #- sensor.torn8o_iphone_battery
+  - sensor.torn8o_battery_level
+  - sensor.torn8o_battery_state
+  - device_tracker.lynx
+  #- sensor.lynx_iphone_battery
+  - sensor.lynx_battery_level
+  - sensor.lynx_battery_state
+
 Garage:
 #  - sensor.attic_door_status
   - sensor.top_door_status
@@ -339,11 +342,6 @@ network:
   - sensor.speedtest_download
   - sensor.speedtest_ping
   - sensor.fastcom_download
-glance:
-  - sensor.glances_sensor_cpu_load
-  - sensor.glances_sensor_disk_use
-  - sensor.glances_sensor_ram_use
-  - sensor.glances_sensor_swap_use
 Nest:
   - climate.hallway
   - sensor.hallway_thermostat_target
@@ -370,11 +368,7 @@ Air Safety:
   - sensor.kitchen_nest_protect_battery_health
 
 
-#Devices BT:
-#  - device_tracker.torn8o_2
-family:
-  - device_tracker.torn8o
-  - device_tracker.torn8o_2
+
 Devices:
   - device_tracker.0021cc4bdaf6
   - device_tracker.3ds
@@ -460,28 +454,13 @@ Hallway:
   - light.unknown_id015d_unknown_type0112_id241c_level_15_0
   - light.zooz_zen22_zwave_plus_dimmer_light_switch_level_6_0
   - light.zooz_unknown_type0112_id241c_level_6_0
-Hallway Motion:
-  - binary_sensor.__sensor_10_0
-  - binary_sensor.__sensor_11_0
-  - binary_sensor.ecolink_pir_motion_sensor_sensor_10_0
-  - binary_sensor.ecolink_pir_motion_sensor_sensor_11_0
+
 Hallway Light:
   - light.hallway_1
   - light.hallway_2
 
-media player:
-  - sensor.torn8oplex
-#kitchen_lights:
-#  - light.hallway_1
-#  - light.hallway_2
-#  - light.ge_12724_3way_dimmer_switch_level_9_0
 
-#  - light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0
 
-Seedbox:
-  - sensor.nzbget_article_cache
-  - sensor.nzbget_download_paused
-  - sensor.nzbget_speed
 darksky:
   - sensor.dark_sky_apparent_temperature
   - sensor.dark_sky_cloud_coverage
@@ -507,12 +486,12 @@ darksky:
   - sensor.dark_sky_visibility
   - sensor.dark_sky_wind_bearing
   - sensor.dark_sky_wind_speed
-Pi-Hole:
-  - sensor.pihole
-  - sensor.pihole_ads_blocked_today
-  - sensor.pihole_domains_blocked
-  - sensor.pihole_percentage_today
-  - sensor.pihole_dns_queries_today
+#Pi-Hole:
+#  - sensor.pihole
+#  - sensor.pihole_ads_blocked_today
+#  - sensor.pihole_domains_blocked
+#  - sensor.pihole_percentage_today
+#  - sensor.pihole_dns_queries_today
 kitchen motion:
   - binary_sensor.hallway_presence
   - sensor.aeotec_zw100_multisensor_6_burglar_31_10
@@ -527,14 +506,7 @@ Christmas lights:
 Led lights:
   - light.steps
   - light.cabinet_lights
-Color lights:
-  - light.tv_color_lights
-  - light.tv_color_lights1
-Color all lights:
-  - light.tv_color_lights
-  - light.tv_color_lights1
-  - light.cabinet_lights
-  - light.steps
+
 temperature:
   - sensor.hallway_thermostat_temperature
   - sensor.aeotec_zw100_multisensor_6_temperature_31_1
