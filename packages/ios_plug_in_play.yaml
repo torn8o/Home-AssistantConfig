@@ -30,8 +30,8 @@ ios:
             title: 'Silence Alarm'
             activationMode: 'background'
             authenticationRequired: yes
-            destructive: no
-            behavior: 'textInput'
+            destructive: yes #no
+            behavior: 'default' #'textInput'
             textInputButtonTitle: 'Silencio!'
             textInputPlaceholder: 'Placeholder'
 
@@ -42,6 +42,7 @@ group: # will add a view on the main tab of home assistant
     entities:
       - automation.Notify_iOS_Actionable_Notifications
       - automation.sound_the_alarm
+      - automation.SILENCE_ALARM
 
 automation:
   - alias: Notify iOS Actionable Notifications
@@ -51,6 +52,7 @@ automation:
     action:
       service: notify.ios_torn8o #change to your ios device name or group
       data:
+        title: "title area"
         message: "3d press for options"
         data:
           push:
@@ -71,4 +73,15 @@ automation:
     action:
       service: notify.ios_torn8o #change to your ios device name
       data:
-        message: "another window should show up"
+        message: "window for sound of alarm"
+
+  - alias: silence alarm
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: SILENCE_ALARM
+    action:
+      service: notify.ios_torn8o #change to your ios device name
+      data:
+        message: "window for silence alarm"
