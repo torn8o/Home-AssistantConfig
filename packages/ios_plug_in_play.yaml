@@ -1,3 +1,13 @@
+###############################################################################
+#   @user           :
+#   original Github
+#   https://github.com/torn8o/Home-AssistantConfig
+#   @author         :   torn8o
+#   @date           :   04/21/2017
+#   @package        :   Ios plug and play
+#   @description    :   Example to understand Actionable Notifications for IOS
+###############################################################################
+
 
 homeassistant:
   customize:
@@ -25,7 +35,7 @@ ios:
             textInputButtonTitle: 'Silencio!'
             textInputPlaceholder: 'Placeholder'
 
-group:
+group: # will add a view on the main tab of home assistant
   ios_test:
     name: ios_test
     view: yes
