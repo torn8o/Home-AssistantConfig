@@ -73,26 +73,6 @@ emulated_hue:
     - switch
     - light
 
-ios:
-  push:
-    categories:
-      - name: Alarm
-        identifier: 'ALARM'
-        actions:
-          - identifier: 'SOUND_ALARM'
-            title: 'Sound Alarm'
-            activationMode: 'background'
-            authenticationRequired: yes
-            destructive: yes
-            behavior: 'default'
-          - identifier: 'SILENCE_ALARM'
-            title: 'Silence Alarm'
-            activationMode: 'background'
-            authenticationRequired: yes
-            destructive: no
-            behavior: 'textInput'
-            textInputButtonTitle: 'Silencio!'
-            textInputPlaceholder: 'Placeholder'
 
 remote:
   - platform: !secret remote_platform
@@ -166,10 +146,11 @@ device_tracker: !include_dir_merge_list device
 light: !include_dir_merge_list light
 #media_player: !include_dir_merge_list media_player
 notify: !include_dir_merge_list notify
+#ios: !include_dir_merge_list ios
 #scene: !include_dir_merge_list scene
 sensor: !include_dir_merge_list sensors
 switch: !include_dir_merge_list switches
-zone: !include_dir_merge_list zone
+#zone: !include_dir_merge_list zone
 
 ################################################
 ## Component Includes (Merge Named)

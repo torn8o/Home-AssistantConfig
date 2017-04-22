@@ -1,0 +1,64 @@
+
+homeassistant:
+  customize:
+    sensor.torn8os_iphone_battery:
+      hidden: True
+
+ios:
+  push:
+    categories:
+      - name: Alarm
+        identifier: 'ALARM'
+        actions:
+          - identifier: 'SOUND_ALARM'
+            title: 'Sound Alarm'
+            activationMode: 'background'
+            authenticationRequired: yes
+            destructive: yes
+            behavior: 'default'
+          - identifier: 'SILENCE_ALARM'
+            title: 'Silence Alarm'
+            activationMode: 'background'
+            authenticationRequired: yes
+            destructive: no
+            behavior: 'textInput'
+            textInputButtonTitle: 'Silencio!'
+            textInputPlaceholder: 'Placeholder'
+
+group:
+  ios_test:
+    name: ios_test
+    view: yes
+    entities:
+      - automation.Notify_iOS_Actionable_Notifications
+      - automation.sound_the_alarm
+
+automation:
+  - alias: Notify iOS Actionable Notifications
+    trigger:
+      platform: time
+      after: '16:00:00'
+    action:
+      service: notify.ios_torn8o #change to your ios device name or group
+      data:
+        message: "3d press for options"
+        data:
+          push:
+            badge: 0
+            sound: US-EN-Morgan-Freeman-Vacate-The-Premises.wav
+            category: "ALARM" # Needs to match the top level identifier you used in the ios configuration
+          action_data: # Anything passed in action_data will get echoed back to Home Assistant.
+            entity_id: camera.cam
+            my_custom_data: foo_bar
+
+
+  - alias: Sound the alarm
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: SOUND_ALARM
+    action:
+      service: notify.ios_torn8o #change to your ios device name
+      data:
+        message: "another window should show up"

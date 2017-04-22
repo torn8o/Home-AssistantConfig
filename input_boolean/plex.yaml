@@ -1,4 +1,20 @@
-  plex_lights_disable:
-    name: Disable Plex Lights
-    initial: off
-    icon: mdi:filmstrip-off
+#  plex_lights_disable:
+#    name: Disable Plex Lights
+#    initial: off
+#    icon: mdi:filmstrip-off
+#3################################################################
+## Input_boolean
+#################################################################
+
+  show_all_automations:
+    name: Show all Automations
+    initial: on
+    icon: mdi:security
+#  startrecording:
+#    name: Camera Recording
+#    initial: off
+#    icon: mdi:record-rec
+#  alokhome:
+#    name: Alok Home
+#    initial: on
+#    icon: mdi:cellphone-iphone

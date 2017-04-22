@@ -2,7 +2,7 @@
 ##Groups
 #################################################################
 Default View:
-  icon: mdi:linux mdi:spin
+  icon: mdi:linux
   view: yes
   entities:
     - group.tv_room_2
@@ -70,6 +70,7 @@ weather:
   name: darksky
   icon: mdi:weather-cloudy
   entities:
+    - input_boolean.show_all_automations
     - group.darksky
 
 den room:
@@ -155,9 +156,14 @@ trash__recycle_schedule:
     - group.trash__recycle_schedule
     - group.trash__recycle
     - group.family_group
+    - group.control
 
 ####GROUPS####
-
+control:
+  entities:
+    - automation.Notify_iOS_Actionable_Notifications
+    - automation.automation_hidden
+    - automation.automation_show
 Trash & Recycle:
   entities:
     - sensor.torn8o_recycle_day
@@ -183,6 +189,8 @@ all scripts:
   - script.restart_ha
   - script.update_hass
 all automation:
+  - automation.automation_hidden
+  - automation.automation_show
   - automation.notify_location_update
   - automation.notify_ios_alarm
   - automation.notify_ios_alarm2

@@ -150,10 +150,10 @@ sensor:
         value_template: >-
           {{ as_timestamp((states.automation.startup_notification.attributes|default).last_triggered|default(None))|timestamp_custom("%b %d %X") or 'unknown' }}
 
-  - platform: command_line
-    name: ha_version
-    command: >-
-      cat $HASS_CONFIG/.HA_VERSION
+  #- platform: command_line
+  #  name: ha_version
+  #  command: >-
+  #    cat $HASS_CONFIG/.HA_VERSION
 
   - platform: rest
     name: ha_github_version
