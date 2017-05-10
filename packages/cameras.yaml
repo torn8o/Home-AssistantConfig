@@ -1,0 +1,145 @@
+# CAMERA MOTION PACKAGE
+# Leverage cameras as motion sensors to trigger notifications, automations, etc
+#----------------------------------------------------------------
+
+group:
+#----------------------------------------------------------------
+  motion_outdoor_camera_all:
+    name: Motion Outdoor (Camera)
+    view: no
+    icon: mdi:camcorder
+    entities:
+    - sensor.motion_front_door
+
+  motion_indoor_camera_all:
+    name: Motion Indoor (Camera)
+    view: yes
+    icon: mdi:camcorder
+    entities:
+    - binary_sensor.motion_dining_room
+    - binary_sensor.motion_front_door
+    - sensor.motion_dining_room2
+    - sensor.motion_front_door2
+    - camera.dining_room
+    - camera.front_door
+
+
+sensor:
+#----------------------------------------------------------------
+
+  # MOTION SENSORS
+  # Blue Iris performs rest calls when motion is detected and when it stops
+  # This dynamically creates the sensors - so no motion detected means
+  # no binary sensor and no state to display or use in an automation.  The
+  # sensors below compensate for this.
+  #----------------------------------------------------------------
+  - platform: template
+    sensors:
+      motion_dining_room:
+        friendly_name: 'dining Room'
+        value_template: >-
+          {% if states.binary_sensor.motion_dining_room.state %}
+            {% if is_state('binary_sensor.motion_dining_room', 'on') %}
+              On
+            {% elif is_state('binary_sensor.motion_dining_room', 'off') %}
+              Off
+            {% else %}
+              {{ states('binary_sensor.motion_dining_room') }}
+            {% endif %}
+          {% else %}
+            Off
+          {% endif %}
+
+  - platform: template
+    sensors:
+      motion_front_door:
+        friendly_name: 'front door'
+        value_template: >-
+          {% if states.binary_sensor.motion_front_door.state %}
+            {% if is_state('binary_sensor.motion_front_door', 'on') %}
+              On
+            {% elif is_state('binary_sensor.motion_front_door', 'off') %}
+              Off
+            {% else %}
+              {{ states('binary_sensor.motion_front_door') }}
+            {% endif %}
+          {% else %}
+            Off
+          {% endif %}
+  - platform: template
+    sensors:
+      motion_dining_room2:
+        friendly_name: 'dining Room'
+        value_template: >-
+          {% if states.sensor.motion_dining_room.state %}
+            {% if is_state('sensor.motion_dining_room', 'on') %}
+              On
+            {% elif is_state('sensor.motion_dining_room', 'off') %}
+              Off
+            {% else %}
+              {{ states('sensor.motion_dining_room') }}
+            {% endif %}
+          {% else %}
+            Off
+          {% endif %}
+
+  - platform: template
+    sensors:
+      motion_front_door2:
+        friendly_name: 'front door'
+        value_template: >-
+          {% if states.sensor.motion_front_door.state %}
+            {% if is_state('sensor.motion_front_door', 'on') %}
+              On
+            {% elif is_state('sensor.motion_front_door', 'off') %}
+              Off
+            {% else %}
+              {{ states('sensor.motion_front_door') }}
+            {% endif %}
+          {% else %}
+            Off
+          {% endif %}
+
+
+  # SUMMARY
+  #----------------------------------------------------------------
+  - platform: template
+    sensors:
+      motion:
+        friendly_name: Motion
+        unit_of_measurement: 'On'
+        value_template: >
+          {% set total = 0 %}
+
+          {% if is_state('sensor.blueiris_kitchen', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+          {% if is_state('binary_sensor.motion_dining_room', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+          {% if is_state('sensor.motion_front_door', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+          {% if is_state('binary_sensor.motion_front_door', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+          {% if is_state('sensor.motion_dining_room', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+          {% if is_state('sensor.blueiris_theater', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+          {% if is_state('sensor.blueiris_bedroom', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+          {% if is_state('sensor.blueiris_driveway_front', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+          {% if is_state('sensor.blueiris_driveway_rear', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+          {% if is_state('sensor.blueiris_front_doors', 'on') %}
+            {% set total = total + 1 %}
+          {% endif %}
+
+          {{total}}

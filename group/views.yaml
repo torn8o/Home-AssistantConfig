@@ -1,0 +1,134 @@
+playlist:
+  name: Radio
+  entities:
+    - group.Home_crimereports
+    - input_select.radio_station_location
+    - input_select.radio_station
+    - input_slider.volume_radio
+
+camera:
+  view: yes
+  icon: mdi:camera
+  name: Camera Front Door
+  entities:
+    - camera.cam
+    - camera.cam_indoor
+    - camera.interior_motion
+    - group.kitchen_lights
+    - switch.ge_12722_onoff_relay_switch_switch_28_0
+    - automation.motion_detected
+tv_room:
+  view: yes
+  icon: mdi:television
+  name: TV Room
+  entities:
+    - group.tv_room
+    - automation.turn_theater_lights_to_80_on_motion_if_no_activity
+    - automation.turn_tv_lights_if_no_activity
+    - script.timed_theater_lights
+    - script.theater_lights_
+    - group.tv_room_temp
+master_bedroom:
+  view: yes
+  name: Master Bedroom
+  icon: mdi:hotel
+  entities:
+    - group.master_bedroom
+
+weather:
+  view: yes
+  name: darksky
+  icon: mdi:weather-cloudy
+  entities:
+    - input_boolean.show_all_automations
+    - group.darksky
+Fan:
+  view: yes
+  icon: mdi:fan
+  name: Fan
+  entities:
+    - switch.fan_speed_low
+    - switch.fan_speed_medium
+    - switch.fan_speed_high
+    - switch.fan_speed_off
+
+den room:
+  view: yes
+  icon: mdi:xbox-controller
+  name: Game Room
+  entities:
+    - group.game_room
+items:
+  name: items
+  entities:
+    - sensor.average_house_temp
+    - automation.mqtt_publish_sensors
+    - sensor.gas_price
+    - sensor.esp_92eba2
+    - sensor.esp_122131
+    - sensor.vizio_tv
+    - sensor.broadlink
+    - sensor.harmony_hub
+    - remote.torn_hub
+    - switch.living_room_curtain_open
+    - switch.living_room_curtain_close
+    - switch.living_room_curtain_stop
+    - sensor.torn8o_battery_level
+    - weblink.grafana
+    - weblink.pi_hole
+    - weblink.sonarr
+
+All Devices:
+  view: yes
+  name: Devices
+  icon: mdi:bluetooth-transfer
+  entities:
+    - group.devices
+
+lights:
+  name: All Lights
+  view: yes
+  icon: mdi:lightbulb-outline
+  entities:
+    - group.all_lights
+
+scripts:
+  name: scripts
+  icon: mdi:prescription
+  view: yes
+  entities:
+    - group.all_scripts
+
+Automations:
+  name: Automations
+  icon: mdi:autorenew
+  view: yes
+  entities:
+    - group.all_automation
+
+MultiSensor:
+  name: MultiSensor
+  icon: mdi:pulse
+  view: yes
+  entities:
+    - group.sensor_node_1_card
+
+Motion:
+  name: Motion
+#  icon: mdi:motion
+  view: yes
+  entities:
+    - sensor.back_motion_status
+    - sensor.front_motion_status
+    - sensor.kitchen_multi_sensor_burglar_31_10
+    - sensor.tv_room_multi_sensor_burglar_32_10
+
+trash__recycle_schedule:
+  view: yes
+  name: trash and recycle
+  icon: mdi:recycle
+  entities:
+    - group.trash__recycle_schedule
+    - group.trash__recycle
+    - group.family_group
+    - group.control

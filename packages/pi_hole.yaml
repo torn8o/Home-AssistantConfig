@@ -1,0 +1,115 @@
+###############################################################################
+#                   :   modified from author below
+#   @author         :   Mahasri Kalavala
+#   @date           :   04/15/2017
+#   @package        :   Pi-Hole Package
+#   @description    :   Pi-Hole Ad Blocking Stuff.
+#                       Remember to add PiHole URL in your secrets.yaml file.
+#                       http://192.168.x.xx/admin/api.php
+###############################################################################
+homeassistant:
+  customize:
+
+
+    sensor.ads_percentage_today:
+      friendly_name: Percentage of Ad Traffic Blocked
+      unit_of_measurement: '%'
+      icon: mdi:ticket-percent
+
+    sensor.domains_being_blocked:
+      friendly_name: Total Domains Blocking
+      icon: mdi:do-not-disturb
+
+    sensor.ads_blocked_today:
+      friendly_name: Ads Blocked Today
+      icon: mdi:do-not-disturb
+
+    sensor.dns_queries_today:
+      friendly_name: DNS Queries Today
+      icon: mdi:note-text
+
+    sensor.unique_domains:
+      friendly_name: Unique Domains
+      icon: mdi:note-text
+
+    sensor.queries_forwarded:
+      friendly_name: Queries Forwarded
+      icon: mdi:note-text
+
+    sensor.queries_cached:
+      friendly_name: Queries Cached
+      icon: mdi:note-text
+
+
+
+group:
+  blocked:
+    name: Blocked
+    view: yes
+    icon: mdi:do-not-disturb
+    entities:
+      - group.ads_blocked
+      
+  Ads Blocked:
+      - sensor.dns_queries_today
+      - sensor.domains_being_blocked
+      - sensor.ads_blocked_today
+      - sensor.ads_percentage_today
+      - sensor.unique_domains
+      - sensor.queries_forwarded
+      - sensor.queries_cached
+
+###############################################################################
+#  Sensors
+###############################################################################
+sensor:
+  - platform: rest
+    name: dns_queries_today
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.dns_queries_today }}'
+
+  - platform: rest
+    name: domains_being_blocked
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.domains_being_blocked }}'
+
+  - platform: rest
+    name: ads_blocked_today
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.ads_blocked_today }}'
+
+  - platform: rest
+    name: ads_percentage_today
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.ads_percentage_today }}'
+
+  - platform: rest
+    name: unique_domains
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.unique_domains }}'
+
+  - platform: rest
+    name: queries_forwarded
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.queries_forwarded }}'
+
+  - platform: rest
+    name: queries_cached
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.queries_cached }}'
+
+###############################################################################
+#  Automations unique_domains
+###############################################################################
+automation:
+  - alias: Thousand Ads blocked
+    initial_state: true
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.ads_blocked_today
+      above: 999
+    action:
+      - service: script.notify_me
+        data_template:
+          value1: "Pi-Hole blocked 1000 Ads today! Hurray!!!"
+          value2: ""

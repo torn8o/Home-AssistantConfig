@@ -1,0 +1,7 @@
+- platform: template
+  name: "Average Living Room Temp"
+  sensors:
+    average_living_room_temp:
+          unit_of_measurement: "°F"
+          value_template: >-
+            {{ ((float(states.sensor.tv_room_multi_sensor_temperature_32_1.state) + float(states.sensor.broadlink_torn_temperature.state) + float(states.sensor.living_room_temperature.state)) / 3) | round(1) }}

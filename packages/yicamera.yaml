@@ -1,0 +1,31 @@
+  sensor:
+  - platform: mqtt
+    state_topic: "homeassistant/motion"
+    name: "DR Motion Detection"
+    unit_of_measurement: "Date"
+    value_template: '{{ value_json.date ~ "\n" ~ value_json.time }}'
+
+#Set up an automation to send notifications based on published messages:
+#the condition here is used to only send notifications when i'm not home.
+#for example:
+  automation:
+  - alias: 'motion detected'
+    trigger:
+      platform: mqtt
+      topic: 'homeassistant/motion'
+    condition:
+      - condition: state
+        entity_id: device_tracker.torn8o
+        state: 'not_home'
+    action:
+      service: notify.ios_torn8o
+      data_template:
+        message: "motion detected: {{ trigger.payload_json['camera'] ~ ' ' ~ trigger.payload_json['time'] ~ ' ' ~ trigger.payload_json['date'] }}"
+        service: notify.ios_torn8o #change to your ios device name or group
+        data:
+          title: "door"
+          message: "front door motion test"
+          data:
+            push:
+              category: camera
+            entity_id: camera.cam

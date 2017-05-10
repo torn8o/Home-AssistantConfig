@@ -4,11 +4,11 @@
 #  waypoints: True
 #  track: yes
 #  waypoint_whitelist:
-- platform: netgear
-  host: !secret netgear_host
-  username: !secret netgear_username
-  password: !secret netgear_password
-  port: 80
+#- platform: netgear
+#  host: !secret netgear_host
+#  username: !secret netgear_username
+#  password: !secret netgear_password
+#  port: 80
 #  track_new_devices: false
 
 - platform: nmap_tracker

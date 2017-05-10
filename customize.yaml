@@ -7,6 +7,9 @@
 #binary_sensor.frontdoorswitch_sensor_3:
 #  friendly_name: Front Door
 #  type: opening
+sensor.average_living_room_temp:
+  friendly_name: Average TV Room Temp
+
 sensor.download_speed_mean:
   friendly_name: 'Speedtest Download Average'
   icon: mdi:speedometer
@@ -213,6 +216,10 @@ light.unknown_id015d_unknown_type0112_id241c_level_31_0:
   friendly_name: Kitchen Bar Lights
   refresh_value: true
   delay: 4
+sensor.everspring_unknown_type0002_id0002_alarm_type_15_0:
+  friendly_name: Door Tamper
+  refresh_value: true
+
 sensor.aeotec_zw100_multisensor_6_alarm_level_31_1:
   haaska_hidden: true
   friendly_name: Kitchen alarm_level
@@ -292,11 +299,13 @@ light.hallway_2:
   haaska_hidden: true
   persistent: true
 light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0:
+#zwave.__8:
   haaska_hidden: true
   friendly_name: Master bedroom Fan
   persistent: true
   icon: mdi:lightbulb
 switch.ge_12722_onoff_relay_switch_switch_28_0:
+#zwave.__28:
   haaska_hidden: true
   friendly_name: Front Lights
   persistent: true
@@ -304,11 +313,13 @@ switch.ge_12722_onoff_relay_switch_switch_28_0:
   refresh_value: true
   delay: 4
 switch.leviton_unknown_type1d04_id0334_switch_17_0:
+#zwave.__17:
   haaska_hidden: true
   friendly_name: Christmas Angel
   persistent: true
   icon: mdi:lightbulb
 switch.ge_12722_onoff_relay_switch_switch_13_0:
+#zwave.__13:
   haaska_hidden: true
   friendly_name: Master bedroom Fan Light
   persistent: true
@@ -316,6 +327,7 @@ switch.ge_12722_onoff_relay_switch_switch_13_0:
   refresh_value: true
   delay: 4
 switch.fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0:
+#zwave.__2:
   haaska_hidden: true
   friendly_name: Garage Door opener
   persistent: true
@@ -328,6 +340,7 @@ light.zooz_zen22_zwave_plus_dimmer_light_switch_level_3_0:
   refresh_value: true
   delay: 4
 light.zooz_unknown_type0112_id241c_level_3_0:
+#zwave.__3:
   haaska_hidden: true
   friendly_name: Attic Lights
   persistent: true
@@ -340,32 +353,37 @@ light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0:
   friendly_name: Kitchen Bar Lights
   refresh_value: true
   delay: 4
-light.zooz_unknown_type0112_id241c_level_5_0:
+light.kitchen_bar_lights_level_5_0:
+#zwave.__5:
   friendly_name: Kitchen Bar
   persistent: true
   icon: mdi:lightbulb
   refresh_value: true
   delay: 4
-light.ge_12724_3way_dimmer_switch_level_16_0:
+#light.ge_12724_3way_dimmer_switch_level_16_0:
+light.tv_room_light_level_16_0:
+#zwave.__16:
   haaska_hidden: true
   friendly_name: TV room Light
   persistent: true
   icon: mdi:lightbulb
   refresh_value: true
   delay: 4
-light.ge_12724_3way_dimmer_switch_level_9_0:
+light.kitchen_light_level_9_0:
+#zwave.__9:
   haaska_hidden: true
   friendly_name: Kitchen Light
   persistent: true
   icon: mdi:lightbulb
   refresh_value: true
-  delay: 2
+  delay: 1
 light.steps:
   haaska_hidden: true
   friendly_name: Step Lights
   persistent: true
   icon: mdi:lightbulb
 switch.ge_12722_onoff_relay_switch_switch_25_0:
+#zwave.__25:
   haaska_hidden: true
   friendly_name: Master Bedroom Hallway Light
   persistent: true
@@ -373,6 +391,7 @@ switch.ge_12722_onoff_relay_switch_switch_25_0:
   refresh_value: true
   delay: 4
 light.zooz_zen22_zwave_plus_dimmer_light_switch_level_6_0:
+#zwave.__6:
   haaska_hidden: true
   friendly_name: Front entry
   persistent: true
@@ -386,6 +405,8 @@ switch.game_room_fan:
 switch.game_room_light:
   persistent: true
 
+sensor.broadlink_torn_temperature:
+  friendly_name: TV Room Temperature
 
 #light.unknown_id015d_unknown_type0112_id241c_level_21_0:
 #  friendly_name: Kitchen Fan
@@ -394,7 +415,7 @@ switch.game_room_light:
 #  friendly_name: Kitchen Light
 #  icon: mdi:lightbulb
 # HOME
-group.tv_room_2:
+group.tv_room:
   order: 1
 group.kitchen_lights:
   order: 2

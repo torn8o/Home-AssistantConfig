@@ -7,7 +7,7 @@ homeassistant:
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
-  time_zone: America/Chicago
+  time_zone: America/New_York
   unit_system: imperial
   customize: !include customize.yaml
 
@@ -56,9 +56,11 @@ mqtt:
   username: !secret mqtt_user
   password: !secret mqtt_pass
 
-#influxdb:
-#  database: !secret influxdb_database
-#  host: !secret influxdb_host
+influxdb:
+  database: !secret influxdb_database
+  host: !secret influxdb_host
+  username:  influxdb_user
+  password: influxdb_password
 
 
 emulated_hue:
@@ -100,13 +102,13 @@ camera:
 
 recorder:
   purge_days: 3
-#  exclude:
-#    domains:
-#      - automation
-#      - weblink
-#      - updater
-#    entities:
-#      - sun.sun   # Don't record sun data
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - updater
+    entities:
+      - sun.sun   # Don't record sun data
 #zwave:
 #  device_config: !include zwave_device_config.yaml
 
@@ -125,7 +127,7 @@ weblink:
 #icloud: !include icloud.yaml
 logger: !include logger.yaml
 zwave: !include zwave.yaml
-group: !include groups.yaml
+#group: !include groups.yaml
 
 ################################################
 ## Component Includes (Named)
@@ -150,13 +152,13 @@ notify: !include_dir_merge_list notify
 #scene: !include_dir_merge_list scene
 sensor: !include_dir_merge_list sensors
 switch: !include_dir_merge_list switches
-#zone: !include_dir_merge_list zone
+zone: !include_dir_merge_list zone
 
 ################################################
 ## Component Includes (Merge Named)
 ################################################
 
-#group: !include_dir_merge_named group
+group: !include_dir_merge_named group
 #input_boolean: !include_dir_merge_named input_boolean
 input_select: !include_dir_merge_named input_select
 input_slider: !include_dir_merge_named input_slider

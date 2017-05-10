@@ -4,14 +4,6 @@
         friendly_name: 'Vizio TV'
         value_template: "{{ 'Online' if is_state('device_tracker.vizio_tv', 'home') else 'Offline' }}"
 
-     esp_92eba2:
-        friendly_name: 'NodeMcu'
-        value_template: "{{ 'Online' if is_state('device_tracker.esp_92eba2', 'home') else 'Offline' }}"
-
-     esp_122131:
-        friendly_name: 'NodeMcu front lights'
-        value_template: "{{ 'Online' if is_state('device_tracker.esp_122131', 'home') else 'Offline' }}"
-
      broadlink:
         friendly_name: 'Broadlink'
         value_template: "{{ 'Online' if is_state('device_tracker.broadlink', 'home') else 'Offline' }}"

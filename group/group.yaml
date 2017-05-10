@@ -1,0 +1,233 @@
+####GROUPS####
+control:
+  entities:
+    - automation.Notify_iOS_Actionable_Notifications
+    - automation.automation_hidden
+    - automation.automation_show
+
+Trash & Recycle:
+  entities:
+    - sensor.torn8o_recycle_day
+    - sensor.torn8o_trash_day
+    - sensor.broadlink_torn_temperature
+Motion:
+  entities:
+    - sensor.back_motion_status
+    - sensor.front_motion_status
+    - sensor.kitchen_multi_sensor_burglar_31_10
+    - sensor.tv_room_multi_sensor_burglar_32_10
+Sensor_multi:
+  entities:
+    - sensor.sn1_humidity
+    - sensor.sn1_ldr
+    - sensor.sn1_pir
+    - sensor.sn1_temperature
+Tv room temp:
+  entities:
+   - sensor.tv_room_multi_sensor_temperature_32_1
+   - sensor.living_room_temperature
+   - sensor.broadlink_torn_temperature
+
+game room:
+  - switch.game_room_fan
+  - switch.game_room_light
+  - binary_sensor.game_room_presence
+  - sensor.game_room_humidity
+  - sensor.game_room_proximity
+  - sensor.game_room_temperature
+
+Kitchen Lights:
+  - light.kitchen_light_level_9_0
+  - light.ge_12724_3way_dimmer_switch_level_9_0
+  - light.zooz_unknown_type0112_id241c_level_5_0
+  - light.kitchen_bar_lights_level_5_0
+  - light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0
+  - camera.cam
+
+Master Bedroom:
+  - switch.ge_12722_on_relay_switch_switch_13_0
+  - switch.ge_12722_onoff_relay_switch_switch_13_0
+  - light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0
+  - light.master_bedroom_fan_level_8_0
+  - switch.master_bedroom_light
+  - switch.master_bathroom_fan
+  - switch.master_bathroom_light
+#  - sensor.master_bedroom_humidity
+  - sensor.master_bedroom_proximity
+  - sensor.master_bedroom_temperature
+  - binary_sensor.master_bedroom_presence
+  - switch.ge_12722_on_relay_switch_switch_25_0
+  - switch.ge_12722_onoff_relay_switch_switch_25_0
+
+Sonarr:
+  - sensor.sonarr_disk_space_2
+  - sensor.sonarr_upcoming_2
+  - sensor.ha_installed_version
+  - sensor.ha_current_version
+  - sensor.ha_last_restart
+  - script.update_hass
+
+family_group:
+  - device_tracker.torn8o
+  #- sensor.torn8o_iphone_battery
+  - sensor.torn8o_battery_level
+  - sensor.torn8o_battery_state
+  - device_tracker.lynx
+  #- sensor.lynx_iphone_battery
+  - sensor.lynx_battery_level
+  - sensor.lynx_battery_state
+
+Door bell sensor:
+  entities:
+    - binary_sensor.door_bell_sensor_23_0
+    - zwave.door_bell_23
+    - binary_sensor.kitchen_door_sensor_35_0
+    - zwave.kitchen_door_35
+    - binary_sensor.window_sensor_sensor_14_0
+    - sensor.window_sensor_alarm_level_14_1
+    - sensor.window_sensor_alarm_type_14_0
+
+Garage:
+  - sensor.top_door_status
+  - sensor.a_door_status
+  - light.attic_lights_level_3_0
+  - sensor.garage_door_status
+  - binary_sensor.garage_door_opener_sensor_2_0
+
+network:
+  - sensor.speedtest_upload
+  - sensor.speedtest_download
+  - sensor.speedtest_ping
+  - sensor.fastcom_download
+
+Nest:
+  - climate.hallway
+  - sensor.hallway_thermostat_target
+  - sensor.hallway_thermostat_temperature
+  - binary_sensor.hallway_presence
+  - sensor.hallway_temperature
+  - sensor.hallway_thermostat_humidity
+  - sensor.hallway_thermostat_operation_mode
+  - binary_sensor.hallway_thermostat_fan
+  - binary_sensor.hallway_thermostat_has_leaf
+  - binary_sensor.hallway_thermostat_is_locked
+  - binary_sensor.hallway_thermostat_is_using_emergency_heat
+  - binary_sensor.hallway_thermostat_online
+
+Air Safety:
+  - binary_sensor.hallway_nest_protect_online
+  - sensor.hallway_nest_protect_smoke_status
+  - sensor.hallway_nest_protect_co_status
+  - sensor.hallway_nest_protect_battery_level_2
+  - sensor.hallway_nest_protect_battery_health
+  - binary_sensor.kitchen_nest_protect_online
+  - sensor.kitchen_nest_protect_smoke_status
+  - sensor.kitchen_nest_protect_co_status
+  - sensor.kitchen_nest_protect_battery_level
+  - sensor.kitchen_nest_protect_battery_health
+
+tv room:
+  - sensor.average_living_room_temp
+  - light.tv_room_light_level_16_0
+  - switch.cable_modem_switch_22_0
+  - switch.plex_server_power
+  - switch.ge_12722_on_relay_switch_switch_16_0
+  - light.ge_12724_3way_dimmer_switch_level_16_0
+  - switch.fan_
+  - switch.tv_room_fan
+  - light.cabinet_lights
+  - switch.deck_motion
+  - switch.deck_flood_lights
+  - light.tv_color_lights
+  - light.tv_color_lights1
+  - switch.flood_lights
+  - media_player.xboxtorn
+  - input_select.fan_speed
+
+Fan:
+  entities:
+    - switch.fan_speed_high
+    - switch.fan_speed_low
+    - switch.fan_speed_medium
+    - switch.fan_speed_off
+Hallway:
+  - switch.bottom_light_load
+  - binary_sensor.hallway_presence
+  - sensor.Hallway_proximity
+  - sensor.Hallway_temperature
+  - sensor.Hallway_humidity
+  - binary_sensor.ecolink_pir_motion_sensor_sensor_10_0
+  - binary_sensor.ecolink_pir_motion_sensor_sensor_11_0
+  - light.unknown_id015d_unknown_type0112_id241c_level_15_0
+  - light.zooz_zen22_zwave_plus_dimmer_light_switch_level_6_0
+  - light.zooz_unknown_type0112_id241c_level_6_0
+
+Hallway Light:
+  - light.hallway_1
+  - light.hallway_2
+
+darksky:
+  - sensor.dark_sky_apparent_temperature
+  - sensor.dark_sky_cloud_coverage
+  - sensor.dark_sky_daily_high_apparent_temperature
+  - sensor.dark_sky_daily_high_temperature
+  - sensor.dark_sky_daily_low_apparent_temperature
+  - sensor.dark_sky_daily_low_temperature
+  - sensor.dark_sky_daily_max_precip_intensity
+  - sensor.dark_sky_daily_summary
+  - sensor.dark_sky_dew_point
+  - sensor.dark_sky_hourly_summary
+  - sensor.dark_sky_humidity
+  - sensor.dark_sky_icon
+  - sensor.dark_sky_nearest_storm_bearing
+  - sensor.dark_sky_nearest_storm_distance
+  - sensor.dark_sky_ozone
+  - sensor.dark_sky_precip
+  - sensor.dark_sky_precip_intensity
+  - sensor.dark_sky_precip_probability
+  - sensor.dark_sky_pressure
+  - sensor.dark_sky_summary
+  - sensor.dark_sky_temperature
+  - sensor.dark_sky_visibility
+  - sensor.dark_sky_wind_bearing
+  - sensor.dark_sky_wind_speed
+#Pi-Hole:
+#  - sensor.pihole
+#  - sensor.pihole_ads_blocked_today
+#  - sensor.pihole_domains_blocked
+#  - sensor.pihole_percentage_today
+#  - sensor.pihole_dns_queries_today
+
+kitchen motion MultiSensor:
+  entities:
+    - sensor.kitchen_multi_sensor_burglar_31_10
+    - sensor.tv_room_multi_sensor_burglar_32_10
+
+binary motion:
+  - binary_sensor.kitchen_multi_sensor_sensor_31_0
+  - binary_sensor.tv_room_multi_sensor_sensor_32_0
+
+kitchen motion ecolink:
+  - sensor.front_motion_burglar_11_10
+  - sensor.back_motion_burglar_10_10
+
+Christmas lights:
+  - switch.kitchen_outlet
+  - switch.ge_12722_on_relay_switch_switch_28_0
+  - switch.ge_12722_onoff_relay_switch_switch_28_0
+  - switch.leviton_unknown_type1d04_id0334_switch_17_0
+  - switch.christmas_sleigh
+  - switch.christmas_tree
+
+Led lights:
+  - light.steps
+  - light.cabinet_lights
+
+temperature:
+  - sensor.hallway_thermostat_temperature
+  - sensor.aeotec_zw100_multisensor_6_temperature_31_1
+  - sensor.aeotec_zw100_multisensor_6_temperature_7_1
+  - sensor.den_temperature
+  - sensor.master_bedroom_temperature
+  - sensor.nina_room_temperature
+  - sensor.hallway_temperature

@@ -6,8 +6,8 @@
 - platform: template
   sensors:
     garage_door_status:
-      value_template: '{% if states.binary_sensor.fortrezz_mimolite_wireless_interfacebridge_module_sensor_2_0 %}
-        {% if states.binary_sensor.fortrezz_mimolite_wireless_interfacebridge_module_sensor_2_0.state == "on" %}
+      value_template: '{% if states.binary_sensor.garage_door_opener_sensor_2_0 %}
+        {% if states.binary_sensor.garage_door_opener_sensor_2_0.state == "on" %}
           Closed
         {% else %}
           Open
@@ -20,18 +20,30 @@
 
 
  #icon_template: '{%- if is_state("sensor.battery_ipad", "unknown") %}mdi:battery-unknown{%- elif is_state_attr("device_tracker.ipad", "battery_status", "Charging") %}mdi:battery-charging{%- elif  states.device_tracker.ipad.attributes.battery <= 5 %}mdi:battery-outline{%- elif states.device_tracker.ipad.attributes.battery >= 95 %}mdi:battery{% else %}mdi:battery-{{(states.device_tracker.ipad.attributes.battery|float / 10)|round*10}}{%- endif %}'
-
-
 - platform: template
   sensors:
-    front_door_status:
-      value_template: '{% if states.binary_sensor.aeotec_zw112_door_window_sensor_6_sensor_3_0 %}
-        {% if states.binary_sensor.aeotec_zw112_door_window_sensor_6_sensor_3_0.state == "on" %}
-          Closed
+    front_motion_status:
+      value_template: '{% if states.sensor.front_motion_burglar_42_10 %}
+        {% if states.sensor.front_motion_burglar_42_10.state == "3" %}
+          8
         {% else %}
-          Open
+          0
         {% endif %}
         {% else %}
         n/a
         {% endif %}'
-      friendly_name: 'Door'
+      friendly_name: 'Front Motion Status'
+
+- platform: template
+  sensors:
+    back_motion_status:
+      value_template: '{% if states.sensor.back_motion_burglar_10_10 %}
+        {% if states.sensor.back_motion_burglar_10_10.state == "3" %}
+          8
+        {% else %}
+          0
+        {% endif %}
+        {% else %}
+        n/a
+        {% endif %}'
+      friendly_name: 'back Motion Status'

@@ -1,0 +1,13 @@
+
+- alias: Turn Kitchen light garage
+  trigger:
+    platform: state
+    entity_id: binary_sensor.garage_door_entry_sensor_23_0
+    to: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: group.kitchen_lights
+    - delay:
+        minutes: 2
+    - service: switch.turn_off
+      entity_id: group.kitchen_lights

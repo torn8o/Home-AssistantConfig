@@ -1,0 +1,21 @@
+sensor:
+  - platform: mqtt
+    state_topic: "homeassistant/motion"
+    name: "Dining Room Motion Detection"
+    unit_of_measurement: "Date"
+    value_template: '{{ value_json.date ~ "\n" ~ value_json.time }}'
+
+
+automation:
+  - alias: 'motion detected'
+    trigger:
+      platform: mqtt
+      topic: 'homeassistant/motion'
+    condition:
+      - condition: state
+        entity_id: device_tracker.torn8o
+        state: 'not_home'
+    action:
+      service: notify.ios_torn8o
+      data_template:
+        message: "motion detected: {{ trigger.payload_json['camera'] ~ ' ' ~ trigger.payload_json['time'] ~ ' ' ~ trigger.payload_json['date'] }}"

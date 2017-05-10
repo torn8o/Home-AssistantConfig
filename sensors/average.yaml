@@ -4,4 +4,4 @@
     average_house_temp:
           unit_of_measurement: "°F"
           value_template: >-
-            {{ ((float(states.sensor.aeotec_zw100_multisensor_6_temperature_31_1.state) + float(states.sensor.broadlink_torn_temperature.state) + float(states.sensor.game_room_temperature.state) + float(states.sensor.hallway_temperature.state) + float(states.sensor.hallway_thermostat_temperature.state) + float(states.sensor.master_bedroom_temperature.state) + float(states.sensor.nina_room_temperature.state)) / 7) | round(1) }}
+            {{ ((float(states.sensor.tv_room_multi_sensor_temperature_32_1.state) + float(states.sensor.kitchen_multi_sensor_temperature_31_1.state) +float(states.sensor.kitchen_multi_sensor_temperature_31_1.state) + float(states.sensor.broadlink_torn_temperature.state) + float(states.sensor.game_room_temperature.state) + float(states.sensor.monkey_room_temperature.state) + float(states.sensor.hallway_thermostat_temperature.state) + float(states.sensor.master_bedroom_temperature.state) + float(states.sensor.nina_room_temperature.state)) / 9) | round(1) }}

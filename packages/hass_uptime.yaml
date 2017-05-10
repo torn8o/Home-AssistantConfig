@@ -18,7 +18,7 @@ automation:
       platform: state
       entity_id: updater.updater
     action:
-      service: notify.notify
+      service: notify.ios_torn8o
       data:
         title: "HomeAssistant Update"
         message: 'Update for Home Assistant is available.'

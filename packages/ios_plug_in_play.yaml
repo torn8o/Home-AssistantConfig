@@ -6,17 +6,44 @@
 #   @date           :   04/21/2017
 #   @package        :   ios plug and play
 #   @description    :   Example to understand Actionable Notifications for IOS
+# htis is a package file inorder for this to work in your setup
+# you must have packagesset up in your configuration.
+#    To set up packages place the following line into the configuation file under
+#    customize please view below order. You will then need to make a folder in the
+#    .homeassistant folder called poackages.
+#
+#homeassistant:
+#  name: your ha name
+#  latitude: !secret home_latitude
+#  longitude: !secret home_longitude
+#  elevation: !secret home_elevation
+#  time_zone: America/Chicago
+#  unit_system: imperial
+#  customize: !include customize.yaml
+#  packages: !include_dir_named packages
 ###############################################################################
 
 
 homeassistant:
   customize:
-    sensor.torn8os_iphone_battery:
-      hidden: True
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'ios plug in play'
 
 ios:
   push:
     categories:
+      - name: Live
+        identifier: 'LIVE_FEED'
+        actions:
+          - identifier: 'SHOW_FEED'
+            title: 'watch live'
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: yes
+            behavior: 'default'
+
       - name: Alarm
         identifier: 'ALARM'
         actions:
@@ -43,6 +70,7 @@ group: # will add a view on the main tab of home assistant
       - automation.Notify_iOS_Actionable_Notifications
       - automation.sound_the_alarm
       - automation.SILENCE_ALARM
+      - automation.Notify_camera_Actionable_Notifications
 
 automation:
   - alias: Notify iOS Actionable Notifications
@@ -74,6 +102,10 @@ automation:
       service: notify.ios_torn8o #change to your ios device name
       data:
         message: "window for sound of alarm"
+        data:
+          push:
+            badge: 0
+            sound: US-EN-Daisy-Back-Door-Open.wav
 
   - alias: silence alarm
     trigger:
@@ -85,3 +117,7 @@ automation:
       service: notify.ios_torn8o #change to your ios device name
       data:
         message: "window for silence alarm"
+        data:
+          push:
+            badge: 0
+            sound: US-EN-Alexa-Motion-At-Back-Door.wav

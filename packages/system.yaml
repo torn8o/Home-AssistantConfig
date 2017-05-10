@@ -100,7 +100,7 @@ automation:
       - platform: homeassistant
         event: start
     action:
-      - service: notify.notify
+      - service: notify.ios_torn8o
         data:
           message: "Home Assistant is now up and running."
 
@@ -116,7 +116,7 @@ automation:
         value_template: >-
           {{ states('updater.updater') != 'unknown' }}
     action:
-      - service: notify.notify
+      - service: notify.ios_torn8o
         data_template:
           message: >-
             Home Assistant {{ states('updater.updater') }} is now available.

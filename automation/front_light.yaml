@@ -4,8 +4,8 @@
     platform: sun
     event: sunset
   action:
-    service: homeassistant.turn_on
-    entity_id: switch.ge_12722_onoff_relay_switch_switch_28_0
+    service: switch.turn_on
+    entity_id: switch.front_lights_switch_28_0, switch.christmas_angel_switch_17_0
 
 - alias: 'front light off'
   trigger:
@@ -13,5 +13,5 @@
     event: sunrise
 #    offset: '-07:33:00'
   action:
-    service: homeassistant.turn_off
-    entity_id: switch.ge_12722_onoff_relay_switch_switch_28_0
+    service: switch.turn_off
+    entity_id: switch.front_lights_switch_28_0, switch.christmas_angel_switch_17_0

@@ -1,0 +1,131 @@
+#MUST INSTALL TOOLS TO USE FFMEG!
+#sudo su -c "echo 'deb http://ftp.debian.org/debian jessie-backports main' >> /etc/apt/sources.list"
+#sudo apt-get update
+#sudo apt-get -t jessie-backports install ffmpeg
+#ffmpeg:
+#  ffmpeg_bin: /usr/bin/ffmpeg
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'ios action'
+#add camera support
+camera:
+  # Front door IP Camera
+  - platform: ffmpeg
+    input: rtsp://192.168.0.18/live/ch00_0
+    name: Door Cam Live
+  # Display most recent snapshot taken when doorbell pushed
+  - platform: generic
+    still_image_url: https://*****s.duckdns.org/local/snapshot.jpeg
+    name: Most Recent Door Bell Pusher
+
+group: # will add a view on the main tab of home assistant
+  ios_action:
+    name: ios_action
+    view: yes
+    entities:
+      - automation.door_bell
+      - automation.Send_Camera_Stream_to_torn8o
+      - automation.torn_wants_the_stream
+      - automation.Notify_camera_Actionable_Notifications
+
+#add apple app support
+
+  #push:
+  #  categories:
+  #    - name: Live
+  #      identifier: 'LIVE_FEED'
+  #      actions:
+  #        - identifier: 'SHOW_FEED'
+  #          title: 'watch live'
+  #          activationMode: 'background'
+  #          authenticationRequired: no
+  #          destructive: yes
+  #          behavior: 'default'
+
+
+# Create a notify group to send messages to all ios devices
+notify:
+  - name: ALL_IPHONES
+    platform: group
+    services:
+      - service: ios_torn8o_iphone
+#      - service: ios_iphone_two
+
+#MUST INSTALL TOOLS TO USE FFMEG!
+#sudo su -c "echo 'deb http://ftp.debian.org/debian jessie-backports main' >> /etc/apt/sources.list"
+#sudo apt-get update
+#sudo apt-get -t jessie-backports install ffmpeg
+#ffmpeg:
+#  ffmpeg_bin: /usr/bin/ffmpeg
+
+#add camera support
+#camera:
+#  # Front door IP Camera
+#  - platform: ffmpeg
+#    input: rtsp://192.168.0.18/live/ch00_0
+#    name: Door Cam Live
+  # Display most recent snapshot taken when doorbell pushed
+#  - platform: generic
+#    still_image_url: https://burrows.duckdns.org/local/snapshot.jpeg
+#    name: Most Recent Door Bell Pusher
+
+# Take a picture from camera and save it
+# Credit to this author https://www.domoticz.com/forum/viewtopic.php?t=6612
+# REMEMBER TO ALLOW ACCESS! sudo chmod -R 777 /home/homeassistant/.homeassistant/www
+#shell_command:
+#  cheese: 'ffmpeg -y -i rtsp://192.168.0.18/live/ch00_0 -vframes 1 /home/homeassistant/.homeassistant/www/snapshot.jpeg'
+
+automation:
+
+# Send camera snapshot attached to ios device notification when
+  # doorbell button pushed. Give option to request live camera
+  # stream via actionable notification function
+  - alias: Door Bell
+    trigger:
+      platform: state
+      entity_id: input_boolean.trigger # switch.door_bell_button
+      to: 'on'
+    action:
+      - service: shell_command.cheese
+      - service: notify.ALL_IPHONES
+        data:
+          message: "Ding Dong!"
+          data:
+            attachment:
+              url: https://******s.duckdns.org/local/snapshot.jpeg
+              content-type: jpeg
+              hide-thumbnail: false
+            push:
+              category: "LIVE_FEED"
+
+
+  # Send live camera feed to "wesleys_iphone" when 'user_select' turns 'on'
+  - alias: Send Camera Stream to torn8o
+    trigger:
+      - platform: state
+        entity_id: input_boolean.user_select
+        to: 'on'
+    action:
+      service: notify.ios_torn8o
+      data:
+        message: Door Cam Live
+        data:
+          push:
+            category: camera
+          entity_id: camera.cam
+
+
+  # torn8o has requested live camera feed
+  - alias: torn wants the stream
+    trigger:
+      - platform: event
+        event_type: ios.notification_action_fired
+        event_data:
+          actionName: SHOW_FEED
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.user_select

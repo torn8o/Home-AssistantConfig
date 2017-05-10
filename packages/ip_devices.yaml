@@ -1,0 +1,110 @@
+homeassistant:
+  customize:
+    device_tracker.chromecast:
+      hidden: true
+    device_tracker.engenius_ap:
+      hidden: true
+    device_tracker.viostor:
+      hidden: true
+    device_tracker.sonicwall:
+      hidden: true
+    device_tracker.airport_extreme:
+      hidden: true
+    device_tracker.ecoplug_1:
+      hidden: true
+    device_tracker.ecoplug_2:
+      hidden: true
+    device_tracker.appletv:
+      hidden: true
+    device_tracker.hpmini:
+      hidden: true
+    device_tracker.samsungtv:
+      hidden: true
+    device_tracker.yeelight1:
+      hidden: true
+    device_tracker.tp_link:
+      hidden: true
+    device_tracker.echo_1:
+      hidden: true
+    device_tracker.echo_2:
+      hidden: true
+    device_tracker.SLAMPHER_1735b9:
+      hidden: true
+    device_tracker.SLAMPHER_173b67:
+      hidden: true
+    device_tracker.SLAMPHER_173a91:
+      hidden: true
+
+sensor:
+  - platform: template
+    sensors:
+      chromecast:
+        friendly_name: 'ChromeCast'
+        value_template: "{{ 'OK' if is_state('device_tracker.chromecast', 'home') else 'Offline' }}"
+      engenius_ap:
+        friendly_name: 'EnGenius AP'
+        value_template: "{{ 'OK' if is_state('device_tracker.engenius_ap', 'home') else 'Offline' }}"
+      viostor_nvr:
+        friendly_name: 'VioStor NVR'
+        value_template: "{{ 'OK' if is_state('device_tracker.viostor', 'home') else 'Offline' }}"
+      sonicwall:
+        friendly_name: 'SonicWall'
+        value_template: "{{ 'OK' if is_state('device_tracker.sonicwall', 'home') else 'Offline' }}"
+      airport_extreme:
+        friendly_name: 'Airport Extreme'
+        value_template: "{{ 'OK' if is_state('device_tracker.airport_extreme', 'home') else 'Offline' }}"
+      tp_link:
+        friendly_name: 'TP Link'
+        value_template: "{{ 'OK' if is_state('device_tracker.tp_link', 'home') else 'Offline' }}"
+      echo_1:
+        friendly_name: 'echo 1'
+        value_template: "{{ 'OK' if is_state('device_tracker.echo_1', 'home') else 'Offline' }}"
+      echo_2:
+        friendly_name: 'echo 2'
+        value_template: "{{ 'OK' if is_state('device_tracker.echo_2', 'home') else 'Offline' }}"
+      ecoplug_1:
+        friendly_name: 'ecoPlug 1'
+        value_template: "{{ 'OK' if is_state('device_tracker.ecoplug_1', 'home') else 'Offline' }}"
+      ecoplug_2:
+        friendly_name: 'ecoPlug 2'
+        value_template: "{{ 'OK' if is_state('device_tracker.ecoplug_2', 'home') else 'Offline' }}"
+      hpmini:
+        friendly_name: 'HP mini'
+        value_template: "{{ 'OK' if is_state('device_tracker.hpmini', 'home') else 'Offline' }}"
+      yeelight1:
+        friendly_name: 'YeeLight 1'
+        value_template: "{{ 'OK' if is_state('device_tracker.yeelight1', 'home') else 'Offline' }}"
+      appletv:
+        friendly_name: 'Apple TV'
+        value_template: "{{ 'OK' if is_state('device_tracker.appletv', 'home') else 'Offline' }}"
+      slampher_1735b9:
+        friendly_name: 'Porch Right Light'
+        value_template: "{{ 'OK' if is_state('device_tracker.SLAMPHER_1735b9', 'home') else 'Offline' }}"
+      slampher_173b67:
+        friendly_name: 'Side Door Light'
+        value_template: "{{ 'OK' if is_state('device_tracker.SLAMPHER_173b67', 'home') else 'Offline' }}"
+      slampher_173a91:
+        friendly_name: 'Porch Left Light'
+        value_template: "{{ 'OK' if is_state('device_tracker.SLAMPHER_173a91', 'home') else 'Offline' }}"
+
+
+group:
+  network_devices:
+    name: Network Devices
+    entities:
+      - sensor.sonicwall
+      - sensor.engenius_ap
+      - sensor.airport_extreme
+      - sensor.tp_link
+      - sensor.viostor_nvr
+      - sensor.hpmini
+      - sensor.chromecast
+      - sensor.appletv
+      - sensor.echo_1
+      - sensor.echo_2
+      - sensor.ecoplug_1
+      - sensor.ecoplug_2
+      - sensor.yeelight1
+      - sensor.slampher_1735b9
+      - sensor.slampher_173b67
+      - sensor.slampher_173a91

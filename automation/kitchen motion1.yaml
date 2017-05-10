@@ -1,18 +1,33 @@
 - alias: Turn on Kitchen light when there is movement
   trigger:
     platform: state
-    entity_id: sensor.aeotec_zw100_multisensor_6_burglar_31_10
+    entity_id: sensor.kitchen_multi_sensor_burglar_31_10 #sensor.tv_room_multi_sensor_burglar_32_10
     to: '8'
   action:
     service: light.turn_on
     entity_id: group.kitchen_lights
-#    entity_id: light.ge_12724_3way_dimmer_switch_level_9_0, light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0
 - alias: Turn off Kitchen light when there is no movement
   trigger:
     platform: state
-    entity_id: sensor.aeotec_zw100_multisensor_6_burglar_31_10
+    entity_id: sensor.kitchen_multi_sensor_burglar_31_10 #sensor.tv_room_multi_sensor_burglar_32_10
     to: '0'
   action:
     service: light.turn_off
     entity_id: group.kitchen_lights
-#    entity_id: light.ge_12724_3way_dimmer_switch_level_9_0, light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0
+
+#- alias: Turn Kitchen light when there is movement
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.front_motion_sensor_42_0, binary_sensor.back_motion_sensor_10_0
+#    to: 'on'
+#  action:
+#    service: light.turn_on
+#    entity_id: group.kitchen_lights
+#- alias: Turn Kitchen light when there is no movement
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.front_motion_sensor_42_0, binary_sensor.back_motion_sensor_10_0
+#    to: 'off'
+#  action:
+#    service: light.turn_off
+#    entity_id: group.kitchen_lights

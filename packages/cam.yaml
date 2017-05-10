@@ -1,0 +1,46 @@
+# CAMERA PACKAGE
+# IP connected cameras
+#----------------------------------------------------------------
+
+homeassistant:
+  customize:
+  #----------------------------------------------------------------
+    sensor.motion_dining_room:
+      icon: mdi:camcorder
+      friendly_name: Dining Room
+
+    sensor.motion_front_door:
+      icon: mdi:camcorder
+      friendly_name: Front Door
+
+group:
+#----------------------------------------------------------------
+
+  cameras_all:
+    - camera.dining_room
+    - camera.front_door
+
+
+camera:
+#----------------------------------------------------------------
+
+  # Blue Iris registered cameras
+  # mjpg to Blue Iris to enable live feed on popup preview (click on camera image)
+  # turn off blue iris local lan authentication for this to work
+  #
+  # url format = http://blue_iris_ip:blue_iris_port/mjpg/blue_iris_camera_name
+  #  ex. http://192.168.1.5:81/mjpg/playroom
+  #----------------------------------------------------------------
+  - platform: mjpeg
+    name: Dining Room
+    mjpeg_url: !secret camera_dining_room_url
+    username: !secret camera_username
+    password: !secret camera_password
+    verify_ssl: False
+
+  - platform: mjpeg
+    name: Front Door
+    mjpeg_url: !secret camera_front_door_url
+    username: !secret camera_username
+    password: !secret camera_password
+    verify_ssl: False

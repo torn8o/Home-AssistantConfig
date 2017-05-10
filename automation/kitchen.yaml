@@ -1,0 +1,16 @@
+- alias: binary Turn on Kitchen light when there is movement
+  trigger:
+    platform: state
+    entity_id: group.binary_motion #sensor.kitchen_multi_sensor_burglar_31_10
+    to: 'on'
+  action:
+    service: light.turn_on
+    entity_id: group.kitchen_lights
+- alias: binary Turn off Kitchen light when there is no movement
+  trigger:
+    platform: state
+    entity_id: group.binary_motion #sensor.kitchen_multi_sensor_burglar_31_10
+    to: 'off'
+  action:
+    service: light.turn_off
+    entity_id: group.kitchen_lights
