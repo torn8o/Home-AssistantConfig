@@ -13,3 +13,7 @@
         entity_id:
           - sensor.hallway_nest_protect_co_status
           - sensor.kitchen_nest_protect_co_status
+
+  - platform: mqtt
+    state_topic: dummy/floorplan/sensor
+    name: Floorplan

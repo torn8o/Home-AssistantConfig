@@ -2,4 +2,5 @@
     sidebar_title: Floorplan
     sidebar_icon: mdi:home
     url_path: floorplan
+  #  webcomponent_path:: 
     config: !include floorplan.yaml

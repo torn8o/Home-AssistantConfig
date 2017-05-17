@@ -1,6 +1,7 @@
 ####GROUPS####
 control:
   entities:
+    - binary_sensor.floorplan
     - media_player.torntv
     - input_slider.porch_animation_speed
     - light.porch_strip

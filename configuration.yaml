@@ -13,7 +13,7 @@ homeassistant:
 
 #  customize: !include_dir_named customize
   packages: !include_dir_named packages
-#  panel_custom: !include panel_custom.yaml
+
 #  binary_sensor: !include binary_sensor.yaml
 
 frontend:
@@ -130,6 +130,8 @@ weblink:
     - name: !secret sonarr_name
       url: !secret sonarr_url
 
+panel_custom: !include panel_custom.yaml
+
 ################################################
 ## Component Includes (Single File)
 ################################################
@@ -152,7 +154,8 @@ zwave: !include zwave.yaml
 ################################################
 
 automation: !include_dir_merge_list automation
-binary_sensor: !include_dir_merge_list binary_sensor
+binary_sensor: !include binary_sensor.yaml
+#!include_dir_merge_list binary_sensor
 #camera: !include_dir_merge_list camera
 #cover: !include_dir_merge_list cover
 device_tracker: !include_dir_merge_list device
