@@ -7,6 +7,14 @@
 #binary_sensor.frontdoorswitch_sensor_3:
 #  friendly_name: Front Door
 #  type: opening
+automation.binary_turn_on_kitchen_light_when_there_is_movement:
+  friendly_name: turn off kitchen motion
+media_player.torntravel_2:
+  friendly_name: Game Room Plex
+
+media_player.torntravel:
+  friendly_name: TV Room Plex
+
 sensor.average_living_room_temp:
   friendly_name: Average TV Room Temp
 
@@ -433,9 +441,3 @@ group.garage:
   order: 8
 group.input:
   order: 9
-
-
-  #zone.home:
-  #  track_ios: true
-  #zone.torn_work:
-  #  track_ios: true

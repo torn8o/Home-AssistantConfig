@@ -1,11 +1,3 @@
-playlist:
-  name: Radio
-  entities:
-    - group.Home_crimereports
-    - input_select.radio_station_location
-    - input_select.radio_station
-    - input_slider.volume_radio
-
 camera:
   view: yes
   icon: mdi:camera
@@ -40,7 +32,6 @@ weather:
   name: darksky
   icon: mdi:weather-cloudy
   entities:
-    - input_boolean.show_all_automations
     - group.darksky
 Fan:
   view: yes

@@ -1,0 +1,560 @@
+Belkin_switch_2:
+  hide_if_away: false
+  mac: 14:91:82:03:3A:ED
+  name: 149182033aed
+  picture:
+  track: true
+  vendor: Belkin International Inc.
+
+Nina_ipad:
+  hide_if_away: false
+  mac: 84:89:AD:2F:FC:52
+  name: Nina_ipad
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+belkin_2:
+  hide_if_away: false
+  mac: 14:91:82:44:40:19
+  name: '149182444019'
+  picture:
+  track: true
+  vendor: Belkin International Inc.
+
+Torn-Cloud:
+  hide_if_away: false
+  mac: 00:90:A9:39:EE:74
+  name: Torn-Cloud
+  picture:
+  track: true
+  vendor: WESTERN DIGITAL
+
+
+Belkin_3:
+  hide_if_away: false
+  mac: 94:10:3E:4F:F1:8D
+  name: 94103e4ff18d
+  picture:
+  track: true
+  vendor: Belkin International Inc.
+
+Belkin_switch_1:
+  hide_if_away: false
+  mac: 14:91:82:03:36:D5
+  name: 1491820336d5
+  picture:
+  track: true
+  vendor: Belkin International Inc.
+
+Philips-hue:
+  hide_if_away: false
+  mac: 00:17:88:20:F9:B9
+  name: Philips-hue
+  picture:
+  track: true
+  vendor: Philips Lighting BV
+
+Dining_room_Camera:
+  hide_if_away: false
+  mac: B0:D5:9D:63:C3:0B
+  name: Dining_room_Camera
+  picture:
+  track: true
+  vendor: Shenzhen Zowee Technology Co., Ltd
+
+Belkin_4:
+  hide_if_away: false
+  mac: 14:91:82:44:40:AD
+  name: 1491824440ad
+  picture:
+  track: true
+  vendor: Belkin International Inc.
+
+Belken_1:
+  hide_if_away: false
+  mac: 14:91:82:44:3E:9D
+  name: 149182443e9d
+  picture:
+  track: true
+  vendor: Belkin International Inc.
+
+Vizio_Tv:
+  hide_if_away: false
+  mac: 00:6B:9E:D0:73:AC
+  name: Vizio_Tv
+  picture:
+  track: true
+  vendor: Vizio, Inc
+
+NightHawk_Router:
+  hide_if_away: false
+  mac: E4:F4:C6:0E:AE:71
+  name: NightHawk_Router
+  picture:
+  track: true
+  vendor: NETGEAR
+
+Micro_Cell:
+  hide_if_away: false
+  mac: 74:54:7D:FA:93:86
+  name: Micro_Cell
+  picture:
+  track: true
+  vendor: Cisco SPVTG
+
+Broadlink:
+  hide_if_away: false
+  mac: B4:43:0D:EF:9F:25
+  name: Broadlink
+  picture:
+  track: true
+  vendor: Broadlink Pty Ltd
+
+Windows7_PC:
+  hide_if_away: false
+  mac: 9C:4E:36:2A:0E:28
+  name: Windows7-PC
+  picture:
+  track: true
+  vendor: Intel Corporate
+
+Front_Camera:
+  hide_if_away: false
+  mac: B0:D5:9D:63:AF:B9
+  name: Front_Camera
+  picture:
+  track: true
+  vendor: Shenzhen Zowee Technology Co., Ltd
+
+Almond_AP:
+  hide_if_away: false
+  mac: E4:71:85:16:FD:0C
+  name: Almond_AP
+  picture:
+  track: true
+  vendor: Securifi Ltd
+
+Belkin_5:
+  hide_if_away: false
+  mac: 14:91:82:44:65:D9
+  name: 1491824465d9
+  picture:
+  track: true
+  vendor: Belkin International Inc.
+
+Home_Server:
+  hide_if_away: false
+  mac: D4:85:64:A7:A5:8E
+  name: Home_Server
+  picture:
+  track: true
+  vendor: Hewlett Packard
+
+Harmony_hub:
+  hide_if_away: false
+  mac: 00:04:20:EF:DD:0C
+  name: 000420efdd0c
+  picture:
+  track: true
+  vendor: unknown
+
+Master_Bedroom_Relay:
+  hide_if_away: false
+  mac: B4:79:A7:1A:65:92
+  name: Master Bedroom Relay
+  picture:
+  track: true
+  vendor: SAMSUNG ELECTRO-MECHANICS(THAILAND)
+
+Nina_Iphone:
+  hide_if_away: false
+  mac: B0:70:2D:0B:58:41
+  name: b0702d0b5841
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+lynx:
+  hide_if_away: false
+  mac: 70:70:0D:CF:A1:E5
+  name: lynx
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+Nest_Thermostat:
+  hide_if_away: false
+  mac: 18:B4:30:72:E7:99
+  name: Nest Thermostat
+  picture:
+  track: true
+  vendor: Nest Labs Inc.
+
+Monkey_phone:
+  hide_if_away: false
+  mac: 40:33:1A:E2:64:B7
+  name: Apple tv
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+Windows7-PC:
+  hide_if_away: false
+  mac: B8:88:E3:16:B5:76
+  name: Windows7-PC
+  picture:
+  track: true
+  vendor: COMPAL INFORMATION (KUNSHAN) CO., LTD.
+
+Nina_Apple_watch:
+  hide_if_away: false
+  mac: 08:66:98:01:9E:60
+  name: 086698019e60
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+38c986e759f2:
+  hide_if_away: false
+  mac: 38:C9:86:E7:59:F2
+  name: 38c986e759f2
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+torn8o:
+  hide_if_away: false
+  mac: 78:4f:43:0a:40:c0
+  name: torn8o
+  picture:
+  track: true
+  vendor:
+
+18b43034608d:
+  hide_if_away: false
+  mac: 18:B4:30:34:60:8D
+  name: 18b43034608d
+  picture:
+  track: true
+  vendor: Nest Labs Inc.
+
+38607731935d:
+  hide_if_away: false
+  mac: 38:60:77:31:93:5D
+  name: 38607731935d
+  picture:
+  track: true
+  vendor: PEGATRON CORPORATION
+
+18b43034a3ac:
+  hide_if_away: false
+  mac: 18:B4:30:34:A3:AC
+  name: 18b43034a3ac
+  picture:
+  track: true
+  vendor: Nest Labs Inc.
+
+accf2366e59c:
+  hide_if_away: false
+  mac: AC:CF:23:66:E5:9C
+  name: accf2366e59c
+  picture:
+  track: true
+  vendor: Hi-flying electronics technology Co.,Ltd
+
+08002773bd08:
+  hide_if_away: false
+  mac: 08:00:27:73:BD:08
+  name: 08002773bd08
+  picture:
+  track: true
+  vendor: PCS Systemtechnik GmbH
+
+342387f92947:
+  hide_if_away: false
+  mac: 34:23:87:F9:29:47
+  name: 342387f92947
+  picture:
+  track: true
+  vendor: Hon Hai Precision Ind. Co.,Ltd.
+
+demo_paulus:
+  hide_if_away: false
+  mac:
+  name: Paulus
+  picture:
+  track: true
+  vendor:
+
+demo_anne_therese:
+  hide_if_away: false
+  mac:
+  name: Anne Therese
+  picture:
+  track: true
+  vendor:
+
+demo_home_boy:
+  hide_if_away: false
+  mac:
+  name: Home Boy
+  picture:
+  track: true
+  vendor:
+
+64bc0c65237c:
+  hide_if_away: false
+  mac: 64:BC:0C:65:23:7C
+  name: 64bc0c65237c
+  picture:
+  track: true
+  vendor: LG Electronics (Mobile Communications)
+
+b479a71a6bdf:
+  hide_if_away: false
+  mac: B4:79:A7:1A:6B:DF
+  name: b479a71a6bdf
+  picture:
+  track: true
+  vendor: SAMSUNG ELECTRO-MECHANICS(THAILAND)
+
+7cbb8a4f6e82:
+  hide_if_away: false
+  mac: 7C:BB:8A:4F:6E:82
+  name: 7cbb8a4f6e82
+  picture:
+  track: true
+  vendor: Nintendo Co., Ltd.
+
+b479a71a6435:
+  hide_if_away: false
+  mac: B4:79:A7:1A:64:35
+  name: b479a71a6435
+  picture:
+  track: true
+  vendor: SAMSUNG ELECTRO-MECHANICS(THAILAND)
+
+84b5415823aa:
+  hide_if_away: false
+  mac: 84:B5:41:58:23:AA
+  name: 84b5415823aa
+  picture:
+  track: true
+  vendor: unknown
+
+4851b74fddcd:
+  hide_if_away: false
+  mac: 48:51:B7:4F:DD:CD
+  name: 4851b74fddcd
+  picture:
+  track: true
+  vendor: Intel Corporate
+
+5ccf7fd5e174:
+  hide_if_away: false
+  mac: 5C:CF:7F:D5:E1:74
+  name: 5ccf7fd5e174
+  picture:
+  track: true
+  vendor: Espressif Inc.
+
+2078f0ac90c0:
+  hide_if_away: false
+  mac: 20:78:F0:AC:90:C0
+  name: 2078f0ac90c0
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+5ccf7fd5de74:
+  hide_if_away: false
+  mac: 5C:CF:7F:D5:DE:74
+  name: 5ccf7fd5de74
+  picture:
+  track: true
+  vendor: unknown
+
+a00460841d7d:
+  hide_if_away: false
+  mac: A0:04:60:84:1D:7D
+  name: a00460841d7d
+  picture:
+  track: true
+  vendor: NETGEAR
+
+dcef0944e8cc:
+  hide_if_away: false
+  mac: DC:EF:09:44:E8:CC
+  name: dcef0944e8cc
+  picture:
+  track: true
+  vendor: NETGEAR
+
+10da4377003a:
+  hide_if_away: false
+  mac: 10:DA:43:77:00:3A
+  name: 10da4377003a
+  picture:
+  track: true
+  vendor: NETGEAR
+
+b479a71a655a:
+  hide_if_away: false
+  mac: B4:79:A7:1A:65:5A
+  name: b479a71a655a
+  picture:
+  track: true
+  vendor: SAMSUNG ELECTRO-MECHANICS(THAILAND)
+
+a020a604704e:
+  hide_if_away: false
+  mac: A0:20:A6:04:70:4E
+  name: a020a604704e
+  picture:
+  track: true
+  vendor: Espressif Inc.
+
+a020a60437ef:
+  hide_if_away: false
+  mac: A0:20:A6:04:37:EF
+  name: a020a60437ef
+  picture:
+  track: true
+  vendor: Espressif Inc.
+
+5ccf7f33b736:
+  hide_if_away: false
+  mac: 5C:CF:7F:33:B7:36
+  name: 5ccf7f33b736
+  picture:
+  track: true
+  vendor: Espressif Inc.
+
+0021cc4bdaf6:
+  hide_if_away: false
+  mac: 00:21:CC:4B:DA:F6
+  name: 0021cc4bdaf6
+  picture:
+  track: true
+  vendor: Flextronics International
+
+40d28a255672:
+  hide_if_away: false
+  mac: 40:D2:8A:25:56:72
+  name: 40d28a255672
+  picture:
+  track: true
+  vendor: Nintendo Co., Ltd.
+
+5ccf7ff5093a:
+  hide_if_away: false
+  mac: 5C:CF:7F:F5:09:3A
+  name: 5ccf7ff5093a
+  picture:
+  track: true
+  vendor: Espressif Inc.
+
+94103e4fb691:
+  hide_if_away: false
+  mac: 94:10:3E:4F:B6:91
+  name: Xboxtorn
+  picture:
+  track: true
+  vendor: Microsoft
+
+5ccf7f92eba2:
+  hide_if_away: false
+  mac: 5C:CF:7F:92:EB:A2
+  name: 5ccf7f92eba2
+  picture:
+  track: true
+  vendor: Espressif Inc.
+
+2818787aba9a:
+  hide_if_away: false
+  mac: 28:18:78:7A:BA:9A
+  name: 2818787aba9a
+  picture:
+  track: true
+  vendor: Microsoft Corporation
+
+281878dde6b1:
+  hide_if_away: false
+  mac: 28:18:78:DD:E6:B1
+  name: 281878dde6b1
+  picture:
+  track: true
+  vendor: Microsoft Corporation
+
+00ffa12226c0:
+  hide_if_away: false
+  mac: 00:FF:A1:22:26:C0
+  name: 00ffa12226c0
+  picture:
+  track: true
+  vendor: unknown
+
+b827eb29dcc4:
+  hide_if_away: false
+  mac: B8:27:EB:29:DC:C4
+  name: b827eb29dcc4
+  picture:
+  track: true
+  vendor: Raspberry Pi Foundation
+
+d0034b1e303d:
+  hide_if_away: false
+  mac: D0:03:4B:1E:30:3D
+  name: d0034b1e303d
+  picture:
+  track: true
+  vendor: Apple, Inc.
+
+9ce635e4ac4f:
+  hide_if_away: false
+  mac: 9C:E6:35:E4:AC:4F
+  name: 9ce635e4ac4f
+  picture:
+  track: true
+  vendor: Nintendo Co., Ltd.
+
+d013fd5ba0d4:
+  hide_if_away: false
+  mac: D0:13:FD:5B:A0:D4
+  name: d013fd5ba0d4
+  picture:
+  track: true
+  vendor: LG Electronics (Mobile Communications)
+
+64bc0c83a67e:
+  hide_if_away: false
+  mac: 64:BC:0C:83:A6:7E
+  name: 64bc0c83a67e
+  picture:
+  track: true
+  vendor: LG Electronics (Mobile Communications)
+
+a020a61c2cf1:
+  hide_if_away: false
+  mac: A0:20:A6:1C:2C:F1
+  name: a020a61c2cf1
+  picture:
+  track: true
+  vendor: Espressif Inc.
+
+torntravel_wired:
+  hide_if_away: false
+  mac: 98:5F:D3:FD:1B:D5
+  name: torntravel wired
+  picture:
+  track: true
+  vendor: Microsoft
+
+torntravel_wireless:
+  hide_if_away: false
+  mac: 98:5F:D3:FD:1B:D7
+  name: torntravel wireless
+  picture:
+  track: true
+  vendor: Microsoft

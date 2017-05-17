@@ -1,0 +1,38 @@
+homeassistant:
+  customize:
+    sensor.torn8os_iphone_battery:
+      hidden: True
+
+
+automation:
+  - alias: automation hidden
+    trigger:
+      platform: time
+      after: '16:00:00'
+    action:
+      service: group.set_visibility
+      entity_id: group.all_automation
+      data:
+        visible: False
+
+  - alias: automation show
+    trigger:
+      platform: time
+      after: '16:00:00'
+    action:
+      service: group.set_visibility
+      entity_id: group.all_automation
+      data:
+        visible: True
+group:
+  automations_view:
+    name: Automations
+    view: yes
+    entities:
+      - group.all_automations
+
+input_boolean:
+  show_all_automations:
+    name: Show all Automations
+    initial: on
+    icon: mdi:security

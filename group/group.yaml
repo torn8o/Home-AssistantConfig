@@ -1,10 +1,19 @@
 ####GROUPS####
 control:
   entities:
+    - media_player.torntv
+    - input_slider.porch_animation_speed
+    - light.porch_strip
+    - automation.porch_input_effect
+    - automation.porch_animation_speed_2
+    - automation.porch_animation_speed
     - automation.Notify_iOS_Actionable_Notifications
     - automation.automation_hidden
     - automation.automation_show
-
+plex:
+  entities:
+    - media_player.torntravel_2
+    - media_player.torntravel
 Trash & Recycle:
   entities:
     - sensor.torn8o_recycle_day
@@ -42,6 +51,7 @@ Kitchen Lights:
   - light.zooz_unknown_type0112_id241c_level_5_0
   - light.kitchen_bar_lights_level_5_0
   - light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0
+  - automation.binary_turn_on_kitchen_light_when_there_is_movement
   - camera.cam
 
 Master Bedroom:
@@ -93,6 +103,7 @@ Garage:
   - light.attic_lights_level_3_0
   - sensor.garage_door_status
   - binary_sensor.garage_door_opener_sensor_2_0
+  - switch.garage_door_opener_switch_2_0
 
 network:
   - sensor.speedtest_upload

@@ -21,3 +21,4 @@ Default View:
     - group.tv_room_temp
     - group.Door_bell_sensor
     - group.led_porch
+    - group.control

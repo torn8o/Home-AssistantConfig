@@ -15,6 +15,11 @@ light:
 sensor:
 
   - platform: mqtt
+    state_topic: "torn/Front_door"
+    name: "front door motion"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: mqtt
     state_topic: "torn/wemo_2"
     name: "Master bedroom motion"
     value_template: '{{ value_json.motion }}'
@@ -32,21 +37,22 @@ sensor:
     value_template: '{{ value_json.humidity | round(1) }}'
 
   - platform: mqtt
-    state_topic: "torn/living_room"
-    name: "Living Room motion"
+    state_topic: "torn/attic"
+    name: "attic motion"
     value_template: '{{ value_json.motion }}'
 
   - platform: mqtt
-    state_topic: "torn/living_room"
-    name: "Living Room Temperature"
+    state_topic: "torn/attic"
+    name: "attic temperature"
     unit_of_measurement: "°F"
     value_template: '{{ value_json.temperature | round(1) }}'
 
   - platform: mqtt
-    state_topic: "torn/living_room"
-    name: "Living Room Humidity"
+    state_topic: "torn/attic"
+    name: "attic humidity"
     unit_of_measurement: "%"
     value_template: '{{ value_json.humidity | round(1) }}'
+
   - platform: mqtt
     state_topic: "torn/monkey"
     name: "monkey room motion"
@@ -80,6 +86,24 @@ sensor:
     name: "nina room Humidity"
     unit_of_measurement: "%"
     value_template: '{{ value_json.humidity | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/game_room"
+    name: "game room motion"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: mqtt
+    state_topic: "torn/game_room"
+    name: "game room Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/game_room"
+    name: "Game room Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
 group:
   sensor_node_1_card:
     name: Sensor Node 1
@@ -87,9 +111,9 @@ group:
       - sensor.master_bedroom_motion
       - sensor.Master_bedroom_temperature
       - sensor.master_bedroom_humidity
-      - sensor.living_room_motion
-      - sensor.living_room_temperature
-      - sensor.living_room_humidity
+      - sensor.attic_garage_motion
+      - sensor.attic_garage_temperature
+      - sensor.attic_garage_humidity
       - sensor.monkey_room_motion
       - sensor.monkey_room_temperature
       - sensor.monkey_room_humidity

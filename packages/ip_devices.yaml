@@ -1,8 +1,8 @@
 homeassistant:
   customize:
-    device_tracker.chromecast:
+    device_tracker.torntravel_wireless:
       hidden: true
-    device_tracker.engenius_ap:
+    device_tracker.torntravel_wired:
       hidden: true
     device_tracker.viostor:
       hidden: true
@@ -38,12 +38,12 @@ homeassistant:
 sensor:
   - platform: template
     sensors:
-      chromecast:
-        friendly_name: 'ChromeCast'
-        value_template: "{{ 'OK' if is_state('device_tracker.chromecast', 'home') else 'Offline' }}"
-      engenius_ap:
-        friendly_name: 'EnGenius AP'
-        value_template: "{{ 'OK' if is_state('device_tracker.engenius_ap', 'home') else 'Offline' }}"
+      torntravel_wireless:
+        friendly_name: 'torntravel_wireless'
+        value_template: "{{ 'online' if is_state('device_tracker.torntravel_wireless', 'home') else 'Offline' }}"
+      torntravel_wired:
+        friendly_name: 'torntravel_wired'
+        value_template: "{{ 'online' if is_state('device_tracker.torntravel_wired', 'home') else 'Offline' }}"
       viostor_nvr:
         friendly_name: 'VioStor NVR'
         value_template: "{{ 'OK' if is_state('device_tracker.viostor', 'home') else 'Offline' }}"

@@ -1,9 +1,8 @@
-
 light:
   - platform: mqtt_json
     name: "Porch Strip"
-    state_topic: "torn/porch"
-    command_topic: "torn/porch/set"
+    state_topic: "bruh/porch"
+    command_topic: "bruh/porch/set"
     effect: true
     effect_list:
       - bpm
@@ -48,13 +47,5 @@ automation:
     action:
       - service: mqtt.publish
         data_template:
-          topic: "torn/porch/set"
+          topic: "bruh/porch/set"
           payload: '{"transition":{{ trigger.to_state.state | int }}}'
-
-group:
-  Led_porch:
-    view: yes
-    name: Led Porch
-    entities:
-      - input_slider.porch_animation_speed
-      - light.porch_strip

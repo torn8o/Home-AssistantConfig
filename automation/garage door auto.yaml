@@ -4,9 +4,9 @@
     seconds: '/5'
   condition:
     - condition: state
-      entity_id: switch.fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0
+      entity_id: switch.garage_door_opener_switch_2_0
       state: "on"
   action:
     - service: switch.turn_off
       data:
-        entity_id: switch.fortrezz_mimolite_wireless_interfacebridge_module_switch_2_0
+        entity_id: switch.garage_door_opener_switch_2_0

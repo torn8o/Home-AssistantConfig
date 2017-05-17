@@ -27,14 +27,14 @@
     - apparent_temperature_min
     - precip_intensity_max
 
-- platform: sonarr
-  api_key: !secret sonarr_api_key
-  host: !secret sonarr_url
-  port: !secret sonarr_port
-  monitored_conditions:
-    - diskspace
-    - upcoming
-  days: 1
+#- platform: sonarr
+#  api_key: !secret sonarr_api_key
+#  host: !secret sonarr_url
+#  port: !secret sonarr_port
+#  monitored_conditions:
+#    - diskspace
+#    - upcoming
+#  days: 1
 
 - platform: crimereports
   name: Home crimereports

@@ -1,6 +1,0 @@
-binary_sensor:
-  - platform: template
-    sensors:
-      motion_group_kitchen:
-        value_template: "{{ is_state('sensor.kitchen_multi_sensor_burglar_31_10', '8') or is_state('sensor.tv_room_multi_sensor_burglar_32_10', '0') }}"
-        friendly_name: 'Motion Group Kitchen'

@@ -6,30 +6,15 @@ homeassistant:
       track_ios: true
 
 
+
 zone:
-  - name: Torn_Work
-    latitude: !secret work_latitude
-    longitude: !secret work_longitude
-    radius: 200
-    icon: mdi:briefcase
+#  - name: Torn_Work
+#    latitude: !secret work_latitude
+#    longitude: !secret work_longitude
+#    radius: 200
+#    icon: mdi:briefcase
 
   - name: Home
     latitude: !secret home_latitude
     longitude: !secret home_longitude
     radius: 100
-# zone:
-#- name: Torn_Work
-#  latitude: !secret work_latitude
-#  longitude: !secret work_longitude
-#   elevation: !secret work_elevation
-#  radius: 100
-#  icon: mdi:account-multiple
-
-# This will override the default home zone
-# zone 2:
-
-#  elevation: !secret home_elevation
-
- #  icon: mdi:account-multiple
-   #zone.home:
-    # track_ios: true

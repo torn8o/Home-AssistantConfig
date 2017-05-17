@@ -5,7 +5,7 @@
       to: 'Online'
   action:
     - service: homeassistant.turn_on
-      entity_id: light.ge_12724_3way_dimmer_switch_level_16_0, switch.tv_room_fan
+      entity_id: light.tv_room_light_level_16_0, switch.tv_room_fan
 - alias: TV Lights and Fan off
   trigger:
     platform: state
@@ -13,4 +13,21 @@
     to: 'offline'
   action:
     service: homeassistant.turn_off
-    entity_id: light.ge_12724_3way_dimmer_switch_level_16_0, switch.tv_room_fan
+    entity_id: light.tv_room_light_level_16_0, switch.tv_room_fan
+
+- alias: gr Lights and Fan on
+  trigger:
+    - platform: state
+      entity_id: sensor.torntravel_wired
+      to: 'Online'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: switch.game_room_fan, switch.game_room_light
+- alias: gr Lights and Fan off
+  trigger:
+    platform: state
+    entity_id: sensor.torntravel_wired
+    to: 'offline'
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.game_room_fan, switch.game_room_light

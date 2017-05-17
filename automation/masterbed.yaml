@@ -1,0 +1,72 @@
+- alias: Turn on master bedroom light when there is movement
+  trigger:
+    platform: state
+    entity_id: sensor.mb_motion_status
+    to: 'on'
+  condition:
+    - condition: template
+      value_template: >-
+        {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+        {%- if hour >= 10 and hour  <=  22 -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+  action:
+    service: switch.turn_on
+    entity_id: switch.master_bedroom_light
+
+- alias: Turn off master bedroom light when there is no movement
+  trigger:
+    platform: state
+    entity_id: sensor.mb_motion_status
+    to: 'off'
+  condition:
+    - condition: template
+      value_template: >-
+        {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+        {%- if hour >= 10 and hour <= 22 -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+  action:
+    service: switch.turn_off
+    entity_id: switch.master_bedroom_light
+
+
+- alias: Turn on game room light when there is movement
+  trigger:
+    platform: state
+    entity_id: sensor.gr_motion_status
+    to: 'on'
+  condition:
+    - condition: template
+      value_template: >-
+        {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+        {%- if hour >= 10 and hour  <=  22 -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+  action:
+    service: switch.turn_on
+    entity_id: switch.game_room_light, switch.game_room_fan
+
+- alias: Turn off game room light when there is no movement
+  trigger:
+    platform: state
+    entity_id: sensor.gr_motion_status
+    to: 'off'
+  condition:
+    - condition: template
+      value_template: >-
+        {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+        {%- if hour >= 10 and hour  <=  22 -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+  action:
+    service: switch.turn_off
+    entity_id: switch.game_room_light, switch.game_room_fan

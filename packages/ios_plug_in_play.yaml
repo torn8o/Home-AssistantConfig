@@ -44,6 +44,21 @@ ios:
             destructive: yes
             behavior: 'default'
 
+      - name: Medicine
+        identifier: 'TABLET'
+        actions:
+          - identifier: 'TABLET_TAKEN'
+            title: 'Tablet Taken'
+            activationMode: 'background'
+            authenticationRequired: yes
+            destructive: yes
+            behavior: 'default'
+          - identifier: 'REMIND_LATER'
+            title: 'Remind me later'
+            activationMode: 'background'
+            authenticationRequired: yes
+            destructive: no
+
       - name: Alarm
         identifier: 'ALARM'
         actions:
@@ -71,6 +86,7 @@ group: # will add a view on the main tab of home assistant
       - automation.sound_the_alarm
       - automation.SILENCE_ALARM
       - automation.Notify_camera_Actionable_Notifications
+      - group.zones
 
 automation:
   - alias: Notify iOS Actionable Notifications
