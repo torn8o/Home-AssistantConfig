@@ -3,7 +3,7 @@ homeassistant:
     packages.system: &customize
       haaska_hidden: true
       homebridge_hidden: true
-      package: 'floorplany'
+      package: 'floorplan'
 
 
       name: Demo Floorplan
