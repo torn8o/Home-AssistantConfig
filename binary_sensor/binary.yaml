@@ -1,0 +1,12 @@
+  - platform: template
+    sensors:
+      master_motion:
+        value_template: '{% if states.sensor.master_bedroom_motion %}
+          {% if states.sensor.master_bedroom_motion.state == "motion detected" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'

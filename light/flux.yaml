@@ -1,0 +1,10 @@
+- platform: flux_led
+  devices:
+    192.168.1.23:
+      name: TV Color Lights
+    192.168.1.57:
+      name: TV Color Lights1
+     #192.168.1.65:
+      # name: Steps
+     #192.168.1.57:
+      # name: Porch Led

@@ -9,55 +9,55 @@
 
         - name: Sensors
           entities:
-             - sensor.melbourne_now
-          text_template: '${entity.state ? entity.state : "unknown"}'
-          class_template: '
-            var temp = parseFloat(entity.state.replace("°", ""));
-            if (temp < 10)
-              return "temp-low";
-            else if (temp < 30)
-              return "temp-medium";
-            else
-              return "temp-high";
-            '
+            - sensor.master_motion
+            - sensor.game_motion
+            - sensor.front_p_motion
+            - sensor.attic_motion
+            - sensor.tv_motion_status
+          states:
+            - state: 'standby'
+              class: 'info-light'
+            - state: 'motion detected'
+              class: 'warning-light'
+          state_transitions:
+            - name: motion detected to standby
+              from_state: 'motion detected'
+              to_state: 'standby'
+              duration: 10
 
-        - name: Lights
+
+        - name: Light
           entities:
-             - light.hallway
-             - light.living_room
-             - light.patio
+            - group.kitchen_lights
+            - light.dining_room_level_33_0
+            - light.front_entry_level_6_0
           states:
             - state: 'on'
               class: 'light-on'
             - state: 'off'
               class: 'light-off'
 
-        - name: Switches
+        - name: Switch
           entities:
-             - switch.doorbell
+            - switch.front_lights_switch_28_0
+            - switch.attic_fans
+            - switch.rabbit_area_switch_34_0
+            - switch.game_room_light
+            - switch.game_room_fan
+
           states:
             - state: 'on'
               class: 'doorbell-on'
             - state: 'off'
               class: 'doorbell-off'
 
-        - name: Alarm Panel
-          entities:
-             - alarm_control_panel.alarm
-          states:
-            - state: 'armed_away'
-              class: 'alarm-armed'
-            - state: 'armed_home'
-              class: 'alarm-armed'
-            - state: 'disarmed'
-              class: 'alarm-disarmed'
-
         - name: Binary sensors
           entities:
-            - binary_sensor.front_hallway
-            - binary_sensor.kitchen
-            - binary_sensor.master_bedroom
-            - binary_sensor.theatre_room
+            - binary_sensor.kitchen_multi_sensor_sensor_31_0
+            - binary_sensor.front_motion_sensor_42_0
+            - binary_sensor.back_motion_sensor_10_0
+            - binary_sensor.tv_room_multi_sensor_sensor_32_0
+
           states:
             - state: 'off'
               class: 'info-light'
@@ -68,13 +68,3 @@
               from_state: 'on'
               to_state: 'off'
               duration: 10
-
-        - name: Cameras
-          entities:
-            - camera.hallway
-            - camera.driveway
-            - camera.front_door
-            - camera.backyard
-          states:
-            - state: 'idle'
-              class: 'camera-idle'

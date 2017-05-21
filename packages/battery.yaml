@@ -18,7 +18,8 @@ homeassistant:
       friendly_name: torn8os iPhone Battery
     sensor.lynx_iphone_battery:
       friendly_name: lynxs iPhone Battery
-
+    sensor.nina_battery_level:
+      friendly_name: Nina iPhone Battery
 
 # Multi Sensor Batteries
 #    sensor.upstairs_multisensor_battery:
@@ -34,6 +35,27 @@ homeassistant:
 #      icon: mdi:battery
 
 sensor:
+  - platform: template
+    sensors:
+      nina_iphone_battery:
+        unit_of_measurement: '%'
+        entity_id: device_tracker.nina
+        value_template: "{{ (states.device_tracker.nina.attributes|default).battery|default|int('unknown') }}"
+        icon_template: >-
+          {% set battery_level = states('sensor.nina_iphone_battery')|int('unknown') %}
+          {% set battery_round = (battery_level|int / 10)|int * 10 %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+
   - platform: template
     sensors:
       lynx_iphone_battery:
@@ -105,6 +127,19 @@ automation:
             {{ trigger.to_state.attributes.friendly_name }}'s phone battery is less than: {{ trigger.to_state.attributes.battery }}%.
           value2: ""
 
+  - alias: Notify nina Low battery
+    trigger:
+      platform: numeric_state
+      entity_id:
+      - device_tracker.nina
+      value_template: '{{ state.attributes.battery }}'
+      below: 80
+    action:
+      - service: script.notify_me
+        data_template:
+          value1: >
+            {{ trigger.to_state.attributes.friendly_name }}'s phone battery is less than: {{ trigger.to_state.attributes.battery }}%.
+          value2: ""
 #  - alias: Alert Low Battery Level of Sensors
 #    trigger:
 #      platform: numeric_state

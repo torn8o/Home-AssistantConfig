@@ -1,0 +1,73 @@
+  - platform: mqtt
+    state_topic: dummy/floorplan/sensor
+    name: Floorplan
+
+  - platform: mqtt
+    state_topic: "torn/front_motion"
+    name: "front p motion"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: mqtt
+    state_topic: "torn/master_bedroom"
+    name: "master motion"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: mqtt
+    state_topic: "torn/master_bedroom"
+    name: "Master Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/master_bedroom"
+    name: "Master Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/attic"
+    name: "attic motion"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: mqtt
+    state_topic: "torn/attic"
+    name: "attic temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/attic"
+    name: "attic humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/monkey"
+    name: "monkey room Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/monkey"
+    name: "monkey room Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+
+
+  - platform: mqtt
+    state_topic: "torn/game_room"
+    name: "game motion"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: mqtt
+    state_topic: "torn/game_room"
+    name: "game room Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/game_room"
+    name: "game room Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'

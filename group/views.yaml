@@ -109,10 +109,7 @@ Motion:
 #  icon: mdi:motion
   view: yes
   entities:
-    - sensor.back_motion_status
-    - sensor.front_motion_status
-    - sensor.kitchen_multi_sensor_burglar_31_10
-    - sensor.tv_room_multi_sensor_burglar_32_10
+    - group.test
 
 trash__recycle_schedule:
   view: yes

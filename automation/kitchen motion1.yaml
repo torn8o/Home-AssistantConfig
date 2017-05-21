@@ -15,19 +15,112 @@
     service: light.turn_off
     entity_id: group.kitchen_lights
 
-#- alias: Turn Kitchen light when there is movement
-#  trigger:
-#    platform: state
-#    entity_id: binary_sensor.front_motion_sensor_42_0, binary_sensor.back_motion_sensor_10_0
-#    to: 'on'
-#  action:
-#    service: light.turn_on
-#    entity_id: group.kitchen_lights
-#- alias: Turn Kitchen light when there is no movement
-#  trigger:
-#    platform: state
-#    entity_id: binary_sensor.front_motion_sensor_42_0, binary_sensor.back_motion_sensor_10_0
-#    to: 'off'
-#  action:
-#    service: light.turn_off
-#    entity_id: group.kitchen_lights
+- alias: Turn front light on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.front_motion_sensor_43_0
+    to: 'on'
+  action:
+    service: light.turn_on
+    entity_id: group.kitchen_lights
+- alias: Turn front light off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.front_door_sensor_sensor_43_0
+    to: 'off'
+    for:
+      minutes: 2
+  action:
+    service: light.turn_off
+    entity_id: group.kitchen_lights
+- alias: binary Turn on color light
+  trigger:
+    platform: state
+    entity_id: sensor.front_p_motion #sensor.kitchen_multi_sensor_burglar_31_10
+    to: 'motion detected'
+  action:
+    service: light.turn_on
+    entity_id: light.tv_color_lights, light.tv_color_lights1
+- alias: binary Turn off color lights
+  trigger:
+    platform: state
+    entity_id: sensor.front_p_motion #sensor.kitchen_multi_sensor_burglar_31_10
+    to: 'standby'
+  action:
+    service: light.turn_off
+    entity_id: light.tv_color_lights, light.tv_color_lights1
+
+- alias: Turn on master bedroom light when there is movement
+  trigger:
+    platform: state
+    entity_id: sensor.mb_motion_status
+    to: 'on'
+  condition:
+    - condition: template
+      value_template: >-
+        {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+        {%- if hour >= 10 and hour  <=  22 -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+  action:
+    service: switch.turn_on
+    entity_id: switch.master_bedroom_light
+
+- alias: Turn off master bedroom light when there is no movement
+  trigger:
+    platform: state
+    entity_id: sensor.mb_motion_status
+    to: 'off'
+  condition:
+    - condition: template
+      value_template: >-
+        {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+        {%- if hour >= 10 and hour <= 22 -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+  action:
+    service: switch.turn_off
+    entity_id: switch.master_bedroom_light
+
+
+- alias: Turn on game room light when there is movement
+  trigger:
+    platform: state
+    entity_id: sensor.gr_motion_status
+    to: 'on'
+  condition:
+    - condition: template
+      value_template: >-
+        {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+        {%- if hour >= 10 and hour  <=  22 -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+  action:
+    service: switch.turn_on
+    entity_id: switch.game_room_light
+
+- alias: Turn off game room light when there is no movement
+  trigger:
+    platform: state
+    entity_id: sensor.gr_motion_status
+    to: 'off'
+    for:
+      minutes: 15
+  condition:
+    - condition: template
+      value_template: >-
+        {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+        {%- if hour >= 10 and hour  <=  22 -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+  action:
+    service: switch.turn_off
+    entity_id: switch.game_room_light
