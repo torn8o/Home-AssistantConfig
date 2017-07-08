@@ -1,0 +1,122 @@
+
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'master'
+
+light:
+  - platform: mqtt_json
+    name: "mb led"
+    state_topic: "torn/master_bed"
+    command_topic: "torn/master_bed/set"
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    qos: 0
+
+  - platform: mqtt_json
+    name: "gr led"
+    state_topic: "torn/game_room"
+    command_topic: "torn/game_room/set"
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    qos: 0
+
+  - platform: mqtt
+    name: "david picture"
+    state_topic: "stat/david/POWER"
+    command_topic: "cmnd/david/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+  - platform: mqtt
+    name: "zelda picture"
+    state_topic: "stat/zelda/POWER"
+    command_topic: "cmnd/zelda/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+group:
+  master_room_motion:
+    entities:
+      - sensor.master_bed_motion
+      - sensor.mb_motion_status
+      - light.mb_led
+      - automation.turn_on_master_bedroom_light_when_there_is_movement
+      - automation.turn_off_master_bedroom_light_when_there_is_no_movement
+
+sensor:
+  - platform: mqtt
+    state_topic: "torn/master_bed"
+    name: "master bed motion"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: mqtt
+    state_topic: "torn/master_bed"
+    name: "master bed temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/master_bed"
+    name: "master bed humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+  - platform: template
+    sensors:
+      mb_motion_status:
+        value_template: '{% if states.sensor.master_bed_motion %}
+          {% if states.sensor.master_bed_motion.state == "motion detected" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+automation:
+  - alias: Turn on led
+    trigger:
+      platform: state
+      entity_id: sensor.mb_motion_status
+      to: 'on'
+    condition:
+      - condition: template
+        value_template: >-
+          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+          {%- if hour >= 10 and hour  <=  22 -%}
+            true
+          {%- else -%}
+            false
+          {%- endif %}
+    action:
+      service: light.turn_on
+      entity_id: light.mb_led
+
+  - alias: Turn off led
+    trigger:
+      platform: state
+      entity_id: sensor.mb_motion_status
+      to: 'off'
+    condition:
+      - condition: template
+        value_template: >-
+          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+          {%- if hour >= 10 and hour <= 22 -%}
+            true
+          {%- else -%}
+            false
+          {%- endif %}
+    action:
+      service: light.turn_off
+      entity_id: light.mb_led

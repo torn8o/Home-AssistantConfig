@@ -1,0 +1,145 @@
+mqtt:
+  broker: !secret mqtt_broker
+  port: !secret mqtt_port
+#  client_id: !secret mqtt_client
+  keepalive: !secret mqtt_keepalive
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+
+light:
+  - platform: mqtt_json
+    name: "Porch Strip"
+  #  state_topic: " bruh/porch"
+    command_topic: "bruh/porch/set"
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane
+      - confetti
+      - cyclon rainbow
+      - dots
+      - fire
+      - solid
+      - white
+      - red
+      - blue
+      - green
+      - glitter
+      - juggle
+      - lightning
+      - noise
+      - police all
+      - police one
+      - rainbow
+      - rainbow with glitter
+      - ripple
+      - sinelon
+      - twinkle
+    brightness: true
+    flash: true
+    rgb: true
+    retain: true
+    optimistic: true
+    qos: 0
+  - platform: mqtt_json
+    name: "picture"
+  #  state_topic: " bruh/porch"
+    command_topic: "torn/test/set"
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane
+      - confetti
+      - cyclon rainbow
+      - dots
+      - fire
+      - solid
+      - white
+      - red
+      - blue
+      - green
+      - glitter
+      - juggle
+      - lightning
+      - noise
+      - police all
+      - police one
+      - rainbow
+      - rainbow with glitter
+      - ripple
+      - sinelon
+      - twinkle
+    brightness: true
+    flash: true
+    rgb: true
+    retain: true
+    optimistic: true
+    qos: 0
+
+
+input_slider:
+  porch_animation_speed:
+    name: Porch Animation Speed
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
+  picture_animation_speed:
+    name: Picture Animation Speed
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
+
+automation:
+  - alias: "Porch Animation Speed"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_slider.porch_animation_speed
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "bruh/porch/set"
+          payload: '{"transition":{{ trigger.to_state.state | int }}}'
+
+  - alias: "picture Animation Speed"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_slider.picture_animation_speed
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "torn/test/set"
+          payload: '{"transition":{{ trigger.to_state.state | int }}}'
+group:
+  porch_lights:
+    control: hidden
+    view: yes
+    icon: mdi:led-on
+    name: Led Porch
+    entities:
+      - group.Led_porch
+      - group.Led_pic
+
+  Led_porch:
+    entities:
+      - automation.turn_front_lights_on_at_sunset
+      - automation.front_light_off
+      - switch.front_lights_switch
+      - light.porch_strip
+      - automation.porch_input_effect
+      - input_slider.porch_animation_speed
+      - automation.turn_front_led_on_at_sunset
+      - automation.front_led_off
+      - light.cabinet_lights
+      - automation.turn_cabinet_on_at_sunset
+      - automation.cabinet_led_off
+  Led_pic:
+    entities:
+      - light.picture
+      - automation.picture_input_effect
+      - input_slider.picture_animation_speed

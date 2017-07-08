@@ -57,6 +57,8 @@ group:
       - sensor.unique_domains
       - sensor.queries_forwarded
       - sensor.queries_cached
+      - script.pihole_on
+      - script.pihole_off
 
 ###############################################################################
 #  Sensors
@@ -112,3 +114,21 @@ automation:
         data_template:
           value1: "Pi-Hole blocked 1000 Ads today! Hurray!!!"
           value2: ""
+
+
+script:
+  pihole_on:
+    sequence:
+       - service: shell_command.pihole_on
+  pihole_off:
+    sequence:
+       - service: shell_command.pihole_off
+
+shell_command:
+  pihole_on: !secret pi_hole_switch_on
+  pihole_off: !secret pi_hole_switch_off
+
+#!secret_example
+#Authorization & Token required (see WEBPASSWORD in /etc/pihole/setupVars.conf)
+#pi_hole_switch_on: /usr/bin/curl -k "localhost/admin/api.php?enable&auth=webkey"
+#pi_hole_switch_off: /usr/bin/curl -k "localhost/admin/api.php?disable=600&auth=webkey"

@@ -21,7 +21,9 @@
 ################################################
 ## System Log
 ################################################
-
+- name: TORNBOT
+  platform: discord
+  token: YPQLl4BYxexMwzCWkEOyl03nCzfzsEOV
 #- platform: syslog
 #  name: syslog
 #  facility: syslog

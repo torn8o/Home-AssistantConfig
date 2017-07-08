@@ -1,38 +1,35 @@
+#  modified version of https://github.com/brahmafear/hass_config/blob/master/yaml/packages/ip_devices.yaml
+#  added automations from https://github.com/Norien/Home-Assistant-Config/blob/master/packages/device_status.yaml
+#
+#
+#
+#
+#
 homeassistant:
   customize:
     device_tracker.torntravel_wireless:
       hidden: true
     device_tracker.torntravel_wired:
       hidden: true
-    device_tracker.viostor:
+    device_tracker.echo_living_room:
       hidden: true
-    device_tracker.sonicwall:
+    device_tracker.echo_master_bedroom:
       hidden: true
-    device_tracker.airport_extreme:
+    device_tracker.echo_game_room:
       hidden: true
-    device_tracker.ecoplug_1:
+    device_tracker.echo_kitchen:
       hidden: true
-    device_tracker.ecoplug_2:
+    device_tracker.esp_attic:
       hidden: true
-    device_tracker.appletv:
+    device_tracker.esp_counter_lights:
       hidden: true
-    device_tracker.hpmini:
+    device_tracker.esp_front_leds:
       hidden: true
-    device_tracker.samsungtv:
+    device_tracker.esp_game_room:
       hidden: true
-    device_tracker.yeelight1:
+    device_tracker.esp_living_room:
       hidden: true
-    device_tracker.tp_link:
-      hidden: true
-    device_tracker.echo_1:
-      hidden: true
-    device_tracker.echo_2:
-      hidden: true
-    device_tracker.SLAMPHER_1735b9:
-      hidden: true
-    device_tracker.SLAMPHER_173b67:
-      hidden: true
-    device_tracker.SLAMPHER_173a91:
+    device_tracker.esp_master_bedroom:
       hidden: true
 
 sensor:
@@ -40,71 +37,116 @@ sensor:
     sensors:
       torntravel_wireless:
         friendly_name: 'torntravel_wireless'
-        value_template: "{{ 'online' if is_state('device_tracker.torntravel_wireless', 'home') else 'Offline' }}"
+        value_template: "{{ 'Online' if is_state('device_tracker.torntravel_wireless', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.torntravel_wireless', 'home') else 'mdi:alert-circle' }}"
       torntravel_wired:
         friendly_name: 'torntravel_wired'
-        value_template: "{{ 'online' if is_state('device_tracker.torntravel_wired', 'home') else 'Offline' }}"
-      viostor_nvr:
-        friendly_name: 'VioStor NVR'
-        value_template: "{{ 'OK' if is_state('device_tracker.viostor', 'home') else 'Offline' }}"
-      sonicwall:
-        friendly_name: 'SonicWall'
-        value_template: "{{ 'OK' if is_state('device_tracker.sonicwall', 'home') else 'Offline' }}"
-      airport_extreme:
-        friendly_name: 'Airport Extreme'
-        value_template: "{{ 'OK' if is_state('device_tracker.airport_extreme', 'home') else 'Offline' }}"
-      tp_link:
-        friendly_name: 'TP Link'
-        value_template: "{{ 'OK' if is_state('device_tracker.tp_link', 'home') else 'Offline' }}"
-      echo_1:
-        friendly_name: 'echo 1'
-        value_template: "{{ 'OK' if is_state('device_tracker.echo_1', 'home') else 'Offline' }}"
-      echo_2:
-        friendly_name: 'echo 2'
-        value_template: "{{ 'OK' if is_state('device_tracker.echo_2', 'home') else 'Offline' }}"
-      ecoplug_1:
-        friendly_name: 'ecoPlug 1'
-        value_template: "{{ 'OK' if is_state('device_tracker.ecoplug_1', 'home') else 'Offline' }}"
-      ecoplug_2:
-        friendly_name: 'ecoPlug 2'
-        value_template: "{{ 'OK' if is_state('device_tracker.ecoplug_2', 'home') else 'Offline' }}"
-      hpmini:
-        friendly_name: 'HP mini'
-        value_template: "{{ 'OK' if is_state('device_tracker.hpmini', 'home') else 'Offline' }}"
-      yeelight1:
-        friendly_name: 'YeeLight 1'
-        value_template: "{{ 'OK' if is_state('device_tracker.yeelight1', 'home') else 'Offline' }}"
-      appletv:
-        friendly_name: 'Apple TV'
-        value_template: "{{ 'OK' if is_state('device_tracker.appletv', 'home') else 'Offline' }}"
-      slampher_1735b9:
-        friendly_name: 'Porch Right Light'
-        value_template: "{{ 'OK' if is_state('device_tracker.SLAMPHER_1735b9', 'home') else 'Offline' }}"
-      slampher_173b67:
-        friendly_name: 'Side Door Light'
-        value_template: "{{ 'OK' if is_state('device_tracker.SLAMPHER_173b67', 'home') else 'Offline' }}"
-      slampher_173a91:
-        friendly_name: 'Porch Left Light'
-        value_template: "{{ 'OK' if is_state('device_tracker.SLAMPHER_173a91', 'home') else 'Offline' }}"
-
+        value_template: "{{ 'Online' if is_state('device_tracker.torntravel_wired', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.torntravel_wired', 'home') else 'mdi:alert-circle' }}"
+      esp_front_led:
+        friendly_name: 'esp front led'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_front_leds', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.esp_front_leds', 'home') else 'mdi:alert-circle' }}"
+      echo_master_bedroom:
+        friendly_name: 'echo master bedroom'
+        value_template: "{{ 'Online' if is_state('device_tracker.echo_master_bedroom', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.echo_master_bedroom', 'home') else 'mdi:alert-circle' }}"
+      echo_living_room:
+        friendly_name: 'echo living room'
+        value_template: "{{ 'Online' if is_state('device_tracker.echo_living_room', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.echo_living_room', 'home') else 'mdi:alert-circle' }}"
+      echo_game_room:
+        friendly_name: 'echo game room'
+        value_template: "{{ 'Online' if is_state('device_tracker.echo_game_room', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.echo_game_room', 'home') else 'mdi:alert-circle' }}"
+      echo_kitchen:
+        friendly_name: 'echo kitchen'
+        value_template: "{{ 'Online' if is_state('device_tracker.echo_kitchen', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.echo_kitchen', 'home') else 'mdi:alert-circle' }}"
+      esp_master_bedroom:
+        friendly_name: 'esp master bedroom'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_master_bedroom', 'home') else 'Offline' }}"
+        icon_template: >-
+          {% set device_status = states.sensor.esp_master_bedroom.state |d('unknown') %}
+          {% if device_status == 'unknown' %}
+            mdi:alert-circle
+          {% else %}
+            {% if device_status == 'online' %}
+              mdi:garage-open
+            {% else %}
+              mdi:garage
+            {% endif %}
+          {% endif %}
+      esp_attic:
+        friendly_name: 'esp attic'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_attic', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.esp_attic', 'home') else 'mdi:alert-circle' }}"
+      esp_game_room:
+        friendly_name: 'esp game room'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_game_room', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.esp_game_room', 'home') else 'mdi:alert-circle' }}"
+      esp_living_room:
+        friendly_name: 'esp living room'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_living_room', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.esp_living_room', 'home') else 'mdi:alert-circle' }}"
+      esp_counter_lights:
+        friendly_name: 'esp counter lights'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_counter_lights', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.esp_counter_lights', 'home') else 'mdi:alert-circle' }}"
 
 group:
   network_devices:
     name: Network Devices
     entities:
-      - sensor.sonicwall
-      - sensor.engenius_ap
-      - sensor.airport_extreme
-      - sensor.tp_link
-      - sensor.viostor_nvr
-      - sensor.hpmini
-      - sensor.chromecast
-      - sensor.appletv
-      - sensor.echo_1
-      - sensor.echo_2
-      - sensor.ecoplug_1
-      - sensor.ecoplug_2
-      - sensor.yeelight1
-      - sensor.slampher_1735b9
-      - sensor.slampher_173b67
-      - sensor.slampher_173a91
+      - sensor.esp_front_led
+#      - sensor.torntravel_wireless
+#      - sensor.torntravel_wired
+#      - sensor.esp_master_bedroom
+#      - sensor.esp_attic
+#      - sensor.esp_game_room
+#      - sensor.esp_living_room
+#      - sensor.esp_counter_lights
+#      - sensor.echo_living_room
+#      - sensor.echo_master_bedroom
+#      - sensor.echo_game_room
+#      - sensor.echo_kitchen
+      - automation.Notify_if_Device_Goes_Offline
+
+  network_views:
+    name: network_views
+    view: yes
+    entities:
+      - group.network_devices
+
+automation:
+###############################################################################
+# Notify when a device goes Offline or Online
+###############################################################################
+  - alias: Notify if Device Goes Offline
+    trigger:
+      platform: state
+      entity_id:
+        - sensor.esp_front_led
+  #      - sensor.torntravel_wireless
+  #      - sensor.torntravel_wired
+  #      - sensor.esp_master_bedroom
+  #      - sensor.esp_attic
+  #      - sensor.esp_game_room
+  #      - sensor.esp_living_room
+  #      - sensor.esp_counter_lights
+  #      - sensor.echo_living_room
+  #      - sensor.echo_master_bedroom
+  #      - sensor.echo_game_room
+  #      - sensor.echo_kitchen
+    condition:
+      - condition: template
+        value_template: "{% if trigger.from_state and trigger.to_state %} True {% else %} False {% endif %}"
+    action:
+      - service: notify.ios_torn8o
+        data_template:
+          message: >
+            {% if trigger.to_state.state | lower == "offline" %}
+              {{ trigger.to_state.attributes.friendly_name }} has gone offline!
+            {% else %}
+              {{ trigger.to_state.attributes.friendly_name }} has come online!
+            {% endif %}

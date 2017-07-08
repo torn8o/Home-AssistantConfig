@@ -3,35 +3,25 @@
     name: Floorplan
 
   - platform: mqtt
+    state_topic: "torn/motion"
+    name: "LR Motion Detection"
+    unit_of_measurement: "Date"
+    value_template: '{{ value_json.date ~ "\n" ~ value_json.time }}'
+
+  - platform: mqtt
     state_topic: "torn/front_motion"
     name: "front p motion"
     value_template: '{{ value_json.motion }}'
 
-  - platform: mqtt
-    state_topic: "torn/master_bedroom"
-    name: "master motion"
-    value_template: '{{ value_json.motion }}'
 
-  - platform: mqtt
-    state_topic: "torn/master_bedroom"
-    name: "Master Temperature"
-    unit_of_measurement: "°F"
-    value_template: '{{ value_json.temperature | round(1) }}'
-
-  - platform: mqtt
-    state_topic: "torn/master_bedroom"
-    name: "Master Humidity"
-    unit_of_measurement: "%"
-    value_template: '{{ value_json.humidity | round(1) }}'
+#  - platform: mqtt
+#    state_topic: "torn/attic"
+#    name: "attic motion"
+#    value_template: '{{ value_json.motion }}'
 
   - platform: mqtt
     state_topic: "torn/attic"
-    name: "attic motion"
-    value_template: '{{ value_json.motion }}'
-
-  - platform: mqtt
-    state_topic: "torn/attic"
-    name: "attic temperature"
+    name: "granma temperature"
     unit_of_measurement: "°F"
     value_template: '{{ value_json.temperature | round(1) }}'
 
@@ -42,18 +32,44 @@
     value_template: '{{ value_json.humidity | round(1) }}'
 
   - platform: mqtt
-    state_topic: "torn/monkey"
+    state_topic: "torn/monkey_room"
     name: "monkey room Temperature"
     unit_of_measurement: "°F"
     value_template: '{{ value_json.temperature | round(1) }}'
 
   - platform: mqtt
-    state_topic: "torn/monkey"
+    state_topic: "torn/monkey_room"
     name: "monkey room Humidity"
     unit_of_measurement: "%"
     value_template: '{{ value_json.humidity | round(1) }}'
 
+  - platform: mqtt
+    state_topic: "torn/attic/attic_motion"
+    name: "attic motion"
+#    value_template: '{{ value_json.motion }}'
 
+  - platform: mqtt
+    state_topic: "torn/attic/dining_motion"
+    name: "dining motion"
+#    value_template: '{{ value_json.motion }}'
+
+#  - platform: mqtt
+#    state_topic: "torn/attic/Temperature"
+#    name: "attic temperature"
+  #  unit_of_measurement: "°F"
+  #  value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/attic/Temperature"
+    name: "attic F temperature"
+    unit_of_measurement: "°F"
+  #  value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/attic/Humidity"
+    name: "attic humidity"
+#    unit_of_measurement: "%"
+#    value_template: '{{ value_json.humidity | round(1) }}'
 
   - platform: mqtt
     state_topic: "torn/game_room"
@@ -62,12 +78,12 @@
 
   - platform: mqtt
     state_topic: "torn/game_room"
-    name: "game room Temperature"
+    name: "game temperature"
     unit_of_measurement: "°F"
     value_template: '{{ value_json.temperature | round(1) }}'
 
   - platform: mqtt
     state_topic: "torn/game_room"
-    name: "game room Humidity"
+    name: "game humidity"
     unit_of_measurement: "%"
     value_template: '{{ value_json.humidity | round(1) }}'

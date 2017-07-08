@@ -18,6 +18,9 @@ all scripts:
   - script.rebuild_customize
   - script.steps_timer_on
 all automation:
+  - input_boolean.working_in_garage
+  - automation.notify_garage_door_status
+  - automation.close_single_car_garage_door
   - automation.fan_control_off_with_temp
   - automation.fan_control_on_with_temp
   - automation.binary_turn_on_kitchen_light_when_there_is_movement

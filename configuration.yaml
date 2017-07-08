@@ -37,6 +37,16 @@ ifttt:
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
+  sensors:
+    monitored_conditions:
+      - 'hvac_state'
+      - 'humidity'
+      - 'operation_mode'
+      - 'temperature'
+      - 'target'
+      - 'co_status'
+      - 'smoke_status'
+      - 'batter_health'
 
 climate:
   platform: nest
@@ -50,19 +60,19 @@ wink:
   email: !secret wink_email
   password: !secret wink_password
 
-mqtt:
-  broker: !secret mqtt_broker
-  port: !secret mqtt_port
-  client_id: !secret mqtt_client
-  keepalive: !secret mqtt_keepalive
-  username: !secret mqtt_user
-  password: !secret mqtt_pass
 
-influxdb:
-  database: !secret influxdb_database
-  host: !secret influxdb_host
-  username:  influxdb_user
-  password: influxdb_password
+
+#influxdb:
+#  database: !secret influxdb_database
+#  host: !secret influxdb_host
+#  username:  influxdb_user
+#  password: influxdb_password
+#  exclude:
+#    entities:
+#       - entity.id1
+#       - entity.id2
+#    domains:
+#       - automation
 
 
 emulated_hue:
@@ -112,7 +122,7 @@ media_player:
 
 recorder:
   purge_days: 3
-#  db_url: !secret recorder_db_url
+  db_url: !secret db_url
   exclude:
     domains:
       - automation

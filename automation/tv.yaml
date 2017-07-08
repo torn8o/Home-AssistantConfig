@@ -2,15 +2,15 @@
   trigger:
     - platform: state
       entity_id: sensor.vizio_tv
-      to: 'Online'
+      state: 'Online'
   action:
     - service: homeassistant.turn_on
-      entity_id: light.tv_room_light_level_16_0, switch.tv_room_fan
+      entity_id: light.tv_room_light_level, switch.tv_room_fan
 - alias: TV Lights and Fan off
   trigger:
     platform: state
     entity_id: sensor.vizio_tv
-    to: 'offline'
+    state: 'offline'
   action:
     service: homeassistant.turn_off
     entity_id: light.tv_room_light_level_16_0, switch.tv_room_fan
@@ -19,7 +19,7 @@
   trigger:
     - platform: state
       entity_id: sensor.torntravel_wired
-      to: 'Online'
+      state: 'Online'
   action:
     - service: homeassistant.turn_on
       entity_id: switch.game_room_fan, switch.game_room_light
@@ -27,7 +27,7 @@
   trigger:
     platform: state
     entity_id: sensor.torntravel_wired
-    to: 'offline'
+    state: 'offline'
   action:
     service: homeassistant.turn_off
     entity_id: switch.game_room_fan, switch.game_room_light

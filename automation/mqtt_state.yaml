@@ -1,0 +1,14 @@
+#automation:
+  - alias: Save sensor mqtt State
+    initial_state: true
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: switch.switch_one, switch.switch_two, switch.switch_three, switch.switch_four, switch.switch_five
+    action:
+      service: mqtt.publish
+      data_template:
+        topic: "/home/rfswitches/{{ trigger.entity_id.split('.')[1] }}"
+        retain: true
+        qos: 1
+        payload: '{{ trigger.to_state.state }}'

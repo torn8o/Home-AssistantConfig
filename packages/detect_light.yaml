@@ -1,0 +1,89 @@
+##############################################################################
+###  Detect when lights are turned on and adjust them accordingly based on time.
+###  Code by @JesseWebDotCom
+###  copy received from @ccostan
+###  @torn8o created into a package
+##############################################################################
+
+
+
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'detect lights'
+
+group:
+  detect_lighting:
+    entities:
+      - switch.front_lights_switch
+      - light.porch_strip
+      - light.kitchen_cabinet_lights
+
+  family:
+    entities:
+      - device_tracker.monkey_phone
+      - device_tracker.nina
+      - device_tracker.nina_iphone
+      - device_tracker.torn8o
+      - device_tracker.lynx
+      - device_tracker.nina_ipad
+      - device_tracker.home_server
+
+  lighting_dim:
+    name: Dim light
+    view: yes
+    entities:
+      - group.detect_lighting
+      - automation.detect_lights
+
+automation:
+  - alias: detect lights
+    trigger:
+      - platform: event
+        event_type: state_changed
+
+    condition:
+      - condition: state
+        entity_id: group.family
+        state: 'home'
+      - condition: state
+        entity_id: input_boolean.alert_mode
+        state: 'off'
+      - condition: template
+        value_template: "{{ trigger.event.data is not none }}"
+      - condition: template
+        value_template: "{{ trigger.event.data.entity_id is not none }}"
+      - condition: template
+        value_template: "{{ trigger.event.data.entity_id.split('.')[0] == 'light' }}"
+      - condition: template
+        value_template: "{{ trigger.event.data.entity_id.split('_')[0] != 'light.porch_strip' }}"
+      - condition: template
+        value_template: "{{ trigger.event.data.entity_id.split('_')[0] != 'light.master_bedroom_fan_level' }}"
+      - condition: template
+        value_template: "{{ trigger.event.data.entity_id.split('_')[0] != 'light.kitchen_cabinet_lights' }}"
+      - condition: template
+        value_template: "{{ trigger.event.data.entity_id.split('_')[0] != 'light.tv_room_light_level' }}"
+      - condition: template
+        value_template: "{{ trigger.event.data.entity_id.split('_')[0] != 'light.attic_lights_level' }}"
+      - condition: template
+        value_template: "{{ trigger.event.data.new_state.state == 'on' }}"
+      - condition: template
+        value_template: "{{ trigger.event.data.old_state.state == 'off' }}"
+
+    action:
+      - service: light.turn_on
+        data_template:
+          entity_id: "{{ trigger.event.data.entity_id }}"
+          brightness: >
+            {% set hour=states("sensor.time").split(':')[0] | int %}
+            {%- if hour >= 5 and hour < 8  -%}
+              50
+            {%- elif hour >= 8 and hour <22  -%}
+              255
+            {%- elif hour >= 22 and hour <24  -%}
+              40
+            {%- else -%}
+              15
+            {%- endif %}

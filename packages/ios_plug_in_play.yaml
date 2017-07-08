@@ -59,19 +59,44 @@ ios:
             authenticationRequired: yes
             destructive: no
 
+      - name: Garage
+        identifier: 'GARAGE_CLOSE'
+        actions:
+          - identifier: 'GARAGE_CLOSE'
+            title: 'Close Garage'
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: yes
+            behavior: 'default'
+          - identifier: 'REMIND_LATER'
+            title: 'Remind me later'
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: no
+
+      - name: Garage test
+        identifier: 'Garage'
+        actions:
+          - identifier: 'garage'
+            title: 'Reminder Garage'
+            activationMode: 'background'
+            authenticationRequired: no
+            destructive: yes
+            behavior: 'default'
+
       - name: Alarm
         identifier: 'ALARM'
         actions:
           - identifier: 'SOUND_ALARM'
             title: 'Sound Alarm'
             activationMode: 'background'
-            authenticationRequired: yes
+            authenticationRequired: no
             destructive: yes
             behavior: 'default'
           - identifier: 'SILENCE_ALARM'
             title: 'Silence Alarm'
             activationMode: 'background'
-            authenticationRequired: yes
+            authenticationRequired: no
             destructive: yes #no
             behavior: 'default' #'textInput'
             textInputButtonTitle: 'Silencio!'
@@ -80,12 +105,16 @@ ios:
 group: # will add a view on the main tab of home assistant
   ios_test:
     name: ios_test
+    icon: mdi:apple-ios
     view: yes
     entities:
       - automation.Notify_iOS_Actionable_Notifications
       - automation.sound_the_alarm
       - automation.SILENCE_ALARM
       - automation.Notify_camera_Actionable_Notifications
+      - automation.notify_door
+      - automation.close_garage
+      - automation.reset_relays
       - group.zones
 
 automation:

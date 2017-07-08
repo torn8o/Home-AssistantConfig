@@ -69,3 +69,15 @@ switch:
      receiver3:
        friendly_name: Fan Speed High
        command_on: 'sgk0AA8OGw4bDhsaDhsPDhsOGg4bDhsaDw4bDhsaDg4bDhsOGxoOGg8OGw4bDhsaDw4aGg4AAawAAAAA'
+     receiver4:
+       friendly_name: Living room curtain close
+       command_on: 'JgA0ACwNKgwPKCsNDygOKSsKESgOKQ8pDikOAAR4Kw0qDg4oKwwPKA4pKw0OKg4pDikOKQ4ADQUAAAAA'
+#       command_off: 'a3/xHpvvpFzyGnS2aFdCYlxe6wne7r5MeEyvWw=='
+     receiver5:
+       friendly_name: Living room curtain open
+       command_on: 'JgBoACoOKQ0PKCwMDikOKQ8oKg4OKA8pDygOAAR4Kw0qDQ4pKg4MKg4pDygrDQ4pDSoPKA8AC10pDykODigrDQ4qDigPKQ4oDygPKQ4pDwAEdyoOKgsQKQ8oDygPKA8pDioOKQ4oDykOAA0F'
+#       command_off: 'a3/xHpvvpFzyGnS2aFdCYlxe6wne7r5MeEyvWw=='
+     receiver6:
+       friendly_name: Living room curtain stop
+       command_on: 'JgBoACsMKw0OKSoNDygPKA8oDygrDg4oDygPAAR4Kg4pDg4oKw0OKQ8oDygPKCsMDygPKQ8AC1wrDikNDygrDQ4oDykPKA8oKg4OKA8oEAAEdysMKw0OKQ8oDygPKBAnDygQKA8oDygPAA0F'
+  #     command_off: 'JgBoACoOKQ0PKCwMDikOKQ8oKg4OKA8pDygOAAR4Kw0qDQ4pKg4MKg4pDygrDQ4pDSoPKA8AC10pDykODigrDQ4qDigPKQ4oDygPKQ4pDwAEdyoOKgsQKQ8oDygPKA8pDioOK'

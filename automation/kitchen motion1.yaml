@@ -1,16 +1,33 @@
 - alias: Turn on Kitchen light when there is movement
   trigger:
     platform: state
-    entity_id: sensor.kitchen_multi_sensor_burglar_31_10 #sensor.tv_room_multi_sensor_burglar_32_10
-    to: '8'
+    entity_id: group.kitchen_motion #sensor.tv_room_multi_sensor_burglar_32_10
+    state: 'on'
   action:
     service: light.turn_on
     entity_id: group.kitchen_lights
 - alias: Turn off Kitchen light when there is no movement
   trigger:
     platform: state
-    entity_id: sensor.kitchen_multi_sensor_burglar_31_10 #sensor.tv_room_multi_sensor_burglar_32_10
-    to: '0'
+    entity_id: group.kitchen_motion #sensor.kitchen_multi_sensor_burglar_31_10 #sensor.tv_room_multi_sensor_burglar_32_10
+    state: 'off'
+  action:
+    service: light.turn_off
+    entity_id: group.kitchen_lights
+
+- alias: Turn on Kitchen light
+  trigger:
+    platform: state
+    entity_id: sensor.fd_motion_status #sensor.tv_room_multi_sensor_burglar_32_10
+    state: 'on'
+  action:
+    service: light.turn_on
+    entity_id: group.kitchen_lights
+- alias: Turn Kitchen light off
+  trigger:
+    platform: state
+    entity_id: sensor.fd_motion_status #sensor.tv_room_multi_sensor_burglar_32_10
+    state: 'off'
   action:
     service: light.turn_off
     entity_id: group.kitchen_lights
@@ -18,43 +35,27 @@
 - alias: Turn front light on
   trigger:
     platform: state
-    entity_id: binary_sensor.front_motion_sensor_43_0
-    to: 'on'
+    entity_id: binary_sensor.front_motion_sensor
+    state: 'on'
   action:
     service: light.turn_on
     entity_id: group.kitchen_lights
 - alias: Turn front light off
   trigger:
     platform: state
-    entity_id: binary_sensor.front_door_sensor_sensor_43_0
-    to: 'off'
+    entity_id: binary_sensor.front_door_sensor_sensor
+    state: 'off'
     for:
       minutes: 2
   action:
     service: light.turn_off
     entity_id: group.kitchen_lights
-- alias: binary Turn on color light
-  trigger:
-    platform: state
-    entity_id: sensor.front_p_motion #sensor.kitchen_multi_sensor_burglar_31_10
-    to: 'motion detected'
-  action:
-    service: light.turn_on
-    entity_id: light.tv_color_lights, light.tv_color_lights1
-- alias: binary Turn off color lights
-  trigger:
-    platform: state
-    entity_id: sensor.front_p_motion #sensor.kitchen_multi_sensor_burglar_31_10
-    to: 'standby'
-  action:
-    service: light.turn_off
-    entity_id: light.tv_color_lights, light.tv_color_lights1
 
 - alias: Turn on master bedroom light when there is movement
   trigger:
     platform: state
     entity_id: sensor.mb_motion_status
-    to: 'on'
+    state: 'on'
   condition:
     - condition: template
       value_template: >-
@@ -72,7 +73,9 @@
   trigger:
     platform: state
     entity_id: sensor.mb_motion_status
-    to: 'off'
+    state: 'off'
+    for:
+      minutes: 2
   condition:
     - condition: template
       value_template: >-
@@ -91,7 +94,7 @@
   trigger:
     platform: state
     entity_id: sensor.gr_motion_status
-    to: 'on'
+    state: 'on'
   condition:
     - condition: template
       value_template: >-
@@ -109,9 +112,9 @@
   trigger:
     platform: state
     entity_id: sensor.gr_motion_status
-    to: 'off'
+    state: 'off'
     for:
-      minutes: 15
+      minutes: 30
   condition:
     - condition: template
       value_template: >-
@@ -124,3 +127,16 @@
   action:
     service: switch.turn_off
     entity_id: switch.game_room_light
+
+#- alias: 'motion detected'
+#  trigger:
+#    platform: mqtt
+#    topic: 'torn/motion'
+#  condition:
+#    - condition: state
+#      entity_id: device_tracker.torn8o
+#      state: 'home'
+#  action:
+#    service: notify.notify
+#    data_template:
+#      message: "motion detected: {{ trigger.payload_json['camera'] ~ ' ' ~ trigger.payload_json['time'] ~ ' ' ~ trigger.payload_json['date'] }}"

@@ -1,8 +1,0 @@
-- alias: garage entry
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.ecolink_doorwindow_sensor_sensor_23_0
-      to: 'on'
-  action:
-    - service: light.turn_on
-      entity_id: light.ge_12724_3way_dimmer_switch_level_9_0, light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0

@@ -33,15 +33,11 @@ weather:
   icon: mdi:weather-cloudy
   entities:
     - group.darksky
-Fan:
+Zwave:
   view: yes
-  icon: mdi:fan
-  name: Fan
+  icon: mdi:nfc
   entities:
-    - switch.fan_speed_low
-    - switch.fan_speed_medium
-    - switch.fan_speed_high
-    - switch.fan_speed_off
+    - group.zwave
 
 den room:
   view: yes
@@ -97,19 +93,6 @@ Automations:
   entities:
     - group.all_automation
 
-MultiSensor:
-  name: MultiSensor
-  icon: mdi:pulse
-  view: yes
-  entities:
-    - group.sensor_node_1_card
-
-Motion:
-  name: Motion
-#  icon: mdi:motion
-  view: yes
-  entities:
-    - group.test
 
 trash__recycle_schedule:
   view: yes
@@ -118,5 +101,3 @@ trash__recycle_schedule:
   entities:
     - group.trash__recycle_schedule
     - group.trash__recycle
-    - group.family_group
-    - group.control

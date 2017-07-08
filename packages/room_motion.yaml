@@ -10,14 +10,10 @@ group:
     entities:
       - sensor.game_motion
       - sensor.gr_motion_status
+      - light.gr_led
       - automation.turn_on_game_room_light_when_there_is_movement
       - automation.turn_off_game_room_light_when_there_is_no_movement
-  master_room_motion:
-    entities:
-      - sensor.master_motion
-      - sensor.mb_motion_status
-      - automation.turn_on_master_bedroom_light_when_there_is_movement
-      - automation.turn_off_master_bedroom_light_when_there_is_no_movement
+
   porch_room_motion:
     entities:
       - sensor.front_p_motion
@@ -25,27 +21,19 @@ group:
       - automation.binary_turn_on_color_light
       - automation.binary_turn_off_color_lights
 
+
   motion:
     name: room motion
     view: yes
+    icon: mdi:walk
     entities:
       - group.game_room_motion
       - group.master_room_motion
-      - group.porch_room_motion
+#      - group.porch_room_motion
+
 
 sensor:
-  - platform: template
-    sensors:
-      mb_motion_status:
-        value_template: '{% if states.sensor.master_motion %}
-          {% if states.sensor.master_motion.state == "motion detected" %}
-            on
-          {% else %}
-            off
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'
+
 
   - platform: template
     sensors:
@@ -89,11 +77,50 @@ sensor:
   - platform: template
     sensors:
       tv_motion_status:
-        value_template: '{% if states.sensor.tv_room_multi_sensor_burglar_32_10 %}
-          {% if states.sensor.tv_room_multi_sensor_burglar_32_10.state == "8" %}
-            motion detected
+        value_template: '{% if states.sensor.tv_room_multi_sensor_burglar %}
+          {% if states.sensor.tv_room_multi_sensor_burglar.state == "8" %}
+            on
           {% else %}
-            standby
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+
+  - platform: template
+    sensors:
+      attic_2motion_status:
+        value_template: '{% if states.sensor.attic_motion %}
+          {% if states.sensor.attic_motion.state == "1" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+
+  - platform: template
+    sensors:
+      dining_motion_status:
+        value_template: '{% if states.sensor.dining_motion %}
+          {% if states.sensor.dining_motion.state == "1" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+
+  - platform: template
+    sensors:
+      kit_motion_status:
+        value_template: '{% if states.sensor.kitchen_multi_sensor_burglar %}
+          {% if states.sensor.kitchen_multi_sensor_burglar.state == "8" %}
+            on
+          {% else %}
+            off
           {% endif %}
           {% else %}
           n/a

@@ -31,7 +31,7 @@
   action:
     service: persistent_notification.create
     data:
-      title:   "New Update"
+      title: "New Update"
       message: "Update for Home Assistant is available."
 
   ##############

@@ -2,10 +2,10 @@
   api_key: !secret darksky_api_key
   monitored_conditions:
     - summary
-    - icon
-    - nearest_storm_distance
-    - nearest_storm_bearing
-    - precip_type
+#    - icon
+#    - nearest_storm_distance
+#    - nearest_storm_bearing
+#    - precip_type
     - precip_intensity
     - precip_probability
     - temperature
@@ -17,15 +17,15 @@
     - humidity
     - pressure
     - visibility
-    - ozone
+#    - ozone
 #      - minutely_summary
-    - hourly_summary
-    - daily_summary
-    - temperature_max
-    - temperature_min
-    - apparent_temperature_max
-    - apparent_temperature_min
-    - precip_intensity_max
+#    - hourly_summary
+#    - daily_summary
+#    - temperature_max
+#    - temperature_min
+#    - apparent_temperature_max
+#    - apparent_temperature_min
+#    - precip_intensity_max
 
 #- platform: sonarr
 #  api_key: !secret sonarr_api_key

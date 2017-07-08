@@ -2,7 +2,7 @@
 - alias: Turn Kitchen light garage
   trigger:
     platform: state
-    entity_id: binary_sensor.garage_door_entry_sensor_23_0
+    entity_id: binary_sensor.garage_door_entry_sensor
     to: 'on'
   action:
     - service: light.turn_on

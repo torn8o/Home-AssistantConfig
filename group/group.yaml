@@ -1,14 +1,10 @@
 ####GROUPS####
 control:
   entities:
-    - binary_sensor.ecolink_doorwindow_sensor_sensor_44_0
-    - binary_sensor.front_door_sensor_sensor_43_0
-    - zwave.front_entry_6
+    - binary_sensor.ecolink_doorwindow_sensor_sensor
+    - binary_sensor.front_door_sensor_sensor
     - binary_sensor.floorplan
     - media_player.torntv
-    - input_slider.porch_animation_speed
-    - light.porch_leds
-    - light.porch_strip
     - automation.porch_input_effect
     - automation.porch_animation_speed_2
     - automation.porch_animation_speed
@@ -35,17 +31,12 @@ test:
     - automation.binary_turn_off_color_lights
     - sensor.back_motion_status
     - sensor.front_motion_status
-    - sensor.kitchen_multi_sensor_burglar_31_10
-    - sensor.tv_room_multi_sensor_burglar_32_10
-Sensor_multi:
-  entities:
-    - sensor.sn1_humidity
-    - sensor.sn1_ldr
-    - sensor.sn1_pir
-    - sensor.sn1_temperature
+    - sensor.kitchen_multi_sensor_burglar
+    - sensor.tv_room_multi_sensor_burglar
+
 Tv room temp:
   entities:
-   - sensor.tv_room_multi_sensor_temperature_32_1
+   - sensor.tv_room_multi_sensor_temperature
    - sensor.living_room_temperature
    - sensor.broadlink_torn_temperature
 
@@ -60,19 +51,26 @@ game room:
 Kitchen Lights:
   control: hidden
   entities:
+   - light.kitchen_light_level
+   - light.kitchen_bar_light_level
    - light.kitchen_light_level_9_0
-   - light.ge_12724_3way_dimmer_switch_level_9_0
-   - light.zooz_unknown_type0112_id241c_level_5_0
-   - light.kitchen_bar_lights_level_5_0
-   - light.zooz_zen22_zwave_plus_dimmer_light_switch_level_5_0
    - automation.turn_on_kitchen_light_when_there_is_movement
    - camera.cam
-
+Kit:
+   - light.kitchen_light_level
+   - light.kitchen_bar_light_level
+#   - light.kitchen_light_level
+#   - light.kitchen_bar_lights_level
+kitchen motion:
+  entities:
+  #  - sensor.kitchen_multi_sensor_burglar_31_10
+    - sensor.dining_motion_status
+    - sensor.kit_motion_status
 master bedroom:
-  - switch.ge_12722_on_relay_switch_switch_13_0
-  - switch.ge_12722_onoff_relay_switch_switch_13_0
-  - light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_8_0
-  - light.master_bedroom_fan_level_8_0
+  - switch.ge_12722_on_relay_switch_switch
+  - switch.ge_12722_onoff_relay_switch_switch
+  - light.aeotec_dsc27103_micro_dimmer_2nd_edition_level
+  - light.master_bedroom_fan_level
   - switch.master_bedroom_light
   - switch.master_bathroom_fan
   - switch.master_bathroom_light
@@ -80,8 +78,8 @@ master bedroom:
   - sensor.master_bedroom_proximity
   - sensor.master_bedroom_temperature
   - binary_sensor.master_bedroom_presence
-  - switch.ge_12722_on_relay_switch_switch_25_0
-  - switch.ge_12722_onoff_relay_switch_switch_25_0
+  - switch.ge_12722_on_relay_switch_switch
+  - switch.ge_12722_onoff_relay_switch_switch
 
 Sonarr:
   - sensor.sonarr_disk_space_2
@@ -101,34 +99,28 @@ family_group:
   - sensor.lynx_battery_level
   - sensor.lynx_battery_state
 
-Door bell sensor:
-  entities:
-    - binary_sensor.door_bell_sensor_23_0
-    - zwave.door_bell_23
-    - binary_sensor.kitchen_door_sensor_35_0
-    - zwave.kitchen_door_35
-    - binary_sensor.window_sensor_sensor_14_0
-    - sensor.window_sensor_alarm_level_14_1
-    - sensor.window_sensor_alarm_type_14_0
+
 
 Garage:
   - sensor.top_door_status
   - sensor.a_door_status
-  - light.attic_lights_level_3_0
+  - light.attic_lights_level
   - sensor.garage_door_status
-  - binary_sensor.garage_door_opener_sensor_2_0
-  - switch.garage_door_opener_switch_2_0
+  - binary_sensor.garage_door_opener_sensor
+  - switch.garage_door_opener_switch
 
 network:
   - sensor.speedtest_upload
   - sensor.speedtest_download
   - sensor.speedtest_ping
   - sensor.fastcom_download
-
+quadflight:
+  - climate.hallway
 Nest:
   - climate.hallway
   - sensor.hallway_thermostat_target
   - sensor.hallway_thermostat_temperature
+  - sensor.hallway_thermostat_hvac_state
   - binary_sensor.hallway_presence
   - sensor.hallway_temperature
   - sensor.hallway_thermostat_humidity
@@ -153,11 +145,11 @@ Air Safety:
 
 tv room:
   - sensor.average_living_room_temp
-  - light.tv_room_light_level_16_0
-  - switch.cable_modem_switch_22_0
+  - light.tv_room_light_level
+  - switch.cable_modem_switch
   - switch.plex_server_power
-  - switch.ge_12722_on_relay_switch_switch_16_0
-  - light.ge_12724_3way_dimmer_switch_level_16_0
+  - switch.ge_12722_on_relay_switch_switch
+  - light.ge_12724_3way_dimmer_switch_level
   - switch.fan_
   - switch.tv_room_fan
   - light.cabinet_lights
@@ -168,7 +160,8 @@ tv room:
   - switch.flood_lights
   - media_player.xboxtorn
   - input_select.fan_speed
-
+gitter:
+  - sensor.gitter_messages
 Fan:
   entities:
     - switch.fan_speed_high
@@ -181,11 +174,11 @@ Hallway:
   - sensor.Hallway_proximity
   - sensor.Hallway_temperature
   - sensor.Hallway_humidity
-  - binary_sensor.ecolink_pir_motion_sensor_sensor_10_0
-  - binary_sensor.ecolink_pir_motion_sensor_sensor_11_0
-  - light.unknown_id015d_unknown_type0112_id241c_level_15_0
-  - light.zooz_zen22_zwave_plus_dimmer_light_switch_level_6_0
-  - light.zooz_unknown_type0112_id241c_level_6_0
+  - binary_sensor.ecolink_pir_motion_sensor_sensor
+  - binary_sensor.ecolink_pir_motion_sensor_sensor
+  - light.unknown_id015d_unknown_type0112_id241c_level
+  - light.zooz_zen22_zwave_plus_dimmer_light_switch_level
+  - light.zooz_unknown_type0112_id241c_level
 
 Hallway Light:
   - light.hallway_1
@@ -225,22 +218,22 @@ darksky:
 
 kitchen motion MultiSensor:
   entities:
-    - sensor.kitchen_multi_sensor_burglar_31_10
-    - sensor.tv_room_multi_sensor_burglar_32_10
+    - sensor.kitchen_multi_sensor_burglar
+    - sensor.tv_room_multi_sensor_burglar
 
 binary motion:
-  - binary_sensor.kitchen_multi_sensor_sensor_31_0
-  - binary_sensor.tv_room_multi_sensor_sensor_32_0
+  - binary_sensor.kitchen_multi_sensor_sensor
+  - binary_sensor.tv_room_multi_sensor_sensor
 
 kitchen motion ecolink:
-  - sensor.front_motion_burglar_11_10
-  - sensor.back_motion_burglar_10_10
+  - sensor.front_motion_burglar
+  - sensor.back_motion_burglar
 
 Christmas lights:
   - switch.kitchen_outlet
-  - switch.ge_12722_on_relay_switch_switch_28_0
-  - switch.ge_12722_onoff_relay_switch_switch_28_0
-  - switch.leviton_unknown_type1d04_id0334_switch_17_0
+  - switch.ge_12722_on_relay_switch_switch
+  - switch.ge_12722_onoff_relay_switch_switch
+  - switch.leviton_unknown_type1d04_id0334_switch
   - switch.christmas_sleigh
   - switch.christmas_tree
 
@@ -250,8 +243,8 @@ Led lights:
 
 temperature:
   - sensor.hallway_thermostat_temperature
-  - sensor.aeotec_zw100_multisensor_6_temperature_31_1
-  - sensor.aeotec_zw100_multisensor_6_temperature_7_1
+  - sensor.aeotec_zw100_multisensor_6_temperature
+  - sensor.aeotec_zw100_multisensor_6_temperature
   - sensor.den_temperature
   - sensor.master_bedroom_temperature
   - sensor.nina_room_temperature

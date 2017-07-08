@@ -1,0 +1,89 @@
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'accent lighting'
+
+group:
+  accent_lighting:
+    entities:
+      - switch.front_lights_switch_
+      - light.porch_strip
+      - light.kitchen_cabinet_lights
+
+  led_automations:
+    entities:
+      - automation.turn_front_led_on_at_sunset
+      - automation.front_led_off
+      - automation.turn_front_lights_on_at_sunset
+      - automation.front_light_off
+      - automation.turn_cabinet_on_at_sunset
+      - automation.cabinet_led_off
+
+  accent:
+    name: room motion
+    view: yes
+    icon: mdi:led
+    entities:
+      - group.led_automations
+      - group.accent_lighting
+#      - group.porch_room_motion
+
+automation:
+  - alias: Turn front lights On At Sunset
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      service: switch.turn_on
+      entity_id: switch.front_lights_switch
+
+  - alias: 'front light off'
+    trigger:
+      platform: sun
+      event: sunrise
+  #    offset: '-07:33:00'
+    action:
+      service: switch.turn_off
+      entity_id: switch.front_lights_switch
+
+  - alias: Turn front led On At Sunset
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+      offset: '00:01:00'
+    action:
+      service: light.turn_on
+      entity_id: light.porch_strip
+
+  - alias: 'front led off'
+    trigger:
+      platform: sun
+      event: sunrise
+  #    offset: '00:00:00'
+    action:
+      service: light.turn_off
+      entity_id: light.porch_strip
+
+
+  - alias: Turn cabinet On At Sunset
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+      offset: '00:01:10'
+    action:
+      service: light.turn_on
+      entity_id: light.kitchen_cabinet_lights
+
+  - alias: 'cabinet led off'
+    trigger:
+      platform: sun
+      event: sunrise
+  #    offset: '00:00:00'
+    action:
+      service: light.turn_off
+      entity_id: light.kitchen_cabinet_lights

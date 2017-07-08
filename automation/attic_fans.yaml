@@ -2,8 +2,8 @@
       - alias: fan_control_on_with_temp
         trigger:
           - platform: numeric_state
-            entity_id: sensor.attic_temperature
-            above: 105
+            entity_id: sensor.attic_f_temperature
+            above: 100
         action:
           - service: switch.turn_on
             data:
@@ -12,7 +12,7 @@
       - alias: fan_control_off_with_temp
         trigger:
           - platform: numeric_state
-            entity_id: sensor.attic_temperature
+            entity_id: sensor.attic_f_temperature
             below: 100
         action:
           - service: switch.turn_off
