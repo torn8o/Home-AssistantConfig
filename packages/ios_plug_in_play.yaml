@@ -1,27 +1,30 @@
-###############################################################################
-#   @user           :
-#   original Github
-#   https://github.com/torn8o/Home-AssistantConfig
+############################################################################################
+#   @user           :   @torn8o
+#   @original Github:   https://github.com/torn8o/Home-AssistantConfig
 #   @author         :   torn8o
 #   @date           :   04/21/2017
 #   @package        :   ios plug and play
-#   @description    :   Example to understand Actionable Notifications for IOS
-# htis is a package file inorder for this to work in your setup
-# you must have packagesset up in your configuration.
-#    To set up packages place the following line into the configuation file under
-#    customize please view below order. You will then need to make a folder in the
-#    .homeassistant folder called poackages.
+#   @description    :   Example to understand Actionable Notifications for IOS.
+#                       This is a package file. In order for this to work in your
+#                       setup you must have packages set up in your configuration.
 #
-#homeassistant:
-#  name: your ha name
-#  latitude: !secret home_latitude
-#  longitude: !secret home_longitude
-#  elevation: !secret home_elevation
-#  time_zone: America/Chicago
-#  unit_system: imperial
-#  customize: !include customize.yaml
-#  packages: !include_dir_named packages
-###############################################################################
+#                       To set up packages place the following line into the configuration
+#                       file under "customize" please view below order.
+#
+#                       You will then need to make a folder in the ".homeassistant" folder
+#                       called packages.
+#
+#
+#   @example        :   homeassistant:
+#                         name: your ha name
+#                         latitude: !secret home_latitude
+#                         longitude: !secret home_longitude
+#                         elevation: !secret home_elevation
+#                         time_zone: America/Chicago
+#                         unit_system: imperial
+#                         customize: !include customize.yaml
+#                         packages: !include_dir_named packages
+############################################################################################
 
 
 homeassistant:
