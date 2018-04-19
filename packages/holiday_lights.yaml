@@ -1,0 +1,161 @@
+#######################################
+############## Holiday Outside Lights ######
+#######################################
+
+light:
+  - platform: mqtt
+    name: "Front led"
+    command_topic: "torn/ledlights/setpower"
+    state_topic: "torn/ledlights/setpowerpub"
+    rgb_state_topic: "torn/ledlights/setcolorpub"
+    rgb_command_topic: "torn/ledlights/setcolor"
+    brightness_state_topic: "torn/ledlights/setbrightnesspub"
+    brightness_command_topic: "torn/ledlights/setbrightness"
+    optimistic: false
+
+input_select:
+  eave_effect:
+    name: eave effect
+    options:
+     - "Christmas"
+     - "Candy Cane"
+     - "Holly Jolly"
+     - "Valentine"
+     - "Lovey Day"
+     - "St Patty"
+     - "Easter"
+     - "USA"
+     - "Independence"
+     - "Go Blue"
+     - "Hail"
+     - "Touchdown"
+     - "Halloween"
+     - "Punkin"
+     - "Thanksgiving"
+     - "Turkey Day"
+     - "BPM"
+     - "Confetti"
+     - "Cyclon Rainbow"
+     - "Dots"
+     - "Fire"
+     - "Glitter"
+     - "Juggle"
+     - "Lightning"
+     - "Police All"
+     - "Police One"
+     - "Rainbow"
+     - "Rainbow with Glitter"
+     - "Ripple"
+     - "Sinelon"
+     - "Solid"
+     - "Twinkle"
+    initial: "Solid"
+
+input_number:
+  animation_speed:
+    name: Animation Speed
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
+
+automation:
+  - alias: "eave Input Effect"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_select.eave_effect
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "torn/ledlights/seteffect"
+          payload: '{{ trigger.to_state.state | string }}'
+
+  - alias: "Animation Speed"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_number.animation_speed
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "torn/ledlights/setanimationspeed"
+          payload: '{{ trigger.to_state.state | int }}'
+
+  - alias: Turn porch light On At Sunset
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+      offset: '-00:00:15'
+    action:
+      service: switch.turn_on
+      entity_id: switch.porch_light
+
+  - alias: 'Turn porch light off at sunrise'
+    trigger:
+      platform: sun
+      event: sunrise
+  #    offset: '-07:33:00'
+    action:
+      service: switch.turn_off
+      entity_id: switch.porch_light
+
+  - alias: Turn eave led On At Sunset
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+      offset: '00:01:00'
+    action:
+      service: light.turn_on
+      entity_id: light.eave_lights
+
+  - alias: 'front led off'
+    trigger:
+      platform: sun
+      event: sunrise
+      offset: '00:00:30'
+    action:
+      service: light.turn_off
+      entity_id: light.eave_lights
+#  - alias: trigger
+#    initial_state: 'on'
+#    trigger:
+#      - platform: mqtt
+#        topic: torn/ledlights/seteffect
+#        payload: 'Holly Jolly'
+#    action:
+#      - service: input_select
+#        data:
+#          entity_id: input_select.holiday_led_effect
+
+group:
+  Led_porch:
+    entities:
+      - automation.turn_front_lights_on_at_sunset
+      - automation.front_light_off
+      - switch.front_lights_switch
+      - light.hyperion
+      - light.Front_led
+      - input_select.Eave_effect
+      - automation.porch_input_effect
+      - input_number.porch_animation_speed
+      - automation.turn_front_led_on_at_sunset
+      - automation.front_led_off
+      - light.cabinet_lights
+      - automation.turn_cabinet_on_at_sunset
+      - automation.cabinet_led_off
+#  holiday_lights:
+#    control: hidden
+#    view: yes
+#    icon: mdi:led-on
+#    name: holiday Porch
+#    entities:
+#      - group.holiday_porch
+
+
+
+################################

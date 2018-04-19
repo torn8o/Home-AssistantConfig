@@ -1,0 +1,115 @@
+
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'Garage sensor'
+light:  
+  - platform: mqtt_json  
+    name: "Garage_LED"
+    state_topic: "torn/garage"  
+    command_topic: "torn/garage/set"  
+    brightness: true  
+    flash: true  
+    rgb: true  
+    optimistic: false  
+    qos: 0  
+  
+ 
+  
+sensor:  
+  - platform: mqtt  
+    state_topic: "torn/garage"  
+    name: "Garage Humidity"  
+    unit_of_measurement: "%"  
+    value_template: '{{ value_json.humidity | round(1) }}'  
+  
+  - platform: mqtt  
+    state_topic: "torn/garage"  
+    name: "Garage LDR"
+    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+    unit_of_measurement: "LUX"  
+    value_template: '{{ value_json.ldr }}'  
+  
+  - platform: mqtt  
+    state_topic: "torn/garage"  
+    name: "Garage PIR"  
+    value_template: '{{ value_json.motion }}'  
+  
+  - platform: mqtt  
+    state_topic: "torn/garage"  
+    name: "Garage Temperature"  
+    unit_of_measurement: "°F"  
+    value_template: '{{ value_json.temperature | round(1) }}'  
+
+  - platform: mqtt
+    state_topic: "torn/garage"
+    name: "Garage Real Feel"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+  - platform: template
+    sensors:
+      garage_motion_status:
+        value_template: '{% if states.sensor.Garage_Pir %}
+          {% if states.sensor.Garage_Pir.state == "motion detected" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'  
+
+automation:
+  - alias: Turn light garage on
+    trigger:
+      platform: state
+      entity_id: sensor.garage_motion_status
+      to: 'on'
+    action:
+      - service: light.turn_on
+        entity_id: light.level
+      - delay:
+          minutes: 15
+      - service: light.turn_off
+        entity_id: light.level
+
+  - alias: Turn light led on
+    trigger:
+      platform: state
+      entity_id: sensor.garage_motion_status
+      to: 'on'
+    action:
+      - service: light.turn_on
+        entity_id: light.garage_led
+        data:
+          color_name: 'green'
+      - service: light.turn_on
+        entity_id: light.garage_led
+        data:
+          flash: long
+      - service: light.turn_on
+        entity_id: light.garage_led
+        data:
+          brightness: 255    
+#        color_name: green
+#        brightness: 255
+#        flash: long
+        
+      - delay:
+          seconds: 15
+      - service: light.turn_off
+        entity_id: light.garage_led
+group:  
+  Garage_sensor:  
+    name: Garage Sensor
+    view: yes 
+    entities:  
+      - sensor.Garage_Temperature  
+      - sensor.Garage_Humidity  
+      - sensor.Garage_Ldr  
+      - sensor.Garage_Pir  
+      - light.Garage_LED
+      - light.level

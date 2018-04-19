@@ -1,0 +1,90 @@
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'devices'
+group:
+  new_sensors:
+    entities:
+      - sensor.vizio_tv
+
+sensor:
+  - platform: template
+    sensors:
+      vizio_tv:
+        value_template: "{% if is_state('device_tracker.vizio_tv', 'home') %}online{% else %}offline{% endif %}"
+        friendly_name: "Vizio tv"
+        icon_template: "{% if is_state('device_tracker.vizio_tv', 'home') %}mdi:check-circle{% else %}mdi:alert-circle{% endif %}"
+
+      front_door_status:
+        value_template: "{% if is_state('binary_sensor.front_door_sensor_sensor', 'on') %}open{% else %}closed{% endif %}"
+        friendly_name: "Front Door Status"
+        icon_template: "{% if is_state('binary_sensor.front_door_sensor_sensor', 'on') %}mdi:door-open{% else %}mdi:door-closed{% endif %}"
+          
+  - platform: foobot
+    token: !secret FOOBOT_SECRET_KEY
+    username: !secret FOOBOT_USERNAME
+              
+  - platform: broadlink
+    host: 192.168.1.19
+    mac: B4:43:0D:EF:9F:25
+    name: "broadlink torn"
+    update_interval: 60
+    monitored_conditions:
+      - temperature
+  
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+      - summary
+  #    - icon
+  #    - nearest_storm_distance
+  #    - nearest_storm_bearing
+  #    - precip_type
+      - precip_intensity
+      - precip_probability
+      - temperature
+      - apparent_temperature
+      - dew_point
+      - wind_speed
+      - wind_bearing
+      - cloud_cover
+      - humidity
+      - pressure
+      - visibility
+  #    - ozone
+  #      - minutely_summary
+  #    - hourly_summary
+  #    - daily_summary
+  #    - temperature_max
+  #    - temperature_min
+  #    - apparent_temperature_max
+  #    - apparent_temperature_min
+  #    - precip_intensity_max
+  
+  #- platform: sonarr
+  #  api_key: !secret sonarr_api_key
+  #  host: !secret sonarr_url
+  #  port: !secret sonarr_port
+  #  monitored_conditions:
+  #    - diskspace
+  #    - upcoming
+  #  days: 1
+  
+  - platform: crimereports
+    name: Home crimereports
+    radius: 10
+    
+  - platform: fastdotcom
+    minute:
+      - 0
+      - 30
+      
+#  - platform: template
+#    name: "Average Temp"
+#    sensors:
+#      average_house_temp:
+#            unit_of_measurement: "°F"
+#            value_template: >-
+#              {{ ((float(states.sensor.tv_room_multi_sensor_temperature_32_1.state) + float(states.sensor.kitchen_multi_sensor_temperature_31_1.state) + float(states.sensor.broadlink_torn_temperature.state) + float(states.sensor.game_room_temperature_2.state) + float(states.sensor.monkey_room_temperature.state) + float(states.sensor.hallway_temperature.state) + float(states.sensor.master_bed_temperature.state) + float(states.sensor.nina_room_temperature.state)) / 8) | round(1) }}

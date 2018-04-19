@@ -1,0 +1,91 @@
+################################################################
+## Packages / ISS
+################################################################
+
+################################################
+## Customize
+################################################
+
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'iss'
+
+    camera.iss:
+      <<: *customize
+      friendly_name: "ISS Position"
+
+    group.iss:
+      <<: *customize
+      friendly_name: "ISS Stats"
+
+    sensor.iss_people_space:
+      <<: *customize
+      friendly_name: "People In Space"
+      icon: mdi:account-multiple
+
+    sensor.iss_next_rise:
+      <<: *customize
+      friendly_name: "Next Rise"
+      icon: mdi:information-variant
+
+    sensor.iss_location:
+      <<: *customize
+      friendly_name: "Location"
+      icon: mdi:map-marker
+
+    sensor.iss_overhead:
+      <<: *customize
+      friendly_name: "Overhead"
+      icon: mdi:cloud-outline
+    
+##################################################
+## Binary Sensor
+##################################################
+binary_sensor:
+  - platform: iss
+
+##################################################
+## Camera
+##################################################
+camera:
+  - platform: generic
+    name: iss
+    still_image_url: https://maps.googleapis.com/maps/api/staticmap?center={{ states.binary_sensor.iss.attributes.lat }},{{ states.binary_sensor.iss.attributes.long }}&zoom=5&size=500x500&maptype=roadmap&markers=color:blue%7Clabel:P%7C{{ states.binary_sensor.iss.attributes.lat }},{{ states.binary_sensor.iss.attributes.long }}
+    limit_refetch_to_url_change: true
+
+##################################################
+## Group
+##################################################
+group:
+  iss:
+    control: hidden
+    entities:
+      - sensor.iss_overhead
+      - sensor.iss_people_space
+      - sensor.iss_next_rise
+      - sensor.iss_location
+      - camera.iss
+
+##################################################
+## Sensor
+##################################################
+sensor:
+  - platform: template
+    sensors:
+      iss_people_space:
+        value_template: "{{ states.binary_sensor.iss.attributes.number_of_people_in_space }}"
+
+      iss_next_rise:
+        value_template: "{{ as_timestamp(states.binary_sensor.iss.attributes.next_rise) | timestamp_custom('%H:%M:%S') }}"
+      
+      iss_location:
+        value_template: "[{{ states.binary_sensor.iss.attributes.lat }},{{ states.binary_sensor.iss.attributes.long }}]"
+
+      iss_overhead:
+        value_template: "{{ 'Yes' if is_state('states.binary_sensor.iss', 'on') else 'No' }}"
