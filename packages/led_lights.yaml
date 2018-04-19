@@ -1,12 +1,50 @@
 mqtt:
   broker: !secret mqtt_broker
   port: !secret mqtt_port
-#  client_id: !secret mqtt_client
+  discovery: true
+  discovery_prefix: homeassistant
+  client_id: !secret mqtt_client
   keepalive: !secret mqtt_keepalive
   username: !secret mqtt_user
   password: !secret mqtt_pass
+  
 
 light:
+  - platform: mqtt_json
+    name: "master Strip"
+  #  state_topic: " bruh/porch"
+    command_topic: "torn/master_light/set"
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane
+      - confetti
+      - cyclon rainbow
+      - dots
+      - fire
+      - solid
+      - white
+      - red
+      - blue
+      - green
+      - glitter
+      - juggle
+      - lightning
+      - noise
+      - police all
+      - police one
+      - rainbow
+      - rainbow with glitter
+      - ripple
+      - sinelon
+      - twinkle
+    brightness: true
+    flash: true
+    rgb: true
+    retain: true
+    optimistic: true
+    qos: 0
+
   - platform: mqtt_json
     name: "Porch Strip"
   #  state_topic: " bruh/porch"
@@ -75,9 +113,48 @@ light:
     retain: true
     optimistic: true
     qos: 0
+  - platform: mqtt_json
+    name: "light porch"
+  #  state_topic: " bruh/porch"
+    command_topic: "bruh/light/set"
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane
+      - confetti
+      - cyclon rainbow
+      - dots
+      - fire
+      - solid
+      - white
+      - red
+      - blue
+      - green
+      - glitter
+      - juggle
+      - lightning
+      - noise
+      - police all
+      - police one
+      - rainbow
+      - rainbow with glitter
+      - ripple
+      - sinelon
+      - twinkle
+    brightness: true
+    flash: true
+    rgb: true
+    retain: true
+    optimistic: true
+    qos: 0
 
-
-input_slider:
+input_number:
+  master_light_animation_speed:
+    name: master light Animation Speed
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
   porch_animation_speed:
     name: Porch Animation Speed
     initial: 150
@@ -90,14 +167,32 @@ input_slider:
     min: 1
     max: 150
     step: 10
+  light_animation_speed:
+    name: light Animation Speed
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
 
 automation:
+  - alias: "master light Animation Speed"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_number.master_light_animation_speed
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "torn/master_light/set"
+          payload: '{"transition":{{ trigger.to_state.state | int }}}'
+
   - alias: "Porch Animation Speed"
     initial_state: True
     hide_entity: False
     trigger:
       - platform: state
-        entity_id: input_slider.porch_animation_speed
+        entity_id: input_number.porch_animation_speed
     action:
       - service: mqtt.publish
         data_template:
@@ -109,11 +204,23 @@ automation:
     hide_entity: False
     trigger:
       - platform: state
-        entity_id: input_slider.picture_animation_speed
+        entity_id: input_number.picture_animation_speed
     action:
       - service: mqtt.publish
         data_template:
           topic: "torn/test/set"
+          payload: '{"transition":{{ trigger.to_state.state | int }}}'
+
+  - alias: "light Animation Speed"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_number.light_animation_speed
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "bruh/light/set"
           payload: '{"transition":{{ trigger.to_state.state | int }}}'
 group:
   porch_lights:
@@ -124,22 +231,23 @@ group:
     entities:
       - group.Led_porch
       - group.Led_pic
+      - group.light_porch
+      - group.master_light
 
-  Led_porch:
-    entities:
-      - automation.turn_front_lights_on_at_sunset
-      - automation.front_light_off
-      - switch.front_lights_switch
-      - light.porch_strip
-      - automation.porch_input_effect
-      - input_slider.porch_animation_speed
-      - automation.turn_front_led_on_at_sunset
-      - automation.front_led_off
-      - light.cabinet_lights
-      - automation.turn_cabinet_on_at_sunset
-      - automation.cabinet_led_off
+
   Led_pic:
     entities:
       - light.picture
       - automation.picture_input_effect
-      - input_slider.picture_animation_speed
+      - input_number.picture_animation_speed
+
+  Light_porch:
+    entities:
+      - light.light_porch
+      - automation.light_input_effect
+      - input_number.light_animation_speed
+  master_Light:
+    entities:
+      - light.master_strip
+      - automation.master_light_animation_speed
+      - input_number.master_light_animation_speed

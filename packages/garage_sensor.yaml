@@ -63,16 +63,26 @@ sensor:
           {% endif %}'  
 
 automation:
-  - alias: Turn light garage on
+
+  - alias: Turn on garage light when there is movement
     trigger:
       platform: state
       entity_id: sensor.garage_motion_status
       to: 'on'
     action:
-      - service: light.turn_on
-        entity_id: light.level
-      - delay:
-          minutes: 15
+      service: light.turn_on
+      entity_id: light.level
+
+
+  - alias: Turn garage light off
+    trigger:
+      platform: state
+      entity_id: sensor.garage_motion_status
+      to: 'off'
+      for:
+    #    seconds: 30
+        minutes: 15
+    action:
       - service: light.turn_off
         entity_id: light.level
 

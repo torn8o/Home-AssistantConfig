@@ -7,6 +7,18 @@ homeassistant:
       package: 'master'
 
 light:
+  - platform: group
+    name: Kitchen Leds
+    entities:
+      - light.kitchen_bar_light_level
+      - light.kitchen_light_level
+  - platform: group
+    name: accent lights
+    entities:
+      - light.kitchen_cabinet_lights
+      - light.display_light
+      - light.tv_color_lights
+      
   - platform: mqtt_json
     name: "mb led"
     state_topic: "torn/master_bed"
@@ -45,6 +57,16 @@ light:
     payload_off: "OFF"
     retain: true
 
+  - platform: mqtt_json  
+    name: Garage LED"  
+    state_topic: "torn/garage"  
+    command_topic: "torn/garage/set"  
+    brightness: true  
+    flash: true  
+    rgb: true  
+    optimistic: false  
+    qos: 0  
+    
 group:
   master_room_motion:
     entities:
@@ -54,7 +76,26 @@ group:
       - automation.turn_on_master_bedroom_light_when_there_is_movement
       - automation.turn_off_master_bedroom_light_when_there_is_no_movement
 
+
+      
 sensor:
+  - platform: mqtt
+    state_topic: "torn/attic"
+    name: "attic temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/attic"
+    name: "attic humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/attic"
+    name: "Garage Entry Motion"
+    value_template: '{{ value_json.motion }}'
+    
   - platform: mqtt
     state_topic: "torn/master_bed"
     name: "master bed motion"
@@ -71,6 +112,23 @@ sensor:
     name: "master bed humidity"
     unit_of_measurement: "%"
     value_template: '{{ value_json.humidity | round(1) }}'
+    
+  - platform: mqtt
+    state_topic: "torn/game_room"
+    name: "game motion"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: mqtt
+    state_topic: "torn/game_room"
+    name: "game temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/game_room"
+    name: "game humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
 
   - platform: template
     sensors:
@@ -84,7 +142,72 @@ sensor:
           {% else %}
           n/a
           {% endif %}'
+  - platform: template
+    sensors:
+      gr_motion:
+        value_template: '{% if states.sensor.game_motion %}
+          {% if states.sensor.game_motion.state == "motion detected" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+
+            
 automation:
+  - alias: master_bath_fan_timer
+    trigger:
+      platform: state
+      entity_id: switch.master_bathroom_fan_switch
+  #    from: 'off'
+      to: 'on'
+      for:
+        minutes: 10
+    action:
+      service: switch.turn_off
+      entity_id: switch.master_bathroom_fan_switch
+        
+  - alias: Turn on master bedroom light when there is movement
+    trigger:
+      platform: state
+      entity_id: sensor.mb_motion_status
+      to: 'on'
+    condition:
+      - condition: template
+        value_template: >-
+          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+          {%- if hour >= 11 and hour  <=  22 -%}
+            true
+          {%- else -%}
+            false
+          {%- endif %}
+    action:
+      service: switch.turn_on
+      entity_id: switch.master_bedroom_f_switch
+  
+  - alias: Turn off master bedroom light when there is no movement
+    trigger:
+      platform: state
+      entity_id: sensor.mb_motion_status
+      to: 'off'
+      for:
+        #minutes: 15
+        seconds: 15
+    condition:
+      - condition: template
+        value_template: >-
+          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+          {%- if hour >= 11 and hour <= 22 -%}
+            true
+          {%- else -%}
+            false
+          {%- endif %}
+    action:
+      service: switch.turn_off
+      entity_id: switch.master_bedroom_f_switch
+
   - alias: Turn on led
     trigger:
       platform: state
@@ -120,3 +243,82 @@ automation:
     action:
       service: light.turn_off
       entity_id: light.mb_led
+  - alias: Turn on kitchen light when there is movement
+    trigger:
+      platform: state
+      entity_id: group.kitchen_motion
+      to: 'on'
+    condition:
+      - condition: template
+        value_template: >-
+          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+          {%- if hour >= 10 and hour  <=  22 -%}
+            true
+          {%- else -%}
+            false
+          {%- endif %}
+    action:
+      service: light.turn_on
+      entity_id: group.kitchen_lights
+  
+  - alias: Turn off kitchen light when there is no movement
+    trigger:
+      platform: state
+      entity_id: group.kitchen_motion
+      to: 'off'
+      for:
+        seconds: 15
+    condition:
+      - condition: template
+        value_template: >-
+          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+          {%- if hour >= 10 and hour <= 22 -%}
+            true
+          {%- else -%}
+            false
+          {%- endif %}
+    action:
+      service: light.turn_off
+      entity_id: group.kitchen_lights
+
+  - alias: Turn on game room light when there is movement
+    trigger:
+      platform: state
+      entity_id: sensor.gr_motion
+      to: 'on'
+    condition:
+      - condition: template
+        value_template: >-
+          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+          {%- if hour >= 10 and hour  <=  22 -%}
+            true
+          {%- else -%}
+            false
+          {%- endif %}
+    action:
+      service: switch.turn_on
+      entity_id: switch.game_room_light
+  
+  - alias: Turn off game room light when there is no movement
+    trigger:
+      platform: state
+      entity_id: sensor.gr_motion
+      to: 'off'
+      for:
+        minutes: 10
+    condition:
+      - condition: template
+        value_template: >-
+          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+          {%- if hour >= 10 and hour  <=  22 -%}
+            true
+          {%- else -%}
+            false
+          {%- endif %}
+    action:
+      service: switch.turn_off
+      entity_id: switch.game_room_light
+      
+      
+
+
