@@ -1,0 +1,181 @@
+
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'Center sensor'
+light:  
+  - platform: mqtt_json  
+    name: "Center_LED"
+    state_topic: "torn/center"  
+    command_topic: "torn/center/set"  
+    brightness: true  
+    flash: true  
+    rgb: true  
+    optimistic: false  
+    qos: 0  
+  
+
+  
+sensor:
+     
+  - platform: mqtt  
+    state_topic: "torn/center"  
+    name: "Center Humidity"  
+    unit_of_measurement: "%"  
+    value_template: '{{ value_json.humidity | round(1) }}'  
+  
+  - platform: mqtt  
+    state_topic: "torn/center"  
+    name: "Center LDR"
+    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+    unit_of_measurement: "LUX"  
+    value_template: '{{ value_json.ldr }}'  
+  
+  - platform: mqtt  
+    state_topic: "torn/center"  
+    name: "Center PIR"  
+    value_template: '{{ value_json.motion }}'  
+  
+  - platform: mqtt  
+    state_topic: "torn/center"  
+    name: "Center Temperature"  
+    unit_of_measurement: "°F"  
+    value_template: '{{ value_json.temperature | round(1) }}'  
+
+  - platform: mqtt
+    state_topic: "torn/center"
+    name: "Center Real Feel"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+  - platform: template
+    sensors:
+      center_motion_status:
+        value_template: '{% if states.sensor.Center_Pir %}
+          {% if states.sensor.Center_Pir.state == "motion detected" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'  
+
+automation:
+#  - alias: motion reset
+#    trigger:
+#      platform: time
+#      seconds: '/10'
+#    condition:
+#     - condition: state
+#       entity_id: input_boolean.motion_toggle
+#       state: "on"
+#    action:
+#     - service: input_boolean.turn_off
+#       data:
+#         entity_id: input_boolean.motion_toggle
+      
+#  - alias: Turn motion on
+#    trigger:
+#      platform: state
+#      entity_id: sensor.front_door_motion
+#      to: 'MOTION'
+#    action:
+#      service: input_boolean.turn_on
+#      entity_id: input_boolean.motion_toggle        
+ 
+#  - alias: test light
+#    trigger:
+#      platform: state
+#      entity_id: input_boolean.motion_toggle
+#      to: 'on'
+#    action:
+#      service: switch.turn_on
+#      entity_id: switch.front_entry_light_switch
+
+#  - alias: Front Door Pic
+#    trigger:
+#      platform: state
+#      entity_id: sensor.front_door_motion
+#      to: 'MOTION'
+#    action:
+#      service: camera.snapshot
+#      data:
+#        entity_id: camera.cam
+#        filename: 'config/snapshot/cam.jpg'
+#      service: notify.pushover
+#      message: "front door"
+  #    target: ["danny_pixel", "tosh_phone"]
+    #  title: Shokabow Zoo
+#  - service: notify.slack
+#    data:
+#      message: "Living room camera snapshot"
+#      data:
+#        file:
+#          path: "/home/homeassistant/.homeassistant/snapshot/living_room_camera.jpg"
+#  - delay: "00:00:30"
+#  - service: switch.turn_on
+#    entity_id: switch.lr_alarm
+             
+  - alias: Turn o kitchen light movement
+    trigger:
+      platform: state
+      entity_id: sensor.center_motion_status
+      to: 'on'
+    action:
+      service: light.turn_on
+      entity_id: group.kitchen_lights
+
+  - alias: Turn kitchen light of
+    trigger:
+      platform: state
+      entity_id: sensor.center_motion_status
+      to: 'off'
+      for:
+        seconds: 30
+      #  minutes: 2
+    action:
+      - service: light.turn_off
+        entity_id: group.kitchen_lights
+
+  - alias: Turn light led on
+    trigger:
+      platform: state
+      entity_id: sensor.center_motion_status
+      to: 'on'
+    action:
+      - service: light.turn_on
+        entity_id: light.Center_led
+        data:
+          color_name: 'purple'
+      - service: light.turn_on
+        entity_id: light.Center_led
+        data:
+          flash: long
+      - service: light.turn_on
+        entity_id: light.Center_led
+        data:
+          brightness: 255    
+#        color_name: green
+#        brightness: 255
+#        flash: long
+        
+      - delay:
+          seconds: 15
+      - service: light.turn_off
+        entity_id: light.Center_led
+        
+    
+group:  
+  Center_sensor:  
+    name: Center Sensor
+    view: yes 
+    entities:  
+      - sensor.Center_Temperature  
+      - sensor.Center_Humidity  
+      - sensor.Center_Ldr  
+      - sensor.Center_Pir  
+      - light.Center_LED
+      - automation.turn_o_kitchen_light_movement
