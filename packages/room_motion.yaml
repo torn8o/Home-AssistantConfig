@@ -8,6 +8,7 @@ homeassistant:
 group:
   game_room_motion:
     entities:
+      - camera.camera
       - sensor.game_motion
       - sensor.gr_motion_status
       - light.gr_led

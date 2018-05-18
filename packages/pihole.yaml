@@ -102,18 +102,18 @@ sensor:
 ###############################################################################
 #  Automations unique_domains
 ###############################################################################
-automation:
-  - alias: Thousand Ads blocked
-    initial_state: true
-    trigger:
-      platform: numeric_state
-      entity_id: sensor.ads_blocked_today
-      above: 999
-    action:
-      - service: script.notify_me
-        data_template:
-          value1: "Pi-Hole blocked 1000 Ads today! Hurray!!!"
-          value2: ""
+#automation:
+#  - alias: Thousand Ads blocked
+#    initial_state: true
+#    trigger:
+#      platform: numeric_state
+#      entity_id: sensor.ads_blocked_today
+#      above: 999
+#    action:
+#      - service: script.notify_me
+#        data_template:
+#          value1: "Pi-Hole blocked 1000 Ads today! Hurray!!!"
+#          value2: ""
 
 
 script:

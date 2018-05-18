@@ -160,7 +160,7 @@ automation:
       platform: state
       entity_id:
       - sensor.garage_door_status
-      state: 'closed'
+      to: 'closed'
     #  for:
     #    minutes: 1
     action:

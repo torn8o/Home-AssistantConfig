@@ -16,9 +16,28 @@ light:
     optimistic: false  
     qos: 0  
   
- 
+
   
-sensor:  
+sensor:
+  - platform: mqtt
+    name: "front door Motion"
+    state_topic: "camera/front_door/motion"
+#    value_template: '{{ value_json.status }}'
+#    payload_on: "MOTION"
+#    payload_off: "NO MOTION"    
+#    device_class: motion
+  - platform: mqtt
+    name: "blue iris front door motion"
+    state_topic: "bfd/front"
+
+  - platform: mqtt
+    name: "blue iris pool motion"
+    state_topic: "bfd/pool"
+        
+  - platform: mqtt
+    name: "pool motion"
+    state_topic: "camera/pool/motion"
+    
   - platform: mqtt  
     state_topic: "torn/garage"  
     name: "Garage Humidity"  
@@ -63,7 +82,61 @@ sensor:
           {% endif %}'  
 
 automation:
+#  - alias: motion reset
+#    trigger:
+#      platform: time
+#      seconds: '/10'
+#    condition:
+#     - condition: state
+#       entity_id: input_boolean.motion_toggle
+#       state: "on"
+#    action:
+#     - service: input_boolean.turn_off
+#       data:
+#         entity_id: input_boolean.motion_toggle
+      
+#  - alias: Turn motion on
+#    trigger:
+#      platform: state
+#      entity_id: sensor.front_door_motion
+#      to: 'MOTION'
+#    action:
+#      service: input_boolean.turn_on
+#      entity_id: input_boolean.motion_toggle        
+ 
+#  - alias: test light
+#    trigger:
+#      platform: state
+#      entity_id: input_boolean.motion_toggle
+#      to: 'on'
+#    action:
+#      service: switch.turn_on
+#      entity_id: switch.front_entry_light_switch
 
+#  - alias: Front Door Pic
+#    trigger:
+#      platform: state
+#      entity_id: sensor.front_door_motion
+#      to: 'MOTION'
+#    action:
+#      service: camera.snapshot
+#      data:
+#        entity_id: camera.cam
+#        filename: 'config/snapshot/cam.jpg'
+#      service: notify.pushover
+#      message: "front door"
+  #    target: ["danny_pixel", "tosh_phone"]
+    #  title: Shokabow Zoo
+#  - service: notify.slack
+#    data:
+#      message: "Living room camera snapshot"
+#      data:
+#        file:
+#          path: "/home/homeassistant/.homeassistant/snapshot/living_room_camera.jpg"
+#  - delay: "00:00:30"
+#  - service: switch.turn_on
+#    entity_id: switch.lr_alarm
+             
   - alias: Turn on garage light when there is movement
     trigger:
       platform: state
@@ -73,7 +146,6 @@ automation:
       service: light.turn_on
       entity_id: light.level
 
-
   - alias: Turn garage light off
     trigger:
       platform: state
@@ -81,7 +153,7 @@ automation:
       to: 'off'
       for:
     #    seconds: 30
-        minutes: 15
+        minutes: 5
     action:
       - service: light.turn_off
         entity_id: light.level
@@ -112,6 +184,8 @@ automation:
           seconds: 15
       - service: light.turn_off
         entity_id: light.garage_led
+        
+    
 group:  
   Garage_sensor:  
     name: Garage Sensor
@@ -123,3 +197,10 @@ group:
       - sensor.Garage_Pir  
       - light.Garage_LED
       - light.level
+      - input_boolean.motion_toggle
+  Blue_Iris_sensor:
+    name: Blue Blue_Iris_sensor
+    view: yes
+    entities:
+      - sensor.blue_iris_front_door_motion
+      - sensor.blue_iris_pool_motion

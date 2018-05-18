@@ -5,8 +5,8 @@
       to: 'on'
   action:
     - service: switch.turn_on
-      entity_id: switch.master_bathroom_light, switch.master_bedroom_hallway_light_switch
+      entity_id: switch.master_bathroom_light_switch, switch.master_bedroom_h_switch
     - delay:
         minutes: 10
     - service: switch.turn_off
-      entity_id: switch.master_bathroom_light, switch.master_bedroom_hallway_light_switch
+      entity_id: switch.master_bathroom_light_switch, switch.master_bedroom_h_switch

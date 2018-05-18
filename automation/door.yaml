@@ -1,13 +1,203 @@
-
-- alias: Turn Kitchen light garage
+- alias: 'Start HomeKit'
+  trigger:
+    - platform: event
+      event_type: zwave.network_ready
+  action:
+    - service: homekit.start
+##################
+#front dooropen#
+##################
+#- alias: Turn entry light
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.front_door_sensor_sensor
+#    to: 'on'
+#  action:
+#      entity_id: switch.front_entry_light_switch
+#    - delay:
+#        seconds: 30
+#    - service: switch.turn_off
+#      entity_id: switch.front_entry_light_switch
+      
+- alias: Turn on front entry
   trigger:
     platform: state
-    entity_id: binary_sensor.garage_door_entry_sensor
+    entity_id: binary_sensor.front_door_sensor_sensor
     to: 'on'
+  condition:
+    - condition: template
+#      value_template: '{{ now().hour | int >= 19 and now().hour | int <= 6 }}'  
+      value_template: >-
+        {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
+        {%- if hour >= 19 and hour  <=  6 -%}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+  action:
+    - service: switch.turn_on
+      entity_id: switch.front_entry_light_switch
+    - delay:
+        seconds: 30
+    - service: switch.turn_off
+      entity_id: switch.front_entry_light_switch
+##################
+#garage dooropen#
+##################
+#- alias: Turn Kitchen light garage
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.garage_door_entry_sensor
+#    to: 'on'
+#  action:
+#    - service: light.turn_on
+#      entity_id: group.kitchen_lights
+#    - delay:
+#        seconds: 30
+#    - service: switch.turn_off
+#      entity_id: group.kitchen_lights
+      
+
+
+      
+      
+#############
+#Rabbit time#
+#############
+- alias: 'Timed 4pm'
+  trigger:
+    - platform: time
+      at: '16:00:00'
+
   action:
     - service: light.turn_on
-      entity_id: group.kitchen_lights
-    - delay:
-        minutes: 2
-    - service: switch.turn_off
-      entity_id: group.kitchen_lights
+      entity_id:
+        - light.level_2
+        
+ ##############
+ #  Presence  #
+##############
+- alias: Charlie is home
+  trigger:
+    platform: state
+    entity_id: group.charlie
+    to: 'home'
+  action:
+    service: notify.notify
+    data:
+      message: "Charlie is Home"
+
+- alias: Charlie is away
+  trigger:
+    platform: state
+    entity_id: group.charlie
+    to: 'not_home'
+  action:
+    service: notify.notify
+    data:
+      message: "charlie is Away"
+
+  ##############
+ #  Updates   #
+##############
+- alias: 'Update Available Notifications'
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+    service: persistent_notification.create
+    data:
+      title: "New Update"
+      message: "Update for Home Assistant is available."
+
+  ##############
+ #  Network  #
+#############
+- alias: Z-Wave network is complete
+  trigger:
+    platform: event
+    event_type: zwave.network_ready
+  action:
+    service: notify.ios_torn8o
+    data:
+      message: "Z Wave Network is up"
+
+  ##############
+ #  tv light on  #
+#############
+
+- alias: TV Lights on
+  trigger:
+    - platform: state
+      entity_id: sensor.vizio_tv
+      to: 'online'
+  action:
+    - service: light.turn_on
+      entity_id: light.tv_room_light_level
+- alias: TV Lights off
+  trigger:
+    platform: state
+    entity_id: sensor.vizio_tv
+    to: 'offline'
+  action:
+    service: light.turn_off
+    entity_id: light.tv_room_light_level
+
+  ##############
+ #  back led on  #
+#############    
+
+- alias: TV accent on
+  trigger:
+    - platform: state
+      entity_id: remote.torn_hub
+      to: 'on'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.led_back_lights
+- alias: TV accent off
+  trigger:
+    platform: state
+    entity_id: remote.torn_hub
+    to: 'off'
+  action:
+    service: switch.turn_off
+    entity_id: switch.led_back_lights
+
+- alias: Turn deck led On At Sunset
+  hide_entity: false
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-00:00:20'
+  action:
+    service: switch.turn_on
+    entity_id: switch.deck_led
+
+- alias: 'Turn deck led off at sunrise'
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '-04:33:00'
+  action:
+    service: switch.turn_on
+    entity_id: switch.deck_led
+
+- alias: Turn accent lights led On At Sunset
+  hide_entity: false
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-00:00:10'
+  action:
+    service: light.turn_on
+    entity_id: light.accent_lights
+
+- alias: 'Turn accent lights off 2am'
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '-04:33:10'
+  action:
+    service: light.turn_off
+    entity_id: light.accent_interior_lights

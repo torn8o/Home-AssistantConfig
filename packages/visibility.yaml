@@ -8,7 +8,7 @@ automation:
   - alias: automation hidden
     trigger:
       platform: time
-      after: '16:00:00'
+      at: '16:00:00'
     action:
       service: group.set_visibility
       entity_id: group.all_automation
@@ -18,7 +18,7 @@ automation:
   - alias: automation show
     trigger:
       platform: time
-      after: '16:00:00'
+      at: '16:00:00'
     action:
       service: group.set_visibility
       entity_id: group.all_automation

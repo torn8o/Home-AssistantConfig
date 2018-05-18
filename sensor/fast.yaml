@@ -2,3 +2,21 @@
   minute:
     - 0
     - 30
+- platform: deluge
+  host: !secret deluge_host
+  username: !secret deluge_username
+  password: !secret deluge_password
+  port: !secret deluge_port
+  monitored_variables:
+    - 'current_status'
+    - 'download_speed'
+    - 'upload_speed'
+- platform: nzbget
+  host: !secret NZBGET_HOST
+  username: !secret NZBGET_user
+  password: !secret NZBGET_pass
+  port: !secret NZBGET_port
+  monitored_variables:
+    - article_cache
+    - download_rate
+    - download_paused

@@ -18,3 +18,96 @@
           - service: switch.turn_off
             data:
               entity_id: switch.attic_fans
+#tv room fan
+      - alias: tv_fan_control_on_with_temp
+        trigger:
+          - platform: numeric_state
+            entity_id: sensor.broadlink_torn_temperature
+            above: 74
+        action:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.tv_room_fan
+              
+
+      - alias: tv_fan_control_off_with_temp
+        trigger:
+          - platform: numeric_state
+            entity_id: sensor.broadlink_torn_temperature
+            below: 74
+        action:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.receiver
+#tv room fan speed
+      - alias: tv_fan_speed_on_low
+        trigger:
+          - platform: numeric_state
+            entity_id: sensor.broadlink_torn_temperature
+            above: 74.1
+        action:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.receiver1
+
+      - alias: tv_fan_speed_on_medium
+        trigger:
+          - platform: numeric_state
+            entity_id: sensor.broadlink_torn_temperature
+            above: 75.1
+        action:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.receiver2      
+
+      - alias: tv_fan_speed_on_high
+        trigger:
+          - platform: numeric_state
+            entity_id: sensor.broadlink_torn_temperature
+            above: 76.1
+        action:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.receiver3
+  
+      - alias: fan off ac on
+        trigger:
+          platform: state
+          entity_id: sensor.hallway_thermostat_hvac_state
+          to: 'cooling'
+        action:
+          - service: switch.turn_off
+            data:
+              entity_id: switch.tv_room_fan      
+
+      - alias: fan on ac off
+        trigger:
+          platform: state
+          entity_id: sensor.hallway_thermostat_hvac_state
+          to: 'off'
+        action:
+          - service: switch.turn_on
+            data:
+              entity_id: switch.tv_room_fan           
+#master fan
+      - alias: mb_fan_control_on_with_temp
+        trigger:
+          - platform: numeric_state
+            entity_id: sensor.master_bed_temperature
+            above: 75
+        action:
+          - service: light.turn_on
+            data:
+              entity_id: light.master_bedroom_fan_level
+              brightness: 255
+              
+
+      - alias: mb_fan_control_off_with_temp
+        trigger:
+          - platform: numeric_state
+            entity_id: sensor.master_bed_temperature
+            below: 74
+        action:
+          - service: light.turn_off
+            data:
+              entity_id: light.master_bedroom_fan_level

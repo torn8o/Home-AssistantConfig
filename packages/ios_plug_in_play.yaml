@@ -1,30 +1,27 @@
-############################################################################################
-#   @user           :   @torn8o
-#   @original Github:   https://github.com/torn8o/Home-AssistantConfig
+###############################################################################
+#   @user           :
+#   original Github
+#   https://github.com/torn8o/Home-AssistantConfig
 #   @author         :   torn8o
 #   @date           :   04/21/2017
 #   @package        :   ios plug and play
-#   @description    :   Example to understand Actionable Notifications for IOS.
-#                       This is a package file. In order for this to work in your
-#                       setup you must have packages set up in your configuration.
+#   @description    :   Example to understand Actionable Notifications for IOS
+# htis is a package file inorder for this to work in your setup
+# you must have packagesset up in your configuration.
+#    To set up packages place the following line into the configuation file under
+#    customize please view below order. You will then need to make a folder in the
+#    .homeassistant folder called poackages.
 #
-#                       To set up packages place the following line into the configuration
-#                       file under "customize" please view below order.
-#
-#                       You will then need to make a folder in the ".homeassistant" folder
-#                       called packages.
-#
-#
-#   @example        :   homeassistant:
-#                         name: your ha name
-#                         latitude: !secret home_latitude
-#                         longitude: !secret home_longitude
-#                         elevation: !secret home_elevation
-#                         time_zone: America/Chicago
-#                         unit_system: imperial
-#                         customize: !include customize.yaml
-#                         packages: !include_dir_named packages
-############################################################################################
+#homeassistant:
+#  name: your ha name
+#  latitude: !secret home_latitude
+#  longitude: !secret home_longitude
+#  elevation: !secret home_elevation
+#  time_zone: America/Chicago
+#  unit_system: imperial
+#  customize: !include customize.yaml
+#  packages: !include_dir_named packages
+###############################################################################
 
 
 homeassistant:
@@ -62,11 +59,11 @@ ios:
             authenticationRequired: yes
             destructive: no
 
-      - name: Garage
-        identifier: 'GARAGE_CLOSE'
+      - name: garage1
+        identifier: 'garage1'
         actions:
-          - identifier: 'GARAGE_CLOSE'
-            title: 'Close Garage'
+          - identifier: 'CLOSE_JANIS'
+            title: 'Close Garage Door'
             activationMode: 'background'
             authenticationRequired: no
             destructive: yes
@@ -87,8 +84,8 @@ ios:
             destructive: yes
             behavior: 'default'
 
-      - name: Alarm
-        identifier: 'ALARM'
+      - name: alarm
+        identifier: 'alarm'
         actions:
           - identifier: 'SOUND_ALARM'
             title: 'Sound Alarm'
@@ -119,25 +116,31 @@ group: # will add a view on the main tab of home assistant
       - automation.close_garage
       - automation.reset_relays
       - group.zones
-
+notify:
+    name: ios_devices
+    platform: group
+    services:
+      - service: ios_torn8o
+      - service: ios_lynx
+      - service: ios_ferina
 automation:
-  - alias: Notify iOS Actionable Notifications
-    trigger:
-      platform: time
-      after: '16:00:00'
-    action:
-      service: notify.ios_torn8o #change to your ios device name or group
-      data:
-        title: "title area"
-        message: "3d press for options"
-        data:
-          push:
-            badge: 0
-            sound: US-EN-Morgan-Freeman-Vacate-The-Premises.wav
-            category: "ALARM" # Needs to match the top level identifier you used in the ios configuration
-          action_data: # Anything passed in action_data will get echoed back to Home Assistant.
-            entity_id: camera.cam
-            my_custom_data: foo_bar
+#  - alias: Notify iOS Actionable Notifications
+#    trigger:
+#      platform: time
+#      at: '16:00:00'
+#    action:
+#      service: notify.ios_torn8o #change to your ios device name or group
+#      data:
+#        title: "title area"
+#        message: "3d press for options"
+#        data:
+#          push:
+#            badge: 0
+#            sound: US-EN-Morgan-Freeman-Vacate-The-Premises.wav
+#            category: "alarm" # Needs to match the top level identifier you used in the ios configuration
+#          action_data: # Anything passed in action_data will get echoed back to Home Assistant.
+#            entity_id: camera.cam
+#            my_custom_data: foo_bar
 
 
   - alias: Sound the alarm
@@ -169,3 +172,90 @@ automation:
           push:
             badge: 0
             sound: US-EN-Alexa-Motion-At-Back-Door.wav
+            
+  - alias: Notify iOS Garage #creates the notification
+    initial_state: True
+    hide_entity: True
+    trigger:
+      - platform: time
+        at: '22:00:00' #change this to actual trigger
+    condition:
+      condition: state
+      entity_id: sensor.garage_door_status #id of your garage door relay
+      state: Open
+    action:
+        service: notify.ios_devices #id of your ios device, might not show up until you've loaded the ios component in HA
+        data:
+          title: "Garage Check" #customizable
+          message: "It's 10pm Garage is Open" #customizable 
+          data:
+            push:
+              badge: 0 # this will remove the badge/app icon number
+              category: 'garage1' #name matched in ios component
+
+  - alias: iOS app notification garage #creates the action button
+    initial_state: True
+    hide_entity: True  
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: CLOSE_JANIS #name matched in ios component
+    action:
+      service: switch.turn_on
+      entity_id: switch.garage_door_opener_switch
+      
+  - alias: iOS app notification garage opened #creates the action button
+    initial_state: True
+    hide_entity: True  
+    trigger:
+      platform: state
+      entity_id: sensor.garage_door_status
+      from: 'Closed'
+      to: 'Open'
+    action:
+        service: notify.ios_devices #id of your ios device, might not show up until you've loaded the ios component in HA
+        data:
+          title: "Garage Check" #customizable
+          message: "Garage door opened" #customizable 
+          data:
+            push:
+              sound: "US-EN-Daisy-Garage-Door-Open.wav"
+              badge: 0 # this will remove the badge/app icon number
+              category: 'garage1'
+
+  - alias: Notify iOS front door #creates the notification
+    initial_state: True
+    hide_entity: True
+    trigger:
+      platform: state
+      entity_id: sensor.aeotec_zw100_multisensor_6_burglar
+      to: '8'
+    action:
+        service: notify.ios_devices
+        data:
+          message: Motion detected at the front door
+          data:
+            attachment:
+              content-type: jpeg
+            push:
+              category: camera
+            entity_id: camera.cam
+
+  - alias: Notify iOS pool camera #creates the notification
+    initial_state: True
+    hide_entity: True
+    trigger:
+      platform: state
+      entity_id: sensor.pool_motion
+      to: 'MOTION'
+    action:
+        service: notify.ios_devices
+        data:
+          message: Motion detected at the pool
+          data:
+            attachment:
+              content-type: jpeg
+            push:
+              category: camera
+            entity_id: camera.camera_pool

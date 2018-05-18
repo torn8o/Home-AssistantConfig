@@ -1,0 +1,23 @@
+- alias: Front Door Pic test
+  trigger:
+    platform: state
+    entity_id: sensor.aeotec_zw100_multisensor_6_burglar
+    to: '8'
+  action:
+  - service: camera.snapshot
+    data:
+      entity_id: camera.cam
+      filename: '/config/snapshot/cam.jpg'
+  - service: notify.slacknotify
+    data:
+      message: "Front door camera snapshot"
+      data:
+        file:
+          path: "/config/snapshot/cam.jpg"      
+  
+  - service: notify.pushover
+    data:
+      title: front door
+      message: Someone at the Front Door
+      data:
+        file: /config/snapshot/cam.jpg

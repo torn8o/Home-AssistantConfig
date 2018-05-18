@@ -1,17 +1,28 @@
-- alias: "Turn ON Day Star"
+- alias: open curtains sunrise
+  hide_entity: false
   trigger:
-    - platform: state
-      entity_id: input_boolean.day_star
-      to: 'on'
+    platform: sun
+    event: sunrise
   action:
-    - service: cover.open_cover
-      entity_id: cover.curtains
-
-- alias: "Turn OFF Day Star"
+    service: switch.turn_on
+    entity_id: switch.receiver5
+#- alias: curtain open
+#  trigger:
+#    platform: time
+#    seconds: '/15'
+#  condition:
+#    - condition: state
+#      entity_id: switch.receiver5
+#      state: "on"
+#  action:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.receiver5
+- alias: close curtains sunset
+  hide_entity: false
   trigger:
-    - platform: state
-      entity_id: input_boolean.day_star
-      to: 'off'
+    platform: sun
+    event: sunset
   action:
-    - service: cover.close_cover
-      entity_id: cover.curtains
+    service: switch.turn_on
+    entity_id: switch.receiver4

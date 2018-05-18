@@ -45,10 +45,10 @@ homeassistant:
       friendly_name: "PyPi Version"
       icon: mdi:language-python
 
-    sensor.ha_startup_time:
-      <<: *customize
-      friendly_name: "Startup Time"
-      icon: mdi:clock-start
+    #sensor.ha_startup_time:
+    #  <<: *customize
+    #  friendly_name: "Startup Time"
+    #  icon: mdi:clock-start
 
     sensor.ha_version:
       <<: *customize
@@ -79,9 +79,9 @@ group:
       - sensor.date
       - sensor.time
       - binary_sensor.system_ready
-      - sensor.ha_startup_time
+      #- sensor.ha_startup_time
       - sensor.ha_version
-      - sensor.ha_github_version
+    #  - sensor.ha_github_version
       - sensor.ha_pypi_version
 
   auto:
@@ -128,13 +128,13 @@ automation:
 ## Binary Sensor
 ################################################
 
-binary_sensor:
-  - platform: template
-    sensors:
-      system_ready:
-        entity_id: sensor.ha_startup_time
-        value_template: >-
-          {{ states('sensor.ha_startup_time') != 'unknown' }}
+#binary_sensor:
+#  - platform: template
+#    sensors:
+#      system_ready:
+#        entity_id: sensor.ha_startup_time
+#        value_template: >-
+#          {{ states('sensor.ha_startup_time') != 'unknown' }}
 
 ################################################
 ## Sensor
