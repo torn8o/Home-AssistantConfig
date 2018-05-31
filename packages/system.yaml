@@ -103,7 +103,7 @@ automation:
       - platform: homeassistant
         event: start
     action:
-      - service: notify.ios_torn8o
+      - service: notify.ios_devices
         data:
           message: "Home Assistant is now up and running."
 

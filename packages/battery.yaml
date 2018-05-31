@@ -11,13 +11,13 @@ homeassistant:
   customize:
     sensor.torn8os_iphone_battery:
       hidden: True
-    sensor.lynxs_iphone_battery:
+    sensor.lizs_iphone_battery:
       hidden: True
 
     sensor.torn8o_iphone_battery:
       friendly_name: torn8os iPhone Battery
-    sensor.lynx_iphone_battery:
-      friendly_name: lynxs iPhone Battery
+    sensor.liz_iphone_battery:
+      friendly_name: lizs iPhone Battery
     sensor.nina_battery_level:
       friendly_name: Nina iPhone Battery
 
@@ -60,10 +60,10 @@ sensor:
     sensors:
       lynx_iphone_battery:
         unit_of_measurement: '%'
-        entity_id: device_tracker.lynx
-        value_template: "{{ (states.device_tracker.lynx.attributes|default).battery|default|int('unknown') }}"
+        entity_id: device_tracker.liz
+        value_template: "{{ (states.device_tracker.liz.attributes|default).battery|default|int('unknown') }}"
         icon_template: >-
-          {% set battery_level = states('sensor.lynx_iphone_battery')|int('unknown') %}
+          {% set battery_level = states('sensor.liz_iphone_battery')|int('unknown') %}
           {% set battery_round = (battery_level|int / 10)|int * 10 %}
           {% if battery_level == 'unknown' %}
             mdi:battery-unknown
@@ -116,7 +116,7 @@ automation:
     trigger:
       platform: numeric_state
       entity_id:
-      - device_tracker.lynx
+      - device_tracker.liz
       - device_tracker.torn8o
       value_template: '{{ state.attributes.battery }}'
       below: 30

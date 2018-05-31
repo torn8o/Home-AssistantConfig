@@ -45,7 +45,7 @@ group:
   trash__recycle:
     name: trash_recycle
   #  icon: mdi:apple-ios
-    view: yes
+  #  view: yes
     entities:
   #    - group.trash__recycle
   #    - group.trash__recycle_schedule

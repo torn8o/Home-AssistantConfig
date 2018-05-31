@@ -33,7 +33,7 @@ group:
 
   lighting_dim:
     name: Dim light
-    view: yes
+#    view: yes
     entities:
       - group.detect_lighting
       - automation.detect_lights

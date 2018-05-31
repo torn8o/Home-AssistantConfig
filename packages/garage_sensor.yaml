@@ -189,7 +189,7 @@ automation:
 group:  
   Garage_sensor:  
     name: Garage Sensor
-    view: yes 
+  #  view: yes 
     entities:  
       - sensor.Garage_Temperature  
       - sensor.Garage_Humidity  
@@ -200,7 +200,7 @@ group:
       - input_boolean.motion_toggle
   Blue_Iris_sensor:
     name: Blue Blue_Iris_sensor
-    view: yes
+#    view: yes
     entities:
       - sensor.blue_iris_front_door_motion
       - sensor.blue_iris_pool_motion

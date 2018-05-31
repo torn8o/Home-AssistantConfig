@@ -27,7 +27,7 @@ automation:
 group:
   automations_view:
     name: Automations
-    view: yes
+#    view: yes
     entities:
       - group.all_automations
 

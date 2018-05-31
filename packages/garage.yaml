@@ -14,14 +14,7 @@ group:
       - automation.notify_garage_door
       - automation.close_garage_door
       - automation.Dark_outside_light
-  garage_test11:
-    name: garage_test
-    icon: mdi:alert-circle
-    #icon: mdi:garage-open
-    view: yes
-    entities:
-      - group.garage_door
-      - group.garage_auto
+
 
 sensor:
   - platform: template

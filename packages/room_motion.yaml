@@ -34,7 +34,7 @@ group:
 
   motion:
     name: room motion
-    view: yes
+  #  view: yes
     icon: mdi:walk
     entities:
       - group.game_room_motion

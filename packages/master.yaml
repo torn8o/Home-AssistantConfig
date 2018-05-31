@@ -11,6 +11,7 @@ light:
     name: Kitchen Leds
     entities:
       - light.kitchen_bar_light_level
+      - light.kitchen_light_level_2
       - light.kitchen_light_level
   - platform: group
     name: accent lights

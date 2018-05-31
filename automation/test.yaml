@@ -1,23 +1,42 @@
-- alias: Front Door Pic test
-  trigger:
-    platform: state
-    entity_id: sensor.aeotec_zw100_multisensor_6_burglar
-    to: '8'
-  action:
-  - service: camera.snapshot
-    data:
-      entity_id: camera.cam
-      filename: '/config/snapshot/cam.jpg'
-  - service: notify.slacknotify
-    data:
-      message: "Front door camera snapshot"
-      data:
-        file:
-          path: "/config/snapshot/cam.jpg"      
   
-  - service: notify.pushover
-    data:
-      title: front door
-      message: Someone at the Front Door
-      data:
-        file: /config/snapshot/cam.jpg
+  
+#  - service: notify.pushover
+#    data:
+#      title: front door
+#      message: Someone at the Front Door
+#      data:
+#        file: /config/snapshot/cam.jpg
+
+#- alias: Front Door Pic blue
+#  trigger:
+#    platform: state
+#    entity_id: sensor.blue_iris_front_door_motion
+#    to: 'motion'
+#  action:
+#  - service: camera.snapshot
+#    data:
+#      entity_id: camera.cam
+#      filename: '/config/www/cambi.jpg'
+#  - service: notify.slacknotify
+#    data:
+##      data:
+  #      file:
+  #        path: "/config/www/cambi.jpg"      
+  
+#- alias: pool Door Pic blue
+#  trigger:
+#    platform: state
+#    entity_id: sensor.blue_iris_pool_motion
+#    to: 'motion'
+##  - service: camera.snapshot
+  #  data:
+  #    entity_id: camera.camera_pool
+  #    filename: '/config/www/campool.jpg'
+  #- service: notify.ios_torn8o #notify.slacknotify
+  #  data:
+  #    message: "pool camera snapshot"
+  #    data:
+  #      file:
+  #        path: "/config/www/campool.jpg"  
+
+

@@ -5,8 +5,8 @@ mqtt:
   discovery_prefix: homeassistant
   client_id: !secret mqtt_client
   keepalive: !secret mqtt_keepalive
-  username: !secret mqtt_user
-  password: !secret mqtt_pass
+#  username: !secret mqtt_user
+#  password: !secret mqtt_pass
   
 
 light:
@@ -225,7 +225,7 @@ automation:
 group:
   porch_lights:
     control: hidden
-    view: yes
+#    view: yes
     icon: mdi:led-on
     name: Led Porch
     entities:
