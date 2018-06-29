@@ -13,7 +13,9 @@ homeassistant:
 
 #  customize: !include_dir_named customize
   packages: !include_dir_named packages
-
+  whitelist_external_dirs:
+     - /config/www
+     - /config/snapshot
 #  binary_sensor: !include binary_sensor.yaml
 
 frontend:
@@ -53,12 +55,12 @@ climate:
 
 http:
   api_password: !secret http_api_password
-  ssl_certificate: !secret http_ssl_certificate
-  ssl_key: !secret http_ssl_key
+#  ssl_certificate: !secret http_ssl_certificate
+#  ssl_key: !secret http_ssl_key
 
 wink:
-  email: !secret wink_email
-  password: !secret wink_password
+#  email: !secret wink_email
+#  password: !secret wink_password
 
 
 
@@ -105,10 +107,10 @@ ffmpeg:
   ffmpeg_bin: !secret ffmpeg_bin
 camera:
   - platform: ffmpeg
-    name: Cam
+    name: front door camera
     input: !secret cam_input
   - platform: ffmpeg
-    name: Cam indoor
+    name: pool camera
     input: !secret cam_indoor_input
 
 media_player:
@@ -121,8 +123,8 @@ media_player:
     use_episode_art: true
 
 recorder:
-  purge_days: 3
-  db_url: !secret db_url
+  purge_interval: 3
+  #db_url: !secret db_url
   exclude:
     domains:
       - automation
@@ -133,12 +135,6 @@ recorder:
 #zwave:
 #  device_config: !include zwave_device_config.yaml
 
-weblink:
-  entities:
-    - name: !secret grafana_name
-      url: !secret grafana_url
-    - name: !secret sonarr_name
-      url: !secret sonarr_url
 
 
 
@@ -167,7 +163,7 @@ zwave: !include zwave.yaml
 
 automation: !include_dir_merge_list automation
 #binary_sensor: !include binary_sensor.yaml
-binary_sensor: !include_dir_merge_list binary_sensor
+#binary_sensor: !include_dir_merge_list binary_sensor
 #camera: !include_dir_merge_list camera
 #cover: !include_dir_merge_list cover
 device_tracker: !include_dir_merge_list device
@@ -176,8 +172,8 @@ light: !include_dir_merge_list light
 notify: !include_dir_merge_list notify
 #ios: !include_dir_merge_list ios
 #scene: !include_dir_merge_list scene
-sensor: !include_dir_merge_list sensors
-switch: !include_dir_merge_list switches
+sensor: !include_dir_merge_list sensor
+#switch: !include_dir_merge_list switches
 zone: !include_dir_merge_list zone
 
 ################################################
@@ -187,6 +183,6 @@ zone: !include_dir_merge_list zone
 group: !include_dir_merge_named group
 #input_boolean: !include_dir_merge_named input_boolean
 input_select: !include_dir_merge_named input_select
-input_slider: !include_dir_merge_named input_slider
+#input_slider: !include_dir_merge_named input_slider
 script: !include_dir_merge_named script
 shell_command: !include_dir_merge_named shell_command
