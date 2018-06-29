@@ -2,20 +2,20 @@ Default View:
   icon: mdi:linux
   view: yes
   entities:
-    - group.quadflight
+  #  - group.quadflight
     - group.tv_room
-    - group.gitter
+  #  - group.gitter
     - group.master_bedroom
     - group.game_room
     - group.nest
     - group.kitchen_lights
-    - group.air_safety
-    - group.network
-    - group.garage_door
-    - group.input
-    - group.temperature
+  #  - group.air_safety
+  #  - group.network
+    - group.garage
+  #  - group.input
+  #  - group.temperature
     - group.items
-    - group.sonarr
+  #  - group.sonarr
     - group.tv_room_temp
     - group.led_porch
     - group.control

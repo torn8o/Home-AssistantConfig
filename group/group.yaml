@@ -71,9 +71,14 @@ master bedroom:
   - switch.ge_12722_onoff_relay_switch_switch
   - light.aeotec_dsc27103_micro_dimmer_2nd_edition_level
   - light.master_bedroom_fan_level
-  - switch.master_bedroom_light
-  - switch.master_bathroom_fan
+#  - switch.master_bedroom_light
+#  - switch.master_bathroom_fan
   - switch.master_bathroom_light
+  - switch.master_bathroom_fan_switch
+  - switch.master_bathroom_light_switch
+  - switch.master_bedroom_f_switch
+  - switch.master_bedroom_h_switch
+  - switch.master_bedroom_light
 #  - sensor.master_bedroom_humidity
   - sensor.master_bedroom_proximity
   - sensor.master_bedroom_temperature

@@ -43,18 +43,7 @@ ios:
             authenticationRequired: no
             destructive: yes
             behavior: 'default'
-      - name: pool
-        identifier: 'pool_feed'
-        actions:
-          - identifier: 'POOL'
-            title: 'Pool Live'
-            activationMode: 'background'
-            authenticationRequired: no
-            destructive: no
-            behavior: 'default'
 
-
-            
       - name: Medicine
         identifier: 'TABLET'
         actions:
@@ -117,6 +106,7 @@ group: # will add a view on the main tab of home assistant
   ios_test:
     name: ios_test
     icon: mdi:apple-ios
+#    view: yes
     entities:
       - automation.Notify_iOS_Actionable_Notifications
       - automation.sound_the_alarm
@@ -135,31 +125,7 @@ notify:
       - service: ios_ferina
       
 automation:
-  - alias: 01 Notify iOS front feed #creates the notification
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: sensor.front_door_motion
-      to: 'motion'  #change this to actual trigger
-    action:
-      - delay: '00:00:01'
-      - service: notify.ios_torn8o
-    #  service: notify.ios_torn8o #id of your ios device, might not show up until you've loaded the ios component in HA
-
-        data:
-          title: "Front door motion" #customizable
-          message: "{{ states. sensor.date__time.state }}" #customizable 
-          data:
-            attachment:
-              url: !secret front_url #"http://tornhome.ddns.net:8123/local/front_door.jpg"
-              content-type: jpg
-              hide-thumbnail: false
-#       data:
-            push:
-              badge: 0 # this will remove the badge/app icon number
-              category: 'live_feed' #name matched in ios component
-              
-  - alias: iOS app notification front live feed #creates the action button
+  - alias: iOS app notification live feed #creates the action button
     initial_state: True
   #    hide_entity: True  
     trigger:
@@ -168,56 +134,9 @@ automation:
       event_data:
         actionName: SHOW_FEED #name matched in ios component
     action:
-
       service: notify.ios_torn8o
       data_template:
-        message: "Front door Feed"
-        data:
-          push:
-            category: camera
-          entity_id: camera.front_door_camera
-          attachment:
-            url: "{{ states.camera.front_door_camera.attributes.entity_picture }}"
-            content-type: jpg
-            hide-thumbnail: false 
-
-  - alias: 01 Notify iOS pool feed #creates the notification
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: sensor.pool_door_motion
-      to: 'no motion'  #change this to actual trigger
-    action:
-  #    - delay: '00:00:03'
-      - service: notify.ios_torn8o
-    #  service: notify.ios_torn8o #id of your ios device, might not show up until you've loaded the ios component in HA
-
-        data:
-          title: "pool motion" #customizable
-          message: "{{ states. sensor.date__time.state }}" #customizable  
-          data:
-            attachment:
-              url: !secret pool_url #
-              content-type: jpg
-              hide-thumbnail: false
-#       data:
-            push:
-              badge: 0 # this will remove the badge/app icon number
-              category: 'pool_feed' #name matched in ios component
-              
-  - alias: iOS app notification pool live feed #creates the action button
-    initial_state: True
-  #    hide_entity: True  
-    trigger:
-      platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: POOL #name matched in ios component
-    action:
-
-      service: notify.ios_torn8o
-      data_template:
-        message: "Pool Feed"
+        message: "pool Feed"
         data:
           push:
             category: camera
@@ -260,6 +179,7 @@ automation:
             
   - alias: Notify iOS Garage #creates the notification
     initial_state: True
+#    hide_entity: True
     trigger:
       - platform: time
         at: '22:00:00' #change this to actual trigger
@@ -279,6 +199,7 @@ automation:
 
   - alias: iOS app notification garage #creates the action button
     initial_state: True
+#    hide_entity: True  
     trigger:
       platform: event
       event_type: ios.notification_action_fired
@@ -290,6 +211,7 @@ automation:
       
   - alias: iOS app notification garage opened #creates the action button
     initial_state: True
+#    hide_entity: True  
     trigger:
       platform: state
       entity_id: sensor.garage_door_status
@@ -308,6 +230,7 @@ automation:
 
   - alias: iOS app notification garage closed #creates the action button
     initial_state: True
+#    hide_entity: True  
     trigger:
       platform: state
       entity_id: sensor.garage_door_status
@@ -324,30 +247,65 @@ automation:
               badge: 0 # this will remove the badge/app icon number
               category: 'garage1'
               
-
-  - alias: 01 snapshot front door #creates the notification
-    initial_state: True
+#  - alias: IOS Notify Front Door #creates the notification
+#    initial_state: True
 #    hide_entity: True
+#    trigger:
+#      platform: state
+#      entity_id: sensor.front_door_motion
+#      to: 'motion'
+#    action:
+#        service: notify.ios_devices
+#        data:
+#          message: Front Door Live Feed
+#          data:
+#            attachment:
+#              content-type: jpeg
+#            push:
+#              category: camera
+#            entity_id: camera.cam
+
+  - alias: IOS Notify Front Door Snapshot
     trigger:
       platform: state
       entity_id: sensor.front_door_motion
-      to: 'motion'  #change this to actual trigger
+      to: 'motion'          
     action:
-      service: camera.snapshot
-      data:
-        entity_id: camera.front_door_camera
-        filename: /config/www/front_door.jpg
+  #  - service: camera.snapshot
+  #    data:
+  #      entity_id: camera.cam
+  #      filename: '/config/www/front_door.jpg'
+    - service:  notify.ios_torn8o #notify.ios_devices
+      data_template:
+        message: "Front Door Feed"
+        data:
+          push:
+            category: camera
+          entity_id: camera.front_door_camera
+          attachment:
+            url: "{{ states.camera.front_door_camera.attributes.entity_picture }}"
+            content-type: jpg
+            hide-thumbnail: false 
+            
 
-  - alias: 01 snapshot pool #creates the notification
-    initial_state: True
-#    hide_entity: True
+  - alias: IOS Notify Pool Snapshot
     trigger:
       platform: state
-      entity_id: sensor.pool_door_motion
-      to: 'motion'  #change this to actual trigger
+      entity_id: sensor.pool_motion
+      to: 'motion'          
     action:
-      service: camera.snapshot
-      data:
-        entity_id: camera.pool_camera
-        filename: /config/www/pool.jpg
-#        delay: 00:00:01
+  #  - service: camera.snapshot
+  #    data:
+  #      entity_id: camera.camera_pool
+  #      filename: '/config/www/pool.jpg'
+    - service:  notify.ios_torn8o #notify.ios_devices
+      data_template:
+        message: "pool Feed"
+        data:
+          push:
+            category: camera
+          entity_id: camera.pool_camera
+          attachment:
+            url: "{{ states.camera.pool_camera.attributes.entity_picture }}"
+            content-type: jpg
+            hide-thumbnail: false 

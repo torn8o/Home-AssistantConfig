@@ -19,20 +19,20 @@ light:
 
   
 sensor:
-  - platform: mqtt
-    name: "front door Motion"
-    state_topic: "camera/front_door/motion"
+#  - platform: mqtt
+#    name: "front door Motion"
+#    state_topic: "camera/front_door/motion"
 #    value_template: '{{ value_json.status }}'
 #    payload_on: "MOTION"
 #    payload_off: "NO MOTION"    
 #    device_class: motion
   - platform: mqtt
-    name: "blue iris front door motion"
-    state_topic: "bfd/front"
+    name: "front door motion"
+    state_topic: "front/motion"
 
   - platform: mqtt
-    name: "blue iris pool motion"
-    state_topic: "bfd/pool"
+    name: "pool motion"
+    state_topic: "pool/motion"
         
   - platform: mqtt
     name: "pool motion"

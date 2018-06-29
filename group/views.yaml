@@ -3,8 +3,8 @@ camera:
   icon: mdi:camera
   name: Camera Front Door
   entities:
-    - camera.cam
-    - camera.cam_indoor
+    - camera.front_door_camera
+    - camera.pool_camera
     - camera.interior_motion
     - group.kitchen_lights
     - switch.ge_12722_onoff_relay_switch_switch_28_0
@@ -20,24 +20,49 @@ tv_room:
     - script.timed_theater_lights
     - script.theater_lights_
     - group.tv_room_temp
-master_bedroom:
+
+Liz easy stuff:
   view: yes
-  name: Master Bedroom
-  icon: mdi:hotel
+  name: Liz stuff
+  icon: mdi:content-cut
   entities:
     - group.master_bedroom
+    - light.master_bedroom_fan_level
+    - switch.master_bathroom_light
+    - switch.master_bathroom_fan_switch
+    - switch.master_bathroom_light_switch
+    - switch.master_bedroom_f_switch
+    - switch.master_bedroom_h_switch
+    - switch.master_bedroom_light
+    - light.kitchen_light_level
+    - light.kitchen_bar_light_level
+    - light.kitchen_light_level_9_0
+    - automation.turn_on_kitchen_light_when_there_is_movement
+    - camera.pool_camera
+    - camera.front_door_camera
+    - input_select.fan_speed
+    - input_select.curtain
+    - automation.01_notify_ios_pool_feed
+    - automation.tv_lights_on
 
-weather:
-  view: yes
-  name: darksky
-  icon: mdi:weather-cloudy
-  entities:
-    - group.darksky
-Zwave:
-  view: yes
-  icon: mdi:nfc
-  entities:
-    - group.zwave
+#master_bedroom:
+#  view: yes
+#  name: Master Bedroom
+#  icon: mdi:hotel
+#  entities:
+#    - group.master_bedroom
+
+#weather:
+#  view: yes
+#  name: darksky
+#  icon: mdi:weather-cloudy
+#  entities:
+#    - group.darksky
+#Zwave:
+#  view: yes
+#  icon: mdi:nfc
+#  entities:
+#    - group.zwave
 
 den room:
   view: yes
@@ -45,25 +70,23 @@ den room:
   name: Game Room
   entities:
     - group.game_room
-items:
-  name: items
-  entities:
-    - sensor.average_house_temp
-    - automation.mqtt_publish_sensors
-    - sensor.gas_price
-    - sensor.esp_92eba2
-    - sensor.esp_122131
-    - sensor.vizio_tv
-    - sensor.broadlink
-    - sensor.harmony_hub
-    - remote.torn_hub
-    - switch.living_room_curtain_open
-    - switch.living_room_curtain_close
-    - switch.living_room_curtain_stop
-    - sensor.torn8o_battery_level
-    - weblink.grafana
-    - weblink.pi_hole
-    - weblink.sonarr
+#items:
+#  name: items
+#  entities:
+#    - sensor.average_house_temp
+#    - automation.mqtt_publish_sensors
+#    - sensor.gas_price
+#    - sensor.esp_92eba2
+#    - sensor.esp_122131
+#    - sensor.vizio_tv
+#    - sensor.broadlink
+#    - sensor.harmony_hub
+#    - remote.torn_hub
+##    - switch.living_room_curtain_close
+  #  - switch.living_room_curtain_stop
+  #  - sensor.torn8o_battery_level
+  ##  - weblink.pi_hole
+    #- weblink.sonarr
 
 All Devices:
   view: yes

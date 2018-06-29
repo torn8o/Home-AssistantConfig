@@ -44,6 +44,14 @@ sensor:
     unit_of_measurement: "°F"  
     value_template: '{{ value_json.temperature | round(1) }}'  
 
+  - platform: mqtt  
+    state_topic: "front/motion"  
+    name: "front door motion" 
+
+  - platform: mqtt  
+    state_topic: "pool/motion"  
+    name: "pool door motion" 
+    
   - platform: mqtt
     state_topic: "torn/center"
     name: "Center Real Feel"

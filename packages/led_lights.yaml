@@ -10,7 +10,7 @@ mqtt:
   
 
 light:
-  - platform: mqtt_json
+  - platform: mqtt
     name: "master Strip"
   #  state_topic: " bruh/porch"
     command_topic: "torn/master_light/set"
@@ -45,7 +45,7 @@ light:
     optimistic: true
     qos: 0
 
-  - platform: mqtt_json
+  - platform: mqtt
     name: "Porch Strip"
   #  state_topic: " bruh/porch"
     command_topic: "bruh/porch/set"
@@ -79,7 +79,7 @@ light:
     retain: true
     optimistic: true
     qos: 0
-  - platform: mqtt_json
+  - platform: mqtt
     name: "picture"
   #  state_topic: " bruh/porch"
     command_topic: "torn/test/set"
@@ -113,7 +113,7 @@ light:
     retain: true
     optimistic: true
     qos: 0
-  - platform: mqtt_json
+  - platform: mqtt
     name: "light porch"
   #  state_topic: " bruh/porch"
     command_topic: "bruh/light/set"
