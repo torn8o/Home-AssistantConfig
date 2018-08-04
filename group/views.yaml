@@ -20,6 +20,7 @@ tv_room:
     - script.timed_theater_lights
     - script.theater_lights_
     - group.tv_room_temp
+    - media_player.itunes
 
 Liz easy stuff:
   view: yes
@@ -27,30 +28,41 @@ Liz easy stuff:
   icon: mdi:content-cut
   entities:
     - group.master_bedroom
-    - light.master_bedroom_fan_level
     - switch.master_bathroom_light
     - switch.master_bathroom_fan_switch
     - switch.master_bathroom_light_switch
     - switch.master_bedroom_f_switch
     - switch.master_bedroom_h_switch
     - switch.master_bedroom_light
+    - switch.deck_led
+    - switch.front_entry_light_switch
+    - light.master_bedroom_fan_level
     - light.kitchen_light_level
     - light.kitchen_bar_light_level
     - light.kitchen_light_level_9_0
-    - automation.turn_on_kitchen_light_when_there_is_movement
+    - light.spot_light_level
+    - light.hair_area_level
+    - light.david_picture
     - camera.pool_camera
     - camera.front_door_camera
     - input_select.fan_speed
     - input_select.curtain
     - automation.01_notify_ios_pool_feed
     - automation.tv_lights_on
+    - automation.tts_motion_front_door
+    - automation.turn_deck_led_off_at_sunrise
 
-#master_bedroom:
-#  view: yes
-#  name: Master Bedroom
-#  icon: mdi:hotel
-#  entities:
-#    - group.master_bedroom
+media plaers:
+  view: yes
+  name: media
+  icon: mdi:hotel
+  entities:
+    - media_player.game_room
+    - media_player.itunes
+    - media_player.kitchen
+    - media_player.living_room
+    - media_player.master_bedroom
+    - media_player.this_device
 
 #weather:
 #  view: yes
@@ -88,33 +100,6 @@ den room:
   ##  - weblink.pi_hole
     #- weblink.sonarr
 
-All Devices:
-  view: yes
-  name: Devices
-  icon: mdi:bluetooth-transfer
-  entities:
-    - group.devices
-
-lights:
-  name: All Lights
-  view: yes
-  icon: mdi:lightbulb-outline
-  entities:
-    - group.all_lights
-
-scripts:
-  name: scripts
-  icon: mdi:prescription
-  view: yes
-  entities:
-    - group.all_scripts
-
-Automations:
-  name: Automations
-  icon: mdi:autorenew
-  view: yes
-  entities:
-    - group.all_automation
 
 
 trash__recycle_schedule:

@@ -1,7 +1,14 @@
 #######################################
 ############## Holiday Outside Lights ######
 #######################################
-
+mqtt:
+  broker: !secret mqtt_broker
+  port: !secret mqtt_port
+  discovery: true
+  discovery_prefix: homeassistant
+  client_id: !secret mqtt_client
+  keepalive: !secret mqtt_keepalive
+  
 light:
   - platform: mqtt
     name: "Front led"
@@ -111,7 +118,7 @@ automation:
       offset: '00:01:00'
     action:
       service: light.turn_on
-      entity_id: light.eave_lights
+      entity_id: light.tv_color_lights
 
   - alias: 'front led off'
     trigger:
@@ -120,7 +127,7 @@ automation:
       offset: '-00:00:30'
     action:
       service: light.turn_off
-      entity_id: light.eave_lights
+      entity_id: light.tv_color_lights
 
   - alias: Turn front lights On At Sunset
     hide_entity: false

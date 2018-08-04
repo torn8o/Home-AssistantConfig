@@ -36,3 +36,8 @@ input_boolean:
     name: Show all Automations
     initial: on
     icon: mdi:security
+  weather:
+  #  custom_ui_state_card: custom-weather-card
+  #  config:
+  #    weather: weather.yweather
+  #    sun: sun.sun

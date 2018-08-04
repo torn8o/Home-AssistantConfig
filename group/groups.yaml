@@ -9,6 +9,7 @@ Default View:
     - group.game_room
     - group.nest
     - group.kitchen_lights
+    - group.kitchen_motion
   #  - group.air_safety
   #  - group.network
     - group.garage
@@ -16,6 +17,6 @@ Default View:
   #  - group.temperature
     - group.items
   #  - group.sonarr
-    - group.tv_room_temp
+  #  - group.tv_room_temp
     - group.led_porch
     - group.control

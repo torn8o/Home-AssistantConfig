@@ -72,7 +72,7 @@
   action:
     - service: light.turn_on
       entity_id:
-        - light.level_2
+        - light.ge_12724_3way_dimmer_switch_level
         
  ##############
  #  Presence  #

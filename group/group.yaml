@@ -64,8 +64,10 @@ Kit:
 kitchen motion:
   entities:
   #  - sensor.kitchen_multi_sensor_burglar_31_10
-    - sensor.dining_motion_status
-    - sensor.kit_motion_status
+#    - sensor.dining_motion_status
+#    - sensor.kit_motion_status
+    - sensor.center_motion_status
+    - binary_sensor.front_motion_sensor
 master bedroom:
   - switch.ge_12722_on_relay_switch_switch
   - switch.ge_12722_onoff_relay_switch_switch

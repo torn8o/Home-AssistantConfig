@@ -142,7 +142,7 @@ automation:
       entity_id: sensor.front_door_motion
       to: 'motion'  #change this to actual trigger
     action:
-      - delay: '00:00:01'
+  #    - delay: '00:00:01'
       - service: notify.ios_torn8o
     #  service: notify.ios_torn8o #id of your ios device, might not show up until you've loaded the ios component in HA
 

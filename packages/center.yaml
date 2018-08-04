@@ -70,6 +70,15 @@ sensor:
           {% else %}
           n/a
           {% endif %}'  
+switch:
+  - platform: hadockermon
+    host: 192.168.1.47
+    port: 8126
+    stats: true
+    prefix: hadockermon
+    exclude:
+      - 'NGINX'
+      - 'ha-dockermon'
 
 automation:
 
@@ -125,7 +134,7 @@ automation:
       entity_id: group.kitchen_motion
       to: 'off'
       for:
-        seconds: 15
+        seconds: 45
     action:
       service: light.turn_off
       entity_id: light.kitchen_leds

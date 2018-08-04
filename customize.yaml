@@ -12,7 +12,13 @@ automation.turn_on_kitchen_light_when_there_is_movement:
   friendly_name: turn off kitchen motion
 media_player.torntravel_2:
   friendly_name: Game Room Plex
-
+  
+input_boolean.weather:
+  custom_ui_state_card: custom-weather-card
+  config:
+    weather: weather.yweather
+    sun: sun.sun
+    
 media_player.torntravel:
   friendly_name: TV Room Plex
 

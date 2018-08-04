@@ -6,10 +6,7 @@
 ## Input_boolean
 #################################################################
 
-  show_all_automations:
-    name: Show all Automations
-    initial: on
-    icon: mdi:security
+
 #  startrecording:
 #    name: Camera Recording
 #    initial: off
@@ -18,3 +15,14 @@
 #    name: Alok Home
 #    initial: on
 #    icon: mdi:cellphone-iphone
+  switch_ac_kitchen:
+    name: AC kitchen
+  switch_ac_livingroom:
+    name: AC living room
+  switch_tv:
+    name: TV
+  input_boolean.weather:
+    custom_ui_state_card: custom-weather-card
+    config:
+      weather: weather.yweather
+      sun: sun.sun

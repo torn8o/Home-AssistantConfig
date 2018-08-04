@@ -35,7 +35,23 @@
 #    - diskspace
 #    - upcoming
 #  days: 1
+- platform: yweather
+#  name: Weather
+  monitored_conditions:
+    - weather
+    - weather_current
+    - temp_min
+    - temp_max
+    - wind_speed
+    - pressure
+    - visibility
+    - humidity
+    - temperature
 
 - platform: crimereports
   name: Home crimereports
   radius: 10
+
+- platform: duke_energy
+  username: !secret YOUR_DUKE_USERNAME
+  password: !secret YOUR_DUKE_PASSWORD
