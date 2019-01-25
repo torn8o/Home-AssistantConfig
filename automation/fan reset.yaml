@@ -1,7 +1,8 @@
 - alias: Fan Power Reset
+  initial_state: True
   trigger:
-    platform: time
-    seconds: '/5'
+    platform: time_pattern
+    at: '00:00:05'
   condition:
     - condition: state
       entity_id: switch.fan_off
@@ -10,3 +11,45 @@
     - service: switch.turn_off
       data:
         entity_id: switch.fan_off
+
+- alias: Fan low Reset
+  initial_state: True
+  trigger:
+    platform: time_pattern
+    at: '00:00:05'
+  condition:
+    - condition: state
+      entity_id: switch.fan_speed_low
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.fan_speed_low
+
+- alias: Fan med Reset
+  initial_state: True
+  trigger:
+    platform: time_pattern
+    at: '00:00:05'
+  condition:
+    - condition: state
+      entity_id: switch.fan_speed_medium
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.fan_speed_medium
+
+- alias: Fan high Reset
+  initial_state: True
+  trigger:
+    platform: time_pattern
+    at: '00:00:05'
+  condition:
+    - condition: state
+      entity_id: switch.fan_speed_high
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.fan_speed_high

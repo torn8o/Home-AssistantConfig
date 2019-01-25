@@ -47,6 +47,9 @@ game room:
   - sensor.game_room_humidity
   - sensor.game_room_proximity
   - sensor.game_room_temperature
+  - sensor.game_temperature
+  - sensor.game_motion
+  - automation.turn_off_game_room_light_when_there_is_no_movement
 
 Kitchen Lights:
   control: hidden
@@ -54,8 +57,8 @@ Kitchen Lights:
    - light.kitchen_light_level
    - light.kitchen_bar_light_level
    - light.kitchen_light_level_9_0
-   - automation.turn_on_kitchen_light_when_there_is_movement
-   - camera.cam
+   - automation.turn_kitchen_light_on
+   - automation.turn_off_kitchen_light
 Kit:
    - light.kitchen_light_level
    - light.kitchen_bar_light_level
@@ -81,12 +84,54 @@ master bedroom:
   - switch.master_bedroom_f_switch
   - switch.master_bedroom_h_switch
   - switch.master_bedroom_light
+  - switch.bathroom_led
+  - switch.bathroom_exhaust
+  - switch.bathroom_heater
 #  - sensor.master_bedroom_humidity
   - sensor.master_bedroom_proximity
   - sensor.master_bedroom_temperature
   - binary_sensor.master_bedroom_presence
   - switch.ge_12722_on_relay_switch_switch
   - switch.ge_12722_onoff_relay_switch_switch
+  - light.mb_color_lights
+
+mommy switches:
+  - switch.master_bathroom_light
+  - switch.master_bathroom_fan_switch
+  - switch.master_bathroom_light_switch
+  - switch.master_bedroom_f_switch
+  - switch.master_bedroom_h_switch
+  - switch.master_bedroom_light
+  - switch.deck_led
+  - switch.led_back_lights
+  - switch.front_entry_light_switch
+  - switch.bathroom_led
+  - switch.bathroom_exhaust
+  - switch.bathroom_heater
+mommy lights:
+  - light.master_bedroom_fan_level
+  - light.kitchen_light_level
+  - light.kitchen_bar_light_level
+  - light.kitchen_light_level_9_0
+  - light.spot_light_level
+  - light.hair_area_level
+  - light.david_picture
+  - light.mb_color_lights
+mommy camera:
+  - camera.pool_camera
+  - camera.front_door_camera
+mommy Control:
+  - input_select.fan_speed
+  - input_select.curtain
+
+mommy Automations:
+  - automation.01_notify_ios_pool_feed
+  - automation.tv_lights_on
+  - automation.tts_motion_front_door
+  - automation.turn_deck_led_off_at_sunrise
+  - automation.master_bedroom_motion
+  - script.pihole_on
+  - script.pihole_off
 
 Sonarr:
   - sensor.sonarr_disk_space_2
@@ -98,23 +143,43 @@ Sonarr:
 
 family_group:
   - device_tracker.torn8o
-  #- sensor.torn8o_iphone_battery
   - sensor.torn8o_battery_level
   - sensor.torn8o_battery_state
   - device_tracker.lynx
-  #- sensor.lynx_iphone_battery
   - sensor.lynx_battery_level
   - sensor.lynx_battery_state
+  - sensor.ferinas_iphone_battery_state
+  - sensor.ferinas_iphone_battery_level
+  - device_tracker.nina_iphone
+  - sensor.nina_battery_state
+  - sensor.nina_battery_level
+  - device_tracker.monkey_phone
 
+fan control:
+  - automation.tv_fan_control_on_with_temp
+  - automation.tv_fan_control_off_with_temp
+  - automation.tv_fan_speed_on_low
+  - automation.tv_fan_speed_on_medium
+  - automation.tv_fan_speed_on_high
+  - switch.tv_room_fan
 
 
 Garage:
+  - switch.garage_door_opener_switch
   - sensor.top_door_status
   - sensor.a_door_status
   - light.attic_lights_level
   - sensor.garage_door_status
   - binary_sensor.garage_door_opener_sensor
-  - switch.garage_door_opener_switch
+  - light.level
+  - switch.vacuum
+  - automation.turn_garage_light_off
+  - switch.attic_fans
+  - sensor.attic_temperature
+  - sensor.attic_real_feel
+  - sensor.garage_temperature
+  - sensor.garage_real_feel
+
 
 network:
   - sensor.speedtest_upload
@@ -151,24 +216,25 @@ Air Safety:
   - sensor.kitchen_nest_protect_battery_health
 
 tv room:
-  - sensor.average_living_room_temp
+  - sensor.average_temp
   - light.tv_room_light_level
-  - switch.cable_modem_switch
-  - switch.plex_server_power
-  - switch.ge_12722_on_relay_switch_switch
-  - light.ge_12724_3way_dimmer_switch_level
   - switch.fan_
   - switch.tv_room_fan
-  - light.cabinet_lights
-  - switch.deck_motion
-  - switch.deck_flood_lights
-  - light.tv_color_lights
-  - light.tv_color_lights1
-  - switch.flood_lights
-  - media_player.xboxtorn
+  - light.accent_interior_lights
+  - light.back_porch_motion_level
+  - light.back_porch_spot_level
   - input_select.fan_speed
-gitter:
-  - sensor.gitter_messages
+  - switch.led_back_lights
+  - switch.dining_room_outlet
+  - sensor.display_song
+  - switch.ferina_tree
+  - switch.front_christmas_tree
+Christmas:
+  - switch.christmas_tree
+  - switch.front_christmas_tree
+  - switch.led_back_lights
+  - switch.dining_room_outlet
+  - switch.ferina_tree
 Fan:
   entities:
     - switch.fan_speed_high

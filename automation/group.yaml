@@ -1,4 +1,5 @@
 - alias: View lights
+  initial_state: True
 #  automation 2:
   trigger:
     platform: sun

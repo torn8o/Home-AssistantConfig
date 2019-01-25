@@ -2,6 +2,7 @@
 
 
 - alias: CarPresence_ON
+  initial_state: True
   trigger:
     platform: state
     entity_id: binary_sensor.carpresence
@@ -13,9 +14,10 @@
   action:
   - service: switch.turn_on
     entity_id: 'switch.garage_door_opener_switch'
-    
+
 # car sensor is disconnected for one minute and the garage door is open
 - alias: CarPresence_OFF
+  initial_state: True
   trigger:
     platform: state
     entity_id: binary_sensor.carpresence
@@ -29,5 +31,3 @@
   action:
   - service: switch.turn_on
     entity_id: 'switch.garage_door_opener_switch'
-    
-    

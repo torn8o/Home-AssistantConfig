@@ -1,0 +1,30 @@
+#  plex_lights_disable:
+#    name: Disable Plex Lights
+#    initial: off
+#    icon: mdi:filmstrip-off
+#3################################################################
+## Input_boolean
+#################################################################
+
+
+#  startrecording:
+#    name: Camera Recording
+#    initial: off
+#    icon: mdi:record-rec
+#  alokhome:
+#    name: Alok Home
+#    initial: on
+#    icon: mdi:cellphone-iphone
+  switch_ac_kitchen:
+    name: AC kitchen
+  switch_ac_livingroom:
+    name: AC living room
+  switch_tv:
+    name: TV
+
+  disable_exterior_on_sunset:
+    name: Disable Exterior Lights On at Sunset
+    icon: mdi:weather-sunset-down
+  interior_holiday:
+    name: Interior Holiday Lighting
+    icon: mdi:gift

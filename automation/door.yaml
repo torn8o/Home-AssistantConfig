@@ -1,9 +1,4 @@
-- alias: 'Start HomeKit'
-  trigger:
-    - platform: event
-      event_type: zwave.network_ready
-  action:
-    - service: homekit.start
+
 ##################
 #front dooropen#
 ##################
@@ -18,15 +13,16 @@
 #        seconds: 30
 #    - service: switch.turn_off
 #      entity_id: switch.front_entry_light_switch
-      
+
 - alias: Turn on front entry
+  initial_state: True
   trigger:
     platform: state
     entity_id: binary_sensor.front_door_sensor_sensor
     to: 'on'
   condition:
     - condition: template
-#      value_template: '{{ now().hour | int >= 19 and now().hour | int <= 6 }}'  
+#      value_template: '{{ now().hour | int >= 19 and now().hour | int <= 6 }}'
       value_template: >-
         {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
         {%- if hour >= 19 and hour  <=  6 -%}
@@ -56,24 +52,25 @@
 #        seconds: 30
 #    - service: switch.turn_off
 #      entity_id: group.kitchen_lights
-      
 
 
-      
-      
+
+
+
 #############
 #Rabbit time#
 #############
 - alias: 'Timed 4pm'
+  initial_state: True
   trigger:
-    - platform: time
+    - platform: time_pattern
       at: '16:00:00'
 
   action:
     - service: light.turn_on
       entity_id:
         - light.ge_12724_3way_dimmer_switch_level
-        
+
  ##############
  #  Presence  #
 ##############
@@ -114,6 +111,7 @@
  #  Network  #
 #############
 - alias: Z-Wave network is complete
+  initial_state: True
   trigger:
     platform: event
     event_type: zwave.network_ready
@@ -127,6 +125,7 @@
 #############
 
 - alias: TV Lights on
+  initial_state: True
   trigger:
     - platform: state
       entity_id: sensor.vizio_tv
@@ -135,6 +134,7 @@
     - service: light.turn_on
       entity_id: light.tv_room_light_level
 - alias: TV Lights off
+  initial_state: True
   trigger:
     platform: state
     entity_id: sensor.vizio_tv
@@ -145,26 +145,27 @@
 
   ##############
  #  back led on  #
-#############    
+#############
 
-- alias: TV accent on
-  trigger:
-    - platform: state
-      entity_id: remote.torn_hub
-      to: 'on'
-  action:
-    - service: switch.turn_on
-      entity_id: switch.led_back_lights
-- alias: TV accent off
-  trigger:
-    platform: state
-    entity_id: remote.torn_hub
-    to: 'off'
-  action:
-    service: switch.turn_off
-    entity_id: switch.led_back_lights
+#- alias: TV accent on
+#  trigger:
+#    - platform: state
+#      entity_id: remote.torn_hub
+#      to: 'on'
+#  action:
+#    - service: switch.turn_on
+#      entity_id: switch.led_back_lights
+#- alias: TV accent off
+#  trigger:
+#    platform: state
+#    entity_id: sensor.vizio_tv
+#    to: 'offline'
+#  action:
+#    service: switch.turn_off
+#    entity_id: switch.led_back_lights
 
-- alias: Turn deck led On At Sunset
+- alias: Turn ferina tree
+  initial_state: True
   hide_entity: false
   trigger:
     platform: sun
@@ -172,18 +173,20 @@
     offset: '-00:00:20'
   action:
     service: switch.turn_on
-    entity_id: switch.deck_led
+    entity_id: switch.ferina_tree
 
 - alias: 'Turn deck led off at sunrise'
+  initial_state: True
   trigger:
     platform: sun
     event: sunrise
     offset: '-04:33:00'
   action:
     service: switch.turn_on
-    entity_id: switch.deck_led
+    entity_id: switch.ferina_tree
 
 - alias: Turn accent lights led On At Sunset
+  initial_state: True
   hide_entity: false
   trigger:
     platform: sun
@@ -194,6 +197,7 @@
     entity_id: light.accent_lights
 
 - alias: 'Turn accent lights off 2am'
+  initial_state: True
   trigger:
     platform: sun
     event: sunrise

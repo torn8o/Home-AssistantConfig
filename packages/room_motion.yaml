@@ -45,10 +45,10 @@ group:
 sensor:
 
   - platform: tautulli
-    host: 192.168.1.47:8183
+    host: !secret tautulli_host
     ssl: false
     verify_ssl: true
-    token: 076963a17eaa4feca9c9cb8f80579840
+    token: !secret tautulli_token
     monitored_conditions:
       - stream_count
       - stream_count_transcode

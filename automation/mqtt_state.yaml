@@ -1,6 +1,6 @@
 #automation:
   - alias: Save sensor mqtt State
-    initial_state: true
+    initial_state: True
     hide_entity: true
     trigger:
       platform: state

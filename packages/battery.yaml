@@ -113,6 +113,7 @@ sensor:
 
 automation:
   - alias: Notify Low battery
+    initial_state: True
     trigger:
       platform: numeric_state
       entity_id:
@@ -128,6 +129,7 @@ automation:
           value2: ""
 
   - alias: Notify nina Low battery
+    initial_state: True
     trigger:
       platform: numeric_state
       entity_id:
@@ -156,6 +158,7 @@ automation:
 #            Action Required: {{ trigger.to_state.attributes.friendly_name }}'s battery is: {{ trigger.to_state.state }}%.
 #          value2: ""
   - alias: 'Notify if any doors left open for 10 minutes'
+    initial_state: True
     trigger:
       platform: state
       entity_id:

@@ -5,53 +5,54 @@ homeassistant:
       haaska_hidden: true
       homebridge_hidden: true
       package: 'Center sensor'
-light:  
-  - platform: mqtt_json  
+light:
+  - platform: mqtt
+    schema: json
     name: "Center_LED"
-    state_topic: "torn/center"  
-    command_topic: "torn/center/set"  
-    brightness: true  
-    flash: true  
-    rgb: true  
-    optimistic: false  
-    qos: 0  
-  
+    state_topic: "torn/center"
+    command_topic: "torn/center/set"
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    qos: 0
 
-  
+
+
 sensor:
-     
-  - platform: mqtt  
-    state_topic: "torn/center"  
-    name: "Center Humidity"  
-    unit_of_measurement: "%"  
-    value_template: '{{ value_json.humidity | round(1) }}'  
-  
-  - platform: mqtt  
-    state_topic: "torn/center"  
+
+  - platform: mqtt
+    state_topic: "torn/center"
+    name: "Center Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/center"
     name: "Center LDR"
     ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
-    unit_of_measurement: "LUX"  
-    value_template: '{{ value_json.ldr }}'  
-  
-  - platform: mqtt  
-    state_topic: "torn/center"  
-    name: "Center PIR"  
-    value_template: '{{ value_json.motion }}'  
-  
-  - platform: mqtt  
-    state_topic: "torn/center"  
-    name: "Center Temperature"  
-    unit_of_measurement: "°F"  
-    value_template: '{{ value_json.temperature | round(1) }}'  
+    unit_of_measurement: "LUX"
+    value_template: '{{ value_json.ldr }}'
 
-  - platform: mqtt  
-    state_topic: "front/motion"  
-    name: "front door motion" 
+  - platform: mqtt
+    state_topic: "torn/center"
+    name: "Center PIR"
+    value_template: '{{ value_json.motion }}'
 
-  - platform: mqtt  
-    state_topic: "pool/motion"  
-    name: "pool door motion" 
-    
+  - platform: mqtt
+    state_topic: "torn/center"
+    name: "Center Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "front/motion"
+    name: "front door motion"
+
+  - platform: mqtt
+    state_topic: "pool/motion"
+    name: "pool door motion"
+
   - platform: mqtt
     state_topic: "torn/center"
     name: "Center Real Feel"
@@ -69,16 +70,7 @@ sensor:
           {% endif %}
           {% else %}
           n/a
-          {% endif %}'  
-switch:
-  - platform: hadockermon
-    host: 192.168.1.47
-    port: 8126
-    stats: true
-    prefix: hadockermon
-    exclude:
-      - 'NGINX'
-      - 'ha-dockermon'
+          {% endif %}'
 
 automation:
 
@@ -89,7 +81,7 @@ automation:
 #      data:
 #        file:
 #          path: "config/snapshot/cam.jpg"
-        
+
 #action:
 #  service: notify.NOTIFIER_NAME
 #  data:
@@ -110,12 +102,13 @@ automation:
 #  - delay: "00:00:30"
 #  - service: switch.turn_on
 #    entity_id: switch.lr_alarm
-             
+
 
 
 
 
   - alias: Turn Kitchen light on
+    initial_state: True
     trigger:
       platform: state
       entity_id: group.kitchen_motion
@@ -129,6 +122,7 @@ automation:
 #        entity_id: group.kitchen_lights
 
   - alias: Turn off kitchen light
+    initial_state: True
     trigger:
       platform: state
       entity_id: group.kitchen_motion
@@ -140,10 +134,11 @@ automation:
       entity_id: light.kitchen_leds
 
   - alias: Turn light led on
+    initial_state: True
     trigger:
       platform: state
-      entity_id: sensor.center_motion_status
-      to: 'on'
+      entity_id: sensor.center_pir
+      to: 'motion detected'
     action:
       - service: light.turn_on
         entity_id: light.Center_led
@@ -156,25 +151,29 @@ automation:
       - service: light.turn_on
         entity_id: light.Center_led
         data:
-          brightness: 255    
+          brightness: 255
 #        color_name: green
 #        brightness: 255
 #        flash: long
-        
+
       - delay:
           seconds: 15
       - service: light.turn_off
         entity_id: light.Center_led
-        
-    
-group:  
-  Center_sensor:  
+
+
+
+
+
+
+group:
+  Center_sensor:
     name: Center Sensor
-#    view: yes 
-    entities:  
-      - sensor.Center_Temperature  
-      - sensor.Center_Humidity  
-      - sensor.Center_Ldr  
-      - sensor.Center_Pir  
+#    view: yes
+    entities:
+      - sensor.Center_Temperature
+      - sensor.Center_Humidity
+      - sensor.Center_Ldr
+      - sensor.Center_Pir
       - light.Center_LED
       - automation.turn_o_kitchen_light_movement

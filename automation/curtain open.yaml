@@ -1,14 +1,15 @@
 - alias: open curtains 9am
+  initial_state: True
   hide_entity: false
   trigger:
-    - platform: time
+    - platform: time_pattern
       at: '09:00:00'
   action:
     service: switch.turn_on
     entity_id: switch.curtain_open
 #- alias: curtain open
 #  trigger:
-#    platform: time
+#    platform: time_pattern_pattern
 #    seconds: '/15'
 #  condition:
 #    - condition: state
@@ -19,6 +20,7 @@
 #      data:
 #        entity_id: switch.receiver5
 - alias: close curtains sunset
+  initial_state: True
   hide_entity: false
   trigger:
     platform: sun
@@ -28,9 +30,10 @@
     entity_id: switch.curtain_close
 
 - alias: curtain reset open
+  initial_state: True
   trigger:
-    platform: time
-    seconds: '/5'
+    platform: time_pattern
+    at: '00:00:05'
   condition:
     - condition: state
       entity_id: switch.curtain_open
@@ -41,9 +44,10 @@
         entity_id: switch.curtain_open
 
 - alias: curtain reset close
+  initial_state: True
   trigger:
-    platform: time
-    seconds: '/5'
+    platform: time_pattern
+    at: '00:00:05'
   condition:
     - condition: state
       entity_id: switch.curtain_close

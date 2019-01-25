@@ -3,6 +3,7 @@
 ######################################################################
 
 - alias: 'Dark outside light'
+  initial_state: True
   trigger:
   #  - platform: numeric_state
   #    entity_id: sun.sun

@@ -43,12 +43,13 @@ homeassistant:
       <<: *customize
       friendly_name: "Overhead"
       icon: mdi:cloud-outline
-    
+
 ##################################################
 ## Binary Sensor
 ##################################################
 binary_sensor:
   - platform: iss
+    show_on_map: true
 
 ##################################################
 ## Camera
@@ -83,7 +84,7 @@ sensor:
 
       iss_next_rise:
         value_template: "{{ as_timestamp(states.binary_sensor.iss.attributes.next_rise) | timestamp_custom('%H:%M:%S') }}"
-      
+
       iss_location:
         value_template: "[{{ states.binary_sensor.iss.attributes.lat }},{{ states.binary_sensor.iss.attributes.long }}]"
 

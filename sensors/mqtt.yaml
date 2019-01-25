@@ -1,8 +1,0 @@
-
-
-  - platform: mqtt
-    state_topic: "home-assistant/light/kitchen_bar_light_level"
-    name: "Kitchen Bar Light"
-  #  unit_of_measurement: "Date"
-  #  value_template: '{{ value_json.date ~ "\n" ~ value_json.time }}'
-

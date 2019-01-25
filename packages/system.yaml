@@ -98,7 +98,7 @@ group:
 
 automation:
   - alias: startup_notification
-    initial_state: 'on'
+    initial_state: 'True'
     trigger:
       - platform: homeassistant
         event: start
@@ -108,7 +108,7 @@ automation:
           message: "Home Assistant is now up and running."
 
   - alias: update_notification
-    initial_state: 'on'
+    initial_state: True
     trigger:
       - platform: state
         entity_id: updater.updater

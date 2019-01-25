@@ -2,6 +2,7 @@
 
 automation:
   - alias: 'Update Available Notification'
+    initial_state: True
     hide_entity: true
     trigger:
       platform: state

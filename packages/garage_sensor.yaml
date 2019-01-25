@@ -5,26 +5,39 @@ homeassistant:
       haaska_hidden: true
       homebridge_hidden: true
       package: 'Garage sensor'
-light:  
-  - platform: mqtt_json  
+light:
+  - platform: mqtt
+    schema: json
     name: "Garage_LED"
-    state_topic: "torn/garage"  
-    command_topic: "torn/garage/set"  
-    brightness: true  
-    flash: true  
-    rgb: true  
-    optimistic: false  
-    qos: 0  
-  
+    state_topic: "torn/garage"
+    command_topic: "torn/garage/set"
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    qos: 0
 
-  
+
+switch:
+  - platform: mqtt
+    name: "Ferina Tree"
+    state_topic: "stat/ferina/POWER"
+    command_topic: "cmnd/ferina/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    qos: 1
+    retain: true
+  - platform: mqtt
+    name: "vacuum"
+    state_topic: "stat/vacuum/POWER"
+    command_topic: "cmnd/vacuum/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    qos: 1
+    retain: true
 sensor:
-#  - platform: mqtt
-#    name: "front door Motion"
-#    state_topic: "camera/front_door/motion"
-#    value_template: '{{ value_json.status }}'
-#    payload_on: "MOTION"
-#    payload_off: "NO MOTION"    
+
+
 #    device_class: motion
   - platform: mqtt
     name: "front door motion"
@@ -33,34 +46,34 @@ sensor:
   - platform: mqtt
     name: "pool motion"
     state_topic: "pool/motion"
-        
+
   - platform: mqtt
     name: "pool motion"
     state_topic: "camera/pool/motion"
-    
-  - platform: mqtt  
-    state_topic: "torn/garage"  
-    name: "Garage Humidity"  
-    unit_of_measurement: "%"  
-    value_template: '{{ value_json.humidity | round(1) }}'  
-  
-  - platform: mqtt  
-    state_topic: "torn/garage"  
+
+  - platform: mqtt
+    state_topic: "torn/garage"
+    name: "Garage Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/garage"
     name: "Garage LDR"
     ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
-    unit_of_measurement: "LUX"  
-    value_template: '{{ value_json.ldr }}'  
-  
-  - platform: mqtt  
-    state_topic: "torn/garage"  
-    name: "Garage PIR"  
-    value_template: '{{ value_json.motion }}'  
-  
-  - platform: mqtt  
-    state_topic: "torn/garage"  
-    name: "Garage Temperature"  
-    unit_of_measurement: "°F"  
-    value_template: '{{ value_json.temperature | round(1) }}'  
+    unit_of_measurement: "LUX"
+    value_template: '{{ value_json.ldr }}'
+
+  - platform: mqtt
+    state_topic: "torn/garage"
+    name: "Garage PIR"
+    value_template: '{{ value_json.motion }}'
+
+  - platform: mqtt
+    state_topic: "torn/garage"
+    name: "Garage Temperature"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.temperature | round(1) }}'
 
   - platform: mqtt
     state_topic: "torn/garage"
@@ -68,18 +81,18 @@ sensor:
     unit_of_measurement: "°F"
     value_template: '{{ value_json.heatIndex | round(1) }}'
 
-  - platform: template
-    sensors:
-      garage_motion_status:
-        value_template: '{% if states.sensor.Garage_Pir %}
-          {% if states.sensor.Garage_Pir.state == "motion detected" %}
-            on
-          {% else %}
-            off
-          {% endif %}
-          {% else %}
-          n/a
-          {% endif %}'  
+  #- platform: template
+  #  sensors:
+  #    garage_motion_status:
+  #      value_template: '{% if states.sensor.Garage_Pir %}
+  #        {% if states.sensor.Garage_Pir.state == "motion detected" %}
+  #          on
+  #        {% else %}
+  #          off
+  #        {% endif %}
+  #        {% else %}
+  #        n/a
+  #        {% endif %}'
 
 automation:
 #  - alias: motion reset
@@ -94,7 +107,7 @@ automation:
 #     - service: input_boolean.turn_off
 #       data:
 #         entity_id: input_boolean.motion_toggle
-      
+
 #  - alias: Turn motion on
 #    trigger:
 #      platform: state
@@ -102,8 +115,8 @@ automation:
 #      to: 'MOTION'
 #    action:
 #      service: input_boolean.turn_on
-#      entity_id: input_boolean.motion_toggle        
- 
+#      entity_id: input_boolean.motion_toggle
+
 #  - alias: test light
 #    trigger:
 #      platform: state
@@ -136,21 +149,23 @@ automation:
 #  - delay: "00:00:30"
 #  - service: switch.turn_on
 #    entity_id: switch.lr_alarm
-             
-  - alias: Turn on garage light when there is movement
+
+  - alias: turn on garage light when there is movement
+    initial_state: True
     trigger:
       platform: state
-      entity_id: sensor.garage_motion_status
-      to: 'on'
+      entity_id: sensor.garage_pir
+      to: 'motion detected'
     action:
       service: light.turn_on
       entity_id: light.level
 
-  - alias: Turn garage light off
+  - alias: turn garage light off
+    initial_state: True
     trigger:
       platform: state
-      entity_id: sensor.garage_motion_status
-      to: 'off'
+      entity_id: sensor.garage_pir
+      to: 'standby'
       for:
     #    seconds: 30
         minutes: 5
@@ -158,11 +173,12 @@ automation:
       - service: light.turn_off
         entity_id: light.level
 
-  - alias: Turn light led on
+  - alias: turn light led on
+    initial_state: True
     trigger:
       platform: state
-      entity_id: sensor.garage_motion_status
-      to: 'on'
+      entity_id: sensor.garage_pir
+      to: 'motion detected'
     action:
       - service: light.turn_on
         entity_id: light.garage_led
@@ -175,26 +191,26 @@ automation:
       - service: light.turn_on
         entity_id: light.garage_led
         data:
-          brightness: 255    
+          brightness: 255
 #        color_name: green
 #        brightness: 255
 #        flash: long
-        
+
       - delay:
           seconds: 15
       - service: light.turn_off
         entity_id: light.garage_led
-        
-    
-group:  
-  Garage_sensor:  
+
+
+group:
+  Garage_sensor:
     name: Garage Sensor
-  #  view: yes 
-    entities:  
-      - sensor.Garage_Temperature  
-      - sensor.Garage_Humidity  
-      - sensor.Garage_Ldr  
-      - sensor.Garage_Pir  
+  #  view: yes
+    entities:
+      - sensor.Garage_Temperature
+      - sensor.Garage_Humidity
+      - sensor.Garage_Ldr
+      - sensor.Garage_Pir
       - light.Garage_LED
       - light.level
       - input_boolean.motion_toggle

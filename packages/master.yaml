@@ -19,15 +19,22 @@ light:
       - light.kitchen_cabinet_lights
       - light.display_light
       - light.tv_color_lights
+      - light.niche_strip
 
   - platform: group
     name: accent interior lights
     entities:
       - light.kitchen_cabinet_lights
       - light.display_light
+      - light.niche_leds
+  - platform: group
+    name: niche and porch lights
+    entities:
+      - light.niche_leds
+      - light.porch_led
 
-      
-  - platform: mqtt_json
+  - platform: mqtt
+    schema: json
     name: "mb led"
     state_topic: "torn/master_bed"
     command_topic: "torn/master_bed/set"
@@ -37,10 +44,11 @@ light:
     optimistic: false
     qos: 0
 
-  - platform: mqtt_json
+  - platform: mqtt
+    schema: json
     name: "gr led"
-    state_topic: "torn/game_room"
-    command_topic: "torn/game_room/set"
+    state_topic: "torn/games"
+    command_topic: "torn/games/set"
     brightness: true
     flash: true
     rgb: true
@@ -65,16 +73,17 @@ light:
     payload_off: "OFF"
     retain: true
 
-  - platform: mqtt_json  
-    name: Garage LED"  
-    state_topic: "torn/garage"  
-    command_topic: "torn/garage/set"  
-    brightness: true  
-    flash: true  
-    rgb: true  
-    optimistic: false  
-    qos: 0  
-    
+  - platform: mqtt
+    schema: json
+    name: Garage LED"
+    state_topic: "torn/garage"
+    command_topic: "torn/garage/set"
+    brightness: true
+    flash: true
+    rgb: true
+    optimistic: false
+    qos: 0
+
 group:
   master_room_motion:
     entities:
@@ -85,7 +94,7 @@ group:
       - automation.turn_off_master_bedroom_light_when_there_is_no_movement
 
 
-      
+
 sensor:
   - platform: mqtt
     state_topic: "torn/attic"
@@ -101,9 +110,15 @@ sensor:
 
   - platform: mqtt
     state_topic: "torn/attic"
+    name: "Attic Real Feel"
+    unit_of_measurement: "°F"
+    value_template: '{{ value_json.heatIndex | round(1) }}'
+
+  - platform: mqtt
+    state_topic: "torn/attic"
     name: "Garage Entry Motion"
     value_template: '{{ value_json.motion }}'
-    
+
   - platform: mqtt
     state_topic: "torn/master_bed"
     name: "master bed motion"
@@ -120,20 +135,20 @@ sensor:
     name: "master bed humidity"
     unit_of_measurement: "%"
     value_template: '{{ value_json.humidity | round(1) }}'
-    
+
   - platform: mqtt
-    state_topic: "torn/game_room"
+    state_topic: "torn/games"
     name: "game motion"
     value_template: '{{ value_json.motion }}'
 
   - platform: mqtt
-    state_topic: "torn/game_room"
+    state_topic: "torn/games"
     name: "game temperature"
     unit_of_measurement: "°F"
     value_template: '{{ value_json.temperature | round(1) }}'
 
   - platform: mqtt
-    state_topic: "torn/game_room"
+    state_topic: "torn/games"
     name: "game humidity"
     unit_of_measurement: "%"
     value_template: '{{ value_json.humidity | round(1) }}'
@@ -163,21 +178,23 @@ sensor:
           n/a
           {% endif %}'
 
-            
+
 automation:
-  - alias: master_bath_fan_timer
-    trigger:
-      platform: state
-      entity_id: switch.master_bathroom_fan_switch
-  #    from: 'off'
-      to: 'on'
-      for:
-        minutes: 10
-    action:
-      service: switch.turn_off
-      entity_id: switch.master_bathroom_fan_switch
-        
-  - alias: Turn on master bedroom light when there is movement
+#  - alias: master_bath_fan_timer
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: switch.master_bathroom_fan_switch
+#  #    from: 'off'
+#      to: 'on'
+#      for:
+#        minutes: 10
+#    action:
+#      service: switch.turn_off
+#      entity_id: switch.master_bathroom_fan_switch
+
+  - alias: Master Bedroom Motion
+    initial_state: True
     trigger:
       platform: state
       entity_id: sensor.mb_motion_status
@@ -194,8 +211,9 @@ automation:
     action:
       service: switch.turn_on
       entity_id: switch.master_bedroom_f_switch
-  
+
   - alias: Turn off master bedroom light when there is no movement
+    initial_state: True
     trigger:
       platform: state
       entity_id: sensor.mb_motion_status
@@ -217,6 +235,7 @@ automation:
       entity_id: switch.master_bedroom_f_switch
 
   - alias: Turn on led
+    initial_state: True
     trigger:
       platform: state
       entity_id: sensor.mb_motion_status
@@ -235,6 +254,7 @@ automation:
       entity_id: light.mb_led
 
   - alias: Turn off led
+    initial_state: True
     trigger:
       platform: state
       entity_id: sensor.mb_motion_status
@@ -268,7 +288,7 @@ automation:
 #    action:
 #      service: light.turn_on
 #      entity_id: group.kitchen_lights
-  
+
 #  - alias: Turn off kitchen light when there is no movement
 #    trigger:
 #      platform: state
@@ -290,6 +310,7 @@ automation:
 #      entity_id: group.kitchen_lights
 
   - alias: Turn on game room light when there is movement
+    initial_state: True
     trigger:
       platform: state
       entity_id: sensor.gr_motion
@@ -306,8 +327,9 @@ automation:
     action:
       service: switch.turn_on
       entity_id: switch.game_room_light
-  
+
   - alias: Turn off game room light when there is no movement
+    initial_state: True
     trigger:
       platform: state
       entity_id: sensor.gr_motion

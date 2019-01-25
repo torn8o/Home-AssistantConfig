@@ -16,14 +16,14 @@ homeassistant:
     group.trash_and_recycle_automations:
       order: 12
 
-    sensor.trash_day:
+    sensor.trash_and_recycle:
       friendly_name: Is it Trash Day today?
       icon: mdi:delete-variant
     sensor.recycle_day:
       friendly_name: Is it Recycle Day today?
       icon: mdi:recycle
     sensor.trash_pickup_day:
-      friendly_name: Trach Pickup Day
+      friendly_name: Trash Pickup Day
       icon: mdi:calendar-today
       hidden: true
     sensor.recycle_pickup_day:
@@ -42,19 +42,9 @@ homeassistant:
       icon: mdi:recycle
 
 group:
-  trash__recycle:
-    name: trash_recycle
-  #  icon: mdi:apple-ios
-  #  view: yes
-    entities:
-  #    - group.trash__recycle
-  #    - group.trash__recycle_schedule
-      - group.trash_schedule
-      - group.recycle_schedule
-      
   Trash Schedule:
     entities:
-      - sensor.trash_day
+      - sensor.trash_and_recycle
       - sensor.trash_pickup_day
       - input_select.trash_pickup_day
 
@@ -72,11 +62,8 @@ group:
       - sensor.time
       - sensor.date
       - sensor.time_utc
-      - sensor.date__time
-      - sensor.time__date
-      - sensor.internet_time
-      - sensor.rocket_launch_time
-      - sensor.beat
+      - sensor.date_time
+      - sensor.time_date
 
 ###############################################################################
 #  UI Elements
@@ -95,7 +82,7 @@ input_select:
      - unknown
     icon: mdi:delete-variant
   recycle_pickup_day:
-    name: Current Recycle Pickup Day (Every Other Week)
+    name: Current Recycle Pickup Day (Every Week)
     options:
      - Monday
      - Tuesday
@@ -109,7 +96,7 @@ input_select:
   recycle_pickup_week:
     name: Select Recycle Pickup Week based on Current Week above
     options:
-     - Even Weeks
+     - week
      - Odd Weeks
      - unknown
     icon: mdi:recycle
@@ -120,12 +107,12 @@ input_select:
 sensor:
   - platform: time_date
     display_options:
-      - 'time'
-      - 'date'
-      - 'date_time'
-      - 'time_date'
-      - 'time_utc'
-      - 'beat'
+      - time
+      - date
+      - date_time
+      - time_date
+      - time_utc
+
   - platform: mqtt
     state_topic: "/home/trashpickupday"
     name: "Trash Pickup Day"
@@ -179,7 +166,7 @@ sensor:
           {%- endif -%}
 
 ###############################################################################
-# Recycle - Pickup schedule is every other week.
+# Recycle - Pickup schedule is every week.
 # Set the day to a day before the actual day leaving time for reminders
 ###############################################################################
   - platform: template
@@ -191,240 +178,17 @@ sensor:
           {% set date = states.sensor.date__time.state.split(',')[0].split('-')[2] %}
           {% set today = strptime(year ~ '-' ~ month ~ '-' ~ date , '%Y-%m-%d') %}    
           {%- set pickupDay = states.sensor.recycle_pickup_day.state | lower -%}
-          {% if states.input_select.recycle_pickup_week.state | lower == "even weeks" %}
-            {%- set evenWeekPickup = "true" %}
-          {% else %}
-            {%- set evenWeekPickup = "false" %}
-          {% endif %}
-          {%- macro day_of_week(timestamp) -%}
-            {{ as_timestamp(timestamp)| timestamp_custom('%A', true) | lower }}
-          {%- endmacro %}      
-          {%- macro week_number_of_year() -%}
-            {{ as_timestamp(today) | timestamp_custom('%U', true) | int }}
-          {%- endmacro %}
-          {%- macro is_it_this_week() -%}
-            {%- if as_timestamp(today) | timestamp_custom('%U', true) | int % 2 == 0 -%}
-              {%- if evenWeekPickup == "true" -%}
-                true
-              {%- else -%}
-                false
-              {%- endif -%}
-            {%- else -%}
-              {%- if evenWeekPickup == "true" -%}
-                false
-              {%- else -%}
-                true
-              {%- endif -%}
-            {%- endif -%}
-          {%- endmacro -%}
-          {%- macro is_it_today() -%}
-          {%- if is_it_this_week() == "true" -%}
-            {%- if day_of_week(today) | lower == pickupDay -%}
-              yes
-            {%- else -%}
-              no
-            {%- endif -%}
+          {%- if as_timestamp(today)| timestamp_custom('%A', true) | lower == pickupDay -%}
+            yes
           {%- else -%}
             no
           {%- endif -%}
-          {%- endmacro -%}
-          {{- is_it_today() -}}
-
 ###############################################################################
-#                               Automations
+#                _                        _   _                 
+#     /\        | |                      | | (_)                
+#    /  \  _   _| |_ ___  _ __ ___   __ _| |_ _  ___  _ __  ___ 
+#   / /\ \| | | | __/ _ \| '_ ` _ \ / _` | __| |/ _ \| '_ \/ __|
+#  / ____ \ |_| | || (_) | | | | | | (_| | |_| | (_) | | | \__ \
+# /_/    \_\__,_|\__\___/|_| |_| |_|\__,_|\__|_|\___/|_| |_|___/              
+#                                                                              
 ###############################################################################
-automation:
-
-###############################################################################
-#  The schedule can be changed via UI. The updated schedules are saved in MQTT
-#  The input_selects don't maintain state automatically - hence this code
-#  These automations are hidden - no interaction with user is required.
-#  Save & Restore Functionality
-###############################################################################
-  - alias: Trash Pickup Day Changed
-    initial_state: true
-    hide_entity: true
-    trigger:
-      platform: state
-      entity_id: input_select.trash_pickup_day
-    action:
-      - service: mqtt.publish
-        data_template:
-          topic: "/home/trashpickupday"
-          retain: true
-          payload: '{{ states.input_select.trash_pickup_day.state }}'
-
-  - alias: Recycle Pickup Day Changed
-    initial_state: true
-    hide_entity: true
-    trigger:
-      platform: state
-      entity_id: input_select.recycle_pickup_day
-    action:
-      - service: mqtt.publish
-        data_template:
-          topic: "/home/recyclepickupday"
-          retain: true
-          payload: '{{ states.input_select.recycle_pickup_day.state }}'
-
-  - alias: Recycle Pickup Week Changed
-    initial_state: true
-    hide_entity: true
-    trigger:
-      platform: state
-      entity_id: input_select.recycle_pickup_week
-    action:
-      - service: mqtt.publish
-        data_template:
-          topic: "/home/recyclepickupweek"
-          retain: true
-          payload: '{{ states.input_select.recycle_pickup_week.state }}'
-
-  - alias: Restore Trash Recycle Settings on Startup
-    initial_state: true
-    hide_entity: true
-    trigger:
-      platform: homeassistant
-      event: start
-    action:
-      - delay:
-          minutes: 1      
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trash_pickup_day
-          option: "{{states.sensor.trash_pickup_day.state}}"
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.recycle_pickup_day
-          option: "{{states.sensor.recycle_pickup_day.state}}"
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.recycle_pickup_week
-          option: "{{states.sensor.recycle_pickup_week.state}}"
-
-###############################################################################
-#  Reminder code - Reminds 5 times every hour starting 4 PM
-#  Conditions: Only notifies when someone is at home 
-###############################################################################
-  - alias: Trash and Recycle Pickup Reminder
-    initial_state: true
-    hide_entity: true
-    trigger:
-      - platform: time
-        at: '16:00:00'
-      - platform: time
-        at: '17:00:00'
-      - platform: time
-        at: '18:00:00'
-      - platform: time
-        at: '19:00:00'
-      - platform: time
-        at: '20:00:00'
-      - platform: time
-        at: '21:00:00'
-    condition:
-      condition: and
-      conditions:
-      - condition: template
-        value_template: '{{ states.input_boolean.trash_reminders.state == "on" }}'
-      - condition: or
-        conditions:
-          - condition: state
-            entity_id: sensor.trash_day
-            state: 'yes'
-          - condition: state
-            entity_id: sensor.recycle_day
-            state: 'yes'
-    action:
-      - service: notify.ios_suresh
-        data_template:
-          title: >
-            {% if states.sensor.trash_day.state == "yes" %}
-              Trash Pickup Tomorrow!
-            {% elif states.sensor.recycle_day.state == "yes" %}
-              Recycle Pickup Tomorrow!
-            {% endif %}
-          message: >
-            {% if states.sensor.trash_day.state == "yes" %}
-              Please leave trash bin outside tonight. Thank you!
-            {% elif states.sensor.recycle_day.state == "yes" %}
-              Please leave recycle bin outside tonight. Thank you!
-            {% endif %}
-          data:
-            push:
-              badge: 0
-              category: "trash_recycle"
-
-      - service: script.notify_me
-        data_template:
-          message: >
-            {% if states.sensor.trash_day.state == "yes" %}
-              Tomorrow is the Trash Pickup day. 
-              Put the Trash bin outside, please!
-            {% elif states.sensor.recycle_day.state == "yes" %}
-              Tomorrow is the Recycle Pickup day. 
-              Put the Recycle bin outside, please!              
-            {% endif %}
-
-      - service: script.voice_notify
-        data_template:
-          message: >
-            {% if states.sensor.trash_day.state == "yes" %}
-              Attention!: Tomorrow is the Trash Pickup day. 
-              Please don't forget to put the Trash bin outside tonight!
-            {% elif states.sensor.recycle_day.state == "yes" %}
-              Attention!: Tomorrow is the Recycle Pickup day. 
-              Please don't forget to put the recycle bin outside tonight!
-            {% endif %}
-
-  - alias: Trash and Recycle Bin Left Outside Already
-    initial_state: true
-    hide_entity: true
-    trigger:
-      platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: TRASH_LEFT
-    action:
-      - service: notify.ios_suresh
-        data:
-          message: "Great job, Thank you!"
-      - service: input_boolean.turn_off
-        entity_id: input_boolean.trash_reminders
-
-  - alias: Remind later
-    initial_state: true
-    hide_entity: true
-    trigger:
-      platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: TRASH_REMIND_LATER
-    action:
-      - service: notify.ios_torn8o
-        data:
-          message: "Will remind you again in an hour!"
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.trash_reminders
-
-  - alias: Reset Trash Reminders
-    initial_state: true
-    hide_entity: true
-    trigger:
-      - platform: time
-        at: '09:00:00'
-    action:
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.trash_reminders
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trash_pickup_day
-          option: "{{states.sensor.trash_pickup_day.state}}"
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.recycle_pickup_day
-          option: "{{states.sensor.recycle_pickup_day.state}}"
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.recycle_pickup_week
-          option: "{{states.sensor.recycle_pickup_week.state}}"

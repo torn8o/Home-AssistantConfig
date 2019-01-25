@@ -1,0 +1,161 @@
+  - alias: Trash Pickup Day Changed
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: input_select.trash_pickup_day
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "/home/trashpickupday"
+          retain: true
+          payload: '{{ states.input_select.trash_pickup_day.state }}'
+  - alias: Recycle Pickup Day Changed
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: input_select.recycle_pickup_day
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "/home/recyclepickupday"
+          retain: true
+          payload: '{{ states.input_select.recycle_pickup_day.state }}'
+
+  - alias: Recycle Pickup Week Changed
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: input_select.recycle_pickup_week
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "/home/recyclepickupweek"
+          retain: true
+          payload: '{{ states.input_select.recycle_pickup_week.state }}'
+
+  - alias: Restore Trash Recycle Settings on Startup
+    initial_state: true
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      - delay:
+          minutes: 1      
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trash_pickup_day
+          option: "{{states.sensor.trash_pickup_day.state}}"
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.recycle_pickup_day
+          option: "{{states.sensor.recycle_pickup_day.state}}"
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.recycle_pickup_week
+          option: "{{states.sensor.recycle_pickup_week.state}}"
+
+###############################################################################
+#  Reminder code - Reminds 5 times every hour starting 4 PM
+#  Conditions: Only notifies when someone is at home 
+###############################################################################
+  - alias: Trash and Recycle Pickup Reminder
+    initial_state: true
+    trigger:
+      - platform: time_pattern
+        at: '16:00:00'
+      - platform: time_pattern
+        at: '17:00:00'
+      - platform: time_pattern
+        at: '18:00:00'
+      - platform: time_pattern
+        at: '19:00:00'
+      - platform: time_pattern
+        at: '20:00:00'
+      - platform: time_pattern
+        at: '21:00:00'
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ states.input_boolean.trash_reminders.state == "on" }}'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: calendar.trash_and_recycle
+            state: 'on'
+          - condition: state
+            entity_id: sensor.recycle_day
+            state: 'yes'
+    action:
+      - service: notify.ios_torn8o
+        data_template:
+          title: "Put Trash Out Trash Pickup Tomorrow!"
+          message: "Please leave Trash bins out tonight!"
+          data:
+            push:
+              badge: 0
+              category: "trash_recycle"
+
+      - service: script.notify_me
+        data_template:
+          message: >
+            {% if states.sensor.trash_and_recycle.state == "Put Trash Out" %}
+              Tomorrow is the Trash Pickup day!
+            {% endif %}
+
+      - service: script.voice_notify
+        data_template:
+          message: >
+            {% if states.sensor.trash_and_recycle.state == "Put Trash Out" %}
+              Attention!: Tomorrow is the Trash Pickup day. 
+              Please don't forget to leave Trash bins outside tonight!
+            {% endif %}
+
+  - alias: Trash and Recycle Bin Left Outside Already
+    initial_state: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: TRASH_LEFT
+    action:
+      - service: notify.ios_torn8o
+        data:
+          message: "Great job, Thank you!"
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.trash_reminders
+
+  - alias: Remind later
+    initial_state: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: TRASH_REMIND_LATER
+    action:
+      - service: notify.ios_torn8o
+        data:
+          message: "Will remind you again in an hour!"
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.trash_reminders
+
+  - alias: Reset Trash Reminders
+    initial_state: true
+    trigger:
+      - platform: time_pattern
+        at: '09:00:00'
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.trash_reminders
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trash_pickup_day
+          option: "{{states.sensor.trash_pickup_day.state}}"
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.recycle_pickup_day
+          option: "{{states.sensor.recycle_pickup_day.state}}"
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.recycle_pickup_week
+          option: "{{states.sensor.recycle_pickup_week.state}}"

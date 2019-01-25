@@ -1,8 +1,9 @@
   #  automation:
       - alias: fan_control_on_with_temp
+        initial_state: True
         trigger:
           - platform: numeric_state
-            entity_id: sensor.attic_f_temperature
+            entity_id: sensor.attic_real_feel
             above: 100
         action:
           - service: switch.turn_on
@@ -10,16 +11,18 @@
               entity_id: switch.attic_fans
 
       - alias: fan_control_off_with_temp
+        initial_state: True
         trigger:
           - platform: numeric_state
-            entity_id: sensor.attic_f_temperature
-            below: 100
+            entity_id: sensor.attic_real_feel
+            below: 95
         action:
           - service: switch.turn_off
             data:
               entity_id: switch.attic_fans
 #tv room fan
       - alias: tv_fan_control_on_with_temp
+        initial_state: True
         trigger:
           - platform: numeric_state
             entity_id: sensor.broadlink_torn_temperature
@@ -28,9 +31,10 @@
           - service: switch.turn_on
             data:
               entity_id: switch.tv_room_fan
-              
+
 
       - alias: tv_fan_control_off_with_temp
+        initial_state: True
         trigger:
           - platform: numeric_state
             entity_id: sensor.broadlink_torn_temperature
@@ -41,6 +45,7 @@
               entity_id: switch.receiver
 #tv room fan speed
       - alias: tv_fan_speed_on_low
+        initial_state: True
         trigger:
           - platform: numeric_state
             entity_id: sensor.broadlink_torn_temperature
@@ -48,9 +53,10 @@
         action:
           - service: switch.turn_on
             data:
-              entity_id: switch.receiver1
+              entity_id: switch.fan_speed_low
 
       - alias: tv_fan_speed_on_medium
+        initial_state: True
         trigger:
           - platform: numeric_state
             entity_id: sensor.broadlink_torn_temperature
@@ -58,9 +64,10 @@
         action:
           - service: switch.turn_on
             data:
-              entity_id: switch.receiver2      
+              entity_id: switch.fan_speed_medium
 
       - alias: tv_fan_speed_on_high
+        initial_state: True
         trigger:
           - platform: numeric_state
             entity_id: sensor.broadlink_torn_temperature
@@ -68,19 +75,21 @@
         action:
           - service: switch.turn_on
             data:
-              entity_id: switch.receiver3
-  
+              entity_id: switch.fan_speed_high
+
       - alias: fan off ac on
+        initial_state: True
         trigger:
           platform: state
           entity_id: sensor.hallway_thermostat_hvac_state
           to: 'cooling'
         action:
-          - service: switch.turn_off
+          - service: switch.turn_on
             data:
-              entity_id: switch.tv_room_fan      
+              entity_id: switch.fan_speed_low
 
       - alias: fan on ac off
+        initial_state: True
         trigger:
           platform: state
           entity_id: sensor.hallway_thermostat_hvac_state
@@ -88,9 +97,10 @@
         action:
           - service: switch.turn_on
             data:
-              entity_id: switch.tv_room_fan           
+              entity_id: switch.tv_room_fan
 #master fan
       - alias: mb_fan_control_on_with_temp
+        initial_state: True
         trigger:
           - platform: numeric_state
             entity_id: sensor.master_bed_temperature
@@ -100,9 +110,10 @@
             data:
               entity_id: light.master_bedroom_fan_level
               brightness: 255
-              
+
 
       - alias: mb_fan_control_off_with_temp
+        initial_state: True
         trigger:
           - platform: numeric_state
             entity_id: sensor.master_bed_temperature

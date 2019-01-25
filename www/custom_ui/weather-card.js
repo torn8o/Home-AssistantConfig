@@ -1,119 +1,428 @@
-class WeatherCard extends HTMLElement {
-  set hass(hass) {
-    if (!this.content) {
-      const card = document.createElement('ha-card');
-      const link = document.createElement('link');
-      link.type = 'text/css';
-      link.rel = 'stylesheet';
-      link.href = '/local/custom_ui/weather-card.css';
-      card.appendChild(link);
-      this.content = document.createElement('div');
-      this.content.className = 'card';
-      card.appendChild(this.content);
-      this.appendChild(card);
-    }
+const LitElement = Object.getPrototypeOf(
+  customElements.get("ha-panel-lovelace")
+);
+const html = LitElement.prototype.html;
 
-    const getUnit = function (measure) {
-      const lengthUnit = hass.config.core.unit_system.length;
-      switch (measure) {
-        case 'air_pressure':
-          return lengthUnit === 'km' ? 'hPa' : 'inHg';
-        case 'length':
-          return lengthUnit;
-        case 'precipitation':
-          return lengthUnit === 'km' ? 'mm' : 'in';
-        default:
-          return hass.config.core.unit_system[measure] || '';
-      }
+const weatherIconsDay = {
+  clear: "day",
+  "clear-night": "night",
+  cloudy: "cloudy",
+  fog: "cloudy",
+  hail: "rainy-7",
+  lightning: "thunder",
+  "lightning-rainy": "thunder",
+  partlycloudy: "cloudy-day-3",
+  pouring: "rainy-6",
+  rainy: "rainy-5",
+  snowy: "snowy-6",
+  "snowy-rainy": "rainy-7",
+  sunny: "day",
+  windy: "cloudy",
+  "windy-variant": "cloudy-day-3",
+  exceptional: "!!"
+};
+
+const weatherIconsNight = {
+  ...weatherIconsDay,
+  clear: "night",
+  sunny: "night",
+  partlycloudy: "cloudy-night-3",
+  "windy-variant": "cloudy-night-3"
+};
+
+const windDirections = [
+  "N",
+  "NNE",
+  "NE",
+  "ENE",
+  "E",
+  "ESE",
+  "SE",
+  "SSE",
+  "S",
+  "SSW",
+  "SW",
+  "WSW",
+  "W",
+  "WNW",
+  "NW",
+  "NNW",
+  "N"
+];
+
+const fireEvent = (node, type, detail, options) => {
+  options = options || {};
+  detail = detail === null || detail === undefined ? {} : detail;
+  const event = new Event(type, {
+    bubbles: options.bubbles === undefined ? true : options.bubbles,
+    cancelable: Boolean(options.cancelable),
+    composed: options.composed === undefined ? true : options.composed
+  });
+  event.detail = detail;
+  node.dispatchEvent(event);
+  return event;
+};
+
+function hasConfigOrEntityChanged(element, changedProps) {
+  if (changedProps.has("_config")) {
+    return true;
+  }
+
+  const oldHass = changedProps.get("hass");
+  if (oldHass) {
+    return (
+      oldHass.states[element._config.entity] !==
+        element.hass.states[element._config.entity] ||
+      oldHass.states["sun.sun"] !== element.hass.states["sun.sun"] ||
+      oldHass.states["sensor.moon"] !== element.hass.states["sensor.moon"]
+    );
+  }
+
+  return true;
+}
+
+class WeatherCard extends LitElement {
+  get properties() {
+    return {
+      _config: {},
+      hass: {}
     };
-
-    const transformDayNight = {
-      "below_horizon": "night",
-      "above_horizon": "day",
-    }
-    const sunLocation = transformDayNight[hass.states[this.config.entity_sun].state];
-    const weatherIcons = {
-      'clear-night': `${sunLocation}`,
-      'cloudy': 'cloudy',
-      'fog': 'cloudy',
-      'hail': 'rainy-7',
-      'lightning': 'thunder',
-      'lightning-rainy': 'thunder',
-      'partlycloudy': `cloudy-${sunLocation}-3`,
-      'pouring': 'rainy-6',
-      'rainy': 'rainy-5',
-      'snowy': 'snowy-6',
-      'snowy-rainy': 'rainy-7',
-      'sunny': `${sunLocation}`,
-      'windy': 'cloudy',
-      'windy-variant': `cloudy-${sunLocation}-3`,
-      'exceptional': '!!',
-    }
-
-    const windDirections = [
-      'N',
-      'NNE',
-      'NE',
-      'ENE',
-      'E',
-      'ESE',
-      'SE',
-      'SSE',
-      'S',
-      'SSW',
-      'SW',
-      'WSW',
-      'W',
-      'WNW',
-      'NW',
-      'NNW',
-      'N'
-    ];
-    const entity = hass.states[this.config.entity_weather];
-    const currentCondition = entity.state;
-    const humidity = entity.attributes.humidity;
-    const pressure = entity.attributes.pressure;
-    const temperature = Math.round(entity.attributes.temperature);
-    const visibility = entity.attributes.visibility;
-    const windBearing = windDirections[(parseInt((entity.attributes.wind_bearing + 11.25) / 22.5))];
-    const windSpeed = entity.attributes.wind_speed;
-    const forecast = entity.attributes.forecast.slice(0, 5);
-
-    this.content.innerHTML = `
-      <span class="icon bigger" style="background: none, url(/local/icons/weather_icons/animated/${weatherIcons[currentCondition]}.svg) no-repeat; background-size: contain;">${currentCondition}</span>
-      <span class="temp">${temperature}</span><span class="tempc"> ${getUnit('temperature')}</span>
-      <span>
-        <ul class="variations right">
-            <li><span class="ha-icon"><ha-icon icon="mdi:water-percent"></ha-icon></span>${humidity}<span class="unit"> %</span></li>
-            <li><span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span>${pressure}<span class="unit"> ${getUnit('air_pressure')}</span></li>
-        </ul>
-        <ul class="variations">
-            <li><span class="ha-icon"><ha-icon icon="mdi:weather-windy"></ha-icon></span>${windBearing} ${windSpeed}<span class="unit"> ${getUnit('length')}/h</span></li>
-            <li><span class="ha-icon"><ha-icon icon="mdi:weather-fog"></ha-icon></span>${visibility}<span class="unit"> ${getUnit('length')}</span></li>
-        </ul>
-      </span>
-      <div class="forecast clear">
-          ${forecast.map(daily => `
-              <div class="day">
-                  <span class="dayname">${(new Date(daily.datetime)).toString().split(' ')[0]}</span>
-                  <br><i class="icon" style="background: none, url(/local/icons/weather_icons/animated/${weatherIcons[daily.condition]}.svg) no-repeat; background-size: contain;"></i>
-                  <br><span class="highTemp">${daily.temperature}${getUnit('temperature')}</span>
-                  <br><span class="lowTemp">${daily.templow}${getUnit('temperature')}</span>
-              </div>`).join('')}
-      </div>`;
   }
 
   setConfig(config) {
-    if (!config.entity_weather || !config.entity_sun) {
-      throw new Error('Please define entities');
+    if (!config.entity) {
+      throw new Error("Please define a weather entity");
     }
-    this.config = config;
+    this._config = config;
   }
 
-  // @TODO: This requires more intelligent logic
+  shouldUpdate(changedProps) {
+    return hasConfigOrEntityChanged(this, changedProps);
+  }
+
+  render() {
+    if (!this._config || !this.hass) {
+      return html``;
+    }
+
+    const stateObj = this.hass.states[this._config.entity];
+    const lang = this.hass.selectedLanguage || this.hass.language;
+
+    const next_rising = new Date(
+      this.hass.states["sun.sun"].attributes.next_rising
+    );
+    const next_setting = new Date(
+      this.hass.states["sun.sun"].attributes.next_setting
+    );
+
+    const moon_rise = new Date(
+      this.hass.states["sensor.moon"].attributes.moonrise
+    );
+    const moon_set = new Date(
+      this.hass.states["sensor.moon"].attributes.moonset
+    );
+
+    return html`
+      ${this.renderStyle()}
+      <ha-card @click="${this._handleClick}">
+        <span
+          class="icon bigger"
+          style="background: none, url(${
+            this.getWeatherIcon(
+              stateObj.state.toLowerCase(),
+              this.hass.states["sun.sun"].state
+            )
+          }) no-repeat; background-size: contain;"
+          >${stateObj.state}
+        </span>
+        ${
+          this._config.name
+            ? html`
+                <span class="title"> ${this._config.name} </span>
+              `
+            : ""
+        }
+        <span class="temp">${Math.round(stateObj.attributes.temperature)}</span>
+        <span class="tempc"> ${this.getUnit("temperature")}</span>
+        <span>
+          <ul class="variations">
+            <li>
+              <span class="ha-icon"
+                ><ha-icon icon="mdi:water-percent"></ha-icon
+              ></span>
+              ${stateObj.attributes.humidity}<span class="unit"> % </span>
+              <br />
+              <span class="ha-icon"
+                ><ha-icon icon="mdi:weather-windy"></ha-icon
+              ></span>
+              ${
+                windDirections[
+                  parseInt((stateObj.attributes.wind_bearing + 11.25) / 22.5)
+                ]
+              }
+              ${stateObj.attributes.wind_speed}<span class="unit">
+                ${this.getUnit("length")}/h
+              </span>
+              <br />
+              <span class="ha-icon"
+                ><ha-icon icon="mdi:weather-sunset-up"></ha-icon
+              ></span>
+              ${next_rising.toLocaleTimeString()}
+              <br />
+              <span class="ha-icon"
+                ><ha-icon icon="mdi:weather-night"></ha-icon
+              ></span>
+              ${moon_rise.toLocaleTimeString()}
+            </li>
+            <li>
+              <span class="ha-icon"><ha-icon icon="mdi:gauge"></ha-icon></span
+              >${stateObj.attributes.pressure}<span class="unit">
+                ${this.getUnit("air_pressure")}
+              </span>
+              <br />
+              <span class="ha-icon"
+                ><ha-icon icon="mdi:weather-fog"></ha-icon
+              ></span>
+              ${stateObj.attributes.visibility}<span class="unit">
+                ${this.getUnit("length")}
+              </span>
+              <br />
+              <span class="ha-icon"
+                ><ha-icon icon="mdi:weather-sunset-down"></ha-icon
+              ></span>
+              ${next_setting.toLocaleTimeString()}
+              <br />
+              <span class="ha-icon"
+                ><ha-icon icon="mdi:theme-light-dark"></ha-icon
+              ></span>
+              ${moon_set.toLocaleTimeString()}
+            </li>
+          </ul>
+        </span>
+        <div class="forecast clear">
+          ${
+            stateObj.attributes.forecast.slice(0, 5).map(
+              daily => html`
+                <div class="day">
+                  <span class="dayname"
+                    >${
+                      new Date(daily.datetime).toLocaleDateString(lang, {
+                        weekday: "short"
+                      })
+                    }</span
+                  >
+                  <br /><i
+                    class="icon"
+                    style="background: none, url(${
+                      this.getWeatherIcon(daily.condition.toLowerCase())
+                    }) no-repeat; background-size: contain;"
+                  ></i>
+                  <br /><span class="highTemp"
+                    >${daily.temperature}${this.getUnit("temperature")}</span
+                  >
+                  ${
+                    daily.templow
+                      ? html`
+                          <br /><span class="lowTemp"
+                            >${daily.templow}${
+                              this.getUnit("temperature")
+                            }</span
+                          >
+                        `
+                      : ""
+                  }
+                </div>
+              `
+            )
+          }
+        </div>
+      </ha-card>
+    `;
+  }
+
+  getWeatherIcon(condition, sun) {
+    return `${
+      this._config.icons
+        ? this._config.icons
+        : "https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/weather-card/icons/animated/"
+    }${
+      sun && sun == "below_horizon"
+        ? weatherIconsNight[condition]
+        : weatherIconsDay[condition]
+    }.svg`;
+  }
+
+  getUnit(measure) {
+    const lengthUnit = this.hass.config.unit_system.length;
+    switch (measure) {
+      case "air_pressure":
+        return lengthUnit === "km" ? "hPa" : "inHg";
+      case "length":
+        return lengthUnit;
+      case "precipitation":
+        return lengthUnit === "km" ? "mm" : "in";
+      default:
+        return this.hass.config.unit_system[measure] || "";
+    }
+  }
+
+  _handleClick() {
+    fireEvent(this, "hass-more-info", { entityId: this._config.entity });
+  }
+
   getCardSize() {
     return 3;
   }
-}
 
-customElements.define('weather-card', WeatherCard);
+  renderStyle() {
+    return html`
+      <style>
+        ha-card {
+          cursor: pointer;
+          margin: auto;
+          padding-top: 2.5em;
+          padding-bottom: 1.3em;
+          padding-left: 1em;
+          padding-right: 1em;
+          position: relative;
+        }
+
+        .clear {
+          clear: both;
+        }
+
+        .ha-icon {
+          height: 18px;
+          margin-right: 5px;
+          color: var(--paper-item-icon-color);
+        }
+
+        .title {
+          position: absolute;
+          left: 3em;
+          top: 0.6em;
+          font-weight: 300;
+          font-size: 3em;
+          color: var(--primary-text-color);
+        }
+        .temp {
+          font-weight: 300;
+          font-size: 4em;
+          color: var(--primary-text-color);
+          position: absolute;
+          right: 1em;
+          top: 0.3em;
+        }
+
+        .tempc {
+          font-weight: 300;
+          font-size: 1.5em;
+          vertical-align: super;
+          color: var(--primary-text-color);
+          position: absolute;
+          right: 1em;
+          margin-top: -14px;
+          margin-right: 7px;
+        }
+
+        .variations {
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-between;
+          font-weight: 300;
+          color: var(--primary-text-color);
+          list-style: none;
+          margin-top: 4.5em;
+          padding: 0;
+        }
+
+        .variations li {
+          flex-basis: auto;
+        }
+
+        .variations li:first-child {
+          padding-left: 1em;
+        }
+
+        .variations li:last-child {
+          padding-right: 1em;
+        }
+
+        .unit {
+          font-size: 0.8em;
+        }
+
+        .forecast {
+          width: 100%;
+          margin: 0 auto;
+          height: 9em;
+        }
+
+        .day {
+          display: block;
+          width: 20%;
+          float: left;
+          text-align: center;
+          color: var(--primary-text-color);
+          border-right: 0.1em solid #d9d9d9;
+          line-height: 2;
+          box-sizing: border-box;
+        }
+
+        .dayname {
+          text-transform: uppercase;
+        }
+
+        .forecast .day:first-child {
+          margin-left: 0;
+        }
+
+        .forecast .day:nth-last-child(1) {
+          border-right: none;
+          margin-right: 0;
+        }
+
+        .highTemp {
+          font-weight: bold;
+        }
+
+        .lowTemp {
+          color: var(--secondary-text-color);
+        }
+
+        .icon.bigger {
+          width: 10em;
+          height: 10em;
+          margin-top: -4em;
+          position: absolute;
+          left: 0em;
+        }
+
+        .icon {
+          width: 50px;
+          height: 50px;
+          margin-right: 5px;
+          display: inline-block;
+          vertical-align: middle;
+          background-size: contain;
+          background-position: center center;
+          background-repeat: no-repeat;
+          text-indent: -9999px;
+        }
+
+        .weather {
+          font-weight: 300;
+          font-size: 1.5em;
+          color: var(--primary-text-color);
+          text-align: left;
+          position: absolute;
+          top: -0.5em;
+          left: 6em;
+          word-wrap: break-word;
+          width: 30%;
+        }
+      </style>
+    `;
+  }
+}
+customElements.define("weather-card", WeatherCard);

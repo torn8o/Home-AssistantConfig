@@ -20,8 +20,10 @@ homeassistant:
 cloud:
   alexa:
     filter:
-      exclude_domains:
-        - automation
+      include_domains:
+        - switch
+        - light
+        - group
 frontend:
 history:
 logbook:
@@ -37,6 +39,12 @@ discovery:
 ## Components (Non-Includes)
 ################################################
 config:
+ring:
+  username: !secret ring_USERNAME
+  password: !secret ring_PASSWORD
+sense:
+    email: !secret sense_USERNAME
+    password: !secret sense_PASSWORD
 
 ifttt:
   key: !secret iftt_key
@@ -66,11 +74,11 @@ wink:
 #  email: !secret wink_email
 #  password: !secret wink_password
 
-mqtt_statestream:
-  base_topic: hass
-  publish_attributes: true
-mqtt_eventstream:
-  publish_topic: hass
+#mqtt_statestream:
+#  base_topic: hass
+#  publish_attributes: true
+#mqtt_eventstream:
+#  publish_topic: hass
 
 #influxdb:
 #  database: !secret influxdb_database
@@ -97,6 +105,9 @@ emulated_hue:
     - switch
     - light
 
+google:
+  client_id: !secret client_id
+  client_secret: !secret client_secret
 
 remote:
   - platform: !secret remote_platform
@@ -112,7 +123,7 @@ wemo:
     - !secret wemo_five
 
 ffmpeg:
-  ffmpeg_bin: !secret ffmpeg_bin
+#  ffmpeg_bin: !secret ffmpeg_bin
 camera:
   - platform: ffmpeg
     name: front door camera
@@ -120,24 +131,52 @@ camera:
   - platform: ffmpeg
     name: pool camera
     input: !secret cam_indoor_input
+  - platform: ring
 
+#camera:
+  - platform: mjpeg
+    mjpeg_url: http://tornhome.ddns.net:84/mjpg/fdb
+    name: Front Door Stream
+    username: torn
+    password: 1028
+    authentication: basic
+
+#camera:
+  - platform: mjpeg
+    mjpeg_url: http://tornhome.ddns.net:84/mjpg/pdb
+    name: Pool Stream
+    username: torn
+    password: 1028
+    authentication: basic
+
+  - platform: generic
+    still_image_url: http://tornhome.ddns.net:84/image/fdb.jpg
+    name: front still
+    username: torn
+    password: 1028
+
+  - platform: generic
+    still_image_url: http://tornhome.ddns.net:84/image/pdb.jpg
+    name: pool still
+    username: torn
+    password: 1028
 media_player:
-  - platform: plex
-    entity_namespace: 'plex'
-    include_non_clients: true
-    scan_interval: 5
-    show_all_controls: false
-    use_custom_entity_ids: true
-    use_episode_art: true
-  - platform: itunes
-    host: 192.168.1.62
-    
+#  - platform: plex
+#    entity_namespace: 'plex'
+#    include_non_clients: true
+#    scan_interval: 5
+#    show_all_controls: false
+#    use_custom_entity_ids: true
+#    use_episode_art: true
+#  - platform: itunes
+#    host: 192.168.1.62
+
   - platform: alexa
     email: !secret amazon_email
     password: !secret amazon_password
     url: amazon.com
 recorder:
-  purge_interval: 3
+  purge_interval: 1
   #db_url: !secret db_url
   exclude:
     domains:
@@ -174,29 +213,30 @@ zwave: !include zwave.yaml
 ################################################
 ## Component Includes (Merge List)
 ################################################
-
-automation: !include_dir_merge_list automation
+automation: !include automation.yaml
+#automation old: !include_dir_merge_list automation
+#automation: !include_dir_merge_list automation
 #binary_sensor: !include binary_sensor.yaml
 #binary_sensor: !include_dir_merge_list binary_sensor
 #camera: !include_dir_merge_list camera
 #cover: !include_dir_merge_list cover
-device_tracker: !include_dir_merge_list device
-light: !include_dir_merge_list light
+#device_tracker: !include_dir_merge_list device
+#light: !include_dir_merge_list light
 #media_player: !include_dir_merge_list media_player
-notify: !include_dir_merge_list notify
+#notify: !include_dir_merge_list notify
 #ios: !include_dir_merge_list ios
 #scene: !include_dir_merge_list scene
-sensor: !include_dir_merge_list sensor
+#sensor: !include_dir_merge_list sensor
 #switch: !include_dir_merge_list switches
-zone: !include_dir_merge_list zone
+#zone: !include_dir_merge_list zone
 
 ################################################
 ## Component Includes (Merge Named)
 ################################################
 
-group: !include_dir_merge_named group
+#group: !include_dir_merge_named group
 #input_boolean: !include_dir_merge_named input_boolean
-input_select: !include_dir_merge_named input_select
+#input_select: !include_dir_merge_named input_select
 #input_slider: !include_dir_merge_named input_slider
-script: !include_dir_merge_named script
-shell_command: !include_dir_merge_named shell_command
+#script: !include_dir_merge_named script
+#shell_command: !include_dir_merge_named shell_command

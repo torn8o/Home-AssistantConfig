@@ -19,6 +19,7 @@
 
 automation:
   - alias: fan_speed_selected
+    initial_state: True
     trigger:
       - platform: state
         entity_id: input_select.fan_speed
@@ -42,6 +43,7 @@ automation:
           option: Select an option...
 
   - alias: curtain_selected
+    initial_state: True
     trigger:
       - platform: state
         entity_id: input_select.curtain
@@ -63,7 +65,7 @@ automation:
         data_template:
           entity_id: "{{ trigger.to_state.entity_id }}"
           option: Select an option...
-          
+
 input_select:
   fan_speed:
     initial: Select an option...
@@ -118,7 +120,7 @@ switch:
       command_on: 'JgBoACoOKQ0PKCwMDikOKQ8oKg4OKA8pDygOAAR4Kw0qDQ4pKg4MKg4pDygrDQ4pDSoPKA8AC10pDykODigrDQ4qDigPKQ4oDygPKQ4pDwAEdyoOKgsQKQ8oDygPKA8pDioOKQ4oDykOAA0F'
   #   command_off: 'JgA0ACwNKgwPKCsNDygOKSsKESgOKQ8pDikOAAR4Kw0qDg4oKwwPKA4pKw0OKg4pDikOKQ4ADQUAAAAA'
 #     command_off: 'JgBoACoOKQ0PKCwMDikOKQ8oKg4OKA8pDygOAAR4Kw0qDQ4pKg4MKg4pDygrDQ4pDSoPKA8AC10pDykODigrDQ4qDigPKQ4oDygPKQ4pDwAEdyoOKgsQKQ8oDygPKA8pDioOK'
-  
+
    #receiver7:
   #   friendly_name: master bedroom wall lights
   #   command_on: 'CEA8AAAACFBCBCDFECBEFEBAEBADABCCACFECBEE2FEFEEECBEECAAECCCCBEEBE2BEBEEECA4AAAACCACBEEFE4EBEEEBADABACACCEEBAEFEFEEEEEAAECCCCBAECCBEBEFEBAE0AAECCCAECBBEBE1EBAECBADABACACCEECEEFEFEEEEEAAECCCC0EBEBEBECEEC4AAACCACBEEBECBEFEEEDABDACCECBAEFEBEAECBAECAAECCCCBEEBFEFEFEEEA0AAECCCAEFEFEFEEECBADABCC8CEEAEBEFEEEAEAAECCACCEEBEFEBEEE0AAECCCBEEFEFEFEEEBADAF3AAAAAA'
@@ -135,6 +137,3 @@ switch:
     # friendly_name: mode plus
      #command_on: 'sgAEARAqKw8PKyoQKhAPKhAqDysPKhAqDyorDysPKw8QKhAqDyoQKg8qECoQKioQDyorDxAAAb0QKioQDyorECoQDyoQKhAqDyoPKw8qKw8rECoPECoQKg8qECoPKw8qECorDw8qKxAPAAG9ECorDw8rKhArDw8qECoPKw8qECoPKisPKxArDw8qECoPKhAqECoPKhAqKw8QKioQDwABvg8qKw8QKisPKw8PKw8qECoQKRAqDyorECsPKw8QKg8qECoQKg8qECoPKisPECorDw8AAb4PKisQDyorDysPECoQKg8qECoPKhAqKw8rDysPECoPKw8qECoQKRAqECoqEA8qKxAPAAXcAAAAAA=='
   #   command_off:
-    
-      
-      

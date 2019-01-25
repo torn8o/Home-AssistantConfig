@@ -175,6 +175,7 @@ automation:
         # data_template:
           # entity_id: '{{ trigger.actionData.attributes["entity_id"] }}'
   - alias: Remind Me Later
+    initial_state: True
     trigger:
       platform: event
       event_type: ios.notification_action_fired

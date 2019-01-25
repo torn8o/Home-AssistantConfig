@@ -124,9 +124,9 @@ script:
     sequence:
        - service: shell_command.pihole_off
 
-#shell_command:
-#  pihole_on: !secret pi_hole_switch_on
-#  pihole_off: !secret pi_hole_switch_off
+shell_command:
+  pihole_on: !secret pi_hole_switch_on
+  pihole_off: !secret pi_hole_switch_off
 
 #!secret_example
 #Authorization & Token required (see WEBPASSWORD in /etc/pihole/setupVars.conf)

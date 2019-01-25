@@ -6,6 +6,10 @@ camera:
     - camera.front_door_camera
     - camera.pool_camera
     - camera.interior_motion
+    - camera.front_door_stream
+    - camera.pool_stream
+    - camera.front_still
+    - camera.pool_still
     - group.kitchen_lights
     - switch.ge_12722_onoff_relay_switch_switch_28_0
     - automation.motion_detected
@@ -14,12 +18,8 @@ tv_room:
   icon: mdi:television
   name: TV Room
   entities:
-    - group.tv_room
-    - automation.turn_theater_lights_to_80_on_motion_if_no_activity
-    - automation.turn_tv_lights_if_no_activity
-    - script.timed_theater_lights
-    - script.theater_lights_
-    - group.tv_room_temp
+    - group.tv_room_2
+    - group.Christmas
     - media_player.itunes
 
 Liz easy stuff:
@@ -43,19 +43,35 @@ Liz easy stuff:
     - light.spot_light_level
     - light.hair_area_level
     - light.david_picture
+    - light.ge_12724_3way_dimmer_switch_level
     - camera.pool_camera
     - camera.front_door_camera
     - input_select.fan_speed
     - input_select.curtain
+    - switch.led_back_lights
     - automation.01_notify_ios_pool_feed
     - automation.tv_lights_on
     - automation.tts_motion_front_door
     - automation.turn_deck_led_off_at_sunrise
+    - automation.fan_on_ac_off
+    - automation.fan_control_on_with_temp
+Liz stuff:
+  view: yes
+  name: Liz
+  icon: mdi:content-cut
+  entities:
+    - group.mommy_switches
+    - group.mommy_lights
+    - group.mommy_Control
+    - group.mommy_Automations
+    - group.mommy_camera
+    - group.master_bedroom
+    - light.accent_lights
 
 media plaers:
   view: yes
   name: media
-  icon: mdi:hotel
+  icon: mdi:amazon-alexa
   entities:
     - media_player.game_room
     - media_player.itunes
@@ -63,49 +79,55 @@ media plaers:
     - media_player.living_room
     - media_player.master_bedroom
     - media_player.this_device
+    - group.catfeeder
 
+Family:
+  view: yes
+  name: Family
+  icon: mdi:cellphone-iphone
+  entities:
+    - group.family_group
 #weather:
 #  view: yes
 #  name: darksky
 #  icon: mdi:weather-cloudy
 #  entities:
 #    - group.darksky
-#Zwave:
-#  view: yes
-#  icon: mdi:nfc
-#  entities:
-#    - group.zwave
+internet:
+  view: yes
+  icon: mdi:web
+  entities:
+    - sensor.speedtest_ping
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.fastcom_download
 
+Fan:
+  view: yes
+  icon: mdi:fan
+  entities:
+    - switch.fan_speed_high
+    - switch.fan_speed_low
+    - switch.fan_speed_medium
+    - switch.fan_speed_turn_off
+    - light.accent_lights
+    - group.fan_control
 den room:
   view: yes
   icon: mdi:xbox-controller
   name: Game Room
   entities:
     - group.game_room
-#items:
-#  name: items
-#  entities:
-#    - sensor.average_house_temp
-#    - automation.mqtt_publish_sensors
-#    - sensor.gas_price
-#    - sensor.esp_92eba2
-#    - sensor.esp_122131
-#    - sensor.vizio_tv
-#    - sensor.broadlink
-#    - sensor.harmony_hub
-#    - remote.torn_hub
-##    - switch.living_room_curtain_close
-  #  - switch.living_room_curtain_stop
-  #  - sensor.torn8o_battery_level
-  ##  - weblink.pi_hole
-    #- weblink.sonarr
 
 
 
-trash__recycle_schedule:
+
+trash_recycle_schedule:
   view: yes
   name: trash and recycle
   icon: mdi:recycle
   entities:
-    - group.trash__recycle_schedule
-    - group.trash__recycle
+    - group.Trash_Schedule
+    - group.Recycle_Schedule
+    - group.Date_Time
+    - automation.trash_and_recycle_pickup_reminder
