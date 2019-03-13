@@ -14,7 +14,10 @@ group:
       - light.gr_led
       - automation.turn_on_game_room_light_when_there_is_movement
       - automation.turn_off_game_room_light_when_there_is_no_movement
-  
+  kitchen motion:
+    entities:
+      - sensor.center_motion_status
+      - binary_sensor.front_motion_sensor
   tautulli:
   #  name: Tautulli
     entities:
@@ -23,7 +26,7 @@ group:
       - sensor.tautulli_direct_play
       - sensor.tautulli_direct_stream
       - sensor.tautulli_total_bandwidth
-        
+
   porch_room_motion:
     entities:
       - sensor.front_p_motion

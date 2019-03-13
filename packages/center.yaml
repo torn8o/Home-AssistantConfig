@@ -12,7 +12,7 @@ light:
     state_topic: "torn/center"
     command_topic: "torn/center/set"
     brightness: true
-    flash: true
+#    flash: true
     rgb: true
     optimistic: false
     qos: 0
@@ -144,20 +144,16 @@ automation:
         entity_id: light.Center_led
         data:
           color_name: 'purple'
-      - service: light.turn_on
-        entity_id: light.Center_led
-        data:
-          flash: long
-      - service: light.turn_on
-        entity_id: light.Center_led
-        data:
-          brightness: 255
-#        color_name: green
-#        brightness: 255
-#        flash: long
 
-      - delay:
-          seconds: 15
+  - alias: Turn light led off center
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: sensor.center_pir
+      to: 'standby'
+      for:
+        seconds: 2
+    action:
       - service: light.turn_off
         entity_id: light.Center_led
 
@@ -176,4 +172,4 @@ group:
       - sensor.Center_Ldr
       - sensor.Center_Pir
       - light.Center_LED
-      - automation.turn_o_kitchen_light_movement
+      - automation.turn_off_kitchen_light

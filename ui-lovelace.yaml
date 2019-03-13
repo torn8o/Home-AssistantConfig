@@ -1,0 +1,414 @@
+resources:
+
+  - url: /local/custom_ui/dark-sky-weather-card.js?v=7.1
+    type: module
+  - url: /local/custom-lovelace/upcoming-media-card/upcoming-media-card.js?v=0.1.2
+    type: js
+  - url: /local/plugins/card-tools.js?v=297fcc
+    type: module
+  - url: /local/plugins/card-modder.js
+    type: js
+  - url: /local/plugins/card-modder.js?v=31
+    type: module
+  - url: /local/auto-entities.js
+    type: js
+  - url: /local/tracker-card.js?track=true
+    type: module
+  - url: /local/custom-lovelace/compact-custom-header/compact-custom-header.js?v=0.0.1
+
+ 
+
+title: Torn Home
+views:
+  - badges: []
+    cards:
+      - entity: light.tv_room_light_level
+        name: TV Room Lights
+        type: light
+      - entity: light.kitchen_leds
+        name: Kitchen Leds
+        type: light
+      - entities:
+          - binary_sensor.ac
+          - binary_sensor.always_on
+          - binary_sensor.coffee_maker
+          - binary_sensor.dryer
+          - binary_sensor.fridge
+          - binary_sensor.fridge_2
+          - binary_sensor.fridge_3
+          - binary_sensor.heat_blanket
+          - binary_sensor.ice_maker
+          - binary_sensor.microwave
+          - binary_sensor.motor_1
+          - binary_sensor.motor_2
+          - binary_sensor.other
+          - binary_sensor.oven
+          - binary_sensor.stove
+          - binary_sensor.stove_2
+          - binary_sensor.washer
+        show_header_toggle: true
+        title: Sense
+        type: entities
+      - entity: media_player.tornx_2
+        type: media-control
+      - entities:
+          - entity: sensor.center_pir
+          - entity: sensor.center_temperature
+          - entity: sensor.center_humidity
+          - entity: automation.turn_off_kitchen_light
+        title: motion
+        type: entities
+      - entities:
+          - entity: sensor.front_door_motion_2
+          - entity: sensor.front_door_motion
+          - entity: binary_sensor.front_motion_sensor
+        type: entities
+      - background: >-
+          center / contain no-repeat
+          url("/assets/arsaboo/icons/ecobee_blank.png")
+        color: white
+        entity: climate.torn_home_hallway_thermostat
+        font-family: Helvetica
+        font-size: 12px
+        left: 50%
+        name: Temp
+        style: null
+        text-align: center
+        top: 43%
+        type: thermostat
+    theme: dark_cyan
+    title: Home
+  - background: center / cover no-repeat url("/local/backgroundz/purple.jpg") fixed
+    badges: []
+    cards:
+      - title: Shopping list
+        type: shopping-list
+      - entity: light.tv_room_light_level
+        name: TV Room Light
+        theme: Purple-test
+        type: light
+      - entities:
+          - entity: automation.tv_fan_control_on_with_temp
+          - entity: automation.tv_fan_control_off_with_temp
+          - entity: automation.tv_fan_speed_on_low
+          - entity: automation.tv_fan_speed_on_medium
+          - entity: automation.tv_fan_speed_on_high
+          - entity: switch.tv_room_fan
+          - entity: automation.master_bedroom_motion
+        show_header_toggle: true
+        title: Automations
+        type: entities
+      - entity: light.kitchen_leds
+        name: Kitchen Lights
+        theme: Purple-test
+        type: light
+      - entities:
+          - entity: sensor.aeotec_zw100_multisensor_6_temperature_4
+          - entity: switch.master_bathroom_fan_switch
+          - entity: switch.bathroom_exhaust
+          - entity: switch.master_bedroom_h_switch
+          - entity: switch.master_bathroom_light_switch
+          - entity: switch.master_bedroom_f_switch
+          - entity: switch.master_bedroom_h_switch
+          - entity: switch.master_bedroom_light
+          - entity: switch.front_entry_light_switch
+          - entity: switch.bathroom_led
+          - entity: light.master_bedroom_fan_level
+          - entity: light.kitchen_leds
+          - entity: light.spot_light_level
+          - entity: light.hair_area_level
+          - entity: light.mb_color_lights
+          - entity: switch.front_lights_switch
+        show_header_toggle: true
+        title: Switches
+        type: entities
+      - entity: media_player.plex_plex_jya0lnv5sod6b0dkbgjydkf8
+        type: media-control
+      - entities:
+          - entity: light.accent_interior_lights
+          - entity: light.master_bedroom_fan_level
+          - entity: light.spot_light_level
+          - entity: light.hair_area_level
+          - entity: light.david_picture
+          - entity: light.ge_12724_3way_dimmer_switch_level
+          - entity: light.niche_leds
+          - entity: light.spot_light_level
+          - entity: light.tv_room_light_level
+          - entity: switch.porch_light
+          - entity: switch.front_lights_switch
+          - entity: light.front_led
+          - entity: light.porch_led
+        show_header_toggle: true
+        title: Lights
+        type: entities
+    icon: 'mdi:content-cut'
+    id: home-assistant
+    theme: Purple-II
+    title: Liz Stuff
+  - background: center / cover no-repeat url("/local/backgroundz/weather.jpg") fixed
+    badges: []
+    cards:
+      - entity_current_conditions: sensor.dark_sky_icon
+        entity_daily_summary: sensor.dark_sky_daily_summary
+        entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
+        entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
+        entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
+        entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
+        entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
+        entity_forecast_icon_1: sensor.dark_sky_icon_1
+        entity_forecast_icon_2: sensor.dark_sky_icon_2
+        entity_forecast_icon_3: sensor.dark_sky_icon_3
+        entity_forecast_icon_4: sensor.dark_sky_icon_4
+        entity_forecast_icon_5: sensor.dark_sky_icon_5
+        entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature_0
+        entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
+        entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
+        entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
+        entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
+        entity_humidity: sensor.dark_sky_humidity
+        entity_pressure: sensor.dark_sky_pressure
+        entity_summary_1: sensor.dark_sky_summary_1
+        entity_summary_2: sensor.dark_sky_summary_2
+        entity_summary_3: sensor.dark_sky_summary_3
+        entity_summary_4: sensor.dark_sky_summary_4
+        entity_summary_5: sensor.dark_sky_summary_5
+        entity_sun: sun.sun
+        entity_temperature: sensor.dark_sky_temperature
+        entity_visibility: sensor.dark_sky_visibility
+        entity_wind_bearing: sensor.dark_sky_wind_bearing
+        entity_wind_speed: sensor.dark_sky_wind_speed
+        locale: en
+        old_daily_format: false
+        show_beaufort: true
+        show_separator: true
+        static_icons: false
+        time_format: 24
+        tooltip_bg_color: 'rgb( 75,155,239)'
+        tooltip_border_color: orange
+        tooltip_border_width: 3
+        tooltip_caret_size: 10
+        tooltip_fg_color: '#fff'
+        tooltip_left_offset: -12
+        tooltip_width: 100
+        tooltips: true
+        type: 'custom:dark-sky-weather-card'
+    icon: 'mdi:weather-cloudy'
+    theme: Clear-Nightz-II
+    title: Weather
+  - background: center / cover no-repeat url("/local/backgroundz/media.jpg") fixed
+    badges: []
+    cards:
+      - entity: media_player.plex_plex_jya0lnv5sod6b0dkbgjydkf8
+        type: media-control
+      - entity: media_player.game_room
+        type: media-control
+      - entity: media_player.game_room_xbox_one
+        type: media-control
+      - entity: media_player.kitchen
+        type: media-control
+      - entity: media_player.living_room
+        type: media-control
+      - entity: media_player.master_bedroom
+        type: media-control
+      - entity: media_player.torn8os_echo_dot
+        type: media-control
+    icon: 'mdi:amazon-alexa'
+    id: home-assistant
+    theme: Darkest-Nightz
+    title: Media Players
+  - cards:
+      - entities:
+          - entity: automation.tv_fan_control_on_with_temp
+          - entity: automation.tv_fan_control_off_with_temp
+          - entity: automation.tv_fan_speed_on_low
+          - entity: automation.tv_fan_speed_on_medium
+          - entity: automation.tv_fan_speed_on_high
+          - entity: switch.tv_room_fan
+          - entity: sensor.broadlink_torn_temperature
+        type: entities
+      - entities:
+          - entity: input_select.fan_speed
+        title: Fan control
+        type: entities
+    icon: 'mdi:fan'
+    id: home-assistant
+    title: Fan
+  - background: >-
+      center / cover no-repeat
+      url("/local/backgroundz/xbox-one-x-controller.jpg") fixed
+    cards:
+      - entities:
+          - entity: automation.turn_off_game_room_light_when_there_is_no_movement
+          - entity: sensor.game_room_temperature_2
+          - entity: switch.game_room_fan
+          - entity: switch.game_room_light
+          - entity: binary_sensor.samsung_tv
+          - entity: device_tracker.samsung_tv
+          - entity: sensor.game_temperature
+        show_header_toggle: false
+        theme: Clear-Nightz-II
+        title: game room
+        type: entities
+    icon: 'mdi:xbox-controller'
+    id: home-assistant
+    theme: Purple-Haze
+    title: Game Room
+  - badges: []
+    cards:
+      - entities:
+          - entity: switch.garage_door_opener_switch
+          - entity: light.attic_lights_level
+          - entity: sensor.garage_door_status
+          - entity: binary_sensor.garage_door_opener_sensor
+          - entity: light.level
+          - entity: switch.vacuum
+          - entity: automation.turn_garage_light_off
+          - entity: switch.attic_fans
+          - entity: sensor.garage_temperature
+          - entity: sensor.garage_real_feel
+        show_header_toggle: false
+        title: Garage Stuff
+        type: entities
+    icon: 'mdi:garage'
+    title: Garage
+  - cards:
+      - entities:
+          - entity: sensor.esp_center
+          - entity: sensor.esp_front_led
+          - entity: sensor.esp_garage
+          - entity: sensor.esp_master_bedroom
+          - entity: sensor.esp_niche
+          - entity: sensor.esp_game_room
+          - entity: sensor.esp_counter_lights
+        show_header_toggle: false
+        title: ESP Stuff Status
+        type: entities
+      - entities:
+          - entity: sensor.esp_master_bedroom
+          - entity: sensor.echo_game_room
+          - entity: sensor.echo_kitchen
+          - entity: sensor.echo_living_room
+          - entity: sensor.echo_master_bedroom
+        show_header_toggle: false
+        title: Wifi Devices
+        type: entities
+      - entities:
+          - entity: script.pihole_off
+          - entity: script.pihole_on
+        show_header_toggle: false
+        title: Pi-Hole
+        type: entities
+      - entities:
+          - entity: device_tracker.torn8o_iphone
+          - entity: device_tracker.torn8o_apple_watch
+          - entity: device_tracker.liz
+          - entity: device_tracker.nina_iphone
+          - entity: device_tracker.game_room_echo
+          - entity: device_tracker.kitchen_echo
+          - entity: device_tracker.living_room_echo
+          - entity: device_tracker.master_bedroom_echo
+        type: entities
+      - type: 'custom:auto-entities'
+        show_empty: false
+        card:
+          type: glance
+          title: Lights on
+        filter:
+          include:
+            - domain: light
+              state: 'on'
+              options:
+                tap_action:
+                  action: toggle
+      - type: 'custom:auto-entities'
+        card:
+          type: entities
+          title: Battery warning
+        filter:
+          include:
+            - domain: device_tracker
+              options:
+                secondary_info: last-changed
+              attributes:
+                battery: < 50
+                source_type: gps
+      - type: 'custom:tracker-card'
+    badges: []
+    background: center / cover no-repeat url("/local/backgroundz/purple.jpg") fixed
+    title: Devices
+    theme: Purple-II
+  - cards:
+      - clock: 12
+        entity: sensor.sonarr_upcoming_media
+        image_style: fanart
+        line2_color: '#ff0000'
+        line2_size: medium
+        max: 20
+        service: sonarr
+        title: Upcoming TV
+        type: 'custom:upcoming-media-card'
+      - clock: 12
+        entity: sensor.radarr_upcoming_media
+        image_style: fanart
+        line2_color: '#ff0000'
+        line2_size: medium
+        max: 20
+        service: radarr
+        title: Upcoming Movies
+        type: 'custom:upcoming-media-card'
+    icon: 'mdi:television-box'
+    title: Upcoming
+  - badges: []
+    cards:
+      - entities:
+          - entity: automation.sprinkler_schedule
+          - entity: switch.sprinkler_front_right
+          - entity: switch.sprinkler_front_left
+          - entity: input_datetime.sprinklers_start_time
+        title: sprinklers
+        type: entities
+    title: Sprinklers
+  - background: center / cover no-repeat url("/local/backgroundz/stand.jpg") fixed
+    cards:
+      - entities:
+          - entity: sensor.epson_ink_level_black
+          - entity: sensor.epson_ink_level_cyan
+          - entity: sensor.epson_ink_level_magenta
+          - entity: sensor.epson_ink_level_yellow
+        type: entities
+      - cards:
+          - cards:
+              - entity: sensor.hallway_nest_protect_color_status
+                name: Nest-Protect Hallway
+                state_image:
+                  gray: /local/nest-protect/nestprotect-gray.png
+                  green: /local/nest-protect/nestprotect-green.png
+                  red: /local/nest-protect/nestprotect-red.png
+                  yellow: /local/nest-protect/nestprotect-yellow.png
+                type: picture-entity
+              - entity: sensor.kitchen_nest_protect_color_status
+                name: Nest-Protect kitchen
+                state_image:
+                  gray: /local/nest-protect/nestprotect-gray.png
+                  green: /local/nest-protect/nestprotect-green.png
+                  red: /local/nest-protect/nestprotect-red.png
+                  yellow: /local/nest-protect/nestprotect-yellow.png
+                type: picture-entity
+            type: horizontal-stack
+          - columns: 4
+            entities:
+              - binary_sensor.hallway_nest_protect_online
+              - sensor.hallway_nest_protect_smoke_status
+              - sensor.hallway_nest_protect_co_status
+              - sensor.hallway_nest_protect_battery_health
+              - binary_sensor.kitchen_nest_protect_online
+              - sensor.kitchen_nest_protect_smoke_status
+              - sensor.kitchen_nest_protect_co_status
+              - sensor.kitchen_nest_protect_battery_health
+            show_header_toggle: true
+            title: Nest-Protect
+            type: glance
+        type: vertical-stack
+    icon: 'mdi:printer'
+    theme: Purple-II
+    title: Printer

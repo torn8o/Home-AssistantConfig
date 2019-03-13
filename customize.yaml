@@ -1,0 +1,20 @@
+sensor.kitchen_nest_protect_co_status:
+  icon: mdi:skull-crossbones
+sensor.kitchen_nest_protect_smoke_status:
+  icon: mdi:fire
+sensor.kitchen_nest_protect_battery_health:
+  icon: mdi:battery
+sensor.kitchen_nest_protect_color_status:
+  icon: mdi:traffic-light
+binary_sensor.kitchen_nest_protect_online:
+  icon: mdi:smoke-detector
+sensor.hallway_nest_protect_co_status:
+  icon: mdi:skull-crossbones
+sensor.hallway_nest_protect_smoke_status:
+  icon: mdi:fire
+sensor.hallway_nest_protect_battery_health:
+  icon: mdi:battery
+sensor.hallway_nest_protect_color_status:
+  icon: mdi:traffic-light
+binary_sensor.hallway_nest_protect_online:
+  icon: mdi:smoke-detector

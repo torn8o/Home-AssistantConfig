@@ -38,52 +38,63 @@ sensor:
       torntravel_wireless:
         friendly_name: 'torntravel_wireless'
         value_template: "{{ 'Online' if is_state('device_tracker.torntravel_wireless', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.torntravel_wireless', 'home') else 'mdi:alert-circle' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.torntravel_wireless', 'home') else 'mdi:wifi-off' }}"
       torntravel_wired:
         friendly_name: 'torntravel_wired'
         value_template: "{{ 'Online' if is_state('device_tracker.torntravel_wired', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.torntravel_wired', 'home') else 'mdi:alert-circle' }}"
-      esp_holiday_lights:
-        friendly_name: 'esp holiday lights'
-        value_template: "{{ 'Online' if is_state('device_tracker.holiday_lights_esp', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.holiday_lights_esp', 'home') else 'mdi:alert-circle' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.torntravel_wired', 'home') else 'mdi:wifi-off' }}"
       echo_master_bedroom:
-        friendly_name: 'echo master bedroom'
+        friendly_name: 'Echo Master Bedroom'
         value_template: "{{ 'Online' if is_state('device_tracker.master_bedroom_echo', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.master_bedroom_echo', 'home') else 'mdi:alert-circle' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.master_bedroom_echo', 'home') else 'mdi:wifi-off' }}"
       echo_living_room:
-        friendly_name: 'echo living room'
+        friendly_name: 'Echo Living Room'
         value_template: "{{ 'Online' if is_state('device_tracker.living_room_echo', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.living_room_echo', 'home') else 'mdi:alert-circle' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.living_room_echo', 'home') else 'mdi:wifi-off' }}"
       echo_game_room:
-        friendly_name: 'echo game room'
+        friendly_name: 'Echo Game Room'
         value_template: "{{ 'Online' if is_state('device_tracker.game_room_echo', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.game_room_echo', 'home') else 'mdi:alert-circle' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.game_room_echo', 'home') else 'mdi:wifi-off' }}"
       echo_kitchen:
-        friendly_name: 'echo kitchen'
+        friendly_name: 'Echo Kitchen'
         value_template: "{{ 'Online' if is_state('device_tracker.kitchen_echo', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.kitchen_echo', 'home') else 'mdi:alert-circle' }}"
-      esp_master_bedroom:
-        friendly_name: 'esp master bedroom'
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.kitchen_echo', 'home') else 'mdi:wifi-off' }}"
+      esp_front_led:
+        friendly_name: 'ESP Front Led'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_garage', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.esp_garage', 'home') else 'mdi:wifi-off' }}"
+      esp_niche:
+        friendly_name: 'ESP Niche'
         value_template: "{{ 'Online' if is_state('device_tracker.master_bedroom_esp', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.master_bedroom_esp', 'home') else 'mdi:alert-circle' }}"
-
-      esp_attic:
-        friendly_name: 'esp attic'
-        value_template: "{{ 'Online' if is_state('device_tracker.Attic_esp', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.Attic_esp', 'home') else 'mdi:alert-circle' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.master_bedroom_esp', 'home') else 'mdi:wifi-off' }}"
+      esp_garage:
+        friendly_name: 'ESP Garage'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_garage', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.esp_garage', 'home') else 'mdi:wifi-off' }}"
+      esp_master_bedroom:
+        friendly_name: 'Esp Master Bedroom'
+        value_template: "{{ 'Online' if is_state('device_tracker.master_bedroom_esp', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.master_bedroom_esp', 'home') else 'mdi:wifi-off' }}"
+      esp_center:
+        friendly_name: 'ESP Center'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_center', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.esp_center', 'home') else 'mdi:wifi-off' }}"
       esp_game_room:
-        friendly_name: 'esp game room'
-        value_template: "{{ 'Online' if is_state('device_tracker.game_room_esp', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.game_room_esp', 'home') else 'mdi:alert-circle' }}"
-      esp_living_room:
-        friendly_name: 'esp living room'
-        value_template: "{{ 'Online' if is_state('device_tracker.esp_living_room', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.esp_living_room', 'home') else 'mdi:alert-circle' }}"
+        friendly_name: 'ESP Game Room'
+        value_template: "{{ 'Online' if is_state('device_tracker.esp_game_room', 'home') else 'Offline' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.esp_game_room', 'home') else 'mdi:wifi-off' }}"
+      samsung_tv:
+        friendly_name: 'Samsung Tv'
+        value_template: "{{ 'Online' if is_state('device_tracker.samsung_tv', 'home') else 'away' }}"
+        icon_template: "{{ 'mdi:television-classic' if is_state('device_tracker.samsung_tv', 'home') else 'mdi:television-classic-off' }}"
+    #  esp_living_room:
+    #    friendly_name: 'esp living room'
+    #    value_template: "{{ 'Online' if is_state('device_tracker.esp_living_room', 'home') else 'Offline' }}"
+    #    icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.esp_living_room', 'home') else 'mdi:wifi-off' }}"
       esp_counter_lights:
-        friendly_name: 'esp counter lights'
+        friendly_name: 'Esp Kitchen Cabinet Lights'
         value_template: "{{ 'Online' if is_state('device_tracker.esp_counter_lights', 'home') else 'Offline' }}"
-        icon_template: "{{ 'mdi:check-circle-outline' if is_state('device_tracker.esp_counter_lights', 'home') else 'mdi:alert-circle' }}"
+        icon_template: "{{ 'mdi:wifi' if is_state('device_tracker.esp_counter_lights', 'home') else 'mdi:wifi-off' }}"
 
 group:
   network_devices:

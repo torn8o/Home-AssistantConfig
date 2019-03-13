@@ -15,12 +15,12 @@
 #    name: Alok Home
 #    initial: on
 #    icon: mdi:cellphone-iphone
-  switch_ac_kitchen:
-    name: AC kitchen
-  switch_ac_livingroom:
-    name: AC living room
-  switch_tv:
-    name: TV
+  switch_bathroom_exhaust_1:
+    name: bathroom exhaust 1
+  switch_bathroom_heater_1:
+    name: bathroom heater 1
+  switch_bathroom_led_1:
+    name: bathroom led 1
 
   disable_exterior_on_sunset:
     name: Disable Exterior Lights On at Sunset

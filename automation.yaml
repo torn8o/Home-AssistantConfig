@@ -72,7 +72,7 @@
   trigger:
   - platform: state
     entity_id: sensor.vizio_tv
-    to: online
+    to: Online
   action:
   - service: light.turn_on
     entity_id: light.tv_room_light_level
@@ -82,7 +82,7 @@
   trigger:
     platform: state
     entity_id: sensor.vizio_tv
-    to: offline
+    to: Offline
   action:
     service: light.turn_off
     entity_id: light.tv_room_light_level
@@ -117,14 +117,13 @@
     offset: -00:00:10
   action:
     service: light.turn_on
-    entity_id: light.accent_lights
+    entity_id: light.accent_interior_lights
   id: efd253d4694e44acb256842d9ca95ca5
-- alias: Turn accent lights off 2am
+- alias: Turn accent lights off 12am
   initial_state: true
   trigger:
-    platform: sun
-    event: sunrise
-    offset: -04:33:10
+  - platform: time
+    at: '00:30:00'
   action:
     service: light.turn_off
     entity_id: light.accent_interior_lights
@@ -171,7 +170,7 @@
     event: start
   action:
     - delay:
-        minutes: 1      
+        minutes: 1
     - service: input_select.select_option
       data_template:
         entity_id: input_select.trash_pickup_day
@@ -187,7 +186,7 @@
 
 ###############################################################################
 #  Reminder code - Reminds 5 times every hour starting 4 PM
-#  Conditions: Only notifies when someone is at home 
+#  Conditions: Only notifies when someone is at home
 ###############################################################################
 - alias: Trash and Recycle Pickup Reminder
   initial_state: true
@@ -238,7 +237,7 @@
       data_template:
         message: >
           {% if states.sensor.trash_and_recycle.state == "Put Trash Out" %}
-            Attention!: Tomorrow is the Trash Pickup day. 
+            Attention!: Tomorrow is the Trash Pickup day.
             Please don't forget to leave Trash bins outside tonight!
           {% endif %}
 
@@ -386,7 +385,7 @@
   initial_state: True
   trigger:
     platform: state
-    entity_id: sensor.front_eave_led_lights
+    entity_id: light.front_led
     from: 'off'
     to: 'on'
   action:
@@ -395,18 +394,18 @@
         entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
         message: "Front   eave   lights   have   turned   on"
 
-- alias: tts motion front door #creates the notification
+- alias: tts accent lights #creates the notification
   initial_state: True
   trigger:
     platform: state
-    entity_id: sensor.front_door_motion
+    entity_id: light.accent_interior_lights
 #    from: 'no motion'
-    to: 'motion'  #change this to actual trigger
+    to: 'on'  #change this to actual trigger
   action:
     - service: media_player.alexa_tts
       data_template:
         entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
-        message: "Motion at the front door"
+        message: "Accent Lights are now on"
 ##################################################################
 ## Holiday Automations
 ##################################################################
@@ -441,7 +440,7 @@
         entity_id: input_select.holiday
         option: 'Christmas'
 
-  
+
       ##########################################################
       ## Christmas Lighting
       ##########################################################
@@ -484,7 +483,7 @@
 #  trigger:
 #    platform: time_pattern
 #    at: '00:30:00'
- 
+
 
 #  condition:
 #    - condition: state
@@ -2049,7 +2048,28 @@
     - service: switch.turn_off
       entity_id: switch.master_bathroom_light_switch, switch.master_bedroom_h_switch
   #  automation:
-- alias: fan_control_on_with_temp
+- alias: Bathroom heater on
+  initial_state: True
+  trigger:
+    - platform: numeric_state
+      entity_id:  sensor.aeotec_zw100_multisensor_6_temperature_4
+      below: 74
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.master_bedroom_h_switch
+- alias: Bathroom heater off
+  initial_state: True
+  trigger:
+    - platform: numeric_state
+      entity_id:  sensor.aeotec_zw100_multisensor_6_temperature_4
+      above: 74
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.master_bedroom_h_switch
+
+- alias: attic fan_control_on_with_temp
   initial_state: True
   trigger:
     - platform: numeric_state
@@ -2060,7 +2080,7 @@
       data:
         entity_id: switch.attic_fans
 
-- alias: fan_control_off_with_temp
+- alias: attic fan_control_off_with_temp
   initial_state: True
   trigger:
     - platform: numeric_state
@@ -2070,9 +2090,32 @@
     - service: switch.turn_off
       data:
         entity_id: switch.attic_fans
+
+# gameroom fan
+- alias: game fan_control_on_with_temp
+  initial_state: True
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.game_temperature
+      above: 74.1
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.game_room_fan
+
+- alias: game fan_control_off_with_temp
+  initial_state: True
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.game_temperature
+      below: 74
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.game_room_fan
 #tv room fan
 - alias: tv_fan_control_on_with_temp
-  initial_state: True
+  initial_state: False
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
@@ -2084,18 +2127,18 @@
 
 
 - alias: tv_fan_control_off_with_temp
-  initial_state: True
+  initial_state: False
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
       below: 74
   action:
-    - service: switch.turn_on
+    - service: switch.turn_off
       data:
         entity_id: switch.receiver
 #tv room fan speed
 - alias: tv_fan_speed_on_low
-  initial_state: True
+  initial_state: False
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
@@ -2106,7 +2149,7 @@
         entity_id: switch.fan_speed_low
 
 - alias: tv_fan_speed_on_medium
-  initial_state: True
+  initial_state: False
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
@@ -2117,7 +2160,7 @@
         entity_id: switch.fan_speed_medium
 
 - alias: tv_fan_speed_on_high
-  initial_state: True
+  initial_state: False
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
@@ -2154,7 +2197,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.master_bed_temperature
-      above: 75
+      above: 74.1
   action:
     - service: light.turn_on
       data:
@@ -2263,4 +2306,3 @@
     - service: switch.turn_off
       data:
         entity_id: switch.curtain_close
-

@@ -12,7 +12,7 @@ light:
     state_topic: "torn/garage"
     command_topic: "torn/garage/set"
     brightness: true
-    flash: true
+  #  flash: true
     rgb: true
     optimistic: false
     qos: 0
@@ -35,6 +35,7 @@ switch:
     payload_off: "OFF"
     qos: 1
     retain: true
+
 sensor:
 
 
@@ -184,24 +185,34 @@ automation:
         entity_id: light.garage_led
         data:
           color_name: 'green'
-      - service: light.turn_on
-        entity_id: light.garage_led
-        data:
-          flash: long
-      - service: light.turn_on
-        entity_id: light.garage_led
-        data:
-          brightness: 255
-#        color_name: green
-#        brightness: 255
-#        flash: long
 
-      - delay:
-          seconds: 15
+  - alias: turn light led off garage
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: sensor.garage_pir
+      to: 'standby'
+      for:
+    #    seconds: 30
+        seconds: 2
+    action:
       - service: light.turn_off
         entity_id: light.garage_led
 
-
+  - alias: turn on water
+    initial_state: True
+    trigger:
+      platform: state
+      entity_id: input_boolean.switch_front_left_sprinklers
+      to: 'off'
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.switch_front_right_sprinklers
+      - delay: '00:{{ states.input_number.right.state | int }}:00'
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.switch_front_right_sprinklers
 group:
   Garage_sensor:
     name: Garage Sensor
@@ -214,9 +225,3 @@ group:
       - light.Garage_LED
       - light.level
       - input_boolean.motion_toggle
-  Blue_Iris_sensor:
-    name: Blue Blue_Iris_sensor
-#    view: yes
-    entities:
-      - sensor.blue_iris_front_door_motion
-      - sensor.blue_iris_pool_motion

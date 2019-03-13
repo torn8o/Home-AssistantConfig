@@ -25,16 +25,38 @@ cloud:
         - light
         - group
 frontend:
+  javascript_version: latest
+  themes: !include themes.yaml
 history:
 logbook:
 sun:
 #updater:
 #discovery:
 discovery:
-  ignore:
-    - netgear_router
-
-
+system_health:
+weather:
+    - platform: darksky
+      api_key: !secret darksky_api_key
+      mode: daily
+shopping_list:
+custom_updater:
+#  mode: storage
+  show_installable: false
+  hide_sensor: true
+  track:
+    - components
+    - cards
+    - python_scripts
+  card_urls:
+      - https://raw.githubusercontent.com/thomasloven/lovelace-card-modder/master/card-modder.json
+      - https://raw.githubusercontent.com/custom-cards/upcoming-media-card/master/upcoming-media-card.json
+      - https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.json
+      - https://raw.githubusercontent.com/iammexx/home-assistant-config/master/ui/darksky/dark-sky-weather-card.json
+      - https://raw.githubusercontent.com/thomasloven/lovelace-card-tools/master/card-tools.json
+      - https://raw.githubusercontent.com/atomic7777/atomic_calendar/master/tracker.json
+      - https://raw.githubusercontent.com/MizterB/lovelace-secondaryinfo-entity-row/master/custom_cards.json
+#lovelace:
+#  mode: yaml
 ################################################
 ## Components (Non-Includes)
 ################################################
@@ -42,9 +64,9 @@ config:
 ring:
   username: !secret ring_USERNAME
   password: !secret ring_PASSWORD
-sense:
-    email: !secret sense_USERNAME
-    password: !secret sense_PASSWORD
+#sense:
+#    email: !secret sense_USERNAME
+#    password: !secret sense_PASSWORD
 
 ifttt:
   key: !secret iftt_key
@@ -60,39 +82,18 @@ nest:
       - 'target'
       - 'co_status'
       - 'smoke_status'
-      - 'batter_health'
+      - 'battery_health'
+      - 'color_status'
 
 climate:
   platform: nest
 
-http:
-  api_password: !secret http_api_password
+#http:
+#  api_password: !secret http_api_password
 #  ssl_certificate: !secret http_ssl_certificate
 #  ssl_key: !secret http_ssl_key
 
 wink:
-#  email: !secret wink_email
-#  password: !secret wink_password
-
-#mqtt_statestream:
-#  base_topic: hass
-#  publish_attributes: true
-#mqtt_eventstream:
-#  publish_topic: hass
-
-#influxdb:
-#  database: !secret influxdb_database
-#  host: !secret influxdb_host
-#  username:  influxdb_user
-#  password: influxdb_password
-#  exclude:
-#    entities:
-#       - entity.id1
-#       - entity.id2
-#    domains:
-#       - automation
-
-
 emulated_hue:
   host_ip: !secret hue_host
   type: alexa
@@ -126,50 +127,25 @@ ffmpeg:
 #  ffmpeg_bin: !secret ffmpeg_bin
 camera:
   - platform: ffmpeg
-    name: front door camera
+    name: cat camera
     input: !secret cam_input
   - platform: ffmpeg
     name: pool camera
     input: !secret cam_indoor_input
   - platform: ring
 
-#camera:
-  - platform: mjpeg
-    mjpeg_url: http://tornhome.ddns.net:84/mjpg/fdb
-    name: Front Door Stream
-    username: torn
-    password: 1028
-    authentication: basic
 
 #camera:
-  - platform: mjpeg
-    mjpeg_url: http://tornhome.ddns.net:84/mjpg/pdb
-    name: Pool Stream
-    username: torn
-    password: 1028
-    authentication: basic
 
-  - platform: generic
-    still_image_url: http://tornhome.ddns.net:84/image/fdb.jpg
-    name: front still
-    username: torn
-    password: 1028
-
-  - platform: generic
-    still_image_url: http://tornhome.ddns.net:84/image/pdb.jpg
-    name: pool still
-    username: torn
-    password: 1028
 media_player:
-#  - platform: plex
-#    entity_namespace: 'plex'
-#    include_non_clients: true
-#    scan_interval: 5
-#    show_all_controls: false
-#    use_custom_entity_ids: true
-#    use_episode_art: true
-#  - platform: itunes
-#    host: 192.168.1.62
+#  - platform: xboxone
+#    device: !secret xbox_living
+#    authentication: false
+#    name: Living Room Xbox One
+#  - platform: xboxone
+#    device: !secret xbox_game
+#    authentication: false
+#    name: Game Room Xbox One
 
   - platform: alexa
     email: !secret amazon_email
@@ -220,7 +196,7 @@ automation: !include automation.yaml
 #binary_sensor: !include_dir_merge_list binary_sensor
 #camera: !include_dir_merge_list camera
 #cover: !include_dir_merge_list cover
-#device_tracker: !include_dir_merge_list device
+device_tracker: !include_dir_merge_list device
 #light: !include_dir_merge_list light
 #media_player: !include_dir_merge_list media_player
 #notify: !include_dir_merge_list notify

@@ -1,0 +1,177 @@
+Purple-II:
+# Main colors that can be changed
+  dark-primary-color: "#63636b"
+  disabled-text-color: "#babac4"
+  light-primary-color: "#a2a2a9"
+  paper-card-background-color: "rgba(0,0,0,0.0)"
+  paper-grey-200: "#acacb9"
+  paper-item-icon-color: "#9900ff"
+  paper-listbox-background-color: "#0b0e0f"
+  primary-background-color: "#060606"
+  primary-color: "#9900ff"
+  primary-text-color: "#FFFFFF"
+  secondary-text-color: "#d6d6dc"
+  text-primary-color: "#FFFFFF"
+  secondary-background-color: "rgba(0,0,0,0.0)"
+  sidebar-text_-_background: "#66757f"
+# Colors based on variables, see above
+  paper-card-header-color: "var(--paper-item-icon-color)"
+  paper-item-icon-active-color: "#e4da00"
+  paper-item-icon_-_color: "var(--primary-text-color)"
+  paper-listbox-color: "var(--primary-text-color)"
+  paper-grey-50: "var(--primary-text-color)"
+  paper-slider-active-color: "var(--primary-color)"
+  paper-slider-knob-color: "var(--primary-color)"
+  paper-slider-knob-start-color: "var(--primary-color)"
+  paper-slider-pin-color: "var(--primary-color)"
+  paper-slider-secondary-color: "var(--light-primary-color)"
+  paper-toggle-button-checked-ink-color: "var(--dark-primary-color)"
+  paper-toggle-button-checked-button-color: "#9900ff"
+  paper-toggle-button-unchecked-button-color: "var(--paper-item-icon-color)" #"#acacb9"
+  paper-toggle-button-checked-bar-color: "var(--paper-item-icon-color)"
+  paper-toggle-button-unchecked-bar-color: "var(--paper-item-icon-color)"
+  table-row-background-color: transparant
+  table-row-alternative-background-color: transparant
+  sidebar-icon-color: "#838395"
+  sidebar-text-color: "#F1F1F1"
+  sidebar-selected-background-color: "var(--primary-background-color)"
+  sidebar-selected-icon-color: "#b3b3b3"
+  sidebar-selected-text-color: "var(--sidebar-selected-icon-color)"
+  divider-color: "rgba(255, 255, 255, 0.12)" #rgba(255, 255, 255, 0.12)
+  dark-divider-opacity: '0'
+  light-divider-opacity: '0'
+  shadow-elevation-2dp_-_box-shadow: 'inset 0px 0px 0px 4px hsla(0, 0%, 0%, 0.0)'
+  shadow-elevation-16dp_-_box-shadow: 'inset 0px 0px 0px 4px hsla(0, 0%, 0%, 0.0)'
+  paper-font-headline_-_letter-spacing: '-0.5px'
+  paper-font-headline_-_font-weight: '500'
+  paper-font-body1_-_font-weight: '500'
+  label-badge-red: 'hsla(0, 0%, 0%, 0)'
+  label-badge-border-color: 'var(--label-badge-red)'
+  label-badge-background-color: 'var(--paper-card-background-color)'
+  label-badge-text-color: 'var(--primary-text-color)'
+  primary-font-family: "Verdana"
+  paper-font-common-base_-_font-family: "var(--primary-font-family)"
+  paper-font-common-code_-_font-family: "var(--primary-font-family)"
+  paper-font-body1_-_font-family: "var(--primary-font-family)"
+  paper-font-subhead_-_font-family: "var(--primary-font-family)"
+  paper-font-headline_-_font-family: "var(--primary-font-family)"
+  paper-font-caption_-_font-family: "var(--primary-font-family)"
+  paper-font-title_-_font-family: "var(--primary-font-family)"
+
+Purple-Haze:
+  primary-color: "#9900ff"
+  primary-background-color: "#060606"
+  secondary-background-color: "#060606"
+  paper-card-background-color: "#131313"
+  paper-item-icon-color: "#9900ff"
+  primary-text-color: "#FFFFFF"
+  secondary-text-color: "#ac00e6"
+  text-primary-color: "#FFFFFF"
+  disabled-text-color: "rgba(255, 255, 255, 0.5)"
+  divider-color: "rgba(255, 255, 255, 0.12)"
+  paper-card-header-color: "#FFFFFF"
+  paper-listbox-background-color: "#131313"
+  paper-listbox-color: "#FFFFFF"
+  paper-grey-200: "#660066"
+  paper-toggle-button-checked-ink-color: "#d80129"
+  paper-toggle-button-checked-button-color: "#9900ff"
+  paper-toggle-button-checked-bar-color: "#FFFFFF"
+  paper-slider-knob-color: "#9900ff"
+  paper-slider-knob-start-color: "#9900ff"
+  paper-slider-pin-color: "#9900ff"
+  paper-slider-active-color: "#9900ff"
+  paper-slider-secondary-color: "#9900ff"
+  table-row-background-color: transparant
+  table-row-alternative-background-color: transparant
+
+Clear-Nightz-II:
+# Main colors that can be changed
+  dark-primary-color: "#63636b"
+  disabled-text-color: "#babac4"
+  light-primary-color: "#a2a2a9"
+  paper-card-background-color: "rgba(0,0,0,0.0)"
+  paper-grey-200: "#acacb9"
+  paper-item-icon-color: "#c8c8d0"
+  paper-listbox-background-color: "#0b0e0f"
+  primary-background-color: "#060606"
+  primary-color: "#0b0e0f"
+  primary-text-color: "#f2f2f2"
+  secondary-text-color: "#d6d6dc"
+  text-primary-color: "#f2f2f2"
+  secondary-background-color: "rgba(0,0,0,0.0)"
+  sidebar-text_-_background: "#66757f"
+# Colors based on variables, see above
+  paper-card-header-color: "var(--paper-item-icon-color)"
+  paper-item-icon-active-color: "#e4da00"
+  paper-item-icon_-_color: "var(--primary-text-color)"
+  paper-listbox-color: "var(--primary-text-color)"
+  paper-grey-50: "var(--primary-text-color)"
+  paper-slider-active-color: "var(--primary-color)"
+  paper-slider-knob-color: "var(--primary-color)"
+  paper-slider-knob-start-color: "var(--primary-color)"
+  paper-slider-pin-color: "var(--primary-color)"
+  paper-slider-secondary-color: "var(--light-primary-color)"
+  paper-toggle-button-checked-ink-color: "var(--dark-primary-color)"
+  paper-toggle-button-checked-button-color: "#e4da00"
+  paper-toggle-button-unchecked-button-color: "var(--paper-item-icon-color)" #"#acacb9"
+  paper-toggle-button-checked-bar-color: "var(--paper-item-icon-color)"
+  paper-toggle-button-unchecked-bar-color: "var(--paper-item-icon-color)"
+  table-row-background-color: transparant
+  table-row-alternative-background-color: transparant
+  sidebar-icon-color: "#838395"
+  sidebar-text-color: "#F1F1F1"
+  sidebar-selected-background-color: "var(--primary-background-color)"
+  sidebar-selected-icon-color: "#b3b3b3"
+  sidebar-selected-text-color: "var(--sidebar-selected-icon-color)"
+  divider-color: "rgba(255, 255, 255, 0.12)" #rgba(255, 255, 255, 0.12)
+  dark-divider-opacity: '0'
+  light-divider-opacity: '0'
+  shadow-elevation-2dp_-_box-shadow: 'inset 0px 0px 0px 4px hsla(0, 0%, 0%, 0.0)'
+  shadow-elevation-16dp_-_box-shadow: 'inset 0px 0px 0px 4px hsla(0, 0%, 0%, 0.0)'
+  paper-font-headline_-_letter-spacing: '-0.5px'
+  paper-font-headline_-_font-weight: '500'
+  paper-font-body1_-_font-weight: '500'
+  label-badge-red: 'hsla(0, 0%, 0%, 0)'
+  label-badge-border-color: 'var(--label-badge-red)'
+  label-badge-background-color: 'var(--paper-card-background-color)'
+  label-badge-text-color: 'var(--primary-text-color)'
+  primary-font-family: "Verdana"
+  paper-font-common-base_-_font-family: "var(--primary-font-family)"
+  paper-font-common-code_-_font-family: "var(--primary-font-family)"
+  paper-font-body1_-_font-family: "var(--primary-font-family)"
+  paper-font-subhead_-_font-family: "var(--primary-font-family)"
+  paper-font-headline_-_font-family: "var(--primary-font-family)"
+  paper-font-caption_-_font-family: "var(--primary-font-family)"
+  paper-font-title_-_font-family: "var(--primary-font-family)"
+
+dark_red:
+  dark-primary-color: "#c66900"
+  disabled-text-color: "#545454"
+  divider-color: "rgba(255, 255, 255, 0.12)"
+  light-primary-color: "#e06c6c"
+  paper-card-background-color: "#1d1d1d"
+  paper-grey-200: "#191919"
+  paper-item-icon-color: "#d3d3d3"
+  paper-listbox-background-color: "#202020"
+  primary-background-color: "#303030"
+  primary-color: "#d32f2f"
+  primary-text-color: "#cfcfcf"
+  secondary-background-color: "#131313"
+  sidebar-text_-_background: "#62717b"
+  paper-card-header-color: "var(--paper-item-icon-color)"
+  paper-item-icon-active-color: "var(--primary-color)"
+  paper-item-icon_-_color: "var(--primary-text-color)"
+  paper-listbox-color: "var(--primary-text-color)"
+  paper-grey-50: "var(--primary-text-color)"
+  paper-slider-active-color: "var(--primary-color)"
+  paper-slider-knob-color: "var(--primary-color)"
+  paper-slider-knob-start-color: "var(--primary-color)"
+  paper-slider-pin-color: "var(--primary-color)"
+  paper-slider-secondary-color: "var(--light-primary-color)"
+  paper-toggle-button-checked-ink-color: "var(--dark-primary-color)"
+  paper-toggle-button-checked-button-color: "var(--primary-color)"
+  paper-toggle-button-checked-bar-color: "var(--light-primary-color)"
+  paper-toggle-button-unchecked-bar-color: "var(--primary-text-color)"
+  secondary-text-color: "var(--primary-color)"
+  table-row-background-color: "var(--paper-card-background-color)"
+  table-row-alternative-background-color: "var(--sidebar-text_-_background)"

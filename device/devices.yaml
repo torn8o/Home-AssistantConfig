@@ -17,3 +17,7 @@
 #  track_new_devices: false
 
 #- platform: bluetooth_tracker
+- platform: icloud
+  username: !secret icloud_USERNAME
+  password: !secret icloud_PASSWORD
+#  account_name: accountname

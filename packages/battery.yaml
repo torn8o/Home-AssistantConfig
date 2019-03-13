@@ -1,5 +1,5 @@
 ###############################################################################
-#   @user           :   torn8o
+#   @user           :   tornado
 #   original Github
 #   https://github.com/skalavala/smarthome
 #   @author         :   Mahasri Kalavala
@@ -9,30 +9,48 @@
 ###############################################################################
 homeassistant:
   customize:
-    sensor.torn8os_iphone_battery:
+    sensor.tornados_iphone_battery:
       hidden: True
     sensor.lizs_iphone_battery:
       hidden: True
 
-    sensor.torn8o_iphone_battery:
-      friendly_name: torn8os iPhone Battery
+    sensor.tornado_iphone_battery:
+      friendly_name: tornados iPhone Battery
     sensor.liz_iphone_battery:
       friendly_name: lizs iPhone Battery
     sensor.nina_battery_level:
       friendly_name: Nina iPhone Battery
+#################################################################
+#                                                               #
+#                           Group                               #
+#                                                               #
+#################################################################
 
-# Multi Sensor Batteries
-#    sensor.upstairs_multisensor_battery:
-#      friendly_name: Upstairs Multisensor Battery
-#    sensor.downstairs_multisensor_battery:
-#      friendly_name: Downstairs Multisensor Battery
-#    sensor.single_car_garage_door_sensor_battery:
-#      friendly_name: Single Car Garage Door Sensor Battery
-#    sensor.two_car_garage_door_sensor_battery:
-#      friendly_name: Two Car Garage Door Sensor Battery
-#    automation.alert_low_battery_level_of_multisensors:
-#      friendly_name: Alert Low Battery of Multisensors
-#      icon: mdi:battery
+group:
+  people:
+    name: People
+    view: no
+    entities:
+      - sensor.james
+      - sensor.james_castle_location
+      - sensor.battery_james
+      - sensor.tina
+      - sensor.tina_castle_location
+      - sensor.battery_tina
+      - sensor.commute_to_work
+      - sensor.commute_from_work
+      - sensor.james_to_home
+      - sensor.next_bus
+
+  family:
+    name: Family
+    view: no
+    entities:
+      - device_tracker.tornado
+      - device_tracker.lynx
+      - device_tracker.nina
+      - device_tracker.monkey
+      - device_tracker.ferina
 
 sensor:
   - platform: template
@@ -58,10 +76,10 @@ sensor:
 
   - platform: template
     sensors:
-      lynx_iphone_battery:
+      liz_iphone_battery:
         unit_of_measurement: '%'
-        entity_id: device_tracker.liz
-        value_template: "{{ (states.device_tracker.liz.attributes|default).battery|default|int('unknown') }}"
+        entity_id: device_tracker.lynx
+        value_template: "{{ (states.device_tracker.lynx.attributes|default).battery|default|int('unknown') }}"
         icon_template: >-
           {% set battery_level = states('sensor.liz_iphone_battery')|int('unknown') %}
           {% set battery_round = (battery_level|int / 10)|int * 10 %}
@@ -79,12 +97,12 @@ sensor:
 
   - platform: template
     sensors:
-      torn8o_iphone_battery:
+      tornado_iphone_battery:
         unit_of_measurement: '%'
-        entity_id: device_tracker.torn8o
-        value_template: "{{ (states.device_tracker.torn8o.attributes|default).battery|default|int('unknown') }}"
+        entity_id: device_tracker.tornado
+        value_template: "{{ (states.device_tracker.tornado.attributes|default).battery|default|int('unknown') }}"
         icon_template: >-
-          {% set battery_level = states('sensor.torn8o_iphone_battery')|int('unknown') %}
+          {% set battery_level = states('sensor.tornado_iphone_battery')|int('unknown') %}
           {% set battery_round = (battery_level|int / 10)|int * 10 %}
           {% if battery_level == 'unknown' %}
             mdi:battery-unknown
@@ -98,18 +116,83 @@ sensor:
             {% endif %}
           {% endif %}
 
-#  - platform: mqtt
-#    state_topic: "owntracks/lynx/lynx"
-#    name: "lynx's iPhone Battery"
-#    unit_of_measurement: "%"
-#    value_template: "{{ value_json.batt }}"
+  - platform: template
+    sensors:
+      battery_charlie:
+        friendly_name: "Battery Charlie"
+        value_template: "{{ states.device_tracker.tornado.attributes.battery|int }}"
+        icon_template: >-
+          {% if is_state('sensor.charlie_charging', 'Charging') %}
+            mdi:battery-charging
+          {% endif %}
+        unit_of_measurement: "%"
+        device_class: battery
+
+      battery_liz:
+        friendly_name: "Battery Liz"
+        value_template: "{{ states.device_tracker.liz.attributes.battery|int }}"
+        icon_template: >-
+          {% if is_state('sensor.liz_charging', 'Charging') %}
+            mdi:battery-charging
+          {% endif %}
+        unit_of_measurement: "%"
+        device_class: battery
 
 
-#  - platform: mqtt
-#    state_topic: "owntracks/torn8o/torn8o"
-#    name: "torn8o iPhone Battery"
-#    unit_of_measurement: "%"
-#    value_template: "{{ value_json.batt }}"
+
+  - platform: template
+    sensors:
+      charlie:
+        friendly_name: "Charlie"
+        value_template: >-
+          {% if is_state('device_tracker.tornado', 'home') %}
+            Home
+          {% else %}
+            Away
+          {% endif %}
+
+  - platform: template
+    sensors:
+      liz:
+        friendly_name: "Liz"
+        value_template: >-
+          {% if is_state('device_tracker.lynx', 'home') %}
+            Home
+          {% else %}
+            Away
+          {% endif %}
+binary_sensor:
+  - platform: template
+    sensors:
+      charlie_gps_status:
+        friendly_name: Charlie GPS
+        device_class: connectivity
+        entity_id: device_tracker.tornado
+        value_template: "{{ is_state('device_tracker.tornado', 'home') }}"
+        icon_template: >-
+          {% if is_state('device_tracker.tornado', 'Home') %}
+            mdi:crosshairs-gps
+          {% elif is_state('device_tracker.tornado', 'not_home') %}
+            mdi:crosshairs-gps
+          {% else %}
+            mdi:alert
+          {% endif %}
+
+  - platform: template
+    sensors:
+      liz_gps_status:
+        friendly_name: Liz GPS
+        device_class: connectivity
+        entity_id: device_tracker.lynx
+        value_template: "{{ is_state('device_tracker.lynx', 'home') }}"
+        icon_template: >-
+          {% if is_state('device_tracker.lynx', 'Home') %}
+            mdi:crosshairs-gps
+          {% elif is_state('device_tracker.lynx', 'not_home') %}
+            mdi:crosshairs-gps
+          {% else %}
+            mdi:alert
+          {% endif %}
 
 automation:
   - alias: Notify Low battery
@@ -117,31 +200,19 @@ automation:
     trigger:
       platform: numeric_state
       entity_id:
-      - device_tracker.liz
-      - device_tracker.torn8o
+      - device_tracker.lynx
+      - device_tracker.tornado
+      - device_tracker.nina
       value_template: '{{ state.attributes.battery }}'
       below: 30
     action:
-      - service: script.notify_me
+      - service: notify.ios_tornado
         data_template:
           value1: >
             {{ trigger.to_state.attributes.friendly_name }}'s phone battery is less than: {{ trigger.to_state.attributes.battery }}%.
           value2: ""
 
-  - alias: Notify nina Low battery
-    initial_state: True
-    trigger:
-      platform: numeric_state
-      entity_id:
-      - device_tracker.nina
-      value_template: '{{ state.attributes.battery }}'
-      below: 80
-    action:
-      - service: script.notify_me
-        data_template:
-          value1: >
-            {{ trigger.to_state.attributes.friendly_name }}'s phone battery is less than: {{ trigger.to_state.attributes.battery }}%.
-          value2: ""
+
 #  - alias: Alert Low Battery Level of Sensors
 #    trigger:
 #      platform: numeric_state
@@ -167,7 +238,20 @@ automation:
     #  for:
     #    minutes: 1
     action:
-      - service: notify.ios_torn8o
+      - service: notify.ios_tornado
         data_template:
           value1: >
               The garage door was left open
+  - alias: "Internet Speed Glow Connect Great"
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.speedtest_download')|float >= 10 }}"
+    action:
+      - service: shell_command.green
+
+  - alias: "Internet Speed Glow Connect Poor"
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.speedtest_download')|float < 10 }}"
+    action:
+      - service: shell_command.red

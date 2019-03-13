@@ -1,0 +1,94 @@
+
+input_datetime:
+  sprinklers_start_time:
+    name: Sprinklers start time
+    has_date: false
+    has_time: true
+
+input_number:
+  right:
+    name: Front Right
+    min: 0
+    max: 25
+    step: 1
+  left:
+    name: Front Left
+    min: 0
+    max: 25
+    step: 1
+
+
+input_boolean:
+  sprinklers_monday:
+    name: 1_Monday
+  sprinklers_tuesday:
+    name: 2_Tuesday
+  sprinklers_wednesday:
+    name: 3_Wednesday
+  sprinklers_thursday:
+    name: 4_Thursday
+  sprinklers_friday:
+    name: 5_Friday
+  sprinklers_saturday:
+    name: 6_Saturday
+  sprinklers_sunday:
+    name: 7_Sunday
+  switch_front_right_sprinklers:
+    name: Front right sprinklers
+  switch_front_left_sprinklers:
+    name: Front left sprinklers
+
+automation:
+ -  alias: 'Sprinkler Schedule'
+    initial_state: false
+#    initial_state: true
+    trigger:
+      platform: template
+      value_template: "{{ states('sensor.time') == (states.input_datetime.sprinklers_start_time.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}"
+
+    condition:
+        condition: or
+        conditions:
+        - condition: template
+          value_template: '{{ (now().strftime("%a") == "Mon") and (states.input_boolean.sprinklers_monday.state=="on")}}'
+        - condition: template
+          value_template: '{{ (now().strftime("%a") == "Tue") and (states.input_boolean.sprinklers_tuesday.state=="on")}}'
+        - condition: template
+          value_template: '{{ (now().strftime("%a") == "Wed") and (states.input_boolean.sprinklers_wednesday.state=="on")}}'
+        - condition: template
+          value_template: '{{ (now().strftime("%a") == "Thu") and (states.input_boolean.sprinklers_thursday.state=="on")}}'
+        - condition: template
+          value_template: '{{ (now().strftime("%a") == "Fri") and (states.input_boolean.sprinklers_friday.state=="on")}}'
+        - condition: template
+          value_template: '{{ (now().strftime("%a") == "Sat") and (states.input_boolean.sprinklers_saturday.state=="on")}}'
+        - condition: template
+          value_template: '{{ (now().strftime("%a") == "Sun") and (states.input_boolean.sprinklers_sunday.state=="on")}}'
+#        - condition: template
+#          value_template: ''{{ not is_state('sensor.dark_sky_precip', rain) }}'
+
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id:
+            - input_boolean.switch_front_left_sprinklers
+      - delay: '00:{{ states.input_number.left.state | int }}:00'
+      - service: input_boolean.turn_off
+        data:
+          entity_id:
+            - input_boolean.switch_front_left_sprinklers
+
+  #  - service: input_boolean.turn_on
+    #    data:
+    #3      entity_id:
+      #      - input_boolean.switch_front_right_sprinklers
+  #    - delay: '01:{{ states.input_number.right.state | int }}:00'
+  #    - service: input_boolean.turn_off
+  #      data:
+  #        entity_id:
+  #          - input_boolean.switch_front_right_sprinklers
+
+
+
+      - service: notify.notify
+        data:
+          message: Sprinkler done.

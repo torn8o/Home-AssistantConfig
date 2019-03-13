@@ -8,10 +8,33 @@
 
 homeassistant:
   customize:
+    sensor.epson_ink_level_black:
+        entity_picture: /local/ink_k.png
+
+          # >
+          #if (state > entities['input_number.ink_level'].state ) return '/local/devices/epson/ink_k.png';
+          #return '/local/devices/epson/ink_k_alert.png';
+    sensor.epson_ink_level_cyan:
+        entity_picture: /local/ink_c.png
+          #>
+          #if (state > entities['input_number.ink_level'].state ) return '/local/devices/epson/ink_c.png';
+          #return '/local/devices/epson/ink_c_alert.png';
+    sensor.epson_ink_level_yellow:
+        entity_picture: /local/ink_y.png
+          # >
+          #if (state > entities['input_number.ink_level'].state ) return '/local/devices/epson/ink_y.png';
+          #return '/local/devices/epson/ink_y_alert.png';
+    sensor.epson_ink_level_magenta:
+        entity_picture: /local/ink_m.png
+          #>
+          #if (state > entities['input_number.ink_level'].state ) return '/local/devices/epson/ink_m.png';
+          #return '/local/devices/epson/ink_m_alert.png';
+
     ################################################
     ## Node Anchors
     ################################################
 sensor:
+  
   - platform: darksky
     api_key: !secret darksky_api_key
     forecast:
@@ -44,8 +67,8 @@ sensor:
       - daily_summary
       - pressure
       - visibility
-    update_interval:
-      minutes: 5
+    scan_interval:
+      minutes: 10
   #    - ozone
   #      - minutely_summary
   #    - hourly_summary
@@ -55,6 +78,50 @@ sensor:
   #    - apparent_temperature_max
   #    - apparent_temperature_min
   #    - precip_intensity_max
+  - platform: sonarr_upcoming_media
+    api_key: !secret sonarr_api_key
+    host: 192.168.1.47
+#    monitored_conditions:
+#      - upcoming
+    days: 3
+  - platform: radarr_upcoming_media
+    api_key: !secret radarr_api_key
+    host: 192.168.1.47
+#    monitored_conditions:
+#      - upcoming
+    days: 14
+
+
+    
+  - platform: pollen
+    zip_code: !secret home_zip
+    monitored_conditions:
+      - allergy_average_forecasted
+      - allergy_average_historical
+      - allergy_index_today
+      - allergy_index_tomorrow
+      - allergy_index_yesterday
+      - asthma_average_forecasted
+      - asthma_average_historical
+      - asthma_index_today
+      - asthma_index_tomorrow
+      - asthma_index_yesterday
+      - disease_average_forecasted
+  - platform: template
+    sensors:
+      pollen_level:
+        friendly_name: 'Pollen Level'
+        value_template: >-
+          {{ state_attr('sensor.allergy_index_forecasted_average', 'rating') }}
+        entity_picture_template: >-
+          {{ '/local/icons/' ~ state_attr('sensor.allergy_index_forecasted_average', 'rating').lower().replace('/', '-') ~ '.png'}}
+      cold_flu_risk:
+        friendly_name: 'Cold & Flu Risk'
+        value_template: >-
+          {{ state_attr('sensor.cold_flu_forecasted_average', 'rating') }}
+        entity_picture_template: >-
+          {{ '/local/icons/' ~ state_attr('sensor.cold_flu_forecasted_average', 'rating').lower().replace('/', '-') ~ '.png'}}
+
 
   #- platform: sonarr
   #  api_key: !secret sonarr_api_key
@@ -97,15 +164,15 @@ sensor:
       trash_and_recycle:
         friendly_name: 'trash_and_recycle'
         value_template: '{{ states.calendar.trash_and_recycle.attributes.message }}'
-  - platform: fastdotcom
-    minute:
-      - 0
-      - 30
+#  - platform: fastdotcom
+#    minute:
+#      - 0
+#      - 30
   - platform: broadlink
     host: 192.168.1.19
     mac: B4:43:0D:EF:9F:25
     name: "broadlink torn"
-    update_interval: 60
+    scan_interval: 60
     monitored_conditions:
       - temperature
 
@@ -117,11 +184,11 @@ sensor:
     state_topic: "xmas/falcon/player/FPP/playlist/media/status"
 
   - platform: yr
-  - platform: speedtest
-    monitored_conditions:
-    - ping
-    - download
-    - upload
+#  - platform: speedtest
+#    monitored_conditions:
+#    - ping
+#    - download
+#    - upload
 
   - platform: template
     sensors:
@@ -140,3 +207,70 @@ sensor:
        tv_room:
           friendly_name: 'Tv Room'
           value_template: "{{ states.remote.torn_hub.attributes.current_activity }}"
+  - platform: command_line
+    name: Epson ink level Black
+    command: /usr/bin/curl -k https://192.168.1.166/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_K.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 14400
+  - platform: command_line
+    name: Epson Ink Level Magenta
+    command: /usr/bin/curl -k https://192.168.1.166/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_M.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 14400
+  - platform: command_line
+    name: Epson Ink Level Yellow
+    command: /usr/bin/curl -k https://192.168.1.166/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_Y.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 14400
+  - platform: command_line
+    name: Epson Ink Level Cyan
+    command: /usr/bin/curl -k https://192.168.1.166/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_C.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 14400
+
+light:
+  - platform: flux_led
+    devices:
+      192.168.1.133:
+        name: MB Color Lights
+      192.168.1.28:
+        name: kitchen cabinet lights
+      192.168.1.127:
+        name: display light
+input_boolean:
+    switch_bathroom_exhaust_1:
+      name: bathroom exhaust 1
+    switch_bathroom_heater_1:
+      name: bathroom heater 1
+    switch_bathroom_led_1:
+      name: bathroom led 1
+
+    disable_exterior_on_sunset:
+      name: Disable Exterior Lights On at Sunset
+      icon: mdi:weather-sunset-down
+    interior_holiday:
+      name: Interior Holiday Lighting
+      icon: mdi:gift
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.1.1/24
+speedtestdotnet:
+  scan_interval:
+    days: 0
+    hours: 0
+    minutes: 3
+    seconds: 30
+    milliseconds: 0
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+fastdotcom:
+  scan_interval:
+    days: 0
+    hours: 0
+    minutes: 3
+    seconds: 30
+    milliseconds: 0
+## battery
+
