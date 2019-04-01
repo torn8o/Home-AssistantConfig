@@ -1,0 +1,181 @@
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'Washer sensor'
+sensor:
+  - platform: mqtt
+    name: "Washer State"
+    state_topic: "hass/state/washer"
+    icon: mdi:washing-machine
+  - platform: mqtt
+    name: "Dryer State"
+    state_topic: "hass/state/dryer"
+    icon: mdi:tumble-dryer
+  - platform: mqtt
+    name: "Washer Watts"
+    state_topic: "tele/SNF-Washer/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Power }}"
+    qos: 2
+    unit_of_measurement : "W"
+    icon: mdi:flash-circle
+    availability_topic: "tele/SNF-Washer/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Washer Voltage"
+    state_topic: "tele/SNF-Washer/SENSOR" 
+    value_template: "{{ value_json['ENERGY'].Voltage }}"
+    qos: 2
+    unit_of_measurement : "V"
+    icon: mdi:flash-circle
+    availability_topic: "tele/SNF-Washer/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Washer Amps"
+    state_topic: "tele/SNF-Washer/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Current }}"
+    qos: 2
+    unit_of_measurement : "A"
+    icon: mdi:flash-circle
+    availability_topic: "tele/SNF-Washer/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Washer Energy Today"
+    state_topic: "tele/SNF-Washer/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Today }}"
+    qos: 2
+    unit_of_measurement : "kWh"
+    availability_topic: "tele/SNF-Washer/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Washer Energy Yesterday"
+    state_topic: "tele/SNF-Washer/SENSOR"
+    value_template: "{{ value_json['ENERGY'].Yesterday }}"
+    qos: 2
+    unit_of_measurement : "kWh"
+    availability_topic: "tele/SNF-Washer/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+
+  - platform: mqtt
+    state_topic: "tele/SNF-Washer/STATE"
+    name: "Washer Signal"
+    unit_of_measurement: "%"
+    value_template: "{{ value_json['Wifi'].RSSI }}"
+    availability_topic: "tele/SNF-Washer/LWT"
+    qos: 1
+    payload_available: "Online"
+    payload_not_available: "Offline" 
+group:
+  washer_panel:
+    name: Washer
+    entities:
+      - sensor.washer_state
+      - sensor.washer_voltage
+      - sensor.washer_watts
+      - sensor.washer_amps
+      - sensor.washer_energy_today
+      - sensor.washer_energy_yesterday
+      - sensor.washer_signal
+    
+    
+automation:
+  - alias: 'Dryer State - Drying'
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: binary_sensor.dryer_2
+      to: 'on'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: hass/state/dryer
+          payload: 'Drying'
+          retain: 'true'
+  - alias: 'Dryer State - Idle'
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: binary_sensor.dryer_2
+      to: 'off'
+    action:
+      - service: mqtt.publish
+        data:
+          topic: hass/state/dryer
+          payload: 'Idle'
+          retain: 'true'
+    
+
+  - alias: 'Washer State - Start'
+    initial_state: true
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.washer_watts
+      above: 5
+      for:
+        seconds: 4
+  # Make sure washer isn't already running and delaying between cycles - don't re-trigger and cause stopwatch reset
+    condition:
+      condition: template
+      value_template: "{{ states.sensor.washer_state.state != 'Washing' }}"
+    action:
+      - service: mqtt.publish
+        data:
+          topic: hass/state/washer
+          payload: 'Washing'
+          retain: 'true'
+  - alias: 'Washer State - Idle'
+    initial_state: true
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.washer_watts
+      below: 5
+      for:
+        minutes: 5
+    action:
+      - service: mqtt.publish
+        data:
+          topic: hass/state/washer
+          payload: 'Idle'
+          retain: 'true'
+
+  - alias: 'tts Dryer Finished'
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: binary_sensor.dryer_2
+      from: 'on'
+      to: 'off'
+    action:
+      - service: python_script.flash_on_ding
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
+          message: "Hey..... Guess what.....  The dryer has stopped"
+  - alias: 'tts Washer Finished'
+    trigger:
+      platform: state
+      entity_id: sensor.washer_state
+      from: 'Washing'
+      to: 'Idle'
+    condition:
+      condition: template
+      value_template: "{{ states.sensor.dryer_state.state != 'Drying' }}"
+    action:
+      - service: python_script.flash_on_ding
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
+          message: "Laundry in the washer can be moved over!"
+
+
+
+  # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  #  Washing Machine Start/Finish
+  # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+   

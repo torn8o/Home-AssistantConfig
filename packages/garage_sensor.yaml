@@ -1,4 +1,3 @@
-
 homeassistant:
   customize:
     packages.system: &customize
@@ -28,7 +27,7 @@ switch:
     qos: 1
     retain: true
   - platform: mqtt
-    name: "vacuum"
+    name: "Washing machine"
     state_topic: "stat/vacuum/POWER"
     command_topic: "cmnd/vacuum/POWER"
     payload_on: "ON"
@@ -37,9 +36,6 @@ switch:
     retain: true
 
 sensor:
-
-
-#    device_class: motion
   - platform: mqtt
     name: "front door motion"
     state_topic: "front/motion"

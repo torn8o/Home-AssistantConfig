@@ -16,3 +16,66 @@ steps_timer_off:
     - service: light.turn_off
       data:
         entity_id: light.steps
+light_dimmer:
+  - alias: light dimmer
+    sequence:
+      - service: light.turn_on
+        data_template:
+          entity_id: "{% for state in states.light if state.state=='on' and (state_attr(state.entity_id, 'brightness') | int - states('input_number.' ~ state.entity_id.split('.')[1]) | int) | abs < 25 and state.entity_id != 'light.office' and state.entity_id != 'light.family_room' and state.entity_id != 'light.bar' and state.entity_id != 'light.fireplace' %}{% if loop.first %}{% else %},{% endif %}{{state.entity_id}}{% endfor %}"
+          brightness: '{{ states.input_number.dim_level.state|int }}'
+      - service: input_number.set_value
+        data_template:
+          entity_id: "{% for state in states.light if state.state=='on' and (state_attr(state.entity_id, 'brightness') | int - states('input_number.' ~ state.entity_id.split('.')[1]) | int) | abs < 25 and state.entity_id != 'light.office' and state.entity_id != 'light.family_room' and state.entity_id != 'light.bar' and state.entity_id != 'light.fireplace' %}{% if loop.first %}{% else %},{% endif %}{{'input_number.' ~ state.entity_id.split('.')[1]}}{% endfor %}"
+          value: '{{ states.input_number.dim_level.state|int }}'
+
+light_dimmer_low:
+  -  alias: light dimmer low
+     sequence:
+       - service: light.turn_on
+         data_template:
+           entity_id: "{% for state in states.light if state.state=='on' and (state_attr(state.entity_id, 'brightness') | int - states('input_number.' ~ state.entity_id.split('.')[1]) | int) | abs < 50 and (state.entity_id == 'light.office' or state.entity_id == 'light.bar') %}{% if loop.first %}{% else %},{% endif %}{{state.entity_id}}{% endfor %}"
+           brightness: '{% if states.input_number.dim_level.state|int < 235 %} {{ states.input_number.dim_level.state|int +20 }}{% else %}{{ states.input_number.dim_level.state|int}}{% endif %}'
+       - service: input_number.set_value
+         data_template:
+           entity_id: "{% for state in states.light if state.state=='on' and (state_attr(state.entity_id, 'brightness') | int - states('input_number.' ~ state.entity_id.split('.')[1]) | int) | abs < 50 and (state.entity_id == 'light.office' or state.entity_id == 'light.bar') %}{% if loop.first %}{% else %},{% endif %}{{'input_number.' ~ state.entity_id.split('.')[1]}}{% endfor %}"
+           value: '{% if states.input_number.dim_level.state|int < 235 %} {{ states.input_number.dim_level.state|int +20 }}{% else %}{{ states.input_number.dim_level.state|int}}{% endif %}'
+
+light_dimmer_high:
+  - alias: light dimmer high
+    sequence:
+      - service: light.turn_on
+        data_template:
+          entity_id: "{% for state in states.light if state.state=='on' and (state_attr(state.entity_id, 'brightness') | int - states('input_number.' ~ state.entity_id.split('.')[1]) | int) | abs < 50 and (state.entity_id == 'light.family_room' or state.entity_id == 'light.fireplace') %}{% if loop.first %}{% else %},{% endif %}{{state.entity_id}}{% endfor %}"
+          brightness: '{% if states.input_number.dim_level.state|int > 30 %} {{ states.input_number.dim_level.state|int -20 }}{% else %}{{ states.input_number.dim_level.state|int}}{% endif %}'
+      - service: input_number.set_value
+        data_template:
+          entity_id: "{% for state in states.light if state.state=='on' and (state_attr(state.entity_id, 'brightness') | int - states('input_number.' ~ state.entity_id.split('.')[1]) | int) | abs < 50 and (state.entity_id == 'light.family_room' or state.entity_id == 'light.fireplace') %}{% if loop.first %}{% else %},{% endif %}{{'input_number.' ~ state.entity_id.split('.')[1]}}{% endfor %}"
+          value: '{% if states.input_number.dim_level.state|int > 30 %} {{ states.input_number.dim_level.state|int -20 }}{% else %}{{ states.input_number.dim_level.state|int}}{% endif %}'
+Dim_level:
+  -  alias: Dim Level # Update Dim Level Every 5 Minutes
+     hide_entity: true
+     trigger:
+       - platform: time
+         minutes: '/5'
+         seconds: 00
+       - platform: state
+         entity_id: input_boolean.hold_lights
+         to: 'off'
+       - platform: homeassistant
+         event: start
+     condition:
+       - condition: sun
+         after: sunset
+       - condition: state
+         entity_id: input_boolean.hold_lights
+         state: 'off'
+     action:
+       - service: input_number.set_value
+         data_template:
+           entity_id: input_number.dim_level
+           value: >
+                  {% if  255 - (255 * (as_timestamp(states.sensor.date.state ~ " " ~ states.sensor.time.state )-(as_timestamp(states.sun.sun.attributes.next_setting)-86400))/(as_timestamp(states.sensor.date.state ~ " 21:30:00") - (as_timestamp(states.sun.sun.attributes.next_setting)-86400)))|int > 12 %}
+                    {{255 - (255 * (as_timestamp(states.sensor.date.state ~ " " ~ states.sensor.time.state )-(as_timestamp(states.sun.sun.attributes.next_setting)-86400))/(as_timestamp(states.sensor.date.state ~ " 21:30:00") - (as_timestamp(states.sun.sun.attributes.next_setting)-86400)))|int}}
+                  {% else %}
+                    12
+                  {% endif %}

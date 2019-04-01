@@ -9,30 +9,6 @@ homeassistant:
 
     sun.sun:
       friendly_name: Sun
-    sensor.pws_relative_humidity:
-      friendly_name: Humidity
-      homebridge_hidden: true
-    sensor.pws_temp_f:
-      friendly_name: Temperature
-      homebridge_hidden: true
-    sensor.pws_feelslike_f:
-      friendly_name: Feels Like
-      homebridge_hidden: true
-    sensor.pws_wind_mph:
-      friendly_name: Wind Speed
-      icon: mdi:weather-windy
-    sensor.pws_heat_index_f:
-      friendly_name: Heat Index
-      homebridge_hidden: true
-    sensor.pws_visibility_mi:
-      friendly_name: Visibility
-    sensor.pws_weather:
-      friendly_name: Weather
-      homebridge_hidden: true
-    sensor.pws_uv:
-      friendly_name: UV Index
-      icon: mdi:white-balance-sunny
-      homebridge_hidden: true
 
     sensor.cold_flu:
       friendly_name: Cold and Flu
@@ -76,10 +52,6 @@ homeassistant:
     input_boolean.hurricane_wind_alert:
       hidden: true
       homebridge_hidden: true
-    sensor.uv_burn_time:
-      friendly_name: Burn Time
-      icon: mdi:fire
-      homebridge_hidden: true
     sensor.wind_direction:
       icon: mdi:weather-windy-variant
       homebridge_hidden: true
@@ -87,8 +59,10 @@ homeassistant:
       icon: mdi:weather-windy-variant
       homebridge_hidden: true
 
-
-
+#camera:
+#  - platform: generic
+#    name: Ohio Doppler Weather
+#    still_image_url: !secret ohio_doppler_weather
 
 input_boolean:
   nice_breeze_alert:
@@ -144,57 +118,51 @@ binary_sensor:
             true
           {% endif %}
 
-weather:
-  - platform: darksky
-    api_key: !secret darksky_api_key
+#weather:
+#  - platform: darksky
+#    api_key: !secret darksky_api_key
 
-sensor:
-  - platform: template
-    sensors:
-      uv_burn_time:
-       # Celtic         = 67  Min
-       # Caucasian      = 100 Min
-       # Central Europe = 200 Min
-       # South american = 200 Min
-       # Middle Eastern = 400 Min
-       # African        = 500 Min
-        value_template: >
-          {% if is_state('sensor.pws_uv', '0') %}
-            0 Minutes
-          {% elif is_state('sensor.pws_uv', '-1') %}
-            0 Minutes
-          {% else %}
-            {{ (400 / states.sensor.pws_uv.state | float) | round }} Minutes
-          {% endif %}
+#sensor:
+#  - platform: darksky
+#    api_key: !secret darksky_api_key
+#    monitored_conditions:
+#      - summary
+#      - icon
+#      - nearest_storm_distance
+#      - nearest_storm_bearing
+#      - precip_type
+#      - precip_intensity
+#      - precip_probability
+#      - temperature
+#      - apparent_temperature
+#      - dew_point
+#      - wind_speed
+#      - wind_bearing
+#      - cloud_cover
+#      - humidity
+#      - pressure
+#      - visibility
+#      - ozone
+#      - minutely_summary
+#      - hourly_summary
+#      - daily_summary
+#      - precip_intensity_max
 
-
-
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    monitored_conditions:
-      - summary
-      - icon
-      - nearest_storm_distance
-      - nearest_storm_bearing
-      - precip_type
-      - precip_intensity
-      - precip_probability
-      - temperature
-      - apparent_temperature
-      - dew_point
-      - wind_speed
-      - wind_bearing
-      - cloud_cover
-      - humidity
-      - pressure
-      - visibility
-      - ozone
-      - minutely_summary
-      - hourly_summary
-      - daily_summary
-      - precip_intensity_max
-
-
+#  - platform: rest
+#    name: pollen
+#    resource: !secret weather_pollen_url
+#    value_template: "{{value_json.Location.periods[1].Index}}"
+#    scan_interval: 21600
+#    headers:
+#      Referer: "https://www.pollen.com"
+#
+#  - platform: rest
+#    name: cold_flu
+#    resource: !secret weather_cold_flu_url
+#    value_template: "{{value_json.Location.periods[0].Index}}"
+#    scan_interval: 21600
+#    headers:
+#      Referer: "https://www.pollen.com"
 
 ###############################################################################
 #                _                        _   _
@@ -207,24 +175,6 @@ sensor:
 ###############################################################################
 
 automation:
-
-  - alias: Weather Alert
-    initial_state: true
-    trigger:
-      platform: state
-      entity_id: sensor.pws_alerts
-    condition:
-      - condition: template
-        value_template: "{{ states('sensor.pws_alerts') | int > 0 }}"
-      - condition: template
-        value_template: "{{ state_attr('sensor.pws_alerts', 'Description') != None }}"
-      - condition: template
-        value_template: "{{ state_attr('sensor.pws_alerts', 'Expires') != None }}"
-    action:
-      - service: notify.ios_devices
-        data_template:
-          message: >
-            {{ states.sensor.pws_alerts.attributes.Description }} for your area, expiring at {{ states.sensor.pws_alerts.attributes.Expires }}.
 
   # Script to alert when enjoyable weather is outside
   # For me, enjoyable is:
@@ -334,6 +284,9 @@ automation:
       - condition: template
         value_template: '{{ trigger.to_state.state | lower == "rain" }}'
       - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+      - condition: state
         entity_id: sun.sun
         state: 'above_horizon'
       - condition: template
@@ -341,7 +294,7 @@ automation:
       - condition: template
         value_template: '{{ states.sensor.dark_sky_precip_probability.state | int == 1 }}'
     action:
-      - service: notify.ios_devices
+      - service: script.notify_me
         data_template:
           message: "{{ trigger.to_state.state | title }} with intensity {{ states.sensor.dark_sky_precip_intensity.state | float }} inches per hour"
       - service: script.voice_notify

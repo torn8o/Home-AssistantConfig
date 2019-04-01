@@ -67,26 +67,32 @@
     data:
       message: Z Wave Network is up
   id: 98cc05dc2f01474b9c9a1c438604718b
-- alias: TV Lights on
+- alias: CL TV Lights on
   initial_state: true
   trigger:
   - platform: state
     entity_id: sensor.vizio_tv
     to: Online
   action:
+  - service: switch.turn_on
+    entity_id: switch.circadian_lighting_kitchen_lights
   - service: light.turn_on
     entity_id: light.tv_room_light_level
   id: dccd0c6c8f1f443aadc0f2a4271377c9
-- alias: TV Lights off
+- alias: CL TV Lights off
   initial_state: true
   trigger:
     platform: state
     entity_id: sensor.vizio_tv
     to: Offline
   action:
-    service: light.turn_off
+  - service: switch.turn_off
+    entity_id: switch.circadian_lighting_kitchen_lights
+  - service: light.turn_off
     entity_id: light.tv_room_light_level
   id: 81eb0c30035946e985fb65835b6125d8
+
+
 - alias: Turn ferina tree
   initial_state: true
   hide_entity: false
@@ -123,7 +129,7 @@
   initial_state: true
   trigger:
   - platform: time
-    at: '00:30:00'
+    at: '00:01:00'
   action:
     service: light.turn_off
     entity_id: light.accent_interior_lights
@@ -289,6 +295,8 @@
       data_template:
         entity_id: input_select.recycle_pickup_week
         option: "{{states.sensor.recycle_pickup_week.state}}"
+
+
 #   alias: Trash - Enable trash Lighting
 #   trigger:
 #      - platform: state
@@ -398,7 +406,7 @@
   initial_state: True
   trigger:
     platform: state
-    entity_id: light.accent_interior_lights
+    entity_id: switch.circadian_lighting_accent
 #    from: 'no motion'
     to: 'on'  #change this to actual trigger
   action:
@@ -2115,11 +2123,11 @@
         entity_id: switch.game_room_fan
 #tv room fan
 - alias: tv_fan_control_on_with_temp
-  initial_state: False
+  initial_state: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
-      above: 74
+      above: 75.5
   action:
     - service: switch.turn_on
       data:
@@ -2127,44 +2135,44 @@
 
 
 - alias: tv_fan_control_off_with_temp
-  initial_state: False
+  initial_state: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
-      below: 74
+      below: 77
   action:
     - service: switch.turn_off
       data:
         entity_id: switch.receiver
 #tv room fan speed
 - alias: tv_fan_speed_on_low
-  initial_state: False
+  initial_state: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
-      above: 74.1
+      above: 77
   action:
     - service: switch.turn_on
       data:
         entity_id: switch.fan_speed_low
 
 - alias: tv_fan_speed_on_medium
-  initial_state: False
+  initial_state: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
-      above: 75.1
+      above: 78.1
   action:
     - service: switch.turn_on
       data:
         entity_id: switch.fan_speed_medium
 
 - alias: tv_fan_speed_on_high
-  initial_state: False
+  initial_state: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.broadlink_torn_temperature
-      above: 76.1
+      above: 79.1
   action:
     - service: switch.turn_on
       data:

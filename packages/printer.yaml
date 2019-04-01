@@ -1,0 +1,231 @@
+##########################################################################################
+# Package Printers
+# inspired by https://community.home-assistant.io/t/epson-wf-3540-ink-level-monitoring/21813/20
+# by @mariusthvdb https://community.home-assistant.io/u/Mariusthvdb/summary
+##########################################################################################
+homeassistant:
+  customize:
+    sensor.epson_ink_level_black:
+      templates:
+        entity_picture: >
+          if (state > entities['input_number.ink_level'].state ) return '/local/ink_k.png';
+          return '/local/ink_k_alert.png';
+    sensor.epson_ink_level_cyan:
+      templates:
+        entity_picture: >
+          if (state > entities['input_number.ink_level'].state ) return '/local/ink_c.png';
+          return '/local/ink_c_alert.png';
+    sensor.epson_ink_level_magenta:
+      templates:
+        entity_picture: >
+          if (state > entities['input_number.ink_level'].state ) return '/local/ink_m.png';
+          return '/local/ink_m_alert.png';
+    sensor.epson_ink_level_yellow:
+      templates:
+        entity_picture: >
+          if (state > entities['input_number.ink_level'].state ) return '/local/ink_y.png';
+          return '/local/ink_y_alert.png';
+    sensor.epson_ink_level_waste:
+      templates:
+        entity_picture: >
+          if (state > entities['input_number.ink_level'].state ) return '/local/ink_waste.png';
+          return '/local/ink_waste_alert.png';
+
+    automation.printer_ink_alert:
+      show_last_changed: true
+      templates:
+        icon: >
+          if (state === 'on') return 'mdi:printer-alert';
+          return 'mdi:printer-settings';
+        icon_color: >
+          if (state === 'on') return 'rgb(251, 210, 41)';
+          return 'rgb(54, 95, 140)';
+
+    device_tracker.epson_printer:
+      show_last_changed: true
+      templates:
+        theme: >
+          if (state === 'home') return 'green';
+          return 'grey';
+        _stateDisplay: >
+          if (state === 'home') return 'Online';
+          return 'Offline';
+
+  #  device_tracker.hp_printer:
+  #    show_last_changed: true
+  #    templates:
+  #      theme: >
+  #        if (state === 'home') return 'green';
+  #        return 'grey';
+  #      _stateDisplay: >
+  #        if (state === 'home') return 'Online';
+  #        return 'Offline';
+
+    script.update_epson_cartridge_sensors:
+      action_name: Update
+      icon: mdi:printer-wireless
+
+##########################################################################################
+#  Sensors
+##########################################################################################
+
+sensor:
+  - platform: command_line
+    name: Epson ink level Black
+    command: /usr/bin/curl -k https://192.168.1.166/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_K.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 14400
+  - platform: command_line
+    name: Epson Ink Level Magenta
+    command: /usr/bin/curl -k https://192.168.1.166/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_M.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 14400
+  - platform: command_line
+    name: Epson Ink Level Yellow
+    command: /usr/bin/curl -k https://192.168.1.166/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_Y.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 14400
+  - platform: command_line
+    name: Epson Ink Level Cyan
+    command: /usr/bin/curl -k https://192.168.1.166/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_C.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 14400
+
+binary_sensor:
+  - platform: template
+    sensors:
+      ink_level_black_threshold:
+        friendly_name: 'Ink level black threshold'
+        value_template: >
+          {{(states('sensor.epson_ink_level_black') | float) <
+            (states('input_number.ink_level') | float)}}
+      ink_level_magenta_threshold:
+        friendly_name: 'Ink level magenta threshold'
+        value_template: >
+          {{(states('sensor.epson_ink_level_magenta') | float) <
+            (states('input_number.ink_level') | float)}}
+      ink_level_yellow_threshold:
+        friendly_name: 'Ink level yellow threshold'
+        value_template: >
+          {{(states('sensor.epson_ink_level_yellow') | float) <
+            (states('input_number.ink_level') | float)}}
+      ink_level_cyan_threshold:
+        friendly_name: 'Ink level cyan threshold'
+        value_template: >
+          {{(states('sensor.epson_ink_level_cyan') | float) <
+            (states('input_number.ink_level') | float)}}
+  #    ink_level_waste_threshold:
+  #      friendly_name: 'Ink level waste threshold'
+  #      value_template: >
+  #        {{(states('sensor.epson_ink_level_waste') | float) <
+  #          (states('input_number.ink_level') | float)}}
+##########################################################################################
+#  Inputs
+##########################################################################################
+
+input_number:
+  ink_level:
+    name: Ink level
+    icon: mdi:printer-settings
+    min: 0
+    max: 100
+    step: 5
+
+
+
+
+##########################################################################################
+#  Groups
+##########################################################################################
+
+group:
+  epson_printer:
+    name: Epson office ink status
+    control: hidden
+    entities:
+      - device_tracker.epson_printer
+      - script.update_epson_cartridge_sensors
+
+      - sensor.epson_ink_level_black
+      - sensor.epson_ink_level_cyan
+      - sensor.epson_ink_level_magenta
+      - sensor.epson_ink_level_yellow
+      - sensor.epson_ink_level_waste
+      - automation.printer_ink_alert
+
+      - input_number.ink_level
+      - binary_sensor.ink_level_black_threshold
+      - binary_sensor.ink_level_magenta_threshold
+      - binary_sensor.ink_level_yellow_threshold
+      - binary_sensor.ink_level_cyan_threshold
+      - input_boolean.persistent_notification_create
+      - input_boolean.notify_utility
+  #    - binary_sensor.ink_level_waste_threshold
+
+##########################################################################################
+#  Scripts
+##########################################################################################
+
+script:
+  update_epson_cartridge_sensors:
+    alias: Update Cartridge sensors
+    sequence:
+      - service: homeassistant.update_entity
+        entity_id: sensor.epson_ink_level_black
+      - service: homeassistant.update_entity
+        entity_id: sensor.epson_ink_level_cyan
+      - service: homeassistant.update_entity
+        entity_id: sensor.epson_ink_level_magenta
+      - service: homeassistant.update_entity
+        entity_id: sensor.epson_ink_level_yellow
+#      - service: homeassistant.update_entity
+#        entity_id: sensor.epson_ink_level_waste
+
+##########################################################################################
+#  Automations
+##########################################################################################
+
+automation:
+  - alias: 'Printer Ink Alert'
+    id: 'Printer Ink Alert'
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.ink_level_black_threshold
+          - binary_sensor.ink_level_magenta_threshold
+          - binary_sensor.ink_level_yellow_threshold
+          - binary_sensor.ink_level_cyan_threshold
+      #    - binary_sensor.ink_level_waste_threshold
+        to: 'on'
+#      - platform: state
+#        entity_id: device_tracker.epson_printer
+#        to: 'home'
+    condition:
+      - condition: template
+        value_template: >
+          {{ is_state('device_tracker.epson_printer', 'home')}}
+      - condition: template
+        value_template: >
+          {{ is_state('input_boolean.notify_utility', 'on')}}
+    action:
+      - service: notify.system
+        data_template:
+          title: 'Ha main: Low ink'
+          message: >
+            {% set color = trigger.entity_id.split('.')[-1].split('_')[2] %}
+            {% set basesensor = 'sensor.epson_ink_level_{}'.format(color) %}
+            {{ trigger.to_state.attributes.friendly_name }} is low at {{ states(basesensor) }}
+#            {% set color = trigger.entity_id[24:-10] %}
+#            {{ trigger.to_state.attributes.friendly_name }} is low at
+#            {{states('sensor.epson_ink_level_' + color)}}
+      - condition: template
+        value_template: >
+          {{ is_state('input_boolean.persistent_notification_create', 'on')}}
+      - service: persistent_notification.create
+        data_template:
+          title: 'Low ink'
+          message: >
+            {{ trigger.to_state.attributes.friendly_name }} is low
+          notification_id: low-printer-ink-level-alert
+

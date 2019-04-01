@@ -1,0 +1,5 @@
+notify:
+  - name: system
+    platform: group
+    services:
+      - service: html5

@@ -4,7 +4,8 @@ notify_me:
       data_template:
         message: "{{ value1 }} {{ value2 }}"
         title: "{{ value1 }} {{ value2 }}"
-#
+
+
 voice_notify:
   sequence:
     - condition: template

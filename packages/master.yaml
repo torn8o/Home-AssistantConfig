@@ -16,12 +16,9 @@ light:
   - platform: group
     name: Door Motion
     entities:
-      - light.hallway
-      - light.kitchen_leds
+#      - light.kitchen_leds
       - light.hair_area_level
-      - light.hallway_1
-      - light.hallway_2
-      - light.center_led
+
       
 
   - platform: group
@@ -180,6 +177,7 @@ sensor:
           {% else %}
           n/a
           {% endif %}'
+
 
 
 automation:

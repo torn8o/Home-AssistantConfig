@@ -1,0 +1,115 @@
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'ios_automations'
+
+input_boolean:
+  test_trigger:
+    name: test trigger
+    initial: off
+#    icon: mdi:tablet
+automation:
+  - alias: IOS Camera actionable notification
+
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: input_boolean.test_trigger
+    action:
+      service: notify.ios_torn8o
+      data:
+        title: ALERT
+        message: Someone is at the Front Door
+        data:
+          attachment:
+            content-type: jpeg
+          push:
+            category: camera
+          entity_id: camera.cat_camera
+  - alias: IOS office security system
+
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: sensor.garage_pir
+      from: 'standby'
+      to: 'motion'
+  #  condition:
+  #    condition: template
+  #    value_template: '{{ states.device_tracker.tornado.state != ''home'' }}'
+    action:
+      service: notify.ios_torn8o
+      data:
+        title: Yo!
+        message: Someones in the Keep!
+        data:
+          attachment:
+            content-type: jpeg
+          push:
+            category: camera
+          entity_id: camera.cat_camera
+
+  - alias: IOS turn on police lights
+#    id: turnonpolicealllights38247982374
+    initial_state: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: POLICE_ALL
+    action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.all_leds
+        option: Police All
+    - delay: 00:30:00
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.all_leds
+        option: solid
+    - delay: 00:00:10
+    - service: light.turn_off
+      entity_id: light.center_led
+  - alias: IOS turn on porch lights
+#    id: turnonporchlights23432423
+    initial_state: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: PORCH_LIGHTS
+    action:
+    - service: light.turn_on
+      data:
+        entity_id: light.center_led
+  - alias: IOS trigger office alarm
+#    id: triggerofficealarm12323423
+    initial_state: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: OFFICE_ALARM
+    action:
+    - service: light.turn_on
+      data:
+        entity_id: light.center_led
+    - service: media_player.alexa_tts
+      data:
+        entity_id: media_player.living_room
+        message: Hello there. Please don't make a mess in Daddys office and whatever
+          you do, don't eat all his cinnamon bears.
+  - alias: IOS notificationTTSbutton
+#    id: notificationttsbutton23424234234
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: TTS_MESSAGE
+    action:
+    - service: media_player.alexa_tts
+      entity_id: media_player.living_room
+      data_template:
+        message: '{{ trigger.event.data["textInput"] }}'

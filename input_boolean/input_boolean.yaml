@@ -28,3 +28,14 @@
   interior_holiday:
     name: Interior Holiday Lighting
     icon: mdi:gift
+
+  notify_utility:
+    name: notify_utility
+    initial: on
+  persistent_notification_create:
+    name: persistent_notification_create
+    initial: on
+
+  text_notifications:
+    name: text_notifications
+    initial: on

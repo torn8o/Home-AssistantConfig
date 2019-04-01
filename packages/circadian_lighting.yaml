@@ -1,0 +1,39 @@
+
+################################################
+## Customize
+################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'circadian_lighting'
+
+    ################################################
+    ## switch
+    ################################################
+switch:
+  - platform: circadian_lighting
+    lights_ct:
+      - light.hair_area_level
+    min_brightness: 35
+    max_brightness: 100
+    name: Hair Lights
+  - platform: circadian_lighting
+    lights_ct:
+      - light.tv_room_light_level
+    min_brightness: 35
+    max_brightness: 100
+    name: TV Room Lights
+  - platform: circadian_lighting
+    lights_ct:
+      - light.kitchen_leds
+    min_brightness: 35
+    max_brightness: 100
+    name: Kitchen Lights
+  - platform: circadian_lighting
+    lights_brightness:
+      - light.accent_interior_lights
+    name: accent

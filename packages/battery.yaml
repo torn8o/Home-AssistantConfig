@@ -130,7 +130,7 @@ sensor:
 
       battery_liz:
         friendly_name: "Battery Liz"
-        value_template: "{{ states.device_tracker.liz.attributes.battery|int }}"
+        value_template: "{{ states.device_tracker.lynx.attributes.battery|int }}"
         icon_template: >-
           {% if is_state('sensor.liz_charging', 'Charging') %}
             mdi:battery-charging
@@ -168,12 +168,12 @@ binary_sensor:
         friendly_name: Charlie GPS
         device_class: connectivity
         entity_id: device_tracker.tornado
-        value_template: "{{ is_state('device_tracker.tornado', 'home') }}"
+        value_template: "{{ is_state('device_tracker.tornado', 'on') }}"
         icon_template: >-
           {% if is_state('device_tracker.tornado', 'Home') %}
             mdi:crosshairs-gps
           {% elif is_state('device_tracker.tornado', 'not_home') %}
-            mdi:crosshairs-gps
+            mdi:crosshairs
           {% else %}
             mdi:alert
           {% endif %}
@@ -184,12 +184,12 @@ binary_sensor:
         friendly_name: Liz GPS
         device_class: connectivity
         entity_id: device_tracker.lynx
-        value_template: "{{ is_state('device_tracker.lynx', 'home') }}"
+        value_template: "{{ is_state('device_tracker.lynx', 'on') }}"
         icon_template: >-
           {% if is_state('device_tracker.lynx', 'Home') %}
             mdi:crosshairs-gps
           {% elif is_state('device_tracker.lynx', 'not_home') %}
-            mdi:crosshairs-gps
+            mdi:crosshairs
           {% else %}
             mdi:alert
           {% endif %}

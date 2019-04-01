@@ -402,6 +402,7 @@ input_select:
     options:
      - Default
      - Slack
+     - ios
     icon: mdi:comment-question-outline
 
 ################################################

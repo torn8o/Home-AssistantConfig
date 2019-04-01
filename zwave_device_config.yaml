@@ -1,6 +1,5 @@
-usb_path: /dev/ttyACM0
-config_path: /srv/homeassistant/src/python-openzwave/openzwave/config
-polling_interval: 60000
+#usb_path: /dev/ttyACM0
+
 light.ge_12724_3way_dimmer_switch_level_16_0:
   refresh_value: true
   delay: 4
@@ -16,3 +15,24 @@ light.zooz_unknown_type0112_id241c_level_5_0:
 light.zooz_unknown_type0112_id241c_level_6_0:
   ignored: false
   polling_intensity: 2
+sensor.aeotec_zw100_multisensor_6_temperature_5:
+  ignored: false
+  polling_intensity: 1
+sensor.aeotec_zw100_multisensor_6_temperature_4:
+  ignored: false
+  polling_intensity: 1
+switch.master_bathroom_light_switch:
+  ignored: false
+  polling_intensity: 1
+switch.master_bedroom_h_switch:
+  ignored: false
+  polling_intensity: 2
+switch.master_bathroom_fan_switch:
+  ignored: false
+  polling_intensity: 1
+light.kitchen_light_level:
+  ignored: false
+  polling_intensity: 1
+light.kitchen_bar_light_level:
+  ignored: false
+  polling_intensity: 1

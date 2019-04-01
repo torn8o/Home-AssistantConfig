@@ -1,0 +1,72 @@
+title: radar_view
+    theme: Clear-Nightz-II
+    background: center / cover no-repeat url("/local/backgroundz/Purple-fractals.jpg") fixed
+    icon: mdi:weather-partlycloudy
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: 'Dark Sky Summary'
+            show_header_toggle: false
+            entities:
+              - sensor.dark_sky_summary
+              - sensor.dark_sky_minutely_summary
+              - sensor.dark_sky_hourly_summary
+              - sensor.dark_sky_daily_summary
+              - type: divider
+              - sensor.dark_sky_temperature
+              - sensor.dark_sky_apparent_temperature
+          - type: iframe
+            url: https://embed.windy.com/embed2.html
+            aspect_ratio: 72%
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.covington_forecast
+          - type: entities
+            entities:
+              - type: divider
+          - type: entities
+            entities:
+              - sensor.dark_sky_daytime_high_temperature_0
+              - sensor.dark_sky_overnight_low_temperature_0
+              - sensor.dark_sky_precip_intensity
+              - sensor.dark_sky_precip_probability
+              - sensor.dark_sky_humidity
+              - sensor.dark_sky_dew_point
+              - sensor.dark_sky_pressure
+              - sensor.dark_sky_wind_speed
+      - type: vertical-stack
+        cards:
+          - type: history-graph
+            title: 'Outside Conditions'
+            entities:
+              - entity: sensor.outside_ht_temp
+                name: Patio Temp
+                unit_of_measurement: F
+              - entity: sensor.outside_ht_humidity
+                name: Patio Humidity
+              - entity: sensor.dark_sky_temperature
+                name: Outside Temp
+                unit_of_measurement: F
+              - entity: sensor.dark_sky_humidity
+                name: Outside Humidity
+              - entity: sensor.garage_smoke_temp
+                name: Garage Temp
+                unit_of_measurement: F
+          - type: markdown
+            content: >
+              ## 
+              Local Radar
+          - type: horizontal-stack
+            cards:
+              - type: picture-entity
+                entity: camera.local_radar
+                camera_image: camera.local_radar
+                show_state: false
+                show_name: false
+              - type: picture-entity
+                entity: camera.new_orleans_radar
+                camera_image: camera.new_orleans_radar
+                show_state: false
+                show_name: false

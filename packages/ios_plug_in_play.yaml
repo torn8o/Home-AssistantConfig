@@ -128,6 +128,24 @@ ios:
             textInputButtonTitle: 'Silencio!'
             textInputPlaceholder: 'Placeholder'
 
+      - name: cameras
+        identifier: 'camera'
+        actions:
+          - identifier: 'TRIGGER_ALARM'
+            title: 'Trigger Alarm'
+            destructive: 'true'
+          - identifier: 'POLICE_ALL'
+            title: 'Turn on Police Lights'
+          - identifier: 'PORCH_LIGHTS'
+            title: 'Turn on Porch Lights'
+          - identifier: 'OFFICE_ALARM'
+            title: 'Office Alarm'
+          - identifier: 'TTS_MESSAGE'
+            title: 'Alexa TTS Message'
+            behavior: 'textInput'
+            textInputButtonTitle: 'Send TTS'
+            textInputPlaceholder: 'Who goes there?'
+
 group: # will add a view on the main tab of home assistant
   ios_test:
     name: ios_test
@@ -336,4 +354,3 @@ automation:
               sound: "US-EN-Morgan-Freeman-Garage-Door-Closed.wav"
               badge: 0 # this will remove the badge/app icon number
               category: 'garage1'
-

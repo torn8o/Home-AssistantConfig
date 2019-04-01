@@ -14,7 +14,7 @@ homeassistant:
 #  customize: !include_dir_named customize
   packages: !include_dir_named packages
   whitelist_external_dirs:
-     - /config/www
+     - /config
      - /config/snapshot
 #  binary_sensor: !include binary_sensor.yaml
 cloud:
@@ -31,7 +31,7 @@ history:
 logbook:
 sun:
 #updater:
-#discovery:
+circadian_lighting:
 discovery:
 system_health:
 weather:
@@ -55,6 +55,9 @@ custom_updater:
       - https://raw.githubusercontent.com/thomasloven/lovelace-card-tools/master/card-tools.json
       - https://raw.githubusercontent.com/atomic7777/atomic_calendar/master/tracker.json
       - https://raw.githubusercontent.com/MizterB/lovelace-secondaryinfo-entity-row/master/custom_cards.json
+      - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
+      - https://raw.githubusercontent.com/cbulock/lovelace-battery-entity/master/battery-entity.js
+  #    - https://raw.githubusercontent.com/keatontaylor/alexa_media_player/master/alexa_media/media_player.py
 #lovelace:
 #  mode: yaml
 ################################################
@@ -67,7 +70,31 @@ ring:
 #sense:
 #    email: !secret sense_USERNAME
 #    password: !secret sense_PASSWORD
+person:
+  - name: Charlie
+    id: fb905228d4fb4c2fbe6e7fd6fdaafd37
+    device_trackers:
+      - device_tracker.tornado
 
+  - name: Liz
+    id: 5abfb49ac65f45b8a64370c8f5241faa
+    device_trackers:
+      - device_tracker.lynx
+
+  - name: Nina
+    id: 5875f83e3fbc4f5c9d74c888c062e1eb
+    device_trackers:
+      - device_tracker.nina
+
+  - name: Jasmin
+    id: 03666e0af8bc423baf80911fefe6aeeb
+    device_trackers:
+      - device_tracker.monkey
+
+  - name: Ferina
+    id: f3c70a918f524eadb454f988e156088c
+    device_trackers:
+      - device_tracker.ferina
 ifttt:
   key: !secret iftt_key
 nest:
@@ -84,7 +111,7 @@ nest:
       - 'smoke_status'
       - 'battery_health'
       - 'color_status'
-
+stream:
 climate:
   platform: nest
 
@@ -133,24 +160,28 @@ camera:
     name: pool camera
     input: !secret cam_indoor_input
   - platform: ring
-
-
+  - platform: generic
+    name: Cat Stream
+    still_image_url: http://192.168.1.121/jpg/image.jpg
+    stream_source: rtsp://192.168.1.121:554
 #camera:
 
 media_player:
-#  - platform: xboxone
-#    device: !secret xbox_living
-#    authentication: false
-#    name: Living Room Xbox One
-#  - platform: xboxone
-#    device: !secret xbox_game
-#    authentication: false
-#    name: Game Room Xbox One
+  - platform: xboxone
+    device: !secret xbox_living
+    authentication: false
+    name: Living Room Xbox One
+  - platform: xboxone
+    device: !secret xbox_game
+    authentication: false
+    name: Game Room Xbox One
 
-  - platform: alexa
+alexa_media:
+  accounts:
     email: !secret amazon_email
     password: !secret amazon_password
     url: amazon.com
+
 recorder:
   purge_interval: 1
   #db_url: !secret db_url
@@ -161,8 +192,8 @@ recorder:
       - updater
     entities:
       - sun.sun   # Don't record sun data
-#zwave:
-#  device_config: !include zwave_device_config.yaml
+zwave:
+  device_config: !include zwave_device_config.yaml
 
 
 
@@ -176,7 +207,7 @@ panel_custom: !include panel_custom.yaml
 # emulated_hue: !include emulated_hue.yaml
 #icloud: !include icloud.yaml
 logger: !include logger.yaml
-zwave: !include zwave.yaml
+#zwave: !include zwave.yaml
 #group: !include groups.yaml
 
 ################################################

@@ -73,6 +73,7 @@ sensor:
           {% endif %}'
 
 automation:
+  
 
 
 #  - service: notify.slacknotify
@@ -102,26 +103,43 @@ automation:
 #  - delay: "00:00:30"
 #  - service: switch.turn_on
 #    entity_id: switch.lr_alarm
+#  - alias: CL Turn Kitchen lights
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: group.kitchen_motion
+#      to: 'on'
+#    action:
+#      - service: switch.turn_on
+#        entity_id: switch.circadian_lighting_kitchen_lights
+#      - delay:
+#          minutes: 1
+#      - service: switch.turn_off
+#        entity_id: group.kitchen_lights
 
-
-
-
-
-  - alias: Turn Kitchen light on
+#  - alias: CL Turn off kitchen lights
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: group.kitchen_motion
+#      to: 'off'
+#      for:
+#        seconds: 45
+#    action:
+#      service: switch.turn_off
+#      entity_id: switch.circadian_lighting_kitchen_lights
+  - alias: CL Turn Kitchen lights
     initial_state: True
     trigger:
       platform: state
       entity_id: group.kitchen_motion
       to: 'on'
     action:
+      - service: switch.turn_on
+        entity_id: switch.circadian_lighting_kitchen_lights
       - service: light.turn_on
         entity_id: light.kitchen_leds
-#      - delay:
-#          minutes: 1
-#      - service: switch.turn_off
-#        entity_id: group.kitchen_lights
-
-  - alias: Turn off kitchen light
+  - alias: CL Turn off kitchen lights
     initial_state: True
     trigger:
       platform: state
@@ -130,8 +148,38 @@ automation:
       for:
         seconds: 45
     action:
-      service: light.turn_off
-      entity_id: light.kitchen_leds
+      - service: switch.turn_off
+        entity_id: switch.circadian_lighting_kitchen_lights
+      - service: light.turn_off
+        entity_id: light.kitchen_leds
+
+
+
+#  - alias: Turn Kitchen light on
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: group.kitchen_motion
+#      to: 'on'
+#    action:
+#      - service: light.turn_on
+#        entity_id: light.kitchen_leds
+#      - delay:
+#          minutes: 1
+#      - service: switch.turn_off
+#        entity_id: group.kitchen_lights
+
+#  - alias: Turn off kitchen light
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: group.kitchen_motion
+#      to: 'off'
+#      for:
+#        seconds: 45
+#    action:
+#      service: light.turn_off
+#      entity_id: light.kitchen_leds
 
   - alias: Turn light led on
     initial_state: True
