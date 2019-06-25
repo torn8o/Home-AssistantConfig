@@ -89,8 +89,8 @@ automation:
     initial_state: true
     trigger:
       platform: state
-      entity_id: binary_sensor.dryer_2
-      to: 'on'
+      entity_id: sensor.dryer
+      to: 'drying'
     action:
       - service: mqtt.publish
         data:
@@ -101,8 +101,8 @@ automation:
     initial_state: true
     trigger:
       platform: state
-      entity_id: binary_sensor.dryer_2
-      to: 'off'
+      entity_id: sensor.dryer
+      to: 'idle'
     action:
       - service: mqtt.publish
         data:
@@ -148,15 +148,37 @@ automation:
     initial_state: true
     trigger:
       platform: state
-      entity_id: binary_sensor.dryer_2
-      from: 'on'
-      to: 'off'
+      entity_id: sensor.dryer
+      from: 'Drying'
+      to: 'Idle'
     action:
       - service: python_script.flash_on_ding
       - service: media_player.alexa_tts
         data_template:
           entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
-          message: "Hey..... Guess what.....  The dryer has stopped"
+#          message: "Hey..... Guess what.....  The dryer has stopped"
+          message: >
+                    '{{ ["Hey.. Guess what..  The spinning flame machine is finished!",
+                         "The dryer is finished, can we have a moment of silence please to reflect upon this great achievement?",
+                         "Are you having loads of fun doing the laundry...  The dryer has another load ready for you.  .",
+                         "Come get the laundry out of the dryer please.",
+                         "Are you tired of me and ready to throw in the towel yet!...  Another dryer load just finished.",
+                         "Claira, did I ever say you are doing a great job at the laundry..  oh wait.  I just did... and by the way the dryer is done.",
+                         "You spin me right round like a dryer. Dryer is waiting.",
+                         "What did the first sock say to the second sock in the dryer?            I'll see you the next time around          Dryer is done",
+                         "Why don't men do laundry?          Because the washer and dryer don't run on the remote control.            Dryer is done",
+                         "How much fun is doing your laundry?         Loads           Dryer is done",
+                         "Don't you get tired and feel like throwing in the towel sometimes?                No, that only means more laundry to do.     Dryer is finished",
+                         "Laundry is the real Neverending Story.  Dryer has stopped",
+                         "Don’t you just love those 12 seconds when the laundry is done?   Dryer stopped",
+                         "I love doing laundry! Except for putting it in the dryer, taking it out and folding it and then putting it away.       Dryer has more clothes for you.",
+                         "I don’t want to fold my laundry. So I’ll restart the dryer … three times in a row.          Na better not.  Dryer is finished.",
+                         "When I’m wearing sexy, lacy lingerie … it just means I need to do laundry and I’m out of clean granny panties. Oh wait the dryer is done get those clean clothes out.",
+                         "I wish my bank account refilled as fast as my laundry basket.    Come and get it.",
+                         "Folding laundry with a toddler is like trying to straighten a desk full of papers while a fan blows on it.  Time to fold some Laundry",
+                         "Whoever said death and taxes were the only guarantees in life obviously never had to do laundry.   Dryer finished.",
+                         "We can land on Mars but we still haven't invented a dryer that folds all the clothes.  Dryer done",                                    
+                    ] | random }}'
   - alias: 'tts Washer Finished'
     trigger:
       platform: state
@@ -171,11 +193,17 @@ automation:
       - service: media_player.alexa_tts
         data_template:
           entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
-          message: "Laundry in the washer can be moved over!"
-
-
+  #        message: "Laundry in the washer can be moved over!"
+          message: >
+                    '{{ ["Hey.. Guess what..  the auto clothes washer is finished!",
+                         "The washer has stopped, can we have a moment of silence please to reflect upon this great achievement?",
+                         "Are you having loads of fun doing the laundry...  The washer has another load ready for you.  Oh and thank you.",
+                         "Come move laundry to the dryer please.",
+                         "Are you tired of me and ready to throw in the towel yet!...  the wahser just finished.",
+                         "Have I ever say you are doing a great job at the laundry..  oh wait.  I just did... and by the way the washer is done.",
+                         "What happened to the leopard that fell into the washing machine?     He came out spotless.    Washer is done",
+                    ] | random }}'
 
   # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
   #  Washing Machine Start/Finish
   # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-   

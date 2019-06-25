@@ -1,0 +1,218 @@
+################################################################
+## Packages / LR Fan                                      ##
+################################################################
+################################################################
+## Comments                                                   ##
+################################################################
+## Package for LR Fan and Broadlink Temperature ##
+################################################
+## Customize                                  ##
+################################################
+
+homeassistant:
+  customize:
+
+    ### Fan ###
+    fan.LR:
+      friendly_name: LR Fan
+      icon: mdi:fan
+
+    ### Group ###
+    group.lr_fan:
+      icon: mdi:fan
+
+    ### Input Boolean ###
+    input_boolean.lr_fan:
+
+    ### Input Select ###
+
+    ### Scripts ###
+    script.lr_fan_power:
+      friendly_name: LR Fan
+      icon: mdi:fan
+
+    script.lr_fan_speed:
+      friendly_name: LR Fan Speed
+      icon: mdi:speedometer
+
+    script.lr_fan_rotation:
+      friendly_name: LR Fan Rotation
+      icon: mdi:format-rotate-90
+
+    script.lr_fan_oscillate:
+      friendly_name: LR Fan Oscillation
+      icon: mdi:delta
+
+    ### Sensors ###
+
+    sensor.lr_broadlink_temperature:
+      hidden: true
+    sensor.lr_temperature:
+      friendly_name: LR Temperature
+################################################
+## climate                                        ##
+################################################
+climate:
+  - platform: generic_thermostat
+    name: Living Room Fan 
+    heater: switch.tv_room_fan #fan.game_room_fan
+    target_sensor: sensor.broadlink_torn_temperature
+    ac_mode: True
+    target_temp: 79
+    initial_operation_mode: auto
+    cold_tolerance: 0
+    hot_tolerance: -0
+################################################
+## Fan                                        ##
+################################################
+
+fan:
+  - platform: template
+    fans:
+      lr_fan:
+        value_template: "{{ states('input_boolean.lr_fan') }}"
+        speed_template: "{{ states('input_select.lr_fan_speed') }}"
+        oscillating_template: "{{ states('input_select.lr_fan_oscillate') }}"
+        direction_template: "{{ states('input_select.lr_fan_rotation') }}"
+        turn_on:
+          service: script.lr_fan_on
+        turn_off:
+          service: script.lr_fan_off
+        set_speed:
+          service: script.lr_fan_speed
+          data_template:
+            speed: "{{ speed }}"
+        set_oscillating:
+          service: script.lr_fan_oscillate
+          data_template:
+            oscillating: "{{ oscillating }}"
+        set_direction:
+          service: script.lr_fan_rotation
+          data_template:
+            direction: "{{ direction }}"
+        speeds:
+          - "Low"
+          - "Med"
+          - "High"
+
+################################################
+## Group                                      ##
+################################################
+
+group:
+  lr_fan:
+    control: hidden
+    view: no
+    name: LR Fan
+    entities:
+      - switch.tv_room_fan
+      - switch.lr_fan_power
+      - script.lr_fan_speed
+      - script.lr_fan_rotation
+      - script.lr_fan_oscillate
+      - sensor.lr_temperature
+      - script.low
+      - script.med
+      - script.high
+
+################################################
+## Input Boolean                              ##
+################################################
+
+input_boolean:
+  lr_fan:
+    initial: off
+
+################################################
+## Input Select                               ##
+################################################
+
+input_select:
+  lr_fan_speed:
+    options:
+      - 'fan_low'
+      - 'fan_med'
+      - 'fan_high'
+  lr_fan_oscillate:
+    options:
+      - 'True'
+      - 'False'
+  lr_fan_rotation:
+    options:
+      - 'forward'
+      - 'reverse'
+
+################################################
+## Sensors                                    ##
+################################################
+
+sensor:
+  - platform: template
+    sensors:
+      lr_temperature:
+        value_template: '{{states("sensor.broadlink_torn_temperature") | float - 0}}'
+        unit_of_measurement: '°F'
+  - platform: template
+    sensors:
+      lr_temperature_target:
+        friendly_name: "LR Target Temperature"
+        unit_of_measurement: '°F'
+        value_template: "{{ state_attr('climate.living_room_fan', 'temperature') }}"
+################################################
+## Switch                                     ##
+################################################
+switch:
+  - platform: template
+    switches:
+      lr_thermostat_switch:
+        value_template:  "{{ is_state('automation.lr_fan_turn_on', 'on') }}"
+        turn_on:
+          service: automation.turn_on
+          entity_id: automation.lr_fan_speed
+        turn_off:
+          - service: automation.turn_off
+            entity_id: automation.lr_fan_turn_on
+          - service: switch.turn_off
+            entity_id: switch.tv_room_fan
+################################################
+## automation                                 ##
+################################################
+automation:
+  alias: lr_Fan Speed
+  initial_state: false
+  trigger:
+    - platform: state
+      entity_id: sensor.lr_temperature
+    - platform: state
+      entity_id: sensor.lr_temperature_target
+  condition:
+    - condition: state
+      entity_id: timer.lr_fan_cooldown
+      state: 'idle'
+  action:
+    - service: fan.turn_on
+      entity_id: fan.lr_fan
+      data_template:
+          speed: >
+            {% if (((states('sensor.lr_temperature_target') | float) - (states('sensor.lr_temperature') | float))) >= 1.0 %}
+              low
+            {% elif (((states('sensor.lr_temperature_target') | float) - (states('sensor.lr_temperature') | float))) <= -3.0 %}
+              high
+            {% else %}
+              med
+            {% endif %}
+    - service: timer.start
+      entity_id: timer.lr_fan_cooldown
+################################################
+## timer                                      ##
+################################################
+timer:
+  lr_fan_cooldown:
+    name: "LR Fan Cooldown"
+    duration: '00:00:30'
+################################################
+## Scripts                                    ##
+################################################
+
+#script:
+  

@@ -40,7 +40,7 @@ input_boolean:
 
 automation:
  -  alias: 'Sprinkler Schedule'
-    initial_state: false
+    initial_state: true
 #    initial_state: true
     trigger:
       platform: template

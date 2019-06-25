@@ -1,0 +1,195 @@
+##This version of the holiday lights code does not require the node red portion
+##The "W" slider under the main "holiday LED" light modifies each effect
+##The "W" slider under "Glitter" light modifies the frequency of glitter, the RGB selection changes the color of the glitter
+##The "W" slider under "Lightning" switch modifies the frequency of lightning.
+##You must replace the Lights_front with the USER_MQTT_CLIENT_NAME you specified in the arduino USER CONFIGURATION section
+homeassistant:
+  customize:
+mqtt:
+  broker: !secret mqtt_broker
+  port: !secret mqtt_port
+  discovery: true
+  discovery_prefix: homeassistant
+
+sensor:
+  - platform: mqtt
+    name: "Current LED"
+    state_topic: "Lights_front/locator"
+
+light:
+  - platform: mqtt
+    name: "Lights_theater"
+    command_topic: "Lights_theater/power"
+    state_topic: "Lights_theater/powerState"
+    brightness_command_topic: "Lights_theater/brightness"
+    brightness_state_topic: "Lights_theater/brightnessState"
+    brightness_scale: 255
+    white_value_command_topic: "Lights_theater/modifier"
+    white_value_state_topic: "Lights_theater/modifierState"
+    white_value_scale: 500
+    effect_command_topic: "Lights_theater/effect"
+    effect_state_topic: "Lights_theater/effectState"
+    effect_list:
+      - Color_Chase
+      - Color_Glitter
+      - Single_Race
+      - Double_Crash
+      - Rainbow
+      - Blocked_Colors
+      - BPM
+      - Twinkle
+      - Fire
+      - Fill_Solid
+      - Spooky_Eyes
+      - LED_Locator
+    retain: true
+  - platform: mqtt
+    name: "Lights_theater Color"
+    command_topic: "Lights_theater/ColorPower"
+    state_topic: "Lights_theater/powerState"
+    rgb_command_topic: "Lights_theatert/color1"
+    rgb_state_topic: "Lights_theater/color1State"
+    retain: true
+  - platform: mqtt
+    name: "Front Led Lights"
+    command_topic: "Lights_front/power"
+    state_topic: "Lights_front/powerState"
+    brightness_command_topic: "Lights_front/brightness"
+    brightness_state_topic: "Lights_front/brightnessState"
+    brightness_scale: 255
+    white_value_command_topic: "Lights_front/modifier"
+    white_value_state_topic: "Lights_front/modifierState"
+    white_value_scale: 500
+    effect_command_topic: "Lights_front/effect"
+    effect_state_topic: "Lights_front/effectState"
+    effect_list:
+      - Color_Chase
+      - Color_Glitter
+      - Single_Race
+      - Double_Crash
+      - Rainbow
+      - Blocked_Colors
+      - BPM
+      - Twinkle
+      - Fire
+      - Fill_Solid
+      - Spooky_Eyes
+      - LED_Locator
+    retain: true
+  - platform: mqtt
+    name: "Front Eave Light Color"
+    command_topic: "Lights_front/ColorPower"
+    state_topic: "Lights_front/powerState"
+    rgb_command_topic: "Lights_front/color1"
+    rgb_state_topic: "Lights_front/color1State"
+    retain: true
+
+  - platform: mqtt
+    name: "Glitter"
+    state_topic: "Lights_front/glitter/state"
+    command_topic: "Lights_front/addEffects"
+    payload_on: "Glitter On"
+    payload_off: "Glitter Off"
+    rgb_command_topic: "Lights_front/glitterColor"
+    rgb_state_topic: "Lights_front/glitterColorState"
+    white_value_command_topic: "Lights_front/glitterChance"
+    white_value_state_topic: "Lights_front/glitterChanceState"
+    white_value_scale: 255
+    retain: true
+  - platform: mqtt
+    name: "Lightning"
+    state_topic: "Lights_front/lightning/state"
+    command_topic: "Lights_front/addEffects"
+    payload_on: "Lightning On"
+    payload_off: "Lightning Off"
+    white_value_command_topic: "Lights_front/lightningChance"
+    white_value_state_topic: "Lights_front/lightningChanceState"
+    white_value_scale: 500
+    retain: true
+  - platform: mqtt
+    schema: json
+    name: "Porch led"
+    state_topic: "porch/led"
+    command_topic: "porch/led/set"
+    optimistic: false
+    retain: true
+    brightness: true
+    rgb: true
+    effect: true
+    effect_list:
+      - Solid
+      - Rainbow
+      - Chase
+      - Fire flicker
+      - Breathe
+
+  - platform: mqtt
+    schema: json
+    name: "niche Leds"
+    state_topic: "torn/niche_led"
+    command_topic: "torn/niche_led/set"
+    retain: True
+    qos: 1
+    brightness: true
+    rgb: true
+    effect: true
+    effect_list:
+      - Solid
+      - Rainbow
+      - Chase
+      - Fire flicker
+      - Breathe
+switch:
+  - platform: mqtt
+    name: "Front Christmas Tree"
+    state_topic: "stat/ferina/POWER"
+    command_topic: "stat/ferina/SET"
+  #  availability_topic: "home/bedroom/switch1/available"
+    payload_on: "ON"
+    payload_off: "OFF"
+  - platform: mqtt
+    name: "bathroom heater"
+    command_topic: "cmnd/bathheater/power"
+    state_topic: "stat/bathheater/POWER"
+
+  #  availability_topic: "home/bedroom/switch1/available"
+    payload_on: "ON"
+    payload_off: "OFF"
+  - platform: mqtt
+    name: "bathroom exhaust"
+    command_topic: "cmnd/bathfan/power"
+    state_topic: "stat/bathfan/POWER"
+
+  #  availability_topic: "home/bedroom/switch1/available"
+    payload_on: "ON"
+    payload_off: "OFF"
+  - platform: mqtt
+    name: "bathroom led"
+    command_topic: "cmnd/bathlight/power"
+    state_topic: "stat/bathlight/POWER"
+
+  #  availability_topic: "home/bedroom/switch1/available"
+    payload_on: "ON"
+    payload_off: "OFF"
+group:
+  Led_porch:
+    entities:
+#      - automation.turn_front_lights_on_at_sunset
+#      - automation.front_light_off
+      - input_select.holiday
+      - input_select.trash
+      - switch.front_lights_switch
+      - light.hyperion
+      - light.front_led_lights
+#      - input_select.Eave_effect
+      - automation.porch_input_effect
+      - input_number.porch_animation_speed
+#      - automation.turn_front_led_on_at_sunset
+#      - automation.front_led_off
+      - light.cabinet_lights
+#      - automation.turn_cabinet_on_at_sunset
+#      - automation.cabinet_led_off
+      - light.niche_leds
+      - light.porch_led
+      - light.tree_leds
+      - light.canes_led

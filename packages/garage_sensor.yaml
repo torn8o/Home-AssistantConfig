@@ -19,6 +19,15 @@ light:
 
 switch:
   - platform: mqtt
+    name: "swimming_light"
+    state_topic: "stat/swimming_light/POWER"
+    command_topic: "cmnd/swimming_light/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    qos: 1
+    retain: true
+    
+  - platform: mqtt
     name: "Ferina Tree"
     state_topic: "stat/ferina/POWER"
     command_topic: "cmnd/ferina/POWER"

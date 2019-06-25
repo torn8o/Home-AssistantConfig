@@ -8,75 +8,26 @@
 
 homeassistant:
   customize:
-#    sensor.epson_ink_level_black:
-#        entity_picture: /local/ink_k.png
-
-          # >
-          #if (state > entities['input_number.ink_level'].state ) return '/local/devices/epson/ink_k.png';
-          #return '/local/devices/epson/ink_k_alert.png';
-#    sensor.epson_ink_level_cyan:
-#        entity_picture: /local/ink_c.png
-          #>
-          #if (state > entities['input_number.ink_level'].state ) return '/local/devices/epson/ink_c.png';
-          #return '/local/devices/epson/ink_c_alert.png';
-#    sensor.epson_ink_level_yellow:
-#        entity_picture: /local/ink_y.png
-          # >
-          #if (state > entities['input_number.ink_level'].state ) return '/local/devices/epson/ink_y.png';
-          #return '/local/devices/epson/ink_y_alert.png';
-#    sensor.epson_ink_level_magenta:
-#        entity_picture: /local/ink_m.png
-          #>
-          #if (state > entities['input_number.ink_level'].state ) return '/local/devices/epson/ink_m.png';
-          #return '/local/devices/epson/ink_m_alert.png';
-
     ################################################
     ## Node Anchors
     ################################################
 sensor:
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    forecast:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
+  - platform: youtube
+    channel_id: UCeAXVwwurpvQVJozU1GipTg
+  - platform: tautulli
+    api_key: !secret tautulli_api_key
+    host: !secret tautulli_host
+    ssl: false
+    verify_ssl: true
+#    token: !secret tautulli_token
     monitored_conditions:
-      - icon
-      - summary
-      - nearest_storm_distance
-      - nearest_storm_bearing
-      - humidity
-      - temperature
-      - temperature_high
-      - temperature_low
-      - apparent_temperature
-      - apparent_temperature_high
-      - apparent_temperature_low
-      - wind_speed
-      - wind_bearing
-      - precip_type
-      - precip_probability
-      - precip_accumulation
-      - precip_intensity
-      - precip_intensity_max
-      - uv_index
-      - daily_summary
-      - pressure
-      - visibility
-    scan_interval:
-      minutes: 10
-  #    - ozone
-  #      - minutely_summary
-  #    - hourly_summary
-  #    - daily_summary
-  #    - temperature_max
-  #    - temperature_min
-  #    - apparent_temperature_max
-  #    - apparent_temperature_min
-  #    - precip_intensity_max
+      - stream_count
+      - stream_count_transcode
+      - stream_count_direct_play
+      - stream_count_direct_stream
+      - total_bandwidth
+
+      
   - platform: sonarr_upcoming_media
     api_key: !secret sonarr_api_key
     host: 192.168.1.47
@@ -295,6 +246,10 @@ sensor:
           friendly_name: 'Vizio TV'
           value_template: "{{ 'Online' if is_state('device_tracker.vizio_tv', 'home') else 'Offline' }}"
 
+       home_theater_status:
+          friendly_name: 'Home Theater Status'
+          value_template: "{{ 'Online' if is_state('media_player.home_theater', 'on') else 'Offline' }}"
+          
        broadlink:
           friendly_name: 'Broadlink'
           value_template: "{{ 'Online' if is_state('device_tracker.broadlink', 'home') else 'Offline' }}"
@@ -326,7 +281,64 @@ sensor:
   #  command: /usr/bin/curl -k https://192.168.1.166/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_C.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
   #  unit_of_measurement: '%'
   #  scan_interval: 14400
-
+  - platform: template
+    sensors:
+      kitchen_nest_battery:
+        friendly_name: 'kitchen_nest_battery'
+        value_template: "{{ states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level|default(-1)|int if states.binary_sensor.torn_home_kitchen_nest_protect_co_detected is not none }}"
+        unit_of_measurement: '%'
+        icon_template: '{% if states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level == 100 %}
+                           mdi:battery
+                        {% elif states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level >= 90 %}
+                           mdi:battery-90
+                        {% elif states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level >= 80 %}
+                           mdi:battery-80
+                        {% elif states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level >= 70 %}
+                           mdi:battery-70
+                        {% elif states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level >= 60 %}
+                           mdi:battery-60
+                        {% elif states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level >= 50 %}
+                           mdi:battery-50
+                        {% elif states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level >= 40 %}
+                           mdi:battery-40
+                        {% elif states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level >= 30 %}
+                           mdi:battery-30
+                        {% elif states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level >= 20 %}
+                           mdi:battery-20
+                        {% elif states.binary_sensor.torn_home_kitchen_nest_protect_co_detected.attributes.battery_level >= 10 %}
+                           mdi:battery-10
+                        {% else %}
+                           battery-outline
+                        {% endif %}'
+  - platform: template
+    sensors:
+      hallway_nest_battery:
+        friendly_name: 'hallway_nest_battery'
+        value_template: "{{ states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level|default(-1)|int if states.binary_sensor.torn_home_hallway_nest_protect_co_detected is not none }}"
+        unit_of_measurement: '%'
+        icon_template: '{% if states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level == 100 %}
+                           mdi:battery
+                        {% elif states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level >= 90 %}
+                           mdi:battery-90
+                        {% elif states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level >= 80 %}
+                           mdi:battery-80
+                        {% elif states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level >= 70 %}
+                           mdi:battery-70
+                        {% elif states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level >= 60 %}
+                           mdi:battery-60
+                        {% elif states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level >= 50 %}
+                           mdi:battery-50
+                        {% elif states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level >= 40 %}
+                           mdi:battery-40
+                        {% elif states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level >= 30 %}
+                           mdi:battery-30
+                        {% elif states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level >= 20 %}
+                           mdi:battery-20
+                        {% elif states.binary_sensor.torn_home_hallway_nest_protect_co_detected.attributes.battery_level >= 10 %}
+                           mdi:battery-10
+                        {% else %}
+                           battery-outline
+                        {% endif %}'
 light:
   - platform: flux_led
     devices:
