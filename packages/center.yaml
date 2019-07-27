@@ -124,29 +124,29 @@ automation:
 #      service: light.turn_off
 #      entity_id: light.kitchen_leds
 
-  - alias: Turn light led on
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: binary_sensor.center_pir
-      to: 'on'
-    action:
-      - service: light.turn_on
-        entity_id: light.Center_led_2
-        data:
-          color_name: 'purple'
+#  - alias: Turn light led on
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: binary_sensor.center_pir
+#      to: 'on'
+#    action:
+#      - service: light.turn_on
+#        entity_id: light.Center_led_2
+#        data:
+#          color_name: 'purple'
 
-  - alias: Turn light led off center
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: binary_sensor.center_pir
-      to: 'off'
-      for:
-        seconds: 2
-    action:
-      - service: light.turn_off
-        entity_id: light.Center_led_2
+#  - alias: Turn light led off center
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: binary_sensor.center_pir
+#      to: 'off'
+#      for:
+#        seconds: 2
+#    action:
+#      - service: light.turn_off
+#        entity_id: light.Center_led_2
 
 
 

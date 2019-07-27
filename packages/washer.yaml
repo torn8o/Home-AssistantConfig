@@ -153,9 +153,18 @@ automation:
       to: 'Idle'
     action:
       - service: python_script.flash_on_ding
-      - service: media_player.alexa_tts
-        data_template:
-          entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
+      - service: notify.alexa_media
+        data:
+          data:
+            type: announce
+          target:
+            - media_player.living_room
+            - media_player.kitchen
+            - media_player.game_room
+            - media_player.master_bedroom
+#        data_template:
+
+#          entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
 #          message: "Hey..... Guess what.....  The dryer has stopped"
           message: >
                     '{{ ["Hey.. Guess what..  The spinning flame machine is finished!",
@@ -190,9 +199,19 @@ automation:
       value_template: "{{ states.sensor.dryer_state.state != 'Drying' }}"
     action:
       - service: python_script.flash_on_ding
-      - service: media_player.alexa_tts
-        data_template:
-          entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
+      - service: notify.alexa_media
+        data:
+          data:
+            type: announce
+          target:
+            - media_player.living_room
+            - media_player.kitchen
+            - media_player.game_room
+            - media_player.master_bedroom
+
+#      - service: media_player.alexa_tts
+#        data_template:
+#          entity_id: media_player.living_room, media_player.kitchen, media_player.game_room, media_player.master_bedroom
   #        message: "Laundry in the washer can be moved over!"
           message: >
                     '{{ ["Hey.. Guess what..  the auto clothes washer is finished!",

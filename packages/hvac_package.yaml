@@ -6,7 +6,7 @@ climate:
     target_sensor: sensor.jasmin_room_temperature_2
     ac_mode: True
     target_temp: 73
-    initial_operation_mode: auto
+    initial_hvac_mode: "off"
     cold_tolerance: 3
     hot_tolerance: -3
     

@@ -85,12 +85,11 @@ input_select:
       - Close
       - Stop
 
-
 switch:
   platform: broadlink
   host: !secret broadlink_host
   mac: !secret broadlink_mac
-  name: !secret broadlink_name
+#  name: !secret broadlink_name
   switches:
     fan_speed_turn_off:
       friendly_name: Fan Speed Off

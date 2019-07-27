@@ -18,7 +18,7 @@ light:
   - platform: group
     name: Theater Room Lights
     entities:
-      - light.spot_light_level
+#      - light.spot_light_level
       - light.tv_room_light_level
 
       
@@ -27,21 +27,21 @@ switch:
     lights_ct:
       - light.hair_area_level
     min_brightness: 35
-    max_brightness: 100
+    max_brightness: 70
     name: Hair Lights
   - platform: circadian_lighting
     lights_ct:
       - light.theater_room_lights
-    min_brightness: 25
-    max_brightness: 90
+    min_brightness: 15
+    max_brightness: 70
     name: Theater Room Circadian
   - platform: circadian_lighting
     lights_ct:
       - light.kitchen_leds
-    min_brightness: 25
-    max_brightness: 100
+    min_brightness: 15
+    max_brightness: 40
     name: Kitchen Lights
-  - platform: circadian_lighting
-    lights_brightness:
-      - light.accent_interior_lights
-    name: accent
+#  - platform: circadian_lighting
+#    lights_brightness:
+#      - light.accent_interior_lights
+#    name: accent

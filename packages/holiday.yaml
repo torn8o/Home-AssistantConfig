@@ -18,17 +18,27 @@ sensor:
 
 light:
   - platform: mqtt
-    name: "Lights_theater"
-    command_topic: "Lights_theater/power"
-    state_topic: "Lights_theater/powerState"
-    brightness_command_topic: "Lights_theater/brightness"
-    brightness_state_topic: "Lights_theater/brightnessState"
+    name: "Theater Lights Motion"
+    command_topic: "theater_room/setpower"
+    state_topic: "theater_room/setpowerpub"
+    rgb_state_topic: "theater_room/setcolorpub"
+    rgb_command_topic: "theater_room/setcolor"
+    brightness_state_topic: "theater_room/setbrightnesspub"
+    brightness_command_topic: "theater_room/setbrightness"
+    optimistic: false
+    
+  - platform: mqtt
+    name: "theater_room"
+    command_topic: "theater_room/power"
+    state_topic: "theater_room/powerState"
+    brightness_command_topic: "theater_room/brightness"
+    brightness_state_topic: "theater_room/brightnessState"
     brightness_scale: 255
-    white_value_command_topic: "Lights_theater/modifier"
-    white_value_state_topic: "Lights_theater/modifierState"
+    white_value_command_topic: "theater_room/modifier"
+    white_value_state_topic: "theater_room/modifierState"
     white_value_scale: 500
-    effect_command_topic: "Lights_theater/effect"
-    effect_state_topic: "Lights_theater/effectState"
+    effect_command_topic: "theater_room/effect"
+    effect_state_topic: "theater_room/effectState"
     effect_list:
       - Color_Chase
       - Color_Glitter
@@ -44,11 +54,11 @@ light:
       - LED_Locator
     retain: true
   - platform: mqtt
-    name: "Lights_theater Color"
-    command_topic: "Lights_theater/ColorPower"
-    state_topic: "Lights_theater/powerState"
-    rgb_command_topic: "Lights_theatert/color1"
-    rgb_state_topic: "Lights_theater/color1State"
+    name: "theater_room Color"
+    command_topic: "theater_room/ColorPower"
+    state_topic: "theater_room/powerState"
+    rgb_command_topic: "theater_roomt/color1"
+    rgb_state_topic: "theater_room/color1State"
     retain: true
   - platform: mqtt
     name: "Front Led Lights"
@@ -139,6 +149,77 @@ light:
       - Chase
       - Fire flicker
       - Breathe
+input_select:
+  theater_room_effect:
+    name: Theater Room Effect
+    options:
+     - "Christmas"
+     - "Candy Cane"
+     - "Holly Jolly"
+     - "Valentine"
+     - "Lovey Day"
+     - "St Patty"
+     - "Easter"
+     - "USA"
+     - "Independence"
+     - "Go Blue"
+     - "Hail"
+     - "Touchdown"
+     - "Halloween"
+     - "Punkin"
+     - "Thanksgiving"
+     - "Turkey Day"
+     - "BPM"
+     - "Confetti"
+     - "Cyclon Rainbow"
+     - "Dots"
+     - "Fire"
+     - "Glitter"
+     - "Juggle"
+     - "Lightning"
+     - "Police All"
+     - "Police One"
+     - "Rainbow"
+     - "Rainbow with Glitter"
+     - "Ripple"
+     - "Sinelon"
+     - "Solid"
+     - "Twinkle"
+    initial: "Solid"
+
+input_number:
+  animation_speed:
+    name: Animation Speed
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
+
+automation: 
+  - alias: "Theater Input Effect"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_select.theater_room_effect
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "theater_room/seteffect"
+          payload: '{{ trigger.to_state.state | string }}'
+
+  - alias: "Animation Speed"
+    initial_state: True
+    hide_entity: False
+    trigger:
+      - platform: state
+        entity_id: input_number.animation_speed
+    action:
+      - service: mqtt.publish
+        data_template:
+          topic: "theater_room/setanimationspeed"
+          payload: '{{ trigger.to_state.state | int }}'
+################################
 switch:
   - platform: mqtt
     name: "Front Christmas Tree"

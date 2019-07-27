@@ -7,7 +7,7 @@ climate:
     target_sensor: sensor.game_temperature
     ac_mode: True
     target_temp: 73
-    initial_operation_mode: auto
+    initial_hvac_mode: "off"
     cold_tolerance: 0
     hot_tolerance: -0
 

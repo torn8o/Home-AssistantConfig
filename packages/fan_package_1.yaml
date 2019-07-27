@@ -59,7 +59,7 @@ climate:
     target_sensor: sensor.broadlink_torn_temperature
     ac_mode: True
     target_temp: 79
-    initial_operation_mode: auto
+    initial_hvac_mode: "off"
     cold_tolerance: 0
     hot_tolerance: -0
 ################################################

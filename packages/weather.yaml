@@ -89,7 +89,14 @@ input_boolean:
   sleet_alert:
     name: Sleet Alert
     initial: off
-
+  text_notifications:
+    name: text notifications
+    icon: mdi:battery-alert
+    initial: on
+  enjoyable_weather_reminders:
+    name: enjoyable weather reminders
+    icon: mdi:battery-alert
+    initial: on
 #
 # Good Weather To Fly Drone?
 # Criteria:
@@ -108,11 +115,11 @@ binary_sensor:
         friendly_name: Good Weather To Fly Drone?
         value_template: >-
           {% if states.sensor.dark_sky_wind_speed.state | round(0) | int > 12 or
-                states.sensor.dark_sky_precip.state |lower == "rain" or
-                states.sensor.dark_sky_precip.state |lower == "snow" or
+                states.sensor.dark_sky_precip_type.state |lower == "rain" or
+                states.sensor.dark_sky_precip_type.state |lower == "snow" or
                 states.sensor.dark_sky_visibility.state | round(0) | int < 2 or
                 states.sensor.dark_sky_temperature.state | round(0) | int < 32 or
-                states.sensor.dark_sky_cloud_coverage.state | round(0) | int > 30 %}
+                states.sensor.dark_sky_cloud_cover.state | round(0) | int > 30 %}
             false
           {% else %}
             true
@@ -122,7 +129,50 @@ binary_sensor:
 #  - platform: darksky
 #    api_key: !secret darksky_api_key
 
-#sensor:
+sensor:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    monitored_conditions:
+      - icon
+      - summary
+      - nearest_storm_distance
+      - nearest_storm_bearing
+      - humidity
+      - temperature
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+      - wind_speed
+      - wind_bearing
+      - precip_type
+      - precip_probability
+      - precip_accumulation
+      - precip_intensity
+      - precip_intensity_max
+      - uv_index
+      - daily_summary
+      - pressure
+      - visibility
+    scan_interval:
+      minutes: 10
+  #    - ozone
+  #      - minutely_summary
+  #    - hourly_summary
+  #    - daily_summary
+  #    - temperature_max
+  #    - temperature_min
+  #    - apparent_temperature_max
+  #    - apparent_temperature_min
+  #    - precip_intensity_max
 #  - platform: darksky
 #    api_key: !secret darksky_api_key
 #    monitored_conditions:
@@ -164,6 +214,8 @@ binary_sensor:
 #    headers:
 #      Referer: "https://www.pollen.com"
 
+
+    
 ###############################################################################
 #                _                        _   _
 #     /\        | |                      | | (_)
@@ -198,7 +250,7 @@ automation:
       - condition: template
         value_template: '{% if states.sensor.dark_sky_wind_speed.state | round < 8 %} false {% else %} true {% endif %}'
     action:
-      - service: script.notify_me
+      - service: script.engine
         data_template:
           message: >
             {% set windspeed = states.sensor.dark_sky_wind_speed.state | round %}
@@ -265,7 +317,7 @@ automation:
             true
           {%- endif -%}
     action:
-      - service: script.notify_me
+      - service: notify.notify #script.notify_me
         data_template:
           message: >
             {% set windspeed = states.sensor.dark_sky_wind_speed.state | round %}
@@ -284,7 +336,7 @@ automation:
       - condition: template
         value_template: '{{ trigger.to_state.state | lower == "rain" }}'
       - condition: state
-        entity_id: group.all_devices
+        entity_id: group.family
         state: 'home'
       - condition: state
         entity_id: sun.sun
@@ -294,7 +346,7 @@ automation:
       - condition: template
         value_template: '{{ states.sensor.dark_sky_precip_probability.state | int == 1 }}'
     action:
-      - service: script.notify_me
+      - service: notify.notify #script.notify_me
         data_template:
           message: "{{ trigger.to_state.state | title }} with intensity {{ states.sensor.dark_sky_precip_intensity.state | float }} inches per hour"
       - service: script.voice_notify
@@ -317,7 +369,7 @@ automation:
       - condition: template
         value_template: '{{ states.sensor.season.state | lower == "winter" }}'
       - condition: state
-        entity_id: group.all_devices
+        entity_id: group.family
         state: 'home'
       - condition: state
         entity_id: sun.sun
@@ -327,7 +379,7 @@ automation:
       - condition: template
         value_template: '{{ states.sensor.dark_sky_precip_probability.state | int == 1 }}'
     action:
-      - service: script.notify_me
+      - service: notify.notify #script.notify_me
         data_template:
           message: "{{ trigger.to_state.state | title }} with intensity {{ states.sensor.dark_sky_precip_intensity.state | float }} inches per hour"
       - service: script.voice_notify

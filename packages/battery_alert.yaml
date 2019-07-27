@@ -273,6 +273,22 @@
 ################################################
 homeassistant:
   customize:
+    sensor.tornado_battery_2:
+      battery_alert_disabled: true
+    sensor.tornado_battery_3:
+      battery_alert_disabled: true
+    sensor.tornado_battery_level_2:
+      battery_alert_disabled: true
+    sensor.torn8o_battery_level_2:
+      battery_alert_disabled: true
+    sensor.torn8o_battery_state:
+      battery_alert_disabled: true
+    sensor.torn8o_battery_level:
+      battery_alert_disabled: true
+    sensor.tornado_battery_level:
+      battery_alert_disabled: true
+    sensor.tornado_battery:
+      battery_alert_disabled: true
     ################################################
     ## Node Anchors
     ################################################

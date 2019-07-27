@@ -1,0 +1,21 @@
+################################################
+## Customize
+################################################
+homeassistant:
+  customize:
+    script.man_cave_tv_app_netflix:
+    friendly_name: TV Netflix
+
+rest_command:
+  man_cave_tv_app_netflix:
+    method: POST
+    url: 'http://192.168.1.215:8080/ws/app/Netflix'
+  man_cave_tv_app_amazon:
+    method: POST
+    url: 'http://192.168.1.215:8080/ws/app/Amazon'
+  man_cave_tv_app_youtube:
+    method: POST
+    url: 'http://192.168.1.215:8080/ws/app/YouTube'
+  man_cave_tv_app_plex:
+    method: POST
+    url: 'http://192.168.1.215:8001/api/v2/applications/kIciSQlYEM.plex'
