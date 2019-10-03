@@ -8,6 +8,9 @@
 
 homeassistant:
   customize:
+
+      
+    
     ################################################
     ## Node Anchors
     ################################################
@@ -248,7 +251,7 @@ sensor:
 
        home_theater_status:
           friendly_name: 'Home Theater Status'
-          value_template: "{{ 'Online' if is_state('media_player.home_theater', 'on') else 'Offline' }}"
+          value_template: "{{ 'Online' if is_state('media_player.denon_avr_s730h', 'on') else 'Offline' }}"
           
        broadlink:
           friendly_name: 'Broadlink'
@@ -339,6 +342,7 @@ sensor:
                         {% else %}
                            battery-outline
                         {% endif %}'
+
 light:
   - platform: flux_led
     devices:
@@ -385,6 +389,16 @@ fastdotcom:
     milliseconds: 0
 ## battery
 binary_sensor:
+  - platform: octoprint
+    monitored_conditions:
+      - Printing
+      - Printing Error
+  - platform: mqtt
+    name: "Pool Motion"
+    state_topic: blue_iris/binary_sensor/pool_motion/state
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: motion
   - platform: template
     sensors:
       charlie_gps_status:

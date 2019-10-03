@@ -17,6 +17,6 @@ switch:
     containers:
       - 'NGINX'
       - 'ha-dockermon'
-      - 'TornServer'
+      - '1plex'
 
     

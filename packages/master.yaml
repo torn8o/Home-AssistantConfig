@@ -10,9 +10,9 @@ light:
   - platform: group
     name: Kitchen Leds
     entities:
-      - light.kitchen_bar_light_level
-      - light.kitchen_light_level_2
+      - light.kitchen_bar_lights
       - light.kitchen_light_level
+    #  - light.kitchen_light_level
   - platform: group
     name: Door Motion
     entities:
@@ -185,14 +185,14 @@ automation:
     initial_state: True
     trigger:
       platform: state
-      entity_id: switch.master_bathroom_fan_switch
+      entity_id: switch.master_bathroom_fan
 #  #    from: 'off'
       to: 'on'
       for:
-        minutes: 10
+        minutes: 8
     action:
       service: switch.turn_off
-      entity_id: switch.master_bathroom_fan_switch
+      entity_id: switch.master_bathroom_fan
 
 #  - alias: master_bath_fan_exhaust_timer
 #    initial_state: True

@@ -19,7 +19,15 @@ group:
       - binary_sensor.center_pir
       - binary_sensor.front_motion_sensor
 
+  Theater Group Motion:
+    entities:
+      - sensor.mb_motion_status
+      - sensor.gr_motion
 
+  Theater Group Motion B:
+    entities:
+      - binary_sensor.center_pir
+      - binary_sensor.theater_room_motion
   porch_room_motion:
     entities:
       - sensor.front_p_motion

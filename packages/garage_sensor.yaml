@@ -164,7 +164,7 @@ automation:
       to: 'motion detected'
     action:
       service: light.turn_on
-      entity_id: light.level
+      entity_id: light.garage_light
 
   - alias: turn garage light off
     initial_state: True
@@ -177,7 +177,7 @@ automation:
         minutes: 5
     action:
       - service: light.turn_off
-        entity_id: light.level
+        entity_id: light.garage_light
 
   - alias: turn light led on
     initial_state: True
