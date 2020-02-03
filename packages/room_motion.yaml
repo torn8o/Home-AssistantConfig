@@ -18,6 +18,7 @@ group:
     entities:
       - binary_sensor.center_pir
       - binary_sensor.front_motion_sensor
+      - binary_sensor.kitchen_motion
 
   Theater Group Motion:
     entities:
@@ -44,7 +45,25 @@ group:
       - group.game_room_motion
       - group.master_room_motion
 #      - group.porch_room_motion
-
+input_boolean:
+  light_manual:
+    name: Light Manual
+    initial: off
+  light_auto:
+    name: Light Auto
+    initial: off
+  light_manual_mb:
+    name: Light Manual Mb
+    initial: off
+  light_auto_mb:
+    name: Light Auto Mb
+    initial: off
+  light_manual_hum:
+    name: Light Manual Hum
+    initial: off
+  light_auto_hum:
+    name: Light Auto Hum
+    initial: off
 
 sensor:
 

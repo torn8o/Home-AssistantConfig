@@ -11,7 +11,10 @@
 
 homeassistant:
   customize:
-
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'Fan Package'
     ### Fan ###
     fan.LR:
       friendly_name: LR Fan

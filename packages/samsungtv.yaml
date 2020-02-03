@@ -3,6 +3,10 @@
 ################################################
 homeassistant:
   customize:
+        packages.system: &customize
+          haaska_hidden: true
+          homebridge_hidden: true
+          package: 'Washer sensor'
     script.man_cave_tv_app_netflix:
     friendly_name: TV Netflix
 

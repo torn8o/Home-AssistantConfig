@@ -8,9 +8,12 @@
 
 homeassistant:
   customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'Sensor'
 
-      
-    
+
     ################################################
     ## Node Anchors
     ################################################
@@ -30,7 +33,7 @@ sensor:
       - stream_count_direct_stream
       - total_bandwidth
 
-      
+
   - platform: sonarr_upcoming_media
     api_key: !secret sonarr_api_key
     host: 192.168.1.47
@@ -218,7 +221,7 @@ sensor:
 #      - 0
 #      - 30
   - platform: broadlink
-    host: 192.168.1.19
+    host: 192.168.1.7
     mac: B4:43:0D:EF:9F:25
     name: "broadlink torn"
     scan_interval: 60
@@ -252,7 +255,7 @@ sensor:
        home_theater_status:
           friendly_name: 'Home Theater Status'
           value_template: "{{ 'Online' if is_state('media_player.denon_avr_s730h', 'on') else 'Offline' }}"
-          
+
        broadlink:
           friendly_name: 'Broadlink'
           value_template: "{{ 'Online' if is_state('device_tracker.broadlink', 'home') else 'Offline' }}"
@@ -353,6 +356,7 @@ light:
       192.168.1.127:
         name: display light
 input_boolean:
+
     switch_bathroom_exhaust_1:
       name: bathroom exhaust 1
     switch_bathroom_heater_1:

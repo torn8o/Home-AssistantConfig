@@ -20,9 +20,19 @@ light:
     entities:
 #      - light.spot_light_level
       - light.tv_room_light_level
-
+  - platform: group
+    name: Hallway Lights
+    entities:
+      - light.hallway_1
+      - light.hallway_2
       
 switch:
+  - platform: circadian_lighting
+    lights_ct:
+      - light.hallway_lights
+    min_brightness: 15
+    max_brightness: 70
+    name: CL hallway Lights
   - platform: circadian_lighting
     lights_ct:
       - light.hair_area_level
@@ -32,14 +42,14 @@ switch:
   - platform: circadian_lighting
     lights_ct:
       - light.theater_room_lights
-    min_brightness: 15
-    max_brightness: 70
+    min_brightness: 30
+    max_brightness: 100
     name: Theater Room Circadian
   - platform: circadian_lighting
     lights_ct:
       - light.kitchen_leds
-    min_brightness: 15
-    max_brightness: 40
+    min_brightness: 30
+    max_brightness: 100
     name: Kitchen Lights
 #  - platform: circadian_lighting
 #    lights_brightness:

@@ -1,0 +1,38 @@
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'Christmas Stuff'
+
+
+switch:
+  - platform: mqtt
+    name: "Christmas Snowman"
+    state_topic: "stat/Snowman/POWER"
+    command_topic: "cmnd/Snowman/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    qos: 1
+    retain: true
+
+automation:
+  - alias: Turn snowman On At Sunset
+    initial_state: true
+    hide_entity: false
+    trigger:
+      platform: sun
+      event: sunset
+      offset: -00:00:10
+    action:
+      service: switch.turn_on
+      entity_id: switch.christmas_snowman
+
+  - alias: Turn snowman off 11pm
+    initial_state: true
+    trigger:
+    - platform: time
+      at: '23:01:00'
+    action:
+      service: switch.turn_off
+      entity_id: switch.christmas_snowman

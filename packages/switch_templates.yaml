@@ -17,6 +17,10 @@ switch:
     containers:
       - 'NGINX'
       - 'ha-dockermon'
-      - '1plex'
+      - 'plex'
+      - 'ESPHome'
+      - 'radarr'
+      - 'MQTT'
+      - 'TasmoAdmin1'
 
     

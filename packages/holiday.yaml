@@ -2,9 +2,13 @@
 ##The "W" slider under the main "holiday LED" light modifies each effect
 ##The "W" slider under "Glitter" light modifies the frequency of glitter, the RGB selection changes the color of the glitter
 ##The "W" slider under "Lightning" switch modifies the frequency of lightning.
-##You must replace the Lights_front with the USER_MQTT_CLIENT_NAME you specified in the arduino USER CONFIGURATION section
+##You must replace the ledstrip with the USER_MQTT_CLIENT_NAME you specified in the arduino USER CONFIGURATION section
 homeassistant:
   customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'Holiday'
 mqtt:
   broker: !secret mqtt_broker
   port: !secret mqtt_port
@@ -14,108 +18,9 @@ mqtt:
 sensor:
   - platform: mqtt
     name: "Current LED"
-    state_topic: "Lights_front/locator"
+    state_topic: "ledstrip/locator"
 
 light:
-  - platform: mqtt
-    name: "Theater Lights Motion"
-    command_topic: "theater_room/setpower"
-    state_topic: "theater_room/setpowerpub"
-    rgb_state_topic: "theater_room/setcolorpub"
-    rgb_command_topic: "theater_room/setcolor"
-    brightness_state_topic: "theater_room/setbrightnesspub"
-    brightness_command_topic: "theater_room/setbrightness"
-    optimistic: false
-    
-  - platform: mqtt
-    name: "theater_room"
-    command_topic: "theater_room/power"
-    state_topic: "theater_room/powerState"
-    brightness_command_topic: "theater_room/brightness"
-    brightness_state_topic: "theater_room/brightnessState"
-    brightness_scale: 255
-    white_value_command_topic: "theater_room/modifier"
-    white_value_state_topic: "theater_room/modifierState"
-    white_value_scale: 500
-    effect_command_topic: "theater_room/effect"
-    effect_state_topic: "theater_room/effectState"
-    effect_list:
-      - Color_Chase
-      - Color_Glitter
-      - Single_Race
-      - Double_Crash
-      - Rainbow
-      - Blocked_Colors
-      - BPM
-      - Twinkle
-      - Fire
-      - Fill_Solid
-      - Spooky_Eyes
-      - LED_Locator
-    retain: true
-  - platform: mqtt
-    name: "theater_room Color"
-    command_topic: "theater_room/ColorPower"
-    state_topic: "theater_room/powerState"
-    rgb_command_topic: "theater_roomt/color1"
-    rgb_state_topic: "theater_room/color1State"
-    retain: true
-  - platform: mqtt
-    name: "Front Led Lights"
-    command_topic: "Lights_front/power"
-    state_topic: "Lights_front/powerState"
-    brightness_command_topic: "Lights_front/brightness"
-    brightness_state_topic: "Lights_front/brightnessState"
-    brightness_scale: 255
-    white_value_command_topic: "Lights_front/modifier"
-    white_value_state_topic: "Lights_front/modifierState"
-    white_value_scale: 500
-    effect_command_topic: "Lights_front/effect"
-    effect_state_topic: "Lights_front/effectState"
-    effect_list:
-      - Color_Chase
-      - Color_Glitter
-      - Single_Race
-      - Double_Crash
-      - Rainbow
-      - Blocked_Colors
-      - BPM
-      - Twinkle
-      - Fire
-      - Fill_Solid
-      - Spooky_Eyes
-      - LED_Locator
-    retain: true
-  - platform: mqtt
-    name: "Front Eave Light Color"
-    command_topic: "Lights_front/ColorPower"
-    state_topic: "Lights_front/powerState"
-    rgb_command_topic: "Lights_front/color1"
-    rgb_state_topic: "Lights_front/color1State"
-    retain: true
-
-  - platform: mqtt
-    name: "Glitter"
-    state_topic: "Lights_front/glitter/state"
-    command_topic: "Lights_front/addEffects"
-    payload_on: "Glitter On"
-    payload_off: "Glitter Off"
-    rgb_command_topic: "Lights_front/glitterColor"
-    rgb_state_topic: "Lights_front/glitterColorState"
-    white_value_command_topic: "Lights_front/glitterChance"
-    white_value_state_topic: "Lights_front/glitterChanceState"
-    white_value_scale: 255
-    retain: true
-  - platform: mqtt
-    name: "Lightning"
-    state_topic: "Lights_front/lightning/state"
-    command_topic: "Lights_front/addEffects"
-    payload_on: "Lightning On"
-    payload_off: "Lightning Off"
-    white_value_command_topic: "Lights_front/lightningChance"
-    white_value_state_topic: "Lights_front/lightningChanceState"
-    white_value_scale: 500
-    retain: true
   - platform: mqtt
     schema: json
     name: "Porch led"
@@ -149,6 +54,8 @@ light:
       - Chase
       - Fire flicker
       - Breathe
+
+
 input_select:
   theater_room_effect:
     name: Theater Room Effect

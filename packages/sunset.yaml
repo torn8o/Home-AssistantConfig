@@ -13,14 +13,14 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id:
-          - light.front_led_lights
+          - light.front_eave
           - light.porch_led
           - switch.porch_light
       - service: script.monthly_color_scene
       - service: light.turn_on
         entity_id:
           - light.porch_led
-          - light.front_eave_light_color
+          
         data_template:
           brightness: >
             {% if states.group.family.state == 'not home' -%}
@@ -40,7 +40,7 @@ automation:
     action:
       - service: homeassistant.turn_off
         entity_id:
-          - light.front_led_lights
+          - light.front_eave
           - light.porch_led
           - switch.porch_light
 

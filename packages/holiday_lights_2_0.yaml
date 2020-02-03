@@ -1,0 +1,81 @@
+##This version of the holiday lights code does not require the node red portion
+##The "W" slider under the main "holiday LED" light modifies each effect
+##The "W" slider under "Glitter" light modifies the frequency of glitter, the RGB selection changes the color of the glitter
+##The "W" slider under "Lightning" switch modifies the frequency of lightning.
+##You must replace the front_strip with the USER_MQTT_CLIENT_NAME you specified in the arduino USER CONFIGURATION section
+sensor:
+  - platform: mqtt
+    name: "Current LED"
+    state_topic: "front_strip/locator"
+
+light:
+  - platform: mqtt
+    name: "Front Strip Lights"
+    command_topic: "front_strip/power"
+    state_topic: "front_strip/powerState"
+    brightness_command_topic: "front_strip/brightness"
+    brightness_state_topic: "front_strip/brightnessState"
+    brightness_scale: 255
+    white_value_command_topic: "front_strip/modifier"
+    white_value_state_topic: "front_strip/modifierState"
+    white_value_scale: 500
+    effect_command_topic: "front_strip/effect"
+    effect_state_topic: "front_strip/effectState"
+    effect_list:
+      - Color_Chase
+      - Color_Glitter
+      - Single_Race
+      - Double_Crash
+      - Rainbow
+      - Blocked_Colors
+      - BPM
+      - Twinkle
+      - Fire
+      - Fill_Solid
+      - Spooky_Eyes
+      - LED_Locator
+    retain: true
+  - platform: mqtt
+    name: "Color 1"
+    command_topic: "front_strip/ColorPower"
+    state_topic: "front_strip/powerState"
+    rgb_command_topic: "front_strip/color1"
+    rgb_state_topic: "front_strip/color1State"
+    retain: true
+  - platform: mqtt
+    name: "Color 2"
+    command_topic: "front_strip/ColorPower"
+    state_topic: "front_strip/powerState"
+    rgb_command_topic: "front_strip/color2"
+    rgb_state_topic: "front_strip/color2State"
+    retain: true
+  - platform: mqtt
+    name: "Color 3"
+    command_topic: "front_strip/ColorPower"
+    state_topic: "front_strip/powerState"
+    rgb_command_topic: "front_strip/color3"
+    rgb_state_topic: "front_strip/color3State"
+    retain: true
+  - platform: mqtt
+    name: "Glitter"
+    state_topic: "front_strip/glitter/state"
+    command_topic: "front_strip/addEffects"
+    payload_on: "Glitter On"
+    payload_off: "Glitter Off"
+    rgb_command_topic: "front_strip/glitterColor"
+    rgb_state_topic: "front_strip/glitterColorState"
+    white_value_command_topic: "front_strip/glitterChance"
+    white_value_state_topic: "front_strip/glitterChanceState"
+    white_value_scale: 255
+    retain: true
+  - platform: mqtt
+    name: "Lightning"
+    state_topic: "front_strip/lightning/state"
+    command_topic: "front_strip/addEffects"
+    payload_on: "Lightning On"
+    payload_off: "Lightning Off"
+    white_value_command_topic: "front_strip/lightningChance"
+    white_value_state_topic: "front_strip/lightningChanceState"
+    white_value_scale: 500
+    retain: true
+  

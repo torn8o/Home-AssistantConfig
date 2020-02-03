@@ -15,62 +15,63 @@ sensor:
     icon: mdi:tumble-dryer
   - platform: mqtt
     name: "Washer Watts"
-    state_topic: "tele/SNF-Washer/SENSOR"
+    state_topic: "tele/Snowman/SENSOR"
     value_template: "{{ value_json['ENERGY'].Power }}"
     qos: 2
     unit_of_measurement : "W"
     icon: mdi:flash-circle
-    availability_topic: "tele/SNF-Washer/LWT"
+    availability_topic: "tele/Snowman/LWT"
     payload_available: "Online"
     payload_not_available: "Offline"
   - platform: mqtt
     name: "Washer Voltage"
-    state_topic: "tele/SNF-Washer/SENSOR" 
+    state_topic: "tele/Snowman/SENSOR"
     value_template: "{{ value_json['ENERGY'].Voltage }}"
     qos: 2
     unit_of_measurement : "V"
     icon: mdi:flash-circle
-    availability_topic: "tele/SNF-Washer/LWT"
+    availability_topic: "tele/Snowman/LWT"
     payload_available: "Online"
     payload_not_available: "Offline"
   - platform: mqtt
     name: "Washer Amps"
-    state_topic: "tele/SNF-Washer/SENSOR"
+    state_topic: "tele/Snowman/SENSOR"
     value_template: "{{ value_json['ENERGY'].Current }}"
     qos: 2
     unit_of_measurement : "A"
     icon: mdi:flash-circle
-    availability_topic: "tele/SNF-Washer/LWT"
+    availability_topic: "tele/Snowman/LWT"
     payload_available: "Online"
     payload_not_available: "Offline"
   - platform: mqtt
     name: "Washer Energy Today"
-    state_topic: "tele/SNF-Washer/SENSOR"
+    state_topic: "tele/Snowman/SENSOR"
     value_template: "{{ value_json['ENERGY'].Today }}"
     qos: 2
     unit_of_measurement : "kWh"
-    availability_topic: "tele/SNF-Washer/LWT"
+    availability_topic: "tele/Snowman/LWT"
     payload_available: "Online"
     payload_not_available: "Offline"
   - platform: mqtt
     name: "Washer Energy Yesterday"
-    state_topic: "tele/SNF-Washer/SENSOR"
+    state_topic: "tele/Snowman/SENSOR"
     value_template: "{{ value_json['ENERGY'].Yesterday }}"
     qos: 2
     unit_of_measurement : "kWh"
-    availability_topic: "tele/SNF-Washer/LWT"
+    availability_topic: "tele/Snowman/LWT"
     payload_available: "Online"
     payload_not_available: "Offline"
 
   - platform: mqtt
-    state_topic: "tele/SNF-Washer/STATE"
+    state_topic: "tele/Snowman/STATE"
     name: "Washer Signal"
     unit_of_measurement: "%"
     value_template: "{{ value_json['Wifi'].RSSI }}"
-    availability_topic: "tele/SNF-Washer/LWT"
+    availability_topic: "tele/Snowman/LWT"
     qos: 1
     payload_available: "Online"
-    payload_not_available: "Offline" 
+    payload_not_available: "Offline"
+
 group:
   washer_panel:
     name: Washer
@@ -82,8 +83,8 @@ group:
       - sensor.washer_energy_today
       - sensor.washer_energy_yesterday
       - sensor.washer_signal
-    
-    
+
+
 automation:
   - alias: 'Dryer State - Drying'
     initial_state: true
@@ -109,7 +110,7 @@ automation:
           topic: hass/state/dryer
           payload: 'Idle'
           retain: 'true'
-    
+
 
   - alias: 'Washer State - Start'
     initial_state: true
@@ -151,6 +152,14 @@ automation:
       entity_id: sensor.dryer
       from: 'Drying'
       to: 'Idle'
+    condition:
+      condition: time
+  # At least one of the following is required.
+      after: '09:00:00'
+      before: '19:00:00'
+      weekday:
+        - thu
+  #      - fri
     action:
       - service: python_script.flash_on_ding
       - service: notify.alexa_media
@@ -186,7 +195,7 @@ automation:
                          "I wish my bank account refilled as fast as my laundry basket.    Come and get it.",
                          "Folding laundry with a toddler is like trying to straighten a desk full of papers while a fan blows on it.  Time to fold some Laundry",
                          "Whoever said death and taxes were the only guarantees in life obviously never had to do laundry.   Dryer finished.",
-                         "We can land on Mars but we still haven't invented a dryer that folds all the clothes.  Dryer done",                                    
+                         "We can land on Mars but we still haven't invented a dryer that folds all the clothes.  Dryer done",
                     ] | random }}'
   - alias: 'tts Washer Finished'
     trigger:
@@ -195,8 +204,17 @@ automation:
       from: 'Washing'
       to: 'Idle'
     condition:
-      condition: template
-      value_template: "{{ states.sensor.dryer_state.state != 'Drying' }}"
+      - condition: template
+        value_template: "{{ states.sensor.dryer_state.state != 'Drying' }}"
+      - condition: or
+        conditions:
+          - condition: time
+  # At least one of the following is required.
+            after: '09:00:00'
+            before: '19:00:00'
+            weekday:
+              - thu
+  #            - fri
     action:
       - service: python_script.flash_on_ding
       - service: notify.alexa_media

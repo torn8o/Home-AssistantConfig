@@ -1,0 +1,71 @@
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'Bath Heater Package'
+      
+climate:
+  - platform: generic_thermostat
+    name: Master Bathroom Heater 
+    heater: switch.master_bathroom_heater #fan.game_room_fan
+    target_sensor: sensor.master_bathroom_temperature
+    ac_mode: false
+    target_temp: 74
+    initial_hvac_mode: "off"
+    cold_tolerance: 0
+    hot_tolerance: -0
+
+sensor:
+  - platform: template
+    sensors:
+      mb_heater_temperature:
+        value_template: '{{states("sensor.master_bathroom_temperature") | float - 3}}'
+        unit_of_measurement: '°F'
+  - platform: template
+    sensors:
+      mb_heater_temperature_target:
+        friendly_name: "Master Bathroom Heater Target Temperature"
+        unit_of_measurement: '°F'
+        value_template: "{{ state_attr('climate.master_bathroom_heater', 'temperature') }}"
+
+switch:
+  - platform: template
+    switches:
+      mb_thermostat_heater_switch:
+        value_template:  "{{ is_state('automation.mb_heat_turn_on', 'on') }}"
+        turn_on:
+          service: automation.turn_on
+          entity_id: automation.mb_heat_speed
+        turn_off:
+          - service: automation.turn_off
+            entity_id: automation.mb_heat_turn_on
+          - service: switch.turn_off
+            entity_id: switch.master_bathroom_heater
+
+automation:
+  alias: mb_heat_speed
+  initial_state: false
+  trigger:
+    - platform: state
+      entity_id: sensor.master_bathroom_temperature
+    - platform: state
+      entity_id: sensor.mb_heater_temperature_target
+  condition:
+    - condition: state
+      entity_id: timer.mb_fan_cooldown
+      state: 'idle'
+  action:
+    - service: fan.turn_on
+      entity_id: fan.mb_heat
+      data_template:
+          speed: >
+            {% if (((states('sensor.mb_heater_temperature_target') | float) - (states('sensor.master_bathroom_temperature') | float))) >= 1.0 %}
+              low
+            {% elif (((states('sensor.mb_heater_temperature_target') | float) - (states('sensor.master_bathroom_temperature') | float))) <= -3.0 %}
+              high
+            {% else %}
+              med
+            {% endif %}
+    - service: timer.start
+      entity_id: timer.mb_fan_cooldown

@@ -11,7 +11,7 @@ light:
     name: Kitchen Leds
     entities:
       - light.kitchen_bar_lights
-      - light.kitchen_light_level
+      - light.kitchen_light_level_2
     #  - light.kitchen_light_level
   - platform: group
     name: Door Motion
@@ -19,7 +19,7 @@ light:
 #      - light.kitchen_leds
       - light.hair_area_level
 
-      
+
 
   - platform: group
     name: accent interior lights
@@ -27,6 +27,7 @@ light:
       - light.kitchen_cabinet_lights
       - light.display_light
       - light.niche_leds
+      - light.ghost_led
   - platform: group
     name: niche and porch lights
     entities:
@@ -83,6 +84,39 @@ light:
     rgb: true
     optimistic: false
     qos: 0
+
+binary_sensor:
+  - platform: mqtt
+    name: "Master Bedroom PIR"
+    state_topic: "torn/master_bed"
+    value_template: '{{ value_json.motion }}'
+    availability_topic: "tele/torn/master_bed"
+    payload_on: "1"
+    payload_off: "0"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    device_class: motion
+  - platform: mqtt
+    name: "Hallway PIR"
+    state_topic: "Hallway/PIR"
+    value_template: '{{ value_json.motion }}'
+    availability_topic: "tele/Hallway/LWT"
+    payload_on: "1"
+    payload_off: "0"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    device_class: motion
+  - platform: mqtt
+    name: "Game Room PIR"
+    state_topic: "torn/games"
+    value_template: '{{ value_json.motion }}'
+    availability_topic: "tele/torn/games"
+#    qos: 1
+    payload_on: "1"
+    payload_off: "0"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    device_class: motion
 
 group:
   master_room_motion:
@@ -181,18 +215,7 @@ sensor:
 
 
 automation:
-  - alias: master_bath_fan_timer
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: switch.master_bathroom_fan
-#  #    from: 'off'
-      to: 'on'
-      for:
-        minutes: 8
-    action:
-      service: switch.turn_off
-      entity_id: switch.master_bathroom_fan
+
 
 #  - alias: master_bath_fan_exhaust_timer
 #    initial_state: True
@@ -206,47 +229,8 @@ automation:
 #    action:
 #      service: switch.turn_off
 #      entity_id: switch.bathroom_exhaust
-      
-  - alias: Master Bedroom Motion
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: sensor.mb_motion_status
-      to: 'on'
-    condition:
-      - condition: template
-        value_template: >-
-          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
-          {%- if hour >= 11 and hour  <=  22 -%}
-            true
-          {%- else -%}
-            false
-          {%- endif %}
-    action:
-      service: switch.turn_on
-      entity_id: switch.master_bedroom_f_switch
 
-  - alias: Turn off master bedroom light when there is no movement
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: sensor.mb_motion_status
-      to: 'off'
-      for:
-        #minutes: 15
-        seconds: 15
-    condition:
-      - condition: template
-        value_template: >-
-          {%- set hour=(as_timestamp(now())|timestamp_custom("%H"))|int -%}
-          {%- if hour >= 11 and hour <= 22 -%}
-            true
-          {%- else -%}
-            false
-          {%- endif %}
-    action:
-      service: switch.turn_off
-      entity_id: switch.master_bedroom_f_switch
+
 
   - alias: Turn on led
     initial_state: True

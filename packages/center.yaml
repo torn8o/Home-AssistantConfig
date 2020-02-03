@@ -10,15 +10,15 @@ homeassistant:
 
 binary_sensor:
   - platform: mqtt
-    name: "Hallway PIR"
+    name: "Hallway motion"
     state_topic: "Hallway/PIR"
     availability_topic: "tele/Hallway/LWT"
     qos: 1
     payload_on: "1"
     payload_off: "0"
-    payload_available: "Online"
     payload_not_available: "Offline"
     device_class: motion
+
 
 
 switch:
@@ -42,59 +42,32 @@ switch:
     payload_available: "Online"
     payload_not_available: "Offline"
     retain: false
-automation:
-  
-#  - alias:  Entry lights On Motion
+#automation:
+
+#  - alias: CL Turn Kitchen lights
 #    initial_state: True
 #    trigger:
 #      platform: state
-#      entity_id: binary_sensor.hallway_pir
+#      entity_id: group.kitchen_motion
 #      to: 'on'
 #    action:
 #      - service: switch.turn_on
-#        entity_id: switch.front_entry_light_switch
+#        entity_id: switch.circadian_lighting_kitchen_lights
 #      - service: light.turn_on
-#        entity_id: light.hallway
-#  - alias: Entry lights Off Motion
+#        entity_id: light.kitchen_leds
+#  - alias: CL Turn off kitchen lights
 #    initial_state: True
 #    trigger:
 #      platform: state
-#      entity_id: binary_sensor.hallway_pir
-#      to: 'off'
-#      for:
-#        seconds: 30
-#    action:
-#      - service: switch.turn_off
-#        entity_id: switch.front_entry_light_switch
+####      seconds: 45
+    #action:
+    #  - service: switch.turn_off
+#        entity_id: switch.circadian_lighting_kitchen_lights
 #      - service: light.turn_off
-#        entity_id: light.hallway  
+#        entity_id: light.kitchen_leds
 
 
 
-  - alias: CL Turn Kitchen lights
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: group.kitchen_motion
-      to: 'on'
-    action:
-      - service: switch.turn_on
-        entity_id: switch.circadian_lighting_kitchen_lights
-      - service: light.turn_on
-        entity_id: light.kitchen_leds
-  - alias: CL Turn off kitchen lights
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: group.kitchen_motion
-      to: 'off'
-      for:
-        seconds: 45
-    action:
-      - service: switch.turn_off
-        entity_id: switch.circadian_lighting_kitchen_lights
-      - service: light.turn_off
-        entity_id: light.kitchen_leds
 
 
 
@@ -124,29 +97,7 @@ automation:
 #      service: light.turn_off
 #      entity_id: light.kitchen_leds
 
-#  - alias: Turn light led on
-#    initial_state: True
-#    trigger:
-#      platform: state
-#      entity_id: binary_sensor.center_pir
-#      to: 'on'
-#    action:
-#      - service: light.turn_on
-#        entity_id: light.Center_led_2
-#        data:
-#          color_name: 'purple'
 
-#  - alias: Turn light led off center
-#    initial_state: True
-#    trigger:
-#      platform: state
-#      entity_id: binary_sensor.center_pir
-#      to: 'off'
-#      for:
-#        seconds: 2
-#    action:
-#      - service: light.turn_off
-#        entity_id: light.Center_led_2
 
 
 

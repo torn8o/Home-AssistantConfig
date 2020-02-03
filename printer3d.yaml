@@ -1,0 +1,83 @@
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'printer3d'
+      
+    
+    ################################################
+    ## Node Anchors
+    ################################################
+switch:
+  - platform: mqtt
+    name: "printer_power"
+    state_topic: "stat/printer_power/POWER"
+    command_topic: "cmnd/printer_power/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    qos: 1
+    retain: true
+  
+sensor:
+  - platform: template
+    sensors:
+     octoprint_time_elapsed_friendly:
+      friendly_name: "Octoprint time Elapsed"
+      value_template: "{{ states('sensor.octoprint_time_elapsed') | int | timestamp_custom('%H:%M:%S', 0) }}"
+  - platform: template
+    sensors:
+     octoprint_time_remaining_friendly:
+      friendly_name: "Octoprint time Remaining"
+      value_template: "{{ states('sensor.octoprint_time_remaining') | int | timestamp_custom('%H:%M:%S', 0) }}"
+  - platform: template    
+    sensors:
+     octoprint_bed:
+      friendly_name: "Octoprint Hot Bed"
+      value_template: "{{ ((states.sensor.octoprint_actual_bed_temp.state | float-32) | float*(5/9)) | round(2) }} F"
+  - platform: template
+    sensors: 
+     octoprint_hotend:
+      friendly_name: "Octoprint Hot End"
+      value_template: "{{ ((states.sensor.octoprint_actual_tool0_temp.state | float-32) | float*(5/9)) | round(2) }} F"
+  - platform: template
+    sensors:
+     octoprint_bed_target:
+      friendly_name: "Octoprint Hot Bed Target"
+      value_template: "{{ ((states.sensor.octoprint_target_bed_temp.state | float-32) | float*(5/9)) | round(2) }} F"
+  - platform: template
+    sensors:
+     octoprint_hotend_target:
+      friendly_name: "Octoprint Hot End Target"
+      value_template: "{{ ((states.sensor.octoprint_target_tool0_temp.state | float-32) | float*(5/9)) | round(2) }} F"
+#automation:
+#  - alias: Turn on printer
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: binary_sensor.octoprint_printing
+#      to: 'on'
+#    action:
+#      service: switch.turn_on
+#      entity_id: switch.printer_power
+
+#  - alias: turn off printer
+#    initial_state: True
+#    trigger:
+#
+#      entity_id: binary_sensor.octoprint_printing
+#      to: 'off'
+#      for:
+    #    seconds: 30
+#        minutes: 2
+#    action:
+#      service: switch.turn_off
+#      entity_id: switch.printer_power
+#switch:      
+#- platform: command_line
+#  switches:
+#    octoprint pause:
+#      friendly_name: "Conectar Octoprint"
+#      command_on: "curl -s http://192.168.1.204/api/connection -d '{\"command\":\"connect\"}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+#      command_off: "curl -s http://192.168.1.204/api/connection -d '{\"command\":\"pause\","action\":\"pause\"}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+#      value_template: "{% if is_state('sensor.octoprint_current_state', 'unknown') %}false{% else %}true{% endif %}"
