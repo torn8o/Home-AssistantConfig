@@ -41,24 +41,7 @@ homeassistant:
 
 
 
-group:
-  blocked:
-    name: Blocked
-    view: yes
-    icon: mdi:do-not-disturb
-    entities:
-      - group.ads_blocked
 
-  Ads Blocked:
-      - sensor.dns_queries_today
-      - sensor.domains_being_blocked
-      - sensor.ads_blocked_today
-      - sensor.ads_percentage_today
-      - sensor.unique_domains
-      - sensor.queries_forwarded
-      - sensor.queries_cached
-      - script.pihole_on
-      - script.pihole_off
 
 ###############################################################################
 #  Sensors

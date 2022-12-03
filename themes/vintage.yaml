@@ -1,4 +1,4 @@
-vintage:
+vintageII:
   turmeric-color: "#DEB853"
   light-turmeric-color: "#E2D9A2"
   slate-color: "#0A373A"
@@ -43,3 +43,15 @@ vintage:
   paper-font-headline_-_font-family: "var(--primary-font-family)"
   paper-font-caption_-_font-family: "var(--primary-font-family)"
   paper-font-title_-_font-family: "var(--primary-font-family)"
+
+stormy_hues:
+  dark-primary-color: "#192231"
+  primary-color: "#98878f"
+  light-primary-color: "#98878f"
+  paper-toggle-button-checked-ink-color: "#494e6b"
+  paper-toggle-button-checked-button-color: "#494e6b"
+  paper-toggle-button-checked-bar-color: "#494e6b"
+  paper-slider-knob-color: "#494e6b"
+  paper-slider-knob-start-color: "#494e6b"
+  paper-slider-pin-color: "#494e6b"
+  paper-slider-active-color: "#494e6b"

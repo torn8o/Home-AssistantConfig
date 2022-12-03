@@ -1,0 +1,267 @@
+switch:
+  - platform: mqtt
+    name: "printer_power"
+    state_topic: "stat/printer_power/POWER"
+    command_topic: "cmnd/printer_power/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    qos: 1
+    retain: true
+    
+  - platform: command_line
+    scan_interval: 5
+    switches:
+      connection_octoprint:
+        friendly_name: "Octoprint Connection"
+        command_on: "curl http://192.168.1.59:5000/api/connection -d '{\"command\":\"connect\"}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/connection -d '{\"command\":\"disconnect\"}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_state: "curl http://192.168.1.59:5000/api/printer"
+        value_template: "{{ '\"ready\": true' in value }}"
+        
+  - platform: command_line
+    scan_interval: 5
+    switches:
+      octoprint_cancel:
+        friendly_name: "Octoprint Cancel"
+        command_on: "curl http://192.168.1.59:5000/api/job -d '{\"command\":\"cancel\"}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_state: "curl http://192.168.1.59:5000/api/printer"
+        value_template: "{{ '\"cancelling\": true' in value }}"
+        
+  - platform: command_line
+    scan_interval: 5
+    switches:
+      pause_octoprint:
+        friendly_name: "Octoprint PAUSE"
+        command_on: "curl http://192.168.1.59:5000/api/job -d '{\"command\":\"pause\",\"action\":\"pause\"}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/job -d '{\"command\":\"pause\",\"action\":\"resume\"}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_state: "curl http://192.168.1.59:5000/api/printer"
+        value_template: "{{ '\"paused\": true' in value }}"
+    
+### Steuerung von Octoprint ###
+  - platform: command_line
+    switches:
+      x_y_home:           
+        #X Y HOME
+        command_on: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"home\",\"axes\":[\"x\",\"y\"]}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"home\",\"axes\":[\"x\",\"y\"]}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+  
+  - platform: command_line
+    switches:
+      z_home:
+        #Z HOME
+        command_on: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"home\",\"axes\":[\"z\"]}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"home\",\"axes\":[\"z\"]}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+
+  - platform: command_line
+    switches:
+      z_up:
+       #Z oben 10mm
+        command_on: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"z\":10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"z\":10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+
+  - platform: command_line
+    switches:
+      z_down:    
+        #Z unten 10mm
+        command_on: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"z\":-10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"z\":-10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+  
+  - platform: command_line
+    switches:
+      y_front:
+        #Y vorne 10mm
+        command_on: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"y\":10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"y\":10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"                
+  
+  - platform: command_line
+    switches:
+      y_back:    
+        #Y hinten 10mm
+        command_on: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"y\":-10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"y\":-10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+  
+  - platform: command_line
+    switches:
+      x_right:
+        #X rechts 10mm
+        command_on: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"x\":10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"x\":10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+ 
+  - platform: command_line
+    switches:
+      x_left:    
+        #x links 10mm
+        command_on: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"x\":-10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/printer/printhead -d '{\"command\":\"jog\",\"x\":-10}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        
+  - platform: command_line
+    switches:
+      target_60:
+        #DRUCKBETT auf 60°
+        command_on: "curl http://192.168.1.59:5000/api/printer/bed -d '{\"command\":\"target\",\"target\":60}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+        command_off: "curl http://192.168.1.59:5000/api/printer/bed -d '{\"command\":\"target\",\"target\":0}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+  
+  - platform: command_line
+    switches:
+      targets_200:
+        #NOZZLE AUF 200°
+        command_on: "curl http://192.168.1.59:5000/api/printer/tool -d '{\"command\":\"target\",\"targets\":{\"tool0\":200}}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"        
+        command_off: "curl http://192.168.1.59:5000/api/printer/tool -d '{\"command\":\"target\",\"targets\":{\"tool0\":0}}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+#  - platform: command_line
+#    switches:
+#      octoprint pause:
+#       friendly_name: "Conectar Octoprint"
+#        command_on: "curl -s http://192.168.1.59/api/connection -d '{\"command\":\"connect\"}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+#        command_off: "curl -s http://192.168.1.59/api/connection -d '{\"command\":\"pause\","action\":\"pause\"}' -H 'Content-Type: application/json' -H 'X-Api-Key: 99CA630567A4406C9231161739FAD8F6'"
+#        value_template: "{% if is_state('sensor.octoprint_current_state', 'unknown') %}false{% else %}true{% endif %}"  
+########################################################################
+#### OCTOPRINT ZEITUMRECHNUNG! ####
+###################################
+sensor:
+  - platform: template
+    sensors:
+      octoprint_creality_3d_ender_5_time_elapsed_format:
+        friendly_name: 'Time Elapsed'
+        value_template: >-
+          {% set etime = states.sensor.octoprint_creality_3d_ender_5_time_elapsed.state | int %}
+          {% set seconds = etime % 60 %}
+          {% set minutes = ((etime % 3600) / 60) | int %}
+          {% set hours = ((etime % 86400) / 3600) | int %}
+          {% set days = (etime / 86400) | int %}
+          {%- if days > 0 -%}
+            {%- if days == 1 -%}
+              1 day
+            {%- else -%}
+              {{ days }} days
+            {%- endif -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours > 0 -%}
+            {%- if hours == 1 -%}
+              1 hour
+              {%- else -%}
+              {{ hours }} hours
+            {%- endif -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes > 0 -%}
+            {%- if minutes == 1 -%}
+              1 minute
+            {%- else -%}
+              {{ minutes }} minutes
+            {%- endif -%}
+          {%- endif -%}
+      octoprint_creality_3d_ender_5_time_remaining_format:
+        friendly_name: 'time Remaining'
+        value_template: >-
+          {% set rtime = states.sensor.octoprint_creality_3d_ender_5_time_remaining.state | int %}
+          {% set seconds = rtime % 60 %}
+          {% set minutes = ((rtime % 3600) / 60) | int %}
+          {% set hours = ((rtime % 86400) / 3600) | int %}
+          {% set days = (rtime / 86400) | int %}
+          {%- if days > 0 -%}
+            {%- if days == 1 -%}
+              1 day
+            {%- else -%}
+              {{ days }} days
+            {%- endif -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if hours > 0 -%}
+            {%- if hours == 1 -%}
+              1 hour
+            {%- else -%}
+              {{ hours }} hours
+            {%- endif -%}
+            {{ ', ' }}
+          {%- endif -%}
+          {%- if minutes > 0 -%}
+            {%- if minutes == 1 -%}
+              1 minute
+            {%- else -%}
+              {{ minutes }} minutes
+            {%- endif -%}
+          {%- endif -%}
+
+### Druckzustand ###
+  - platform: template
+    sensors:
+      ender_5_status:
+        value_template: '{{ states.sensor.octoprint_creality_3d_ender_5_current_state.state }}'
+        entity_id: sensor.octoprint_creality_3d_ender_5_current_state
+        friendly_name: 'Ender 5'
+        entity_picture_template: >
+          {% set state = states('sensor.octoprint_creality_3d_ender_5_current_state') %}
+          {{ '/local/icons/3d_drucker/{}.gif'.format(state) }}
+
+#######################################################################        
+### OCTOPRINT ###
+#################
+  - platform: rest
+    resource: 'http://192.168.1.59:5000/api/job'
+    name: "STL File"
+    value_template: '{{value_json.job.file.display}}'
+    
+  - platform: rest
+    resource: 'http://192.168.1.59:5000/api/job'
+    name: "Filament Quantity API"
+    value_template: '{{ value_json.job.filament.tool0.length | float / 1000 }}'
+    unit_of_measurement: 'm'
+  
+  - platform: rest
+    resource: 'http://192.168.1.59:5000/api/job'
+    name: "STL Grosse API"
+    value_template: '{{ value_json.job.file.size | float / 1000000 }}'
+    unit_of_measurement: 'MB' 
+  
+  - platform: template
+    sensors:
+      filament_quantity:
+        friendly_name: "Filament Quantity"
+        unit_of_measurement: 'm'
+        value_template: "{{ states('sensor.filament_menge_api') | round(1) }}"
+        
+  - platform: template
+    sensors:
+      stl_size:
+        friendly_name: "STL Size"
+        unit_of_measurement: 'MB'
+        value_template: "{{ states('sensor.stl_grosse_api') | round(1) }}"
+        
+  - platform: template ### 1kg = 18€ und ca.345m Filament = 0.052€
+    sensors:
+      filament_costs:
+        friendly_name: "Filament Costs"
+        unit_of_measurement: '€'
+        value_template: "{{ states('sensor.filament_menge_api') | multiply(0.052) | round(1) }}"
+
+  - platform: template
+    sensors:
+     octoprint_time_elapsed_friendly:
+      friendly_name: "Octoprint time Elapsed"
+      value_template: "{{ states('sensor.octoprint_time_elapsed') | int | timestamp_custom('%H:%M:%S', 0) }}"
+  - platform: template
+    sensors:
+     octoprint_time_remaining_friendly:
+      friendly_name: "Octoprint time Remaining"
+      value_template: "{{ states('sensor.octoprint_time_remaining') | int | timestamp_custom('%H:%M:%S', 0) }}"
+  - platform: template    
+    sensors:
+     octoprint_bed:
+      friendly_name: "Octoprint Hot Bed"
+      value_template: "{{ ((states.sensor.octoprint_actual_bed_temp.state | float-32) | float*(5/9)) | round(2) }} F"
+  - platform: template
+    sensors: 
+     octoprint_hotend:
+      friendly_name: "Octoprint Hot End"
+      value_template: "{{ ((states.sensor.octoprint_actual_tool0_temp.state | float-32) | float*(5/9)) | round(2) }} F"
+  - platform: template
+    sensors:
+     octoprint_bed_target:
+      friendly_name: "Octoprint Hot Bed Target"
+      value_template: "{{ ((states.sensor.octoprint_target_bed_temp.state | float-32) | float*(5/9)) | round(2) }} F"
+  - platform: template
+    sensors:
+     octoprint_hotend_target:
+      friendly_name: "Octoprint Hot End Target"
+      value_template: "{{ ((states.sensor.octoprint_target_tool0_temp.state | float-32) | float*(5/9)) | round(2) }} F"

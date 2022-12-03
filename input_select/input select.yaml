@@ -40,3 +40,13 @@ trash:
     - Trash
     - Recycle
   icon: mdi:gift
+
+holiday_lights_demo_mode:
+  name: Mode
+  options:
+    - off
+    - cycle effects
+    - cycle presets
+  initial: off
+  icon: "mdi:animation"  
+

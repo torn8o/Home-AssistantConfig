@@ -1,0 +1,93 @@
+#-------------------------------------------
+# @CCOSTAN
+# Original Repo : https://github.com/CCOSTAN/Home-AssistantConfig
+# Youtube Video description of how I use this script
+# https://www.vcloudinfo.com/2018/10/easy-smart-home-gadgets-i-use-for-my.html
+# http://www.vmwareinfo.com/2017/08/diy-outdoor-smart-home-led-strips.html
+# https://www.vcloudinfo.com/2019/02/breaking-down-the-flag-sensor-in-home-assistant.html
+######################################################################################################
+###Script to turn on scene for the appropriate month for the front of the house but only when the sun is down.
+#  action:
+#   - service: script.monthly_color_scene
+#
+#   scenes should be named month_[01-12]_colors (month_06_colors)
+# Color help - http://www.esbnyc.com/explore/tower-lights/calendar
+######################################################################################################
+
+monthly_color_scene:
+  sequence:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+          scene.month_
+          {%- if states.sensor.flag.state == "True" -%}
+          RWB
+          {%- elif now().strftime("%m%d")|int == 101 -%}
+          new_years_day
+          {%- elif now().strftime("%m%d")|int >= 210
+          and now().strftime("%m%d")|int <= 214-%}
+          valentine
+          {%- elif now().strftime("%m%d")|int == 305 -%}
+          mardi_gras
+          {%- elif now().strftime("%m%d")|int == 314 -%}
+          pi
+          {%- elif now().strftime("%m%d")|int >= 315
+          and now().strftime("%m%d")|int <= 317-%}
+          st_patty
+          {%- elif now().strftime("%m%d")|int >= 418
+          and now().strftime("%m%d")|int <= 421-%}
+          easter
+          {%- elif now().strftime("%m%d")|int == 504 -%}
+          starwars
+          {%- elif now().strftime("%m%d")|int == 505 -%}
+          cinco_de_mayo
+          {%- elif now().strftime("%m%d")|int == 512 -%}
+          mothers_day
+          {%- elif now().strftime("%m%d")|int == 616 -%}
+          fathers_day
+          {%- elif now().strftime("%m%d")|int >= 1001
+          and now().strftime("%m%d")|int <= 1031-%}
+          halloween
+          {%- elif now().strftime("%m%d")|int >= 1128
+          and now().strftime("%m%d")|int <= 1130-%}
+          thanksgiving
+          {%- elif now().strftime("%m%d")|int >= 1125
+          and now().strftime("%m%d")|int <= 1221-%}
+          christmas
+          {%- elif now().strftime("%m%d")|int >= 1222
+          and now().strftime("%m%d")|int <= 1223-%}
+          hanukkah
+          {%- elif now().strftime("%m%d")|int >= 1224
+          and now().strftime("%m%d")|int <= 1225-%}
+          christmas
+          {%- elif now().strftime("%m%d")|int >= 1226
+          and now().strftime("%m%d")|int <= 1230-%}
+          hanukkah
+          {%- elif now().strftime("%m%d")|int == 1231 -%}
+          new_years_day
+          {%- else -%}
+          standard
+          {%- endif -%}_colors
+
+man_cave_tv_app_netflix:
+  sequence:
+    - service: rest_command.man_cave_tv_app_netflix
+
+man_cave_tv_app_amazon:
+  sequence:
+    - service: rest_command.man_cave_tv_app_amazon
+
+man_cave_tv_app_youtube:
+  sequence:
+    - service: rest_command.man_cave_tv_app_youtube
+
+man_cave_tv_app_plex:
+  sequence:
+    - service: rest_command.man_cave_tv_app_plex    
+
+# http://www.calendar-365.com/holidays/2019.html
+# Updated for 2019

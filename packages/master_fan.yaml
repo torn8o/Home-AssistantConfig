@@ -1,14 +1,15 @@
 climate:
   - platform: generic_thermostat
-    name: Master Bedroom Fan 
-    heater: light.master_bedroom_fan #fan.game_room_fan
-    target_sensor: sensor.master_bed_temperature
+    name: Master Bedroom Fan
+    heater: light.master_bedroom_fan_level #fan.game_room_fan
+    target_sensor: sensor.master_bed_room_temperature
     ac_mode: True
-    target_temp: 74
-    initial_hvac_mode: "off"
+    target_temp: 75
+    initial_hvac_mode: "cool"
     cold_tolerance: 0
     hot_tolerance: -0
-    
+
+
 ################################################
 ## Sensors                                    ##
 ################################################
@@ -63,7 +64,7 @@ automation:
           speed: >
             {% if (((states('sensor.mb_temperature_target') | float) - (states('sensor.mb_temperature') | float))) >= 1.0 %}
               low
-            {% elif (((states('sensor.mb_temperature_target') | float) - (states('sensor.mb_temperature') | float))) <= -3.0 %}
+            {% elif (((states('sensor.mb_temperature_target') | float) - (states('sensor.mb_temperature') | float))) <= -1.0 %}
               high
             {% else %}
               med

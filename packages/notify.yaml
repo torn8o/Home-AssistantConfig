@@ -7,8 +7,7 @@
 homeassistant:
   customize:
 
-    group.tts_announcements:
-      order: 52
+
 
     # Script Stuff
     script.home_status:
@@ -31,11 +30,7 @@ homeassistant:
 
 
 
-notify:
-  - name: ios_devices
-    platform: group
-    services:
-      - service: ios_torn8o
+
 #      - service: ios_suresh
 #      - service: ios_mallika
 #      - service: ios_srinika

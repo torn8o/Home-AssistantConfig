@@ -27,22 +27,6 @@ switch:
     qos: 1
     retain: true
     
-  - platform: mqtt
-    name: "Ferina Tree"
-    state_topic: "stat/ferina/POWER"
-    command_topic: "cmnd/ferina/POWER"
-    payload_on: "ON"
-    payload_off: "OFF"
-    qos: 1
-    retain: true
-  - platform: mqtt
-    name: "Washing machine"
-    state_topic: "stat/vacuum/POWER"
-    command_topic: "cmnd/vacuum/POWER"
-    payload_on: "ON"
-    payload_off: "OFF"
-    qos: 1
-    retain: true
 
 sensor:
   - platform: mqtt
@@ -57,35 +41,7 @@ sensor:
     name: "pool motion"
     state_topic: "camera/pool/motion"
 
-  - platform: mqtt
-    state_topic: "torn/garage"
-    name: "Garage Humidity"
-    unit_of_measurement: "%"
-    value_template: '{{ value_json.humidity | round(1) }}'
 
-  - platform: mqtt
-    state_topic: "torn/garage"
-    name: "Garage LDR"
-    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
-    unit_of_measurement: "LUX"
-    value_template: '{{ value_json.ldr }}'
-
-  - platform: mqtt
-    state_topic: "torn/garage"
-    name: "Garage PIR"
-    value_template: '{{ value_json.motion }}'
-
-  - platform: mqtt
-    state_topic: "torn/garage"
-    name: "Garage Temperature"
-    unit_of_measurement: "°F"
-    value_template: '{{ value_json.temperature | round(1) }}'
-
-  - platform: mqtt
-    state_topic: "torn/garage"
-    name: "Garage Real Feel"
-    unit_of_measurement: "°F"
-    value_template: '{{ value_json.heatIndex | round(1) }}'
 
   #- platform: template
   #  sensors:
@@ -101,83 +57,7 @@ sensor:
   #        {% endif %}'
 
 automation:
-#  - alias: motion reset
-#    trigger:
-#      platform: time
-#      seconds: '/10'
-#    condition:
-#     - condition: state
-#       entity_id: input_boolean.motion_toggle
-#       state: "on"
-#    action:
-#     - service: input_boolean.turn_off
-#       data:
-#         entity_id: input_boolean.motion_toggle
 
-#  - alias: Turn motion on
-#    trigger:
-#      platform: state
-#      entity_id: sensor.front_door_motion
-#      to: 'MOTION'
-#    action:
-#      service: input_boolean.turn_on
-#      entity_id: input_boolean.motion_toggle
-
-#  - alias: test light
-#    trigger:
-#      platform: state
-#      entity_id: input_boolean.motion_toggle
-#      to: 'on'
-#    action:
-#      service: switch.turn_on
-#      entity_id: switch.front_entry_light_switch
-
-#  - alias: Front Door Pic
-#    trigger:
-#      platform: state
-#      entity_id: sensor.front_door_motion
-#      to: 'MOTION'
-#    action:
-#      service: camera.snapshot
-#      data:
-#        entity_id: camera.cam
-#        filename: 'config/snapshot/cam.jpg'
-#      service: notify.pushover
-#      message: "front door"
-  #    target: ["danny_pixel", "tosh_phone"]
-    #  title: Shokabow Zoo
-#  - service: notify.slack
-#    data:
-#      message: "Living room camera snapshot"
-#      data:
-#        file:
-#          path: "/home/homeassistant/.homeassistant/snapshot/living_room_camera.jpg"
-#  - delay: "00:00:30"
-#  - service: switch.turn_on
-#    entity_id: switch.lr_alarm
-
-  - alias: turn on garage light when there is movement
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: sensor.garage_pir
-      to: 'motion detected'
-    action:
-      service: light.turn_on
-      entity_id: light.garage_light
-
-  - alias: turn garage light off
-    initial_state: True
-    trigger:
-      platform: state
-      entity_id: sensor.garage_pir
-      to: 'standby'
-      for:
-    #    seconds: 30
-        minutes: 5
-    action:
-      - service: light.turn_off
-        entity_id: light.garage_light
 
   - alias: turn light led on
     initial_state: True
@@ -218,15 +98,4 @@ automation:
       - service: input_boolean.turn_off
         data:
           entity_id: input_boolean.switch_front_right_sprinklers
-group:
-  Garage_sensor:
-    name: Garage Sensor
-  #  view: yes
-    entities:
-      - sensor.Garage_Temperature
-      - sensor.Garage_Humidity
-      - sensor.Garage_Ldr
-      - sensor.Garage_Pir
-      - light.Garage_LED
-      - light.level
-      - input_boolean.motion_toggle
+

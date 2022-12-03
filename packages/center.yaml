@@ -11,11 +11,11 @@ homeassistant:
 binary_sensor:
   - platform: mqtt
     name: "Hallway motion"
-    state_topic: "Hallway/PIR"
+    state_topic: "stat/Hallway/POWER3"
     availability_topic: "tele/Hallway/LWT"
     qos: 1
-    payload_on: "1"
-    payload_off: "0"
+    payload_on: "ON"
+    payload_off: "OFF"
     payload_not_available: "Offline"
     device_class: motion
 
@@ -42,7 +42,6 @@ switch:
     payload_available: "Online"
     payload_not_available: "Offline"
     retain: false
-#automation:
 
 #  - alias: CL Turn Kitchen lights
 #    initial_state: True
@@ -96,22 +95,3 @@ switch:
 #    action:
 #      service: light.turn_off
 #      entity_id: light.kitchen_leds
-
-
-
-
-
-
-
-
-group:
-  Center_sensor:
-    name: Center Sensor
-#    view: yes
-    entities:
-      - sensor.Center_Temperature
-      - sensor.Center_Humidity
-      - sensor.Center_Ldr
-      - sensor.Center_Pir
-      - light.Center_LED
-      - automation.turn_off_kitchen_light

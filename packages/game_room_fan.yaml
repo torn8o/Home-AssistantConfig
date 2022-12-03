@@ -4,10 +4,10 @@ climate:
   - platform: generic_thermostat
     name: Game Room
     heater: switch.game_room_fan #fan.game_room_fan
-    target_sensor: sensor.game_temperature
+    target_sensor: sensor.game_room_temperature_2
     ac_mode: True
     target_temp: 73
-    initial_hvac_mode: "off"
+    initial_hvac_mode: "cool"
     cold_tolerance: 0
     hot_tolerance: -0
 
@@ -63,4 +63,3 @@ timer:
   game_room_fan_cooldown:
     name: "game_room Fan Cooldown"
     duration: '00:00:30'
-

@@ -15,27 +15,14 @@
 #    name: Alok Home
 #    initial: on
 #    icon: mdi:cellphone-iphone
-  switch_bathroom_exhaust_1:
-    name: bathroom exhaust 1
-  switch_bathroom_heater_1:
-    name: bathroom heater 1
-  switch_bathroom_led_1:
-    name: bathroom led 1
 
-  disable_exterior_on_sunset:
-    name: Disable Exterior Lights On at Sunset
-    icon: mdi:weather-sunset-down
-  interior_holiday:
-    name: Interior Holiday Lighting
-    icon: mdi:gift
-
-  notify_utility:
-    name: notify_utility
-    initial: on
-  persistent_notification_create:
-    name: persistent_notification_create
-    initial: on
 
   text_notifications:
     name: text_notifications
     initial: on
+  charlie_home:
+    name: charlie_home
+  liz_home:
+    name: liz_home
+  home_occupied:
+    name: home_occupied

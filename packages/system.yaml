@@ -25,10 +25,7 @@ homeassistant:
       friendly_name: "System Ready"
       icon: mdi:flag-checkered
 
-    group.system:
-      <<: *customize
-      friendly_name: "System"
-      icon: mdi:settings-box
+
 
     sensor.date:
       <<: *customize
@@ -69,27 +66,6 @@ homeassistant:
 ## Group
 ################################################
 
-group:
-  system:
-    control: hidden
-    view: yes
-    icon: mdi:engine
-    entities:
-      - updater.updater
-      - sensor.date
-      - sensor.time
-      - binary_sensor.system_ready
-      #- sensor.ha_startup_time
-      - sensor.ha_version
-    #  - sensor.ha_github_version
-      - sensor.ha_pypi_version
-
-  auto:
-     control: hidden
-#     view: yes
-     entities:
-       - automation.startup_notification
-       - automation.update_notification
 
 
 ################################################

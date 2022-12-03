@@ -2,18 +2,7 @@ homeassistant:
   customize:
     switch.garage_door_opener_switch_2_0:
       friendly_name: Double Car Garage
-group:
-  garage_door:
-    entities:
-    #  - binary_sensor.garage_door_opener_sensor
-      - sensor.garage_door_sensor_status
-      - switch.garage_door_opener_switch
-  grarage_auto:
-    entities:
-      - automation.reset_garage_relays
-      - automation.notify_garage_door
-      - automation.close_garage_door
-      - automation.Dark_outside_light
+
 
 
 sensor:

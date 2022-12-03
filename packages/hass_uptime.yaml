@@ -3,7 +3,7 @@
 automation:
   - alias: 'Update Available Notification'
     initial_state: True
-    hide_entity: true
+  
     trigger:
       platform: state
       entity_id: updater.updater
@@ -23,10 +23,4 @@ automation:
 #        title: "HomeAssistant Startup"
 #        message: "Home Assistant restarted."
 
-group:
-  hass:
-    name: HomeAssistant
-    entities:
-      - sensor.ha_installed_version
-      - sensor.ha_current_version
-      - sensor.ha_last_restart
+

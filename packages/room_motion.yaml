@@ -5,47 +5,17 @@ homeassistant:
       homebridge_hidden: true
       package: 'room_motion'
 
-group:
-  game_room_motion:
-    entities:
-      - camera.camera
-      - sensor.game_motion
-      - sensor.gr_motion_status
-      - light.gr_led
-      - automation.turn_on_game_room_light_when_there_is_movement
-      - automation.turn_off_game_room_light_when_there_is_no_movement
-  kitchen motion:
-    entities:
-      - binary_sensor.center_pir
-      - binary_sensor.front_motion_sensor
-      - binary_sensor.kitchen_motion
-
-  Theater Group Motion:
-    entities:
-      - sensor.mb_motion_status
-      - sensor.gr_motion
-
-  Theater Group Motion B:
-    entities:
-      - binary_sensor.center_pir
-      - binary_sensor.theater_room_motion
-  porch_room_motion:
-    entities:
-      - sensor.front_p_motion
-      - sensor.fd_motion_status
-      - automation.binary_turn_on_color_light
-      - automation.binary_turn_off_color_lights
 
 
-  motion:
-    name: room motion
-  #  view: yes
-    icon: mdi:walk
-    entities:
-      - group.game_room_motion
-      - group.master_room_motion
-#      - group.porch_room_motion
+
+
 input_boolean:
+  game_room_ac:
+    name: Game Room AC
+    initial: on
+  theater_auto:
+    name: Theater Auto
+    initial: on
   light_manual:
     name: Light Manual
     initial: off
@@ -54,17 +24,34 @@ input_boolean:
     initial: off
   light_manual_mb:
     name: Light Manual Mb
-    initial: off
+    initial: on
   light_auto_mb:
     name: Light Auto Mb
-    initial: off
+    initial: on
   light_manual_hum:
     name: Light Manual Hum
     initial: off
   light_auto_hum:
     name: Light Auto Hum
     initial: off
-
+  light_master_bathroom_manual:
+    name: master bathroom manual
+    initial: on
+  fan_master_bathroom_manual:
+    name: fan master bathroom manual
+    initial: on
+  light_kitchen_manual:
+    name: kitchen manual
+    initial: on
+  light_game_room_manual:
+    name: game room manual
+    initial: on
+  light_75:
+    name: 75
+    initial: off
+  theater_room_status:
+    name: theater room Status
+    initial: on
 sensor:
 
   - platform: template
@@ -130,3 +117,10 @@ sensor:
           {% else %}
           n/a
           {% endif %}'
+
+
+
+
+#    action:
+#      service: input_boolean.turn_on
+#      entity_id: input_boolean.motion_toggle

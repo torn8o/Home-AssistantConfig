@@ -75,7 +75,7 @@ automation:
 
   - alias: persistence_publish
     initial_state: 'on'
-    hide_entity: true
+ 
     trigger:
       - platform: event
         event_type: state_changed
@@ -119,7 +119,7 @@ automation:
 
   - alias: persistence_subscribe_binary
     initial_state: 'on'
-    hide_entity: true
+ 
     trigger:
       - platform: mqtt
         topic: home-assistant/automation/+
@@ -141,7 +141,7 @@ automation:
 
   - alias: persistence_subscribe_select_option
     initial_state: 'on'
-    hide_entity: true
+ 
     trigger:
       - platform: mqtt
         topic: home-assistant/input_select/+
@@ -154,7 +154,7 @@ automation:
 
   - alias: persistence_subscribe_select_value
     initial_state: 'on'
-    hide_entity: true
+ 
     trigger:
       - platform: mqtt
         topic: home-assistant/input_slider/+

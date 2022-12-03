@@ -2,53 +2,47 @@
 Circadian Lighting Sensor for Home-Assistant.
 """
 
-DEPENDENCIES = ['circadian_lighting']
-
-import logging
-
-from custom_components.circadian_lighting import DOMAIN, CIRCADIAN_LIGHTING_UPDATE_TOPIC, DATA_CIRCADIAN_LIGHTING
-
-from homeassistant.helpers.dispatcher import dispatcher_connect
+from homeassistant.core import callback, HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.typing import ConfigType
+from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from homeassistant.helpers.entity import Entity
 
-import datetime
+from . import CIRCADIAN_LIGHTING_UPDATE_TOPIC, DOMAIN
 
-_LOGGER = logging.getLogger(__name__)
+ICON = "mdi:theme-light-dark"
 
-ICON = 'mdi:theme-light-dark'
 
-def setup_platform(hass, config, add_devices, discovery_info=None):
+async def async_setup_platform(
+    hass: HomeAssistant,
+    config: ConfigType,
+    async_add_entities: AddEntitiesCallback,
+    discovery_info = None,
+) -> None:
     """Set up the Circadian Lighting sensor."""
-    cl = hass.data.get(DATA_CIRCADIAN_LIGHTING)
-    if cl:
-        cs = CircadianSensor(hass, cl)
-        add_devices([cs])
+    circadian_lighting = hass.data.get(DOMAIN)
+    if circadian_lighting is not None:
+        sensor = CircadianSensor(hass, circadian_lighting)
+        async_add_entities([sensor])
 
-        def update(call=None):
+        async def async_update(call = None) -> None:
             """Update component."""
-            cl._update()
+            await circadian_lighting.async_update()
+
         service_name = "values_update"
-        hass.services.register(DOMAIN, service_name, update)
-        return True
-    else:
-        return False
+        hass.services.async_register(DOMAIN, service_name, async_update)
+
 
 class CircadianSensor(Entity):
     """Representation of a Circadian Lighting sensor."""
 
-    def __init__(self, hass, cl):
+    def __init__(self, hass, circadian_lighting):
         """Initialize the Circadian Lighting sensor."""
-        self._cl = cl
-        self._name = 'Circadian Values'
-        self._entity_id = 'sensor.circadian_values'
-        self._state = self._cl.data['percent']
-        self._unit_of_measurement = '%'
+        self._circadian_lighting = circadian_lighting
+        self._name = "Circadian Values"
+        self._entity_id = "sensor.circadian_values"
+        self._unit_of_measurement = "%"
         self._icon = ICON
-        self._hs_color = self._cl.data['hs_color']
-        self._attributes = self._cl.data
-
-        """Register callbacks."""
-        dispatcher_connect(hass, CIRCADIAN_LIGHTING_UPDATE_TOPIC, self.update_sensor)
 
     @property
     def entity_id(self):
@@ -63,7 +57,7 @@ class CircadianSensor(Entity):
     @property
     def state(self):
         """Return the state of the sensor."""
-        return self._state
+        return self._circadian_lighting._percent
 
     @property
     def unit_of_measurement(self):
@@ -77,23 +71,31 @@ class CircadianSensor(Entity):
 
     @property
     def hs_color(self):
-        return self._hs_color
+        return self._circadian_lighting._hs_color
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the attributes of the sensor."""
-        return dict((k,str(v) if isinstance(v, datetime.time) or isinstance(v, datetime.timedelta) else v) for k,v in self._attributes.items())
+        return {
+            "colortemp": self._circadian_lighting._colortemp,
+            "rgb_color": self._circadian_lighting._rgb_color,
+            "xy_color": self._circadian_lighting._xy_color,
+        }
 
-    def update(self):
-        """Fetch new state data for the sensor.
+    @property
+    def should_poll(self) -> bool:
+        """Disable polling."""
+        return False
 
-        This is the only method that should fetch new data for Home Assistant.
-        """
-        self._cl.update()
+    async def async_added_to_hass(self) -> None:
+        """Connect dispatcher to signal from CircadianLighting object."""
+        self.async_on_remove(
+            async_dispatcher_connect(
+                self.hass, CIRCADIAN_LIGHTING_UPDATE_TOPIC, self._update_callback
+            )
+        )
 
-    def update_sensor(self):
-        if self._cl.data is not None:
-            self._state = self._cl.data['percent']
-            self._hs_color = self._cl.data['hs_color']
-            self._attributes = self._cl.data
-            _LOGGER.debug("Circadian Lighting Sensor Updated")
+    @callback
+    def _update_callback(self) -> None:
+        """Triggers update of properties."""
+        self.async_schedule_update_ha_state(force_refresh=False)

@@ -10,7 +10,34 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'filed_automations'
+light:
+  - platform: mqtt
+    name: “Garage_left_mqtt"
+    state_topic: “wled/garage_left_light/status”
+    command_topic: “wled/garage_left_light/light”
+    brightness_state_topic: ‘wled/garage_left_light/brightness/status’
+    brightness_command_topic: ‘wled/garage_left_light/brightness/set’
+    brightness_scale: 100
+    rgb_state_topic: ‘wled/garage_left_light/rgb/status’
+    rgb_command_topic: ‘wled/garage_left_light/rgb/set’
+    qos: 0
+    payload_on: “ON”
+    payload_off: “OFF”
+    optimistic: false
 
+  - platform: mqtt
+    name: “Garage_Right_mqtt"
+    state_topic: “wled/garage_right/status”
+    command_topic: “wled/garage_right”
+    brightness_state_topic: ‘wled/garage_right/brightness/status’
+    brightness_command_topic: ‘wled/garage_right/brightness/set’
+    brightness_scale: 100
+    rgb_state_topic: ‘wled/garage_right/rgb/status’
+    rgb_command_topic: ‘wled/garage_right/rgb/set’
+    qos: 0
+    payload_on: “ON”
+    payload_off: “OFF”
+    optimistic: false
 sensor:
   - platform: file
     file_path: /config/filed_automations.txt

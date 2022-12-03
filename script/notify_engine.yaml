@@ -28,7 +28,7 @@ notify_engine:
           {% if who == 'Liz' %}
             notify.ios_liz1
           {% elif who == 'charlie' %}
-            notify.ios_torn8o
+            notify.ios_tornado
           {% elif who == 'parents' %}
             notify.ios_parents
           {% elif who == 'family' %}
