@@ -1,0 +1,21 @@
+homeassistant:
+  customize:
+    zone.Torn_Work:
+      track_ios: true
+    zone.home:
+      track_ios: true
+
+
+
+zone:
+#  - name: Torn_Work
+#    latitude: !secret work_latitude
+#    longitude: !secret work_longitude
+#    radius: 200
+#    icon: mdi:briefcase
+
+  - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 100
+

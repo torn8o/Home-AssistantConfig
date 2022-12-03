@@ -1,0 +1,22 @@
+
+#- platform: mjpeg
+#  name: Interior Motion
+#  mjpeg_url: torn8o.ddns.net:81/mjpg/cam1/video.mjpg
+#  username: homeassistant
+#  password: a10281028
+#  authentication: basic
+#camera:
+  - platform: mjpeg
+    mjpeg_url: http://tornhome.ddns.net:84/mjpg/fdb/video.mjpg
+    name: Front Door Stream
+    username: torn
+    password: 1028
+    authentication: basic
+
+#camera:
+  - platform: mjpeg
+    mjpeg_url: http://tornhome.ddns.net:84/mjpg/pdb/video.mjpg
+    name: Pool Stream
+    username: torn
+    password: 1028
+    authentication: basic

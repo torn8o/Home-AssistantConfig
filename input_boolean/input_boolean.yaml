@@ -1,0 +1,28 @@
+#  plex_lights_disable:
+#    name: Disable Plex Lights
+#    initial: off
+#    icon: mdi:filmstrip-off
+#3################################################################
+## Input_boolean
+#################################################################
+
+
+#  startrecording:
+#    name: Camera Recording
+#    initial: off
+#    icon: mdi:record-rec
+#  alokhome:
+#    name: Alok Home
+#    initial: on
+#    icon: mdi:cellphone-iphone
+
+
+  text_notifications:
+    name: text_notifications
+    initial: on
+  charlie_home:
+    name: charlie_home
+  liz_home:
+    name: liz_home
+  home_occupied:
+    name: home_occupied

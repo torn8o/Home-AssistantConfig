@@ -1,0 +1,15 @@
+cover:
+ - platform: command_line
+   covers:
+    curtains:
+# Only use one of the below sections.
+ ### GPIO IR Blaster - These commands use lirc's irsend command to activate pre-programmed
+ ### remote signals via an infrared led connected to the GPIO pins of a Raspberry Pi:
+        command_open:  'irsend SEND_ONCE windows KEY_OPEN'
+        command_close: 'irsend SEND_ONCE windows KEY_CLOSE'
+        command_stop:  'irsend SEND_ONCE windows KEY_STOP'
+
+ ### RM Pro 2 - These commands use curl to activate a pre-programmed remote signal via the
+ ### RM-Bridge software I have running on another device:
+         command_close: 'curl http://<rm-bridge-ip>:<port>/code/curtainclose'
+         command_open:  'curl http://<rm-bridge-ip>:<port>/code/curtainopen'

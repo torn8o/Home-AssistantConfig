@@ -1,0 +1,144 @@
+###############################################################################
+#                   :   modified from author below
+#   @author         :   Mahasri Kalavala
+#   @date           :   04/15/2017
+#   @package        :   Pi-Hole Package
+#   @description    :   Pi-Hole Ad Blocking Stuff.
+#                       Remember to add PiHole URL in your secrets.yaml file.
+#                       http://192.168.x.xx/admin/api.php
+###############################################################################
+homeassistant:
+  customize:
+
+    sensor.ads_blocked_today:
+      friendly_name: Ads Blocked Today
+      entity_picture: /local/Vortex.png
+
+    sensor.dns_queries_today:
+      friendly_name: DNS Queries Today
+      icon: mdi:comment-question-outline
+
+    sensor.ads_percentage_today:
+      friendly_name: Percentage of Ad Traffic Blocked
+      unit_of_measurement: '%'
+      icon: mdi:ticket-percent
+
+    sensor.domains_being_blocked:
+      friendly_name: Total Domains Blocking
+      icon: mdi:do-not-disturb
+
+    sensor.unique_domains:
+      friendly_name: Unique Domains
+      icon: mdi:approval
+
+    sensor.queries_forwarded:
+      friendly_name: Queries Forwarded
+      icon: mdi:fast-forward
+
+    sensor.queries_cached:
+      friendly_name: Queries Cached
+      icon: mdi:cached
+
+
+
+
+
+###############################################################################
+#  Sensors
+###############################################################################
+sensor:
+  - platform: rest
+    name: dns_queries_today
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.dns_queries_today }}'
+
+  - platform: rest
+    name: domains_being_blocked
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.domains_being_blocked }}'
+
+  - platform: rest
+    name: ads_blocked_today
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.ads_blocked_today }}'
+
+  - platform: rest
+    name: ads_percentage_today
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.ads_percentage_today }}'
+
+  - platform: rest
+    name: unique_domains
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.unique_domains }}'
+
+  - platform: rest
+    name: queries_forwarded
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.queries_forwarded }}'
+
+  - platform: rest
+    name: queries_cached
+    resource: !secret pi_hole_url
+    value_template: '{{ value_json.queries_cached }}'
+
+###############################################################################
+#  Automations unique_domains
+###############################################################################
+#automation:
+#  - alias: Thousand Ads blocked
+#    initial_state: true
+#    trigger:
+#      platform: numeric_state
+#      entity_id: sensor.ads_blocked_today
+#      above: 999
+#    action:
+#      - service: script.notify_me
+#        data_template:
+#          value1: "Pi-Hole blocked 1000 Ads today! Hurray!!!"
+#          value2: ""
+input_boolean:
+  pi_hole:
+    name: "pi_hole"
+    initial: on
+  ad_blocker:
+    name: "ad_blocker"
+    initial: off
+switch:
+  - platform: template
+    switches:
+      ad_blocker:
+       value_template: "{% if is_state('input_boolean.ad_blocker', 'on') %}on{% else %}off{% endif %}"
+       turn_on:
+         service: script.turn_on
+         entity_id: script.pihole_on
+       turn_off:
+         service: script.turn_on
+         entity_id: script.pihole_off
+  - platform: template
+    switches:
+      pihole:
+       value_template: "{% if is_state('input_boolean.pi_hole', 'on') %}on{% else %}off{% endif %}"
+       turn_on:
+         service: script.turn_on
+         entity_id: script.pihole_on
+       turn_off:
+         service: script.turn_on
+         entity_id: script.pihole_off
+
+script:
+  pihole_on:
+    sequence:
+       - service: shell_command.pihole_on
+  pihole_off:
+    sequence:
+       - service: shell_command.pihole_off
+
+shell_command:
+  pihole_on: !secret pi_hole_switch_on
+  pihole_off: !secret pi_hole_switch_off
+
+#!secret_example
+#Authorization & Token required (see WEBPASSWORD in /etc/pihole/setupVars.conf)
+#pi_hole_switch_on: /usr/bin/curl -k "localhost/admin/api.php?enable&auth=webkey"
+#pi_hole_switch_off: /usr/bin/curl -k "localhost/admin/api.php?disable=600&auth=webkey"

@@ -1,0 +1,50 @@
+######################################################################################################
+###Script to send notifications to IFTTT to notify me on the mobile Phone! Call like this:
+  # action:
+    # service: script.notify_engine
+    # data_template:
+      # title: 'Ios Title'
+      # value1: 'Startup: Home Assistant is Up and Running!'
+      # value2: "{{ trigger.to_state.state }}"
+      # value3:
+      # who: "stacey | carlo | paige | family | parents"
+      # camera_entity: 'Camera.Camera'
+      # content-type: "jpeg"
+
+    # IFTTT Maker channel should look like this: https://files.gitter.im/home-assistant/home-assistant/phkx/blob
+######################################################################################################
+
+notify_engine:
+  sequence:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: input_boolean.text_notifications
+          state: 'on'
+    # - service: ifttt.trigger
+    #   data_template: {"event":"notify_engine", "value1":"{{ value1 }}", "value2":"{{ value2 }}", "value3":"{{ value3 }}"}
+
+    - service_template: >
+          {% if who == 'Liz' %}
+            notify.ios_liz1
+          {% elif who == 'charlie' %}
+            notify.ios_tornado
+          {% elif who == 'parents' %}
+            notify.ios_parents
+          {% elif who == 'family' %}
+            notify.ios_family
+          {% else %}
+            notify.ios_family
+          {% endif %}
+      data_template:
+        title: "{{ title }}"
+        message: "{{ value1 }} {{ value2 }} {{ value3 }}"
+        data:
+          attachment:
+            content-type: "{{ content_type }}"
+            hide-thumbnail: false
+          push:
+            sound: "{{ ios_sound }}"
+            badge: "{{ ios_badge }}"
+            category: "{{ ios_category }}"
+          entity_id: "{{ camera_entity }}"

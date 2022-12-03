@@ -1,0 +1,113 @@
+- platform: darksky
+  api_key: !secret darksky_api_key
+  monitored_conditions:
+    - summary
+#    - icon
+#    - nearest_storm_distance
+#    - nearest_storm_bearing
+#    - precip_type
+    - precip_intensity
+    - precip_probability
+    - temperature
+    - apparent_temperature
+    - dew_point
+    - wind_speed
+    - wind_bearing
+    - cloud_cover
+    - humidity
+    - pressure
+    - visibility
+#    - ozone
+#      - minutely_summary
+#    - hourly_summary
+#    - daily_summary
+#    - temperature_max
+#    - temperature_min
+#    - apparent_temperature_max
+#    - apparent_temperature_min
+#    - precip_intensity_max
+
+#- platform: sonarr
+#  api_key: !secret sonarr_api_key
+#  host: !secret sonarr_url
+#  port: !secret sonarr_port
+#  monitored_conditions:
+#    - diskspace
+#    - upcoming
+#  days: 1
+- platform: yweather
+#  name: Weather
+  monitored_conditions:
+    - weather
+    - weather_current
+    - temp_min
+    - temp_max
+    - wind_speed
+    - pressure
+    - visibility
+    - humidity
+    - temperature
+
+- platform: crimereports
+  name: Home crimereports
+  radius: 10
+
+- platform: template
+  sensors:
+    holidays_calendar:
+      friendly_name: 'Holiday'
+      value_template: '{{ states.calendar.holidays_in_united_states.attributes.message }}'
+- platform: template
+  sensors:
+    charlie_calendar:
+      friendly_name: 'Charlie'
+      value_template: '{{ states.calendar.charlie_brown.attributes.message }}'
+
+- platform: template
+  sensors:
+    trash_and_recycle:
+      friendly_name: 'trash_and_recycle'
+      value_template: '{{ states.calendar.trash_and_recycle.attributes.message }}'
+- platform: fastdotcom
+  minute:
+    - 0
+    - 30
+#- platform: broadlink
+#  host: 192.168.1.11
+#  mac: B4:43:0D:EF:9F:25
+#  name: "broadlink torn"
+#  update_interval: 60
+#  monitored_conditions:
+#    - temperature
+
+- platform: ring
+- platform: google_wifi
+
+- platform: mqtt
+  name: "display song"
+  state_topic: "xmas/falcon/player/FPP/playlist/media/status"
+
+- platform: yr
+- platform: speedtest
+  monitored_conditions:
+  - ping
+  - download
+  - upload
+
+- platform: template
+  sensors:
+     vizio_tv:
+        friendly_name: 'Vizio TV'
+        value_template: "{{ 'Online' if is_state('device_tracker.vizio_tv', 'home') else 'Offline' }}"
+
+     broadlink:
+        friendly_name: 'Broadlink'
+        value_template: "{{ 'Online' if is_state('device_tracker.broadlink', 'home') else 'Offline' }}"
+
+     harmony_hub:
+        friendly_name: 'Harmony Hub'
+        value_template: "{{ 'Online' if is_state('device_tracker.harmonyhub', 'home') else 'Offline' }}"
+
+     tv_room:
+        friendly_name: 'Tv Room'
+        value_template: "{{ states.remote.torn_hub.attributes.current_activity }}"

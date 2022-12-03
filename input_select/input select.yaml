@@ -1,0 +1,52 @@
+log_level:
+  name: Log Level
+  options:
+    - critical
+    - fatal
+    - error
+    - warning
+    - warn
+    - info
+    - debug
+    - notset
+  initial: warn
+
+#################################################################
+## Input Select
+#################################################################
+
+holiday:
+  name: Holiday Lighting
+  options:
+    - None
+    - Valentine's Day
+    - St. Patrick's Day
+    - Easter
+    - Memorial Day
+    - Independence Day
+    - Labor Day
+    - Halloween
+    - Veterans Day
+    - Thanksgiving
+    - Christmas
+    - Cardinals Game
+    - Blues Game
+  icon: mdi:gift
+
+trash:
+  name: Trash Lighting
+  options:
+    - None
+    - Trash
+    - Recycle
+  icon: mdi:gift
+
+holiday_lights_demo_mode:
+  name: Mode
+  options:
+    - off
+    - cycle effects
+    - cycle presets
+  initial: off
+  icon: "mdi:animation"  
+

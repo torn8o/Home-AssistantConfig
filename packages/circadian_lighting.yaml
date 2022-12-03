@@ -1,0 +1,77 @@
+
+################################################
+## Customize
+################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'circadian_lighting'
+
+    ################################################
+    ## switch
+    ################################################
+
+
+switch:
+  - platform: circadian_lighting
+    lights_ct:
+      - light.hallway_1
+      - light.hallway_2
+    min_brightness: 15
+    max_brightness: 70
+    name: CL hallway Lights
+  - platform: circadian_lighting
+    lights_ct:
+      - light.game_room_dimmer
+    min_brightness: 30
+    max_brightness: 100
+    name: CL Game Room
+  - platform: circadian_lighting
+    lights_ct:
+      - light.theater_room_lights
+    min_brightness: 30
+    max_brightness: 100
+    name: Theater Room Circadian
+  - platform: circadian_lighting
+    lights_ct:
+      - light.kitchen_leds
+    min_brightness: 30
+    max_brightness: 100
+    name: kitchen lights
+#  - platform: circadian_lighting
+#    lights_brightness:
+#      - light.accent_interior_lights
+#    name: accent
+input_text:
+  alexa_actionable_notification:
+    name: Alexa Actionable Notification Holder
+    max: 255
+    initial: '{"text": "This is a test of the alexa actions custom skill. Did it work?", "event": "actionable.skill.test"}'
+
+script:
+  activate_alexa_actionable_notification:
+    description: 'Activates an actionable notification on a specific echo device'
+    fields:
+      text:
+        description: 'The text you would like alexa to speak.'
+      #  example: 'What would you like the thermostat set to?'
+      event_id:
+        description: 'Correlation ID for event responses'
+      #  example: 'ask_for_temperature'
+      alexa_device:
+        description: 'Alexa device you want to trigger'
+      #  example: 'media_player.game_room'
+    sequence:
+      - service: input_text.set_value
+        data:
+          entity_id: input_text.alexa_actionable_notification
+          value: '{"text": "{{ text }}", "event": "{{ event_id }}"}'
+      - service: media_player.play_media
+        data:
+          entity_id: "{{ alexa_device }}"
+          media_content_type: skill
+          media_content_id: amzn1.ask.skill.718d3b24-88ef-47d8-9cde-66b1d8788420

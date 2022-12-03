@@ -1,0 +1,78 @@
+
+################################################
+## Customize
+################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'filed_automations'
+light:
+  - platform: mqtt
+    name: “Garage_left_mqtt"
+    state_topic: “wled/garage_left_light/status”
+    command_topic: “wled/garage_left_light/light”
+    brightness_state_topic: ‘wled/garage_left_light/brightness/status’
+    brightness_command_topic: ‘wled/garage_left_light/brightness/set’
+    brightness_scale: 100
+    rgb_state_topic: ‘wled/garage_left_light/rgb/status’
+    rgb_command_topic: ‘wled/garage_left_light/rgb/set’
+    qos: 0
+    payload_on: “ON”
+    payload_off: “OFF”
+    optimistic: false
+
+  - platform: mqtt
+    name: “Garage_Right_mqtt"
+    state_topic: “wled/garage_right/status”
+    command_topic: “wled/garage_right”
+    brightness_state_topic: ‘wled/garage_right/brightness/status’
+    brightness_command_topic: ‘wled/garage_right/brightness/set’
+    brightness_scale: 100
+    rgb_state_topic: ‘wled/garage_right/rgb/status’
+    rgb_command_topic: ‘wled/garage_right/rgb/set’
+    qos: 0
+    payload_on: “ON”
+    payload_off: “OFF”
+    optimistic: false
+sensor:
+  - platform: file
+    file_path: /config/filed_automations.txt
+    name: Filed automations
+
+notify:
+  - name: filed_automations
+    platform: file
+    filename: filed_automations.txt
+
+automation:
+  - alias: Automation ran
+    id: 'Automation ran'
+  #  initial_state: 'off'
+    trigger:
+      platform: event
+      event_type: state_changed
+    condition:
+      condition: template
+      value_template: >
+        {% set skip_list = ['automation_ran', 'count_warnings', 'count_errors',
+                             'activate_map_sensors_actueel', 'call_family_home',
+                             'timed_python_scripts_per_20_secs'] %}
+        {{ trigger.event.data.entity_id.startswith('automation.') and
+           trigger.event.data.entity_id.split('.')[1] not in skip_list and
+           'old_state' in trigger.event.data and 'new_state' in trigger.event.data }}
+    action:
+      - condition: template
+        value_template: >
+          {{ trigger.event.data.new_state.attributes.last_triggered !=
+             trigger.event.data.old_state.attributes.last_triggered }}
+      - service: notify.filed_automations
+        data_template:
+          message: >
+           {{ as_timestamp(trigger.event.data.new_state.last_updated)|timestamp_custom('%d %b: %X') }}: {{ trigger.event.data.new_state.name }}
+      - service: python_script.last_automation
+        data_template:
+          event: '{{ trigger.event }}'

@@ -1,0 +1,126 @@
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'room_motion'
+
+
+
+
+
+input_boolean:
+  game_room_ac:
+    name: Game Room AC
+    initial: on
+  theater_auto:
+    name: Theater Auto
+    initial: on
+  light_manual:
+    name: Light Manual
+    initial: off
+  light_auto:
+    name: Light Auto
+    initial: off
+  light_manual_mb:
+    name: Light Manual Mb
+    initial: on
+  light_auto_mb:
+    name: Light Auto Mb
+    initial: on
+  light_manual_hum:
+    name: Light Manual Hum
+    initial: off
+  light_auto_hum:
+    name: Light Auto Hum
+    initial: off
+  light_master_bathroom_manual:
+    name: master bathroom manual
+    initial: on
+  fan_master_bathroom_manual:
+    name: fan master bathroom manual
+    initial: on
+  light_kitchen_manual:
+    name: kitchen manual
+    initial: on
+  light_game_room_manual:
+    name: game room manual
+    initial: on
+  light_75:
+    name: 75
+    initial: off
+  theater_room_status:
+    name: theater room Status
+    initial: on
+sensor:
+
+  - platform: template
+    sensors:
+      gr_motion_status:
+        value_template: '{% if states.sensor.game_motion %}
+          {% if states.sensor.game_motion.state == "motion detected" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+
+#  - platform: template
+#    sensors:
+#      attic_motion_status:
+#        value_template: '{% if states.sensor.attic_motion %}
+#          {% if states.sensor.attic_motion.state == "1" %}
+#            on
+#          {% else %}
+#            off
+#          {% endif %}
+#          {% else %}
+#          n/a
+#          {% endif %}'
+  - platform: template
+    sensors:
+      dining_motion_status:
+        value_template: '{% if states.sensor.Garage_Entry_Motion %}
+          {% if states.sensor.Garage_Entry_Motion.state == "motion detected" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+
+  - platform: template
+    sensors:
+      kit_motion_status:
+        value_template: '{% if states.sensor.kitchen_multi_sensor_burglar %}
+          {% if states.sensor.kitchen_multi_sensor_burglar.state == "8" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+
+  - platform: template
+    sensors:
+      garage_motion_status:
+        value_template: '{% if states.sensor.aeotec_zw100_multisensor_6_burglar %}
+          {% if states.sensor.aeotec_zw100_multisensor_6_burglar.state == "8" %}
+            on
+          {% else %}
+            off
+          {% endif %}
+          {% else %}
+          n/a
+          {% endif %}'
+
+
+
+
+#    action:
+#      service: input_boolean.turn_on
+#      entity_id: input_boolean.motion_toggle

@@ -1,0 +1,97 @@
+
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'Center sensor'
+
+
+
+binary_sensor:
+  - platform: mqtt
+    name: "Hallway motion"
+    state_topic: "stat/Hallway/POWER3"
+    availability_topic: "tele/Hallway/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_not_available: "Offline"
+    device_class: motion
+
+
+
+switch:
+  - platform: mqtt
+    name: "Pool Lights"
+    state_topic: "stat/pool_lights/POWER"
+    command_topic: "cmnd/pool_lights/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    qos: 1
+    retain: true
+
+  - platform: mqtt
+    name: "HallWay Motion Sensor and Switch"
+    state_topic: "stat/Hallway/POWER1"
+    command_topic: "cmnd/Hallway/EVENT"
+    availability_topic: "tele/Hallway/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+
+#  - alias: CL Turn Kitchen lights
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: group.kitchen_motion
+#      to: 'on'
+#    action:
+#      - service: switch.turn_on
+#        entity_id: switch.circadian_lighting_kitchen_lights
+#      - service: light.turn_on
+#        entity_id: light.kitchen_leds
+#  - alias: CL Turn off kitchen lights
+#    initial_state: True
+#    trigger:
+#      platform: state
+####      seconds: 45
+    #action:
+    #  - service: switch.turn_off
+#        entity_id: switch.circadian_lighting_kitchen_lights
+#      - service: light.turn_off
+#        entity_id: light.kitchen_leds
+
+
+
+
+
+
+#  - alias: Turn Kitchen light on
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: group.kitchen_motion
+#      to: 'on'
+#    action:
+#      - service: light.turn_on
+#        entity_id: light.kitchen_leds
+#      - delay:
+#          minutes: 1
+#      - service: switch.turn_off
+#        entity_id: group.kitchen_lights
+
+#  - alias: Turn off kitchen light
+#    initial_state: True
+#    trigger:
+#      platform: state
+#      entity_id: group.kitchen_motion
+#      to: 'off'
+#      for:
+#        seconds: 45
+#    action:
+#      service: light.turn_off
+#      entity_id: light.kitchen_leds

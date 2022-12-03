@@ -1,0 +1,26 @@
+
+
+automation:
+  - alias: 'Update Available Notification'
+    initial_state: True
+  
+    trigger:
+      platform: state
+      entity_id: updater.updater
+    action:
+      service: notify.ios_torn8o
+      data:
+        title: "HomeAssistant Update"
+        message: 'Update for Home Assistant is available.'
+
+#  - alias: "Startup Notification"
+#    trigger:
+#      platform: homeassistant
+#      event: start
+#    action:
+#      service: notify.pushover
+#      data:
+#        title: "HomeAssistant Startup"
+#        message: "Home Assistant restarted."
+
+

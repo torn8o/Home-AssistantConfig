@@ -1,10 +1,23 @@
 #!/bin/bash
+# Path variables
+#HASS_SERVICE=${HASS_SERVICE: home-assistant.service}
+#HASS_CONFIG=${HASS_CONFIG: home/homeassistant/.homeassistant}
+#VIRTUAL_ENV=${VIRTUAL_ENV: srv/homeassistant}
+# This is for log purposes
 
-# Run backup first
-/home/pi/shell/backup_config.sh
-
-# Run update
-pushd /home/pi >/dev/null
-sudo pip3 install --upgrade homeassistant
-hassctl restart
-popd >/dev/null
+echo
+echo "[$(date)] Update script starting"
+# Show package information
+#$VIRTUAL_ENV/bin/pip3 search homeassistant
+# Run the backup script
+#$HASS_CONFIG/shell_scripts/backup_config.sh
+# Upgrade Home Assistant
+sudo su -s /bin/bash homeassistant
+source /srv/homeassistant/bin/activate
+pip3 install --upgrade homeassistant
+# Restart Home Assistant
+# This requires a modification using `sudo visudo`:
+#   homeassistant ALL=(ALL) NOPASSWD: /bin/systemctl restart home-assistant.service
+# Make sure to change `home-assistant.service` to the correct service name
+#sudo systemctl restart $HASS_SERVICE
+#sudo systemctl restart home-assistant.service

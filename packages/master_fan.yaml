@@ -1,0 +1,80 @@
+climate:
+  - platform: generic_thermostat
+    name: Master Bedroom Fan
+    heater: light.master_bedroom_fan_level #fan.game_room_fan
+    target_sensor: sensor.master_bed_room_temperature
+    ac_mode: True
+    target_temp: 75
+    initial_hvac_mode: "cool"
+    cold_tolerance: 0
+    hot_tolerance: -0
+
+
+################################################
+## Sensors                                    ##
+################################################
+
+sensor:
+  - platform: template
+    sensors:
+      mb_temperature:
+        value_template: '{{states("sensor.master_bed_temperature") | float - 3}}'
+        unit_of_measurement: '°F'
+  - platform: template
+    sensors:
+      mb_temperature_target:
+        friendly_name: "MB Target Temperature"
+        unit_of_measurement: '°F'
+        value_template: "{{ state_attr('climate.master_bedroom_room_fan', 'temperature') }}"
+################################################
+## Switch                                     ##
+################################################
+switch:
+  - platform: template
+    switches:
+      mb_thermostat_switch:
+        value_template:  "{{ is_state('automation.mb_fan_turn_on', 'on') }}"
+        turn_on:
+          service: automation.turn_on
+          entity_id: automation.mb_fan_speed
+        turn_off:
+          - service: automation.turn_off
+            entity_id: automation.mb_fan_turn_on
+          - service: light.turn_off
+            entity_id: light.master_bedroom_fan
+################################################
+## automation                                 ##
+################################################
+automation:
+  alias: mb_Fan Speed
+  initial_state: false
+  trigger:
+    - platform: state
+      entity_id: sensor.mb_temperature
+    - platform: state
+      entity_id: sensor.mb_temperature_target
+  condition:
+    - condition: state
+      entity_id: timer.mb_fan_cooldown
+      state: 'idle'
+  action:
+    - service: fan.turn_on
+      entity_id: fan.mb_fan
+      data_template:
+          speed: >
+            {% if (((states('sensor.mb_temperature_target') | float) - (states('sensor.mb_temperature') | float))) >= 1.0 %}
+              low
+            {% elif (((states('sensor.mb_temperature_target') | float) - (states('sensor.mb_temperature') | float))) <= -1.0 %}
+              high
+            {% else %}
+              med
+            {% endif %}
+    - service: timer.start
+      entity_id: timer.mb_fan_cooldown
+################################################
+## timer                                      ##
+################################################
+timer:
+  mb_fan_cooldown:
+    name: "mb Fan Cooldown"
+    duration: '00:00:30'

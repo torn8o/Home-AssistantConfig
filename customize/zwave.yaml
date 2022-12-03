@@ -1,0 +1,12 @@
+sensor.aeotec_zw100_multisensor_6_burglar:
+  friendly_name: Garage MultiSensor Burglar
+sensor.aeotec_zw100_multisensor_6_luminance:
+  friendly_name: Garage MultiSensor Luminance
+sensor.aeotec_zw100_multisensor_6_relative_humidity:
+  friendly_name: Garage MultiSensor Relative Humidity
+sensor.aeotec_zw100_multisensor_6_sourcenodeid:
+  friendly_name: Garage MultiSensor SourceNodeId
+sensor.aeotec_zw100_multisensor_6_temperature:
+  friendly_name: Garage MultiSensor Temperature
+sensor.aeotec_zw100_multisensor_6_ultraviolet:
+  friendly_name: Garage MultiSensor Ultraviolet

@@ -1,0 +1,133 @@
+
+homeassistant:
+  customize:
+    packages.system: &customize
+      haaska_hidden: true
+      homebridge_hidden: true
+      package: 'group'
+
+
+
+group:
+  Kitchen_Leds:
+    name: Kitchen Leds
+    entities:
+      - light.kitchen_bar_lights
+      - light.kitchen_light_level_2
+    #  - light.kitchen_light_level
+
+  game_room_motion:
+    name: game room motion
+    entities:
+      - camera.camera
+      - sensor.game_motion
+      - sensor.gr_motion_status
+      - light.gr_led
+      - automation.turn_on_game_room_light_when_there_is_movement
+      - automation.turn_off_game_room_light_when_there_is_no_movement
+  kitchen_motion:
+    name: kitchen motion
+    entities:
+      - binary_sensor.center_pir
+      - binary_sensor.front_motion_sensor
+
+  theater_group_motion:
+    name: theater group motion
+    entities:
+      - sensor.mb_motion_status
+      - sensor.gr_motion
+
+  theater_group_motion_b:
+    name: theater group motion b
+    entities:
+      - binary_sensor.center_pir
+      - binary_sensor.theater_room_motion
+  motion:
+    name: room motion
+  #  view: yes
+    icon: mdi:walk
+    entities:
+      - group.game_room_motion
+      - group.master_room_motion
+#      - group.porch_room_motion
+
+
+  theater_room_lights:
+    name: Theater Room Lights
+    entities:
+#      - light.spot_light_level
+      - light.tv_room_light_level
+  hallway_lights:
+    name: Hallway Lights
+    entities:
+      - light.hallway_1
+      - light.hallway_2
+
+  lr_fan:
+    name: LR Fan
+    entities:
+      - switch.tv_room_fan
+      - switch.lr_fan_power
+      - script.lr_fan_speed
+      - script.lr_fan_rotation
+      - script.lr_fan_oscillate
+      - sensor.lr_temperature
+      - script.low
+      - script.med
+      - script.high
+  Center_sensor:
+    name: Center Sensor
+#    view: yes
+    entities:
+      - sensor.Center_Temperature
+      - sensor.Center_Humidity
+      - sensor.Center_Ldr
+      - sensor.Center_Pir
+      - light.Center_LED
+      - automation.turn_off_kitchen_light
+
+  master_room_motion:
+    name: master_room_motion
+    entities:
+      - sensor.master_bed_motion
+      - sensor.mb_motion_status
+      - light.mb_led
+      - automation.turn_on_master_bedroom_light_when_there_is_movement
+      - automation.turn_off_master_bedroom_light_when_there_is_no_movement
+
+#  notify:
+#      name: ios_devices
+#      services:
+#        - service: ios_torn8o
+#        - service: ios_liz
+#        - service: ios_ferina
+  hass:
+    name: HomeAssistant
+    entities:
+      - sensor.ha_installed_version
+      - sensor.ha_current_version
+      - sensor.ha_last_restart
+  ios_test:
+    name: ios_test
+    icon: mdi:apple-ios
+    entities:
+      - automation.Notify_iOS_Actionable_Notifications
+      - automation.sound_the_alarm
+      - automation.SILENCE_ALARM
+      - automation.Notify_camera_Actionable_Notifications
+      - automation.notify_door
+      - automation.close_garage
+      - automation.reset_relays
+      - group.zones
+
+  Garage_sensor:
+    name: Garage Sensor
+  #  view: yes
+    entities:
+      - sensor.Garage_Temperature
+      - sensor.Garage_Humidity
+      - sensor.Garage_Ldr
+      - sensor.Garage_Pir
+      - light.Garage_LED
+      - light.level
+      - input_boolean.motion_toggle
