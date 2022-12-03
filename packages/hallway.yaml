@@ -7,9 +7,10 @@ homeassistant:
       package: 'Center sensor'
 
 
-
-binary_sensor:
-  - platform: mqtt
+mqtt:
+#  binary_sensor:
+#    - state_topic: "home-assistant/window/contact"
+  binary_sensor:
     name: "Hallway motion"
     state_topic: "stat/Hallway/POWER3"
     availability_topic: "tele/Hallway/LWT"
@@ -21,27 +22,27 @@ binary_sensor:
 
 
 
-switch:
-  - platform: mqtt
-    name: "Pool Lights"
-    state_topic: "stat/pool_lights/POWER"
-    command_topic: "cmnd/pool_lights/POWER"
-    payload_on: "ON"
-    payload_off: "OFF"
-    qos: 1
-    retain: true
+  switch:
 
-  - platform: mqtt
-    name: "HallWay Motion Sensor and Switch"
-    state_topic: "stat/Hallway/POWER1"
-    command_topic: "cmnd/Hallway/EVENT"
-    availability_topic: "tele/Hallway/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+    - name: "Pool Lights"
+      state_topic: "stat/pool_lights/POWER"
+      command_topic: "cmnd/pool_lights/POWER"
+      payload_on: "ON"
+      payload_off: "OFF"
+      qos: 1
+      retain: true
+
+
+    - name: "HallWay Motion Sensor and Switch"
+      state_topic: "stat/Hallway/POWER1"
+      command_topic: "cmnd/Hallway/EVENT"
+      availability_topic: "tele/Hallway/LWT"
+      qos: 1
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      retain: false
 
 #  - alias: CL Turn Kitchen lights
 #    initial_state: True
