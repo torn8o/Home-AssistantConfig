@@ -1,5 +1,4 @@
 import logging
-from enum import IntEnum
 
 import homeassistant.util.dt as dt_util
 
@@ -76,7 +75,7 @@ _LOGGER = logging.getLogger(__name__)
 
 def parse_sensor_state(state):
     if not state or not state.state:
-        return STATE_UNKNOWN
+        return STATE_UNAVAILABLE
     elif state.state == STATE_UNAVAILABLE:
         return STATE_UNAVAILABLE
     elif state.state in SENSOR_STATES_OPEN:
@@ -146,9 +145,9 @@ class SensorHandler:
 
         def handle_startup(_event):
             self._startup_complete = True
-        
+
         if hass.state == CoreState.running:
-             self._startup_complete = True
+            self._startup_complete = True
         else:
             hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STARTED, handle_startup)
 
@@ -187,9 +186,10 @@ class SensorHandler:
         if area_id and old_state is None:
             sensors_list = self.active_sensors_for_alarm_state(area_id)
             for entity in sensors_list:
-                sensor_state = parse_sensor_state(self.hass.states.get(entity))
-                if sensor_state != STATE_UNKNOWN:
-                    _LOGGER.debug("Initial state for {} is {}".format(entity, state))
+                state = self.hass.states.get(entity)
+                sensor_state = parse_sensor_state(state)
+                if state and state.state and sensor_state != STATE_UNKNOWN:
+                    _LOGGER.debug("Initial state for {} is {}".format(entity, parse_sensor_state(state)))
 
     def active_sensors_for_alarm_state(self, area_id: str, state: str = None):
         """Compose a list of sensors that are active for the state"""
@@ -205,7 +205,7 @@ class SensorHandler:
             elif alarm_entity.bypassed_sensors and entity in alarm_entity.bypassed_sensors:
                 continue
             elif (
-                alarm_entity.arm_mode in config[const.ATTR_MODES]
+                state in config[const.ATTR_MODES]
                 or config[ATTR_ALWAYS_ON]
             ):
                 entities.append(entity)
@@ -217,8 +217,7 @@ class SensorHandler:
         use_delay = kwargs.get("use_delay", False)
         bypass_open_sensors = kwargs.get("bypass_open_sensors", False)
 
-        sensors_list = self.active_sensors_for_alarm_state(area_id)
-
+        sensors_list = self.active_sensors_for_alarm_state(area_id, target_state)
         open_sensors = {}
         bypassed_sensors = []
 
@@ -230,12 +229,17 @@ class SensorHandler:
 
         for entity in sensors_list:
             sensor_config = self._config[entity]
-            sensor_state = parse_sensor_state(self.hass.states.get(entity))
-            res = sensor_state_allowed(sensor_state, sensor_config, alarm_state)
+            state = self.hass.states.get(entity)
+            sensor_state = parse_sensor_state(state)
+            if not state or not state.state:
+                # entity does not exist in HA
+                res = False
+            else:
+                res = sensor_state_allowed(sensor_state, sensor_config, alarm_state)
 
             if not res and target_state in const.ARM_MODES:
                 # sensor is active while arming
-                if sensor_config[ATTR_ALLOW_OPEN]:
+                if sensor_config[ATTR_ALLOW_OPEN] and sensor_state == STATE_OPEN:
                     # sensor is permitted to be open during/after arming
                     continue
                 elif bypass_open_sensors or (
@@ -262,7 +266,7 @@ class SensorHandler:
         if old_state == new_state:
             # not a state change - ignore
             return
-    
+
         _LOGGER.debug("entity {} changed: old_state={}, new_state={}".format(entity, old_state, new_state))
 
         sensor_config = self._config[entity]
@@ -294,7 +298,7 @@ class SensorHandler:
                 skip_delay=True,
                 open_sensors=open_sensors
             )
-        
+
         elif alarm_state == STATE_ALARM_ARMING:
             # sensor triggered while arming, abort arming
             _LOGGER.debug("Arming was aborted due to a sensor being active: {}".format(entity))
@@ -307,7 +311,7 @@ class SensorHandler:
                 skip_delay=(not sensor_config[ATTR_USE_ENTRY_DELAY]),
                 open_sensors=open_sensors
             )
-        
+
         elif alarm_state == STATE_ALARM_PENDING:
             # immediate trigger while in pending state
             _LOGGER.info("Alarm is triggered due to sensor: {}".format(entity))

@@ -10,38 +10,87 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'filed_automations'
-light:
-  - platform: mqtt
-    name: “Garage_left_mqtt"
-    state_topic: “wled/garage_left_light/status”
-    command_topic: “wled/garage_left_light/light”
-    brightness_state_topic: ‘wled/garage_left_light/brightness/status’
-    brightness_command_topic: ‘wled/garage_left_light/brightness/set’
-    brightness_scale: 100
-    rgb_state_topic: ‘wled/garage_left_light/rgb/status’
-    rgb_command_topic: ‘wled/garage_left_light/rgb/set’
-    qos: 0
-    payload_on: “ON”
-    payload_off: “OFF”
-    optimistic: false
 
-  - platform: mqtt
-    name: “Garage_Right_mqtt"
-    state_topic: “wled/garage_right/status”
-    command_topic: “wled/garage_right”
-    brightness_state_topic: ‘wled/garage_right/brightness/status’
-    brightness_command_topic: ‘wled/garage_right/brightness/set’
-    brightness_scale: 100
-    rgb_state_topic: ‘wled/garage_right/rgb/status’
-    rgb_command_topic: ‘wled/garage_right/rgb/set’
-    qos: 0
-    payload_on: “ON”
-    payload_off: “OFF”
-    optimistic: false
 sensor:
   - platform: file
     file_path: /config/filed_automations.txt
     name: Filed automations
+
+
+  # Syncthing (REST, requires GUI address '0.0.0.0:8384' and API Key)
+  # Version information
+  - platform: rest
+    name: syncthing_version
+    resource: https://alien.seedhost.eu/torn8oseed/syncthing/
+    headers:
+      X-API-Key: !secret syncthing_api_key
+    json_attributes:
+      - version
+      - longVersion
+      - os
+      - arch
+    value_template: '{{ value_json.version }}'
+    scan_interval: 300
+
+# Connection information
+  - platform: rest
+    name: syncthing_connections
+    resource: https://alien.seedhost.eu/torn8oseed/syncthing/
+    headers:
+      X-API-Key: !secret syncthing_api_key
+    json_attributes:
+      - connections
+      - total
+    # Don't read sensor value (it's the OLD last one!) but update directly from JSON
+    #value_template: "{{ states.sensor.syncthing_connections.attributes.connections.values() | selectattr('connected') | list | length }}"
+    value_template: "{{ value_json.connections.values() | selectattr('connected') | list | length }}"
+    scan_interval: 300
+
+# Status information
+  - platform: rest
+    name: syncthing_status
+    resource: https://alien.seedhost.eu/torn8oseed/syncthing/
+    headers:
+      X-API-Key: !secret syncthing_api_key
+    json_attributes:
+      - myID
+      - startTime
+      - uptime
+      - alloc
+    # Don't read sensor value (it's the OLD last one!) but update directly from JSON
+    #value_template: "{{ (states.sensor.syncthing_status.attributes.uptime / 86400) | round(0) | int }}"
+    value_template: "{{ (value_json.uptime / 86400) | round(0) | int }}"
+    unit_of_measurement: 'd'
+    scan_interval: 300
+
+# Info "sensor" that aggregates info from above REST sensors
+  - platform: template
+    sensors:
+      syncthing_info:
+        # force update if any of these change
+        entity_id:
+          - binary_sensor.syncthing
+          - sensor.syncthing_version
+          - sensor.syncthing_status
+          - sensor.syncthing_connections
+        value_template: "{{ states('binary_sensor.syncthing') }}"
+        # aggregate some useful info from the other sensors
+        attribute_templates:
+          my_ID: "{{ state_attr('sensor.syncthing_status', 'myID') }}"
+          version: "{{ state_attr('sensor.syncthing_version', 'version') }}"
+          version_long: "{{ state_attr('sensor.syncthing_version', 'longVersion') }}"
+          os: "{{ state_attr('sensor.syncthing_version', 'os') }}"
+          arch: "{{ state_attr('sensor.syncthing_version', 'arch') }}"
+          # must subtract 1 because own machine is also in connections, albeit always disconnected
+          connections_total: "{{ state_attr('sensor.syncthing_connections', 'connections') | length - 1 }}"
+          # selectattr('connected') is the same as selectattr('connected', 'equalto', True)
+          connections_active: "{{ states.sensor.syncthing_connections.attributes.connections.values()|selectattr('connected')|list|length }}"
+          total_bytes_in: "{{ state_attr('sensor.syncthing_connections', 'total')['inBytesTotal'] }}"
+          total_bytes_out: "{{ state_attr('sensor.syncthing_connections', 'total')['outBytesTotal'] }}"
+          start_time: "{{ as_timestamp(state_attr('sensor.syncthing_status', 'startTime')) | timestamp_custom() }}"
+          uptime: "{{ states('sensor.syncthing_status') }}"
+          memory_usage: "{{ state_attr('sensor.syncthing_status', 'alloc') }}"
+
 
 notify:
   - name: filed_automations
@@ -76,3 +125,15 @@ automation:
       - service: python_script.last_automation
         data_template:
           event: '{{ trigger.event }}'
+
+binary_sensor:
+
+  # Syncthing (REST, requires GUI address '0.0.0.0:8384' and API Key)
+  - platform: rest
+    name: syncthing
+    resource: https://alien.seedhost.eu/torn8oseed/syncthing/
+    headers:
+      X-API-Key: !secret syncthing_api_key
+    value_template: '{{ value_json.ping == "pong" }}'
+    device_class: connectivity
+

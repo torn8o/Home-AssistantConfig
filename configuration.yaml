@@ -3,13 +3,13 @@
 ################################################################
 
 homeassistant:
-  name: Torn Home
+#  name: Torn Home
   latitude: !secret home_latitude
   longitude: !secret home_longitude
-  elevation: !secret home_elevation
-  time_zone: America/New_York
-  unit_system: imperial
-  customize: !include customize.yaml
+#  elevation: !secret home_elevation
+#  time_zone: America/New_York
+#  unit_system: imperial
+#  customize: !include customize.yaml
 
 #  customize: !include_dir_named customize
   packages: !include_dir_named packages
@@ -18,48 +18,58 @@ homeassistant:
      - /config/snapshot
 #  binary_sensor: !include binary_sensor.yaml
 cloud:
-  alexa:
-    filter:
-      include_domains:
-        - switch
-        - light
-        - group
-frontend:
-  javascript_version: latest
-  themes: !include themes.yaml
+#  alexa:
+#    filter:
+  #    include_entities:
+    #    - input_boolean.light_75
+#      include_domains:
+#        - switch
+#        - light
+  #      - climate
+
+#frontend:
+#  javascript_version: latest
+#  themes: !include themes.yaml
+
+mobile_app:
+rest_command:
+  trigger_monkey:
+    url: https://api.voicemonkey.io/trigger
+    method: POST
+    verify_ssl: true
+    content_type: "application/json; charset=utf-8"
+    payload: '{"access_token":"8bd78641c716e053ee1d740ee638fb97" ,"secret_token":"Yee1af7603757cafaeb17c4ef8b8969d9","monkey":"{{test-game-room}}","announcement":"{{announcement}}"}'
+
+# Example configuration.yaml entry with include
 history:
+  include:
+    domains:
+      - sensor
+      - switch
+      - light
+      - media_player
+      - motion
+      - binary_sensor
 logbook:
 sun:
 #updater:
+#upnp:
+#  local_ip: 192.168.1.1
 circadian_lighting:
 discovery:
+#octoprint:
+#  host: !secret OCTOPRINT_HOST
+#  api_key: !secret OCTOPRINT_API_KEY
+
 system_health:
 weather:
-    - platform: darksky
-      api_key: !secret darksky_api_key
-      mode: daily
-shopping_list:
-custom_updater:
-#  mode: storage
-  show_installable: false
-  hide_sensor: true
-  track:
-    - components
-    - cards
-    - python_scripts
-  card_urls:
-      - https://raw.githubusercontent.com/thomasloven/lovelace-card-modder/master/card-modder.json
-      - https://raw.githubusercontent.com/custom-cards/upcoming-media-card/master/upcoming-media-card.json
-      - https://raw.githubusercontent.com/thomasloven/lovelace-auto-entities/master/auto-entities.json
-      - https://raw.githubusercontent.com/iammexx/home-assistant-config/master/ui/darksky/dark-sky-weather-card.json
-      - https://raw.githubusercontent.com/thomasloven/lovelace-card-tools/master/card-tools.json
-      - https://raw.githubusercontent.com/atomic7777/atomic_calendar/master/tracker.json
-      - https://raw.githubusercontent.com/MizterB/lovelace-secondaryinfo-entity-row/master/custom_cards.json
-      - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
-      - https://raw.githubusercontent.com/cbulock/lovelace-battery-entity/master/battery-entity.js
-  #    - https://raw.githubusercontent.com/keatontaylor/alexa_media_player/master/alexa_media/media_player.py
-#lovelace:
-#  mode: yaml
+#    - platform: darksky
+ #     api_key: !secret darksky_api_key
+  #    mode: daily
+#shopping_list:
+hacs:
+  token: !secret my_github_access_token
+
 ################################################
 ## Components (Non-Includes)
 ################################################
@@ -70,112 +80,143 @@ ring:
 #sense:
 #    email: !secret sense_USERNAME
 #    password: !secret sense_PASSWORD
-person:
-  - name: Charlie
-    id: fb905228d4fb4c2fbe6e7fd6fdaafd37
-    device_trackers:
-      - device_tracker.tornado
 
-  - name: Liz
-    id: 5abfb49ac65f45b8a64370c8f5241faa
-    device_trackers:
-      - device_tracker.lynx
-
-  - name: Nina
-    id: 5875f83e3fbc4f5c9d74c888c062e1eb
-    device_trackers:
-      - device_tracker.nina
-
-  - name: Jasmin
-    id: 03666e0af8bc423baf80911fefe6aeeb
-    device_trackers:
-      - device_tracker.monkey
-
-  - name: Ferina
-    id: f3c70a918f524eadb454f988e156088c
-    device_trackers:
-      - device_tracker.ferina
-ifttt:
-  key: !secret iftt_key
-nest:
-  client_id: !secret nest_client_id
-  client_secret: !secret nest_client_secret
-  sensors:
-    monitored_conditions:
-      - 'hvac_state'
-      - 'humidity'
-      - 'operation_mode'
-      - 'temperature'
-      - 'target'
-      - 'co_status'
-      - 'smoke_status'
-      - 'battery_health'
-      - 'color_status'
+#ifttt:
+ # key: !secret iftt_key
+#nest:
+ # client_id: !secret nest_client_id
+ # client_secret: !secret nest_client_secret
+ # project_id: !secret nest_PROJECT_ID
+#  sensors:
+#    monitored_conditions:
+#      - 'hvac_state'
+#      - 'humidity'
+#      - 'operation_mode'
+#      - 'temperature'
+#      - 'target'
+#      - 'co_status'
+#      - 'smoke_status'
+#      - 'battery_health'
+#      - 'color_status'
 stream:
-climate:
-  platform: nest
+#climate:
+#  platform: nest
 
 #http:
 #  api_password: !secret http_api_password
 #  ssl_certificate: !secret http_ssl_certificate
 #  ssl_key: !secret http_ssl_key
 
-wink:
-emulated_hue:
-  host_ip: !secret hue_host
-  type: alexa
-  off_maps_to_on_domains:
-    - script
-    - scene
-  expose_by_default: true
-  exposed_domains:
-    - input_boolean
-    - switch
-    - light
-
-google:
-  client_id: !secret client_id
-  client_secret: !secret client_secret
+#wink:
+#emulated_hue:
+#  host_ip: !secret hue_host
+#  listen_port: 8300
+#  advertise_ip: 10.0.0.10
+#  advertise_port: 8080
+#  type: alexa
+#  off_maps_to_on_domains:
+#    - script
+#    - scene
+#  expose_by_default: true
+#  exposed_domains:
+#    - input_boolean
+#    - switch
+#    - light
+default_config:
+#google:
+#  client_id: !secret client_id
+#  client_secret: !secret client_secret
 
 remote:
   - platform: !secret remote_platform
     name: !secret remote_name
     host: !secret remote_host
 
+
+
+ # organization: !secret influx_organization
+ # token: !secret influx_token
 wemo:
+  discovery: false
   static:
     - !secret wemo_one
     - !secret wemo_two
     - !secret wemo_three
-    - !secret wemo_four
-    - !secret wemo_five
+#    - !secret wemo_four
+#    - !secret wemo_five
+#    - !secret wemo_six
+    - !secret wemo_seven
+#    - !secret wemo_eight
 
-ffmpeg:
+#tplink:
+#  discovery: false
+#  static:
+#    - !secret tp_one
+#    - !secret tp_two
+#    - !secret tp_three
+#    - !secret tp_four
+#    - !secret tp_five
+#    - !secret tp_six
+#    - !secret tp_seven
+#    - !secret tp_eight
+#ffmpeg:
 #  ffmpeg_bin: !secret ffmpeg_bin
-camera:
-  - platform: ffmpeg
-    name: cat camera
-    input: !secret cam_input
-  - platform: ffmpeg
-    name: pool camera
-    input: !secret cam_indoor_input
-  - platform: ring
-  - platform: generic
-    name: Cat Stream
-    still_image_url: http://192.168.1.121/jpg/image.jpg
-    stream_source: rtsp://192.168.1.121:554
 #camera:
-
+#  - platform: ffmpeg
+#    name: cat camera
+#    input: !secret cam_input
+#  - platform: ffmpeg
+#    name: pool camera
+#    input: !secret cam_indoor_input
+#  - platform: ring
+#  - platform: generic
+#    name: Cat Stream
+#    still_image_url: http://192.168.1.128/jpg/image.jpg
+#    stream_source: rtsp://192.168.1.128:554
+#  - platform: mjpeg
+#    mjpeg_url: http://192.168.1.32:84/mjpg/pool
+#    name: Pool Camera
+#    username: !secret bi_username
+#    password: !secret bi_password
+#    authentication: basic
+#  - platform: mjpeg
+#    mjpeg_url: !secret 3d_printer_address
+#    name: Printer Camera
+#camera:
+#breaking_changes:
 media_player:
-  - platform: xboxone
-    device: !secret xbox_living
-    authentication: false
-    name: Living Room Xbox One
-  - platform: xboxone
-    device: !secret xbox_game
-    authentication: false
-    name: Game Room Xbox One
 
+#  - platform: denon
+#    host: 192.168.1.8
+#    name: Torn Theater
+#    show_all_sources: true
+#    timeout: 3
+#    zones:
+#      - zone: Zone2
+#        name: NAME
+
+
+#  - platform: xboxone
+#    device: !secret xbox_living
+#    authentication: true
+#    name: Living Room Xbox One
+#  - platform: xboxone
+#    device: !secret xbox_game
+#    authentication: false
+#    name: Game Room Xbox One
+#samsungtv:
+#  host: 192.168.1.51
+#    port: 8002
+#    method: websocket
+#plex:
+#  host: !secret plex_host
+#  port: !secret plex_port
+#  token: !secret plex_token
+#  ssl: true
+#  verify_ssl: true
+#  media_player:
+#    use_episode_art: true
+#    show_all_controls: false
 alexa_media:
   accounts:
     email: !secret amazon_email
@@ -183,22 +224,46 @@ alexa_media:
     url: amazon.com
 
 recorder:
-  purge_interval: 1
+  #purge_interval: 1
   #db_url: !secret db_url
-  exclude:
+  #purge_keep_days: 5
+  include:
     domains:
-      - automation
-      - weblink
-      - updater
-    entities:
-      - sun.sun   # Don't record sun data
-zwave:
-  device_config: !include zwave_device_config.yaml
+      - sensor
+      - switch
+      - media_player
+      - light
+   # Don't record sun data
+#zwave:
+#  usb_path: /dev/ttyACM0
+#  device_config: !include zwave_device_config.yaml
 
-
-
-
-panel_custom: !include panel_custom.yaml
+panel_iframe:
+  nodered:
+    title: Node-RED
+    icon: mdi:sitemap
+    url: !secret node_red_url
+#  octoprint:
+#    title: Octoprint
+#    icon: mdi:printer-3d
+#    url: !secret octoprint_url
+# Example configuration.yaml entry for Netgear device
+#device_tracker:
+#  - platform: netgear
+#    host: IP_ADDRESS
+#    username: YOUR_USERNAME
+#    password: YOUR_PASSWORD
+#    new_device_defaults:
+#      track_new_devices: true
+device_tracker:
+  - platform: iphonedetect
+    consider_home: 60
+    new_device_defaults:
+      track_new_devices: true
+    hosts:
+      Charlie: 10.0.2.6
+      Liz: 10.0.2.8
+#panel_custom: !include panel_custom.yaml
 
 ################################################
 ## Component Includes (Single File)
@@ -208,7 +273,7 @@ panel_custom: !include panel_custom.yaml
 #icloud: !include icloud.yaml
 logger: !include logger.yaml
 #zwave: !include zwave.yaml
-#group: !include groups.yaml
+group: !include groups.yaml
 
 ################################################
 ## Component Includes (Named)
@@ -216,27 +281,28 @@ logger: !include logger.yaml
 
 # alexa:
 #   intents: !include_dir_named alexa
-
+#themes: !include themes.yaml
 ################################################
 ## Component Includes (Merge List)
 ################################################
-automation: !include automation.yaml
+automation: !include automations.yaml
 #automation old: !include_dir_merge_list automation
 #automation: !include_dir_merge_list automation
 #binary_sensor: !include binary_sensor.yaml
 #binary_sensor: !include_dir_merge_list binary_sensor
 #camera: !include_dir_merge_list camera
 #cover: !include_dir_merge_list cover
-device_tracker: !include_dir_merge_list device
+#device_tracker: !include_dir_merge_list device
 #light: !include_dir_merge_list light
 #media_player: !include_dir_merge_list media_player
 #notify: !include_dir_merge_list notify
 #ios: !include_dir_merge_list ios
-#scene: !include_dir_merge_list scene
+scene: !include_dir_merge_list scene
 #sensor: !include_dir_merge_list sensor
+#template: !include_dir_merge_list templates
 #switch: !include_dir_merge_list switches
 #zone: !include_dir_merge_list zone
-
+influxdb: !include influxdb.yaml
 ################################################
 ## Component Includes (Merge Named)
 ################################################
@@ -245,5 +311,5 @@ device_tracker: !include_dir_merge_list device
 #input_boolean: !include_dir_merge_named input_boolean
 #input_select: !include_dir_merge_named input_select
 #input_slider: !include_dir_merge_named input_slider
-#script: !include_dir_merge_named script
+script: !include scripts.yaml #!include_dir_merge_named script
 #shell_command: !include_dir_merge_named shell_command

@@ -72,33 +72,33 @@ homeassistant:
 ## Automation
 ################################################
 
-automation:
-  - alias: startup_notification
-    initial_state: 'True'
-    trigger:
-      - platform: homeassistant
-        event: start
-    action:
-      - service: notify.ios_devices
-        data:
-          message: "Home Assistant is now up and running."
+#automation:
+ # - alias: startup_notification
+  #  initial_state: 'True'
+   # trigger:
+    #  - platform: homeassistant
+     #   event: start
+    #action:
+#      - service: notify.ios_devices
+ #       data:
+ #         message: "Home Assistant is now up and running."
 
-  - alias: update_notification
-    initial_state: True
-    trigger:
-      - platform: state
-        entity_id: updater.updater
-      - platform: homeassistant
-        event: start
-    condition:
-      - condition: template
-        value_template: >-
-          {{ states('updater.updater') != 'unknown' }}
-    action:
-      - service: notify.ios_torn8o
-        data_template:
-          message: >-
-            Home Assistant {{ states('updater.updater') }} is now available.
+#  - alias: update_notification
+ #   initial_state: True
+  #  trigger:
+   #   - platform: state
+    #    entity_id: updater.updater
+#      - platform: homeassistant
+ #       event: start
+  #  condition:
+ #     - condition: template
+  #      value_template: >-
+   #       {{ states('updater.updater') != 'unknown' }}
+ #   action:
+  #    - service: notify.ios_torn8o
+   #     data_template:
+    #      message: >-
+     #       Home Assistant {{ states('updater.updater') }} is now available.
 
 ################################################
 ## Binary Sensor
@@ -144,3 +144,22 @@ sensor:
     resource: 'https://pypi.python.org/pypi/homeassistant/json'
     value_template: >-
       {{ value_json.info.version }}
+
+ # - platform: influxdb
+  #  organization: !secret influx_organization
+  #  bucket: !secret influx_bucket
+  #  token: !secret influx_token
+  #  api_version: 2
+  #  organization: RANDOM_16_DIGIT_HEX_ID
+  #  token: GENERATED_AUTH_TOKEN
+  #  queries_flux:
+  #     name: InfluxDb DB Size
+  #     unit_of_measurement: MB
+  #     value_template: '{{ (value | float / 1024 /1024) | round(1) }}'
+   #    group_function: sum
+  #     measurement: '"monitor"."shard"'
+   #    database: _internal
+    #   where: 'time > now() - 10s'
+     #  field: diskBytes
+  #  organization: RANDOM_16_DIGIT_HEX_ID
+   # token: GENERATED_AUTH_TOKEN

@@ -32,10 +32,17 @@ switch:
     name: CL Game Room
   - platform: circadian_lighting
     lights_ct:
-      - light.theater_room_lights
+     # - light.theater_light
+      - light.theater_room_light
     min_brightness: 30
     max_brightness: 100
-    name: Theater Room Circadian
+    name: CL Theater Room
+ # - platform: circadian_lighting
+ #   lights_ct:
+ #     - light.theater_room_light
+ #   min_brightness: 30
+  #  max_brightness: 100
+   # name: Theater Room Circadian zwave
   - platform: circadian_lighting
     lights_ct:
       - light.kitchen_leds

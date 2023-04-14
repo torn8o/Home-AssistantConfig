@@ -8,93 +8,122 @@ device_tracker:
     hosts:
       host_one: 192.168.2.12
       host_two: 192.168.2.25
+
 """
 import logging
+import socket
 import subprocess
-import sys
-from datetime import timedelta
-
-import voluptuous as vol
 
 import homeassistant.helpers.config_validation as cv
-from homeassistant.components.device_tracker import (
-    PLATFORM_SCHEMA)
-from homeassistant.components.device_tracker.const import (
-    CONF_SCAN_INTERVAL, SCAN_INTERVAL, SOURCE_TYPE_ROUTER)
+import homeassistant.util.dt as dt_util
+import voluptuous as vol
+from homeassistant.components.device_tracker import PLATFORM_SCHEMA
+from homeassistant.components.device_tracker.const import (SCAN_INTERVAL,
+                                                           SOURCE_TYPE_ROUTER,
+                                                           ATTR_IP)
+from homeassistant.const import CONF_HOSTS, CONF_SCAN_INTERVAL
 
-from homeassistant import util
-from homeassistant import const
+from .const import (
+    HOME_STATES,
+    CONST_MESSAGE,
+    CONST_MESSAGE_PORT,
+)
 
-import socket
-
-__version__ = '1.0.0'
+PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+    {
+        vol.Required(CONF_HOSTS): {cv.string: cv.string},
+        vol.Optional(CONF_SCAN_INTERVAL): cv.time_period,
+    }
+)
 
 _LOGGER = logging.getLogger(__name__)
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Required(const.CONF_HOSTS): {cv.string: cv.string},
-})
-
+REACHABLE_DEVICES = []
 
 class Host:
     """Host object with arp detection."""
 
-    def __init__(self, ip_address, dev_id, hass, config):
+    def __init__(self, dev_id, dev_ip):
         """Initialize the Host."""
-        self.hass = hass
-        self.ip_address = ip_address
         self.dev_id = dev_id
+        self.dev_ip = dev_ip
 
-    def detectiphone(self):
-        """Send udp message to port 5353 
-           and return True if an arp chache entry is made success.
-        """
-        aSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        aSocket.settimeout(1)
-        addr = (self.ip_address, 5353)
-        message = b'Steve Jobs'
-        aSocket.sendto(message, addr)
-    
-        try:
-            output = subprocess.check_output('arp -na', shell=True)
-            output = output.decode('utf-8').split('\n')
-            for entry in output:
-                mac = entry.split(' ')
-                if mac[0] != '':
-                    rcvd_ip = mac[1]
-                    rcvd_ip = rcvd_ip[:-1]  # remove last Klammer
-                    rcvd_ip = rcvd_ip[1:]  # remove first Klammer
-                    mac = mac[3]
-                    mac = mac.split(':')
-                    if rcvd_ip == self.ip_address:
-                        if len(mac) == 6:
-                            return True
-        except subprocess.CalledProcessError:
-            return False
+    def ping_device(self):
+        """Send UDP message to probe device."""
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.settimeout(1)
+            s.sendto(CONST_MESSAGE, (self.dev_ip, CONST_MESSAGE_PORT))
+        _LOGGER.debug(f"Probe sent to {self.dev_id} on {self.dev_ip}")
 
-    def update(self, see):
-        """Update device state by sending one or more ping messages."""
-        if self.detectiphone():
-            see(dev_id=self.dev_id, source_type=SOURCE_TYPE_ROUTER)
-            return True
+    def update_device(self, see):
+        """Update tracked devices"""
+        if self.dev_ip in REACHABLE_DEVICES:
+            _LOGGER.debug(f"Device {self.dev_id} on {self.dev_ip} is HOME")
+            see(dev_id=self.dev_id,
+            attributes = {ATTR_IP: self.dev_ip},
+            source_type=SOURCE_TYPE_ROUTER)
+        else:
+            _LOGGER.debug(f"Device {self.dev_id} on {self.dev_ip} is AWAY")
+
+    @staticmethod
+    def find_with_ip():
+        """Queries the network neighbours and lists found IP's"""
+        state_filter = " nud " + " nud ".join(HOME_STATES.values()).lower()
+        cmd = f"ip neigh show {state_filter}".split()
+        neighbours = subprocess.run(cmd, shell=False, capture_output=True, text=True)
+        neighbours_ip = [_.split()[0] for _ in neighbours.stdout.splitlines()]
+        return neighbours_ip
+
+    @staticmethod
+    def find_with_arp():
+        """Queries the arp table and lists found IP's"""
+        cmd = "arp -na"
+        neighbours = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+        neighbours_ip = [_.split()[1][1:-1] for _ in neighbours.stdout.splitlines() if _.count(":") == 5]
+        return neighbours_ip
 
 def setup_scanner(hass, config, see, discovery_info=None):
     """Set up the Host objects and return the update function."""
-    hosts = [Host(ip, dev_id, hass, config) for (dev_id, ip) in
-             config[const.CONF_HOSTS].items()]
+
+    if subprocess.run("which ip", shell=True, stdout=subprocess.DEVNULL).returncode == 0:
+        _LOGGER.debug("Using 'IP' to find tracked devices")
+        _use_cmd_ip = True
+    elif subprocess.run("which arp", shell=True, stdout=subprocess.DEVNULL).returncode == 0:
+        _LOGGER.warn("Using 'ARP' to find tracked devices")
+        _use_cmd_ip = False
+    else:
+        _LOGGER.fatal("Can't get neighbours from host OS!")
+        return
+
+    hosts = [Host(dev_id, dev_ip) for (dev_id, dev_ip) in
+             config[CONF_HOSTS].items()]
     interval = config.get(CONF_SCAN_INTERVAL, SCAN_INTERVAL)
 
-    _LOGGER.debug("Started iphonedetect with interval=%s on hosts: %s",
-                  interval, ",".join([host.ip_address for host in hosts]))
-    
+    _LOGGER.info("Started iphonedetect with interval=%s on hosts: %s",
+                  interval, ", ".join([host.dev_ip for host in hosts]))
+
+
     def update_interval(now):
         """Update all the hosts on every interval time."""
         try:
             for host in hosts:
-                host.update(see)
+                Host.ping_device(host)
+
+            global REACHABLE_DEVICES
+            if _use_cmd_ip:
+                REACHABLE_DEVICES = Host.find_with_ip()
+            else:
+                REACHABLE_DEVICES = Host.find_with_arp()
+
+            for host in hosts:
+                Host.update_device(host, see)
+
+        except Exception as e:
+            _LOGGER.error(e)
+
         finally:
             hass.helpers.event.track_point_in_utc_time(
-                update_interval, util.dt.utcnow() + interval)
+                update_interval, dt_util.utcnow() + interval)
 
     update_interval(None)
     return True

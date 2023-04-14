@@ -25,11 +25,11 @@ import voluptuous as vol
 
 from .base import HacsBase
 from .const import DOMAIN, MINIMUM_HA_VERSION, STARTUP
+from .data_client import HacsDataClient
 from .enums import ConfigurationType, HacsDisabledReason, HacsStage, LovelaceMode
 from .frontend import async_register_frontend
 from .utils.configuration_schema import hacs_config_combined
 from .utils.data import HacsData
-from .utils.platform_setup import async_setup_entity_platforms
 from .utils.queue_manager import QueueManager
 from .utils.version import version_left_higher_or_equal_then_right
 from .websocket import async_register_websocket_commands
@@ -88,6 +88,10 @@ async def async_initialize_integration(
     hacs.hass = hass
     hacs.queue = QueueManager(hass=hass)
     hacs.data = HacsData(hacs=hacs)
+    hacs.data_client = HacsDataClient(
+        session=clientsession,
+        client_name=f"HACS/{integration.version}",
+    )
     hacs.system.running = True
     hacs.session = clientsession
 
@@ -154,8 +158,9 @@ async def async_initialize_integration(
             hacs.disable_hacs(HacsDisabledReason.RESTORE)
             return False
 
-        can_update = await hacs.async_can_update()
-        hacs.log.debug("Can update %s repositories", can_update)
+        if not hacs.configuration.experimental:
+            can_update = await hacs.async_can_update()
+            hacs.log.debug("Can update %s repositories", can_update)
 
         hacs.set_active_categories()
 
@@ -169,9 +174,7 @@ async def async_initialize_integration(
             hacs.log.info("Update entities are only supported when using UI configuration")
 
         else:
-            await async_setup_entity_platforms(
-                hacs,
-                hass,
+            await hass.config_entries.async_forward_entry_setups(
                 config_entry,
                 [Platform.SENSOR, Platform.UPDATE]
                 if hacs.configuration.experimental

@@ -1,0 +1,171 @@
+media_player:
+  - platform: media_player_template
+  media_players:
+    torn8o_television:
+      friendly_name: torn8o television
+      value_template: "{{ states('sensor.torn8o_television_current_status') }}"
+      current_source_template: "{{ states('sensor.torn8o_television_current_source') }}"
+      current_volume_template: "{{ states('sensor.torn8o_television_current_volume') }}"
+      turn_on:
+        service: switch.toggle
+        data_template:
+          entity_id: switch.torn_tv
+      turn_off:
+        service: switch.toggle
+        data_template:
+          entity_id: switch.torn_tv
+      play:
+        service: media_player.media_play
+        data_template:
+          entity_id: media_player.torn8o_s_fire_tv_cube
+      stop:
+        service: media_player.media_stop
+        data_template:
+          entity_id: media_player.torn8o_s_fire_tv_cube
+      pause:
+        service: media_player.media_pause
+        data_template:
+          entity_id: media_player.torn8o_s_fire_tv_cube
+      next:
+        service: media_player.media_next_track
+        data_template:
+          entity_id: media_player.torn8o_s_fire_tv_cube
+      previous:
+        service: media_player.media_previous_track
+        data_template:
+          entity_id: media_player.torn8o_s_fire_tv_cube
+      seek:
+        service: media_player.media_seek
+        data_template:
+          entity_id: media_player.torn8o_s_fire_tv_cube
+          seek_position: '10'
+      play_media:
+        service: media_player.media_seek
+        data_template:
+          entity_id: media_player.torn8o_s_fire_tv_cube
+          media_content_id: 101
+          media_content_type: episode
+      volume_up:
+        service: media_player.volume_set
+        data_template:
+          entity_id: media_player.denon_avr_s730h
+          volume_level: "{{ states.media_player.denon_avr_s730h.attributes.volume_level - '.05' | float }}"
+      volume_down:
+        service: media_player.volume_set
+        data_template:
+          entity_id: media_player.denon_avr_s730h
+          volume_level: "{{ states.media_player.denon_avr_s730h.attributes.volume_level + '.05' | float }}"
+      set_volume:
+        service: input_number.set_value
+        data:
+          entity_id: input_number.torn8o_television_selected_volume
+          value: "{{ volume * 100 | float }}"
+      mute:
+        service: media_player.volume_mute
+        data_template:
+          entity_id: media_player.denon_avr_s730h
+          is_volume_muted: True
+      inputs:
+        TV:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn_tv_smart
+            source: "TV"
+        Home Assistant:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn_tv_smart
+            source: "Home Assistant"
+        Home Theatre:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn_tv_smart
+            source: "Home Theatre"
+        Shield TV:
+          service: remote.send_command
+          data_template:
+            device: polk_command_bar
+            command: HDMI 2
+        Shield Home:
+          service: androidtv.adb_command
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            command: HOME
+        Prime:
+          service: androidtv.adb_command
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            command: am start -n com.amazon.amazonvideo.livingroom/com.amazon.ignition.IgnitionActivity
+        CBS:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "CBS All Access"
+        Disney+:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "Disney+"
+        Google Play:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "Google Play"
+        Google Video:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "Google Video"
+        HBO:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "HBO"
+        Netflix:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "Netflix"
+        Pandora:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "Pandora"
+        Peacock:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "Peacock"
+        Plex:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "Plex"
+        Prime Music:
+          service: androidtv.adb_command
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            command: "Amazon Music"
+        Tiny Cam:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "Tiny Cam"
+        YouTube:
+          service: media_player.select_source
+          data_template:
+            entity_id: media_player.torn8o_s_fire_tv_cube
+            source: "YouTube"
+      title_template: "{{ states('sensor.torn8o_television_media_title') }}"
+      media_content_type_template: "{{ states('sensor.torn8o_television_media_content_type') }}"
+      media_image_url_template: "{{ states('sensor.torn8o_television_media_image_url') }}"
+      media_episode_template: "{{ states('sensor.torn8o_television_media_episode') }}"
+      media_season_template: "{{ states('sensor.torn8o_television_media_season') }}"
+      media_series_title_template: "{{ states('sensor.torn8o_television_media_series_title') }}"
+      current_position_template: "{{ states('sensor.torn8o_television_media_current_position') }}"
+      media_duration_template: "{{ states('sensor.torn8o_television_media_duration') }}"
+      artist_template: "{{ states('sensor.torn8o_television_artist') }}"
+      album_template: "{{ states('sensor.torn8o_television_album') }}"
+      media_album_artist_template: "{{ states('sensor.torn8o_television_media_album_artist') }}"
+      album_art_template: "{{ states('sensor.torn8o_television_album_art') }}"
+      current_sound_mode_template: "{{ states('sensor.torn8o_television_current_sound_mode') }}"

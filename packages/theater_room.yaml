@@ -25,37 +25,7 @@ switch:
         command_on: JgBoACsMKw0OKSoNDygPKA8oDygrDg4oDygPAAR4Kg4pDg4oKw0OKQ8oDygPKCsMDygPKQ8AC1wrDikNDygrDQ4oDykPKA8oKg4OKA8oEAAEdysMKw0OKQ8oDygPKBAnDygQKA8oDygPAA0F
           #    command_off: JgBoACgNKg0QJywMDygPKCsMDygQJxAoDygPAAR3KwwqDQ8oKwwQKA8nLAwOKQ8oECcQJxAAC1srDCsMDygqDRAnECgqDQ8oDygQJxAnEAAEdioOKg0PKA8oDygPKBAnECgPKA4pDygQAA0F
 #switch:
-  - platform: mqtt
-    name: "Front Christmas Tree"
-    state_topic: "stat/ferina/POWER"
-    command_topic: "stat/ferina/SET"
-  #  availability_topic: "home/bedroom/switch1/available"
-    payload_on: "ON"
-    payload_off: "OFF"
-  - platform: mqtt
-    name: "bathroom heater"
-    command_topic: "cmnd/bathheater/power"
-    state_topic: "stat/bathheater/POWER"
 
-  #  availability_topic: "home/bedroom/switch1/available"
-    payload_on: "ON"
-    payload_off: "OFF"
-  - platform: mqtt
-    name: "bathroom exhaust"
-    command_topic: "cmnd/bathfan/power"
-    state_topic: "stat/bathfan/POWER"
-
-  #  availability_topic: "home/bedroom/switch1/available"
-    payload_on: "ON"
-    payload_off: "OFF"
-  - platform: mqtt
-    name: "bathroom led"
-    command_topic: "cmnd/bathlight/power"
-    state_topic: "stat/bathlight/POWER"
-
-  #  availability_topic: "home/bedroom/switch1/available"
-    payload_on: "ON"
-    payload_off: "OFF"
 sensor:
   - platform: template
     sensors:
